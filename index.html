@@ -23327,7 +23327,7 @@ function renderScore(){
       html+=`<div class="callout" style="margin-bottom:10px;border-left-color:var(--accent)"><b>If you had traded the monthly way since ${R.FirstScan||''}:</b> put $100 into every scan\'s basket, held each batch four weeks, then sold (a new batch every scan, so up to four overlap). `
         +`Across all picks that is <b>${money(B.Invested)}</b> in, worth <b>${money(B.Value)}</b> now: ${rp(B.Ret)} vs S&amp;P bought and sold on the same days ${rp(B.Spy)}`
         +(bLead==null?'':` - ${bLead>=0?'<b class="pos">ahead by '+bLead.toFixed(1)+' points</b>':'<b class="neg">behind by '+Math.abs(bLead).toFixed(1)+' points</b>'}`)
-        +`. ${B.Closed?B.Closed+' batch'+(B.Closed===1?'':'es')+' sold so far; ':'No batch has reached four weeks yet - every one is '}${B.Open?B.Open+' still open and marked at today\'s price.':''} This is the same "monthly" definition as the backtests: run every week, hold four weeks.</div>`;
+        +`. ${B.Closed?B.Closed+' batch'+(B.Closed===1?'':'es')+' sold so far'+(B.Open?'; '+B.Open+' still open and marked at today\'s price.':'.'):'No batch has reached four weeks yet - all '+B.Open+' are still open and marked at today\'s price.'} This is the same "monthly" definition as the backtests: run every week, hold four weeks.</div>`;
       html+=`<div class="zv-h2">Rotation leaderboard - average return per batch</div><div class="zv-wrap"><table class="sc-lead"><tbody>`
         +rRow('sc-all',`All picks, every scan`,B.Ret,batchNote(B))
         +rRow('sc-spy','S&amp;P 500 (SPY), bought and sold on the same days',B.Spy)
