@@ -22838,35 +22838,41 @@ function scoreBar(v){const w=Math.max(2,Math.round((v||0)/100*64));
   return `<span class="score-track"><span class="score-bar" style="width:${w}px"></span></span><span class="num">${Math.round(v||0)}</span>`}
 
 /* ---- bottom line ---- */
+// Shawn (2026-10-11): the two headline cards are the best 1-YEAR return (left) and the best 5-YEAR
+// return (right), both on a weekly hold - raw total return, not the consistency score. The best
+// combination still has its own section (04) further down.
 function renderBottomLine(){
-  const top=rankedBy('Weekly')[0];
   const bl=$('#bottomline'); bl.innerHTML='';
-  if(top){
-    const t=top.Weekly;
+  const rows=A.Screens.filter(s=>s.Weekly);
+  const bestBy=k=>rows.filter(s=>s.Weekly[k]!=null&&!isNaN(s.Weekly[k])).slice().sort((a,b)=>b.Weekly[k]-a.Weekly[k])[0];
+  const y1=bestBy('Ret1y'), y5=bestBy('Total');
+  if(y1){
+    const t=y1.Weekly;
     const c=el('div','card hero gold');
-    c.innerHTML=`<div class="tag">Best all-round screener · weekly</div>
-      <h2>${top.Screen}</h2><div class="screener">${top.Folder}</div>
+    c.innerHTML=`<div class="tag">Best 1-year return · weekly hold</div>
+      <h2>${y1.Screen}</h2><div class="screener">${y1.Folder}</div>
+      <div class="big pos">${pct(t.Ret1y)}</div>
+      <div class="caption">total return over the last 12 months &nbsp;·&nbsp; S&P 500 returned ${pct(t.Bench1y)}</div>
+      <div class="statline">
+        <div><b>${t.Win1y==null?'–':(+t.Win1y).toFixed(0)+'%'}</b>of weeks profitable (1 yr)</div>
+        <div><b class="neg">${pct(t.MaxDD1y)}</b>worst drop (1 yr)</div>
+        <div><b class="pos">${pct(t.CAGR)}</b>per year over 5 yrs</div>
+        <div><b>${t.Beat12}%</b>of 12-mo windows beat S&P</div>
+      </div>`;
+    bl.appendChild(c);
+  }
+  if(y5){
+    const t=y5.Weekly;
+    const c=el('div','card hero');
+    c.innerHTML=`<div class="tag">Best 5-year return · weekly hold</div>
+      <h2>${y5.Screen}</h2><div class="screener">${y5.Folder}</div>
       <div class="big pos">${pct(t.Total)}</div>
       <div class="caption">total return over 5 years &nbsp;·&nbsp; S&P 500 returned ${pct(t.BenchTotal)}</div>
       <div class="statline">
         <div><b class="pos">${pct(t.CAGR)}</b>per year</div>
-        <div><b>${t.Beat12}%</b>of 12-mo windows beat S&P</div>
         <div><b class="neg">${pct(t.MaxDD)}</b>worst drop</div>
+        <div><b>${t.Beat12}%</b>of 12-mo windows beat S&P</div>
         <div><b>${t.YearsBeat}/${t.YearsN}</b>years beat S&P</div>
-      </div>`;
-    bl.appendChild(c);
-  }
-  const combo = A.Combos && A.Combos.find(c=>/best pair/i.test(c.Label)) || (A.Combos&&A.Combos[0]);
-  if(combo){
-    const c=el('div','card hero');
-    c.innerHTML=`<div class="tag">Best combination to hold</div>
-      <h2>${combo.Members.length} screeners, blended</h2>
-      <div class="screener">${combo.Members.join('  +  ')}</div>
-      <div class="big pos">${pct(combo.CAGR)}<span style="font-size:18px;color:var(--muted)"> / yr</span></div>
-      <div class="caption">equal-weighted &nbsp;·&nbsp; ${combo.Beat12}% of 12-mo windows beat S&P &nbsp;·&nbsp; worst drop ${pct(combo.MaxDD)}</div>
-      <div class="statline">
-        <div><b>${combo.Calmar}</b>return-to-risk (Calmar)</div>
-        <div><b class="pos">${pct(combo.Total)}</b>5-yr total</div>
       </div>`;
     bl.appendChild(c);
   }
