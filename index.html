@@ -25067,6 +25067,10 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 }</script>
 <script>
 const A = JSON.parse(document.getElementById('analysis-data').textContent);
+// Screeners Shawn removed from the page (2026-10-18: 'zacks rank 1 only' lagged the rest). Backtest data is kept.
+const HIDDEN_SCREENS=new Set(['zacks rank 1 only']);
+A.Screens=(A.Screens||[]).filter(s=>!HIDDEN_SCREENS.has(s.Screen));
+if(A.LivePicks) A.LivePicks=A.LivePicks.filter(x=>!HIDDEN_SCREENS.has(x.Screen));
 try { A.ZacksView = JSON.parse(document.getElementById('zacks-data').textContent); } catch (e) { A.ZacksView = null; }
 const $=(s,r=document)=>r.querySelector(s), el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e};
 const pct=v=>(v==null||v==='')?'–':(v>0?'+':'')+(+v).toFixed(v> -100&&v<1000?1:0)+'%';
@@ -25104,7 +25108,6 @@ function scoreBar(v){const w=Math.max(2,Math.round((v||0)/100*64));
 // The two "just hold Zacks #1" screens (queued 2026-10-11) get their own comparison cards under the
 // top four and are kept out of the top-four pick so they never show twice.
 const RANK1_CMP=[
-  {n:'zacks rank 1 only',   tag:'Every Zacks Rank #1 stock · 1-week hold',     why:'Buy every Rank #1, hold a week, and each Monday sell whatever is no longer a #1 - no other rules at all.'},
   {n:'zacks rank 1 plus AAA',tag:'Zacks Rank #1 with A / A / A · 1-week hold', why:'The same, but only the #1 stocks that also score A on Value, Growth and Momentum.'}
 ];
 function renderBottomLine(){
