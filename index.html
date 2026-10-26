@@ -157,6 +157,12 @@ h1,h2,h3{margin:0;font-family:var(--serif);font-weight:600;letter-spacing:-.02em
 .cpp-snap td.pos{color:var(--pos)} .cpp-snap td.neg{color:var(--neg)}
 .cpp-snap .cs-held{margin-top:6px;font-size:11px;color:var(--muted);line-height:1.4}
 .cpp-snap .cs-held b{color:var(--ink);font-weight:600}
+.cpp-desc{margin-top:10px;border-top:1px solid var(--hair);padding-top:8px;font-size:12.5px;line-height:1.5;color:var(--ink)}
+.cpp-desc:empty{display:none}
+.cpp-desc .d-h,.ss-desc .d-h{display:flex;gap:10px;align-items:baseline;margin-bottom:3px;flex-wrap:wrap}
+.cpp-desc .d-h b,.ss-desc .d-h b{color:var(--pos);font-size:13.5px}
+.cpp-desc .d-h span,.ss-desc .d-h span{color:var(--muted);font-size:12px}
+.ss-desc{grid-column:1/-1;border:1px solid var(--hair);border-radius:8px;padding:12px 14px;font-size:13.5px;line-height:1.55}
 .chart-pop .cpp-tip{margin-top:6px;font-size:11px;color:var(--muted);text-align:right}
 .chart-pop .cpp-miss{font-size:12.5px;color:var(--muted);padding:18px 4px}
 .chart-pop .cpp-x{margin-left:auto;background:var(--surface-2);border:1px solid var(--hair-strong);color:var(--ink);font:inherit;font-size:12px;border-radius:6px;padding:3px 9px;cursor:pointer;display:none}
@@ -515,7 +521,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   <section class="bottomline" id="bottomline"></section>
   <section class="card-panel" id="cardPanel" hidden aria-live="polite"></section>
   <div class="ss-wrap" id="stockSheet" hidden><div class="ss" role="dialog" aria-modal="true" aria-labelledby="ssName"></div></div>
-  <div class="chart-pop" id="chartPop" hidden role="dialog" aria-label="Stock chart"><div class="cpp-h"><b id="cppT"></b><span id="cppSub"></span><button class="cpp-x" id="cppX" type="button">Close</button></div><div class="cpp-body"><div class="cpp-snap" id="cppSnap"></div><div class="cpp-chart"><img id="cppImg" alt=""><div class="cpp-miss" id="cppMiss" hidden>No chart was captured for this ticker on the last refresh.</div></div></div><div class="cpp-tip">Click the ticker for the full stock sheet</div></div>
+  <div class="chart-pop" id="chartPop" hidden role="dialog" aria-label="Stock chart"><div class="cpp-h"><b id="cppT"></b><span id="cppSub"></span><button class="cpp-x" id="cppX" type="button">Close</button></div><div class="cpp-body"><div class="cpp-snap" id="cppSnap"></div><div class="cpp-chart"><img id="cppImg" alt=""><div class="cpp-miss" id="cppMiss" hidden>No chart was captured for this ticker on the last refresh.</div></div></div><div class="cpp-desc" id="cppDesc"></div><div class="cpp-tip">Click the ticker for the full stock sheet</div></div>
   <section class="rank1-compare" id="rank1Compare"></section>
   <div class="callout" id="readme"></div>
 
@@ -597,7 +603,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 </div>
 
 <script id="analysis-data" type="application/json">{
-    "GeneratedAt":  "2026-10-26 13:07",
+    "GeneratedAt":  "2026-10-26 13:11",
     "PicksAsOf":  "07/24/26",
     "LivePicks":  [
                       {
@@ -28321,6 +28327,708 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
                ]
 }</script>
 <script id="cardpicks-data" type="application/json">[{"Screen":"new highs","Tickers":"BTE;CHRD;PEB;EC;RS","AsOf":"2026-10-26","Captured":"yes"},{"Screen":"all cap growth","Tickers":"SHG;PEB;KB;TTDKY;HRMY;TGS","AsOf":"2026-10-26","Captured":"yes"}]</script>
+<script id="profiles-data" type="application/json">{
+"AIZ": {
+"Name": "Assurant, Inc.",
+"Sector": "Financial Services",
+"Industry": "Insurance - Property & Casualty",
+"Summary": "Assurant, Inc. provides protection services to connected devices, homes, and automobiles in North America, Latin America, Europe, and the Asia Pacific. It operates through Global Lifestyle and Global Housing segments. The Global Lifestyle segment offers mobile device solutions, and extended service contracts and related services for consumer electronics and appliances, and credit and other insurance products; and vehicle protection, commercial equipment protection, and other related services.",
+"City": "Atlanta",
+"Country": "United States",
+"Website": "https://www.assurant.com",
+"Fetched": "2026-10-26"
+},
+"APELY": {
+"Name": "Alps Alpine Co., Ltd.",
+"Sector": "Technology",
+"Industry": "Electronic Components",
+"Summary": "Alps Alpine Co., Ltd. manufactures and sells electronic components in Japan, China, the United States, South Korea, and internationally. It operates through three segments: Component, Sensor and Communication, and Mobility Business. The company offers TACT switches, potentiometers, HAPTIC reactors, actuators, microfluidic devices, and for automobiles, consumer appliances, mobile phones and video games.",
+"City": "Tokyo",
+"Country": "Japan",
+"Website": "https://www.alpsalpine.com",
+"Fetched": "2026-10-26"
+},
+"APOG": {
+"Name": "Apogee Enterprises, Inc.",
+"Sector": "Industrials",
+"Industry": "Building Products & Equipment",
+"Summary": "Apogee Enterprises, Inc. engages in the provision of architectural products and services for enclosing buildings, and glass and acrylic products used for preservation, protection, and enhanced viewing in the United States, Canada, and Brazil. It operates in four segments: Architectural Metals, Architectural Glass, Architectural Services, and Performance Surfaces.",
+"City": "Minneapolis",
+"Country": "United States",
+"Website": "https://www.apog.com",
+"Fetched": "2026-10-26"
+},
+"BBSI": {
+"Name": "Barrett Business Services, Inc.",
+"Sector": "Industrials",
+"Industry": "Staffing & Employment Services",
+"Summary": "Barrett Business Services, Inc. provides business management solutions for small and mid-sized companies in the United States. It develops a management platform that integrates a knowledge-based approach from the management consulting industry with tools from the human resource outsourcing industry.",
+"City": "Vancouver",
+"Country": "United States",
+"Website": "https://www.bbsi.com",
+"Fetched": "2026-10-26"
+},
+"BJ": {
+"Name": "BJ's Wholesale Club Holdings, Inc.",
+"Sector": "Consumer Defensive",
+"Industry": "Discount Stores",
+"Summary": "BJ's Wholesale Club Holdings, Inc., together with its subsidiaries, operates membership warehouse clubs on the eastern half of the United States. The company offers groceries, fresh food, general merchandise, gasoline, and other ancillary services. It sells its products through its clubs; the BJs.com website; and its mobile app. The company was formerly known as Beacon Holding Inc. and changed its name to BJ's Wholesale Club Holdings, Inc. in February 2018. BJ's Wholesale Club Holdings, Inc.",
+"City": "Marlborough",
+"Country": "United States",
+"Website": "https://www.bjs.com",
+"Fetched": "2026-10-26"
+},
+"BP": {
+"Name": "BP p.l.c.",
+"Sector": "Energy",
+"Industry": "Oil & Gas Integrated",
+"Summary": "BP p.l.c., an integrated energy company, engages in the oil and gas business worldwide. The company operates through Gas & Low Carbon Energy, Oil Production & Operations, and Customers & Products segments. It engages in the production of natural gas, marketing, and trading activities, as well as solar, wind, and hydrogen businesses. The company also offers aviation fuel products and services, such as jet fuel; aviation gasoline; UL91 aviation fuel; and sustainable aviation fuel.",
+"City": "London",
+"Country": "United Kingdom",
+"Website": "https://www.bp.com",
+"Fetched": "2026-10-26"
+},
+"BTE": {
+"Name": "Baytex Energy Corp.",
+"Sector": "Energy",
+"Industry": "Oil & Gas E&P",
+"Summary": "Baytex Energy Corp., an energy company, engages in the acquisition, development, and production of crude oil and natural gas in the Western Canadian Sedimentary Basin. It offers light oil and condensate, heavy oil, natural gas liquids, and natural gas. The company also holds 100% interest in Duvernay and Peace River properties in Alberta; and Lloydminster property in Alberta and Saskatchewan. Baytex Energy Corp. was incorporated in 1993 and is headquartered in Calgary, Canada.",
+"City": "Calgary",
+"Country": "Canada",
+"Website": "https://www.baytexenergy.com",
+"Fetched": "2026-10-26"
+},
+"CAKE": {
+"Name": "The Cheesecake Factory Incorporated",
+"Sector": "Consumer Cyclical",
+"Industry": "Restaurants",
+"Summary": "The Cheesecake Factory Incorporated operates and licenses restaurants in the United States and Canada. It operates bakeries that produce cheesecakes and other baked products for its restaurants, international licensees, third-party bakery customers, external foodservice operators, retailers, and distributors. The company operates restaurants under the brands comprising The Cheesecake Factory, North Italia, Flower Child, and Fox Restaurant Concepts.",
+"City": "Calabasas",
+"Country": "United States",
+"Website": "https://www.thecheesecakefactory.com",
+"Fetched": "2026-10-26"
+},
+"CHRD": {
+"Name": "Chord Energy Corporation",
+"Sector": "Energy",
+"Industry": "Oil & Gas E&P",
+"Summary": "Chord Energy Corporation operates as an independent exploration and production company in the United States. The company engages in the acquisition, exploration, development and production of crude oil, natural gas, and natural gas liquids in the Williston Basin. It sells its products to refiners, marketers, and other purchasers that have access to pipeline and rail facilities. The company was formerly known as Oasis Petroleum Inc. and changed its name to Chord Energy Corporation in July 2022.",
+"City": "Houston",
+"Country": "United States",
+"Website": "https://www.chordenergy.com",
+"Fetched": "2026-10-26"
+},
+"COLL": {
+"Name": "Collegium Pharmaceutical, Inc.",
+"Sector": "Healthcare",
+"Industry": "Drug Manufacturers - Specialty & Generic",
+"Summary": "Collegium Pharmaceutical, Inc., a specialty pharmaceutical company, engages in the development and commercialization of medicines for pain management. The company's portfolio includes Jornay PM, a central nervous system stimulant prescription medicine that contains methylphenidate HCl for the treatment of attention deficit hyperactivity disorder; Belbuca, a buccal film that contains buprenorphine for severe and persistent pain that requires an extended treatment period; Xtampza ER, an abuse-deterrent,…",
+"City": "Stoughton",
+"Country": "United States",
+"Website": "https://www.collegiumpharma.com",
+"Fetched": "2026-10-26"
+},
+"CRCL": {
+"Name": "Circle Internet Group",
+"Sector": "Financial Services",
+"Industry": "Capital Markets",
+"Summary": "Circle Internet Group, Inc. operates as a platform, network, and market infrastructure for stablecoin and blockchain applications. The company provides various platform including Arc Blockchain and Developer Infrastructure, an open, layer-1 blockchain network purpose-built to bring real world economic activity onchain; Circle Digital Assets and Services, which includes circle digital assets, USDC, EURC, and USYC, as well as circle mint and xreserve, related liquidity, custody, and trust infrastructure; and Circle…",
+"City": "New York",
+"Country": "United States",
+"Website": "https://www.circle.com",
+"Fetched": "2026-10-26"
+},
+"CRON": {
+"Name": "Cronos Group Inc.",
+"Sector": "Healthcare",
+"Industry": "Drug Manufacturers - Specialty & Generic",
+"Summary": "Cronos Group Inc., a cannabinoid company, engages in the cultivation, production, distribution, and marketing of cannabis products in Canada, Israel, and internationally. It offers dried flowers, pre-rolls, oils, vaporizers, edibles, and tinctures under the Spinach, Lord Jones, Lit, and Peace Naturals brand names. The company is headquartered in Stayner, Canada.",
+"City": "Stayner",
+"Country": "Canada",
+"Website": "https://thecronosgroup.com",
+"Fetched": "2026-10-26"
+},
+"CVI": {
+"Name": "CVR Energy, Inc.",
+"Sector": "Energy",
+"Industry": "Oil & Gas Refining & Marketing",
+"Summary": "CVR Energy, Inc., together with its subsidiaries, engages in renewable fuels and petroleum refining and marketing, and nitrogen fertilizer manufacturing activities in the United States. It operates through three segments: Petroleum, Renewables, and Nitrogen Fertilizer. The Petroleum segment refines and markets transportation fuels, such as gasoline, diesel, jet fuel, and distillates; and includes crude gathering and logistics activities that support refinery operations.",
+"City": "Sugar Land",
+"Country": "United States",
+"Website": "https://www.cvrenergy.com",
+"Fetched": "2026-10-26"
+},
+"CWEN": {
+"Name": "Clearway Energy, Inc.",
+"Sector": "Utilities",
+"Industry": "Utilities - Renewable",
+"Summary": "Clearway Energy, Inc. operates in the clean energy generation assets business in the United States. It operates through Flexible Generation and Renewables & Storage segments.",
+"City": "Princeton",
+"Country": "United States",
+"Website": "https://investor.clearwayenergy.com",
+"Fetched": "2026-10-26"
+},
+"DINO": {
+"Name": "HF Sinclair Corporation",
+"Sector": "Energy",
+"Industry": "Oil & Gas Refining & Marketing",
+"Summary": "HF Sinclair Corporation operates as an independent energy company in the United States. It operates through five segments: Refining, Renewables, Marketing, Lubricants & Specialties, and Midstream. The company produces and markets gasoline, diesel fuel, jet fuel, renewable diesel, specialty lubricant products, specialty chemicals, commodity and modified asphalt products, and others.",
+"City": "Dallas",
+"Country": "United States",
+"Website": "https://www.hfsinclair.com",
+"Fetched": "2026-10-26"
+},
+"EC": {
+"Name": "Ecopetrol S.A.",
+"Sector": "Energy",
+"Industry": "Oil & Gas Integrated",
+"Summary": "Ecopetrol S.A. operates as an integrated energy company. It operates through four segments: Exploration and Production; Transport and Logistics; Refining and Petrochemicals; and Energy transmission and Toll Roads Concessions. The Exploration and Production segment engages in the exploration and production of oil and gas. The Transport and Logistics segment is involved in the transportation of crude oil, motor fuels, fuel oil, and other refined products, including diesel, jet, and biofuels.",
+"City": "Bogotá",
+"Country": "Colombia",
+"Website": "https://www.ecopetrol.com.co",
+"Fetched": "2026-10-26"
+},
+"ECHO": {
+"Name": "EchoStar Corporation",
+"Sector": "Communication Services",
+"Industry": "Telecom Services",
+"Summary": "EchoStar Corporation provides pay-tv services in the United States, Mexico, Canada, South and Central America, Asia, Africa, Australia, Europe, India, and the Middle East.",
+"City": "Englewood",
+"Country": "United States",
+"Website": "https://www.echostar.com",
+"Fetched": "2026-10-26"
+},
+"FOXA": {
+"Name": "Fox Corporation",
+"Sector": "Communication Services",
+"Industry": "Entertainment",
+"Summary": "Fox Corporation operates as a news, sports, and entertainment company in the United States. It operates in two segments, Cable Network Programming and Television. The Cable Network Programming segment produces and licenses news and sports content for distribution through traditional cable television systems, direct broadcast satellite operators, telecommunication companies, virtual multi-channel video programming distributors, and other digital platforms.",
+"City": "New York",
+"Country": "United States",
+"Website": "https://www.foxcorporation.com",
+"Fetched": "2026-10-26"
+},
+"FTK": {
+"Name": "Flotek Industries, Inc.",
+"Sector": "Energy",
+"Industry": "Oil & Gas Equipment & Services",
+"Summary": "Flotek Industries, Inc. operates as a chemical and data analytics company in the United States, the United Arab Emirates, and internationally. It operates in two segments, Chemistry Technologies (CT) and Data Analytics (DA).",
+"City": "Houston",
+"Country": "United States",
+"Website": "https://www.flotekind.com",
+"Fetched": "2026-10-26"
+},
+"GCT": {
+"Name": "GigaCloud Technology Inc.",
+"Sector": "Technology",
+"Industry": "Software - Infrastructure",
+"Summary": "GigaCloud Technology Inc. provides end-to-end B2B ecommerce solutions for large parcel merchandise in the United States and internationally. The company offers GigaCloud Marketplace that integrates product discovery to payments and logistics tools into one easy-to-use platform. It's marketplace connects manufacturers primarily in Asia with resellers in the United States, Asia, and Europe to execute cross-border transactions across furniture, home appliance, fitness equipment, and other large parcel categories.",
+"City": "El Monte",
+"Country": "United States",
+"Website": "https://www.gigacloudtech.com",
+"Fetched": "2026-10-26"
+},
+"GPRE": {
+"Name": "Green Plains Inc.",
+"Sector": "Basic Materials",
+"Industry": "Chemicals",
+"Summary": "Green Plains Inc. produces low-carbon fuels in the United States and internationally. It operates in two segments, Ethanol Production, and Agribusiness and Energy Services. The company produces, stores, and transports ethanol, distiller grains, and ultra-high protein and renewable corn oil.",
+"City": "Omaha",
+"Country": "United States",
+"Website": "https://www.gpreinc.com",
+"Fetched": "2026-10-26"
+},
+"HAS": {
+"Name": "Hasbro, Inc.",
+"Sector": "Consumer Cyclical",
+"Industry": "Leisure",
+"Summary": "Hasbro, Inc. operates as a toy and game company in the United States, Europe, Canada, Mexico, Latin America, Australia, China, and Hong Kong. The company offers trading cards and collectibles, action figures, arts and crafts and creative play products, dolls, play sets, preschool toys, plush products, vehicles and toy-related specialty products, sports action products and accessories, and other consumer products; and licensed products, such as apparel, publishing products, home goods and electronics, and toy…",
+"City": "Pawtucket",
+"Country": "United States",
+"Website": "https://corporate.hasbro.com",
+"Fetched": "2026-10-26"
+},
+"HELE": {
+"Name": "Helen of Troy Limited",
+"Sector": "Consumer Defensive",
+"Industry": "Household & Personal Products",
+"Summary": "Helen of Troy Limited operates as a consumer products company in the United States, Canada, Europe, the Middle East, Africa, the Asia Pacific, and Latin America. The Home & Outdoor segment offers food storage containers, kitchen utensils for cooking and preparing salads, fruits, vegetables and meats, graters, slicers and choppers, baking essentials, kitchen organization, bath, cleaning, infant and toddler products, and coffee preparation tools and electronics.",
+"City": "El Paso",
+"Country": "United States",
+"Website": "https://www.helenoftroy.com",
+"Fetched": "2026-10-26"
+},
+"HOOD": {
+"Name": "Robinhood Markets, Inc.",
+"Sector": "Financial Services",
+"Industry": "Capital Markets",
+"Summary": "Robinhood Markets, Inc. operates financial services platform in the United States. The company's platform allows users to invest in stocks, exchange-traded funds (ETFs), and American depository receipts. It offers fractional trading, recurring investments, access to investing on margin, fully-paid securities lending, cash sweep, instant withdrawals, retirement program, around-the-clock trading, joint investing accounts, event contracts, future contract services, and short selling.",
+"City": "Menlo Park",
+"Country": "United States",
+"Website": "https://robinhood.com",
+"Fetched": "2026-10-26"
+},
+"HRI": {
+"Name": "Herc Holdings Inc.",
+"Sector": "Industrials",
+"Industry": "Rental & Leasing Services",
+"Summary": "Herc Holdings Inc., together with its subsidiaries, operates as an equipment rental supplier in the United States and internationally. It rents aerial, earthmoving, material handling, trucks and trailers, air compressors, compaction, and lighting equipment. The company offers ProSolutions, an industry specific solution-based services, which include power generation, climate control, remediation and restoration, pump, trench shoring, and studio and production equipment; and ProContractor professional grade tools.",
+"City": "Bonita Springs",
+"Country": "United States",
+"Website": "https://www.hercrentals.com",
+"Fetched": "2026-10-26"
+},
+"HRMY": {
+"Name": "Harmony Biosciences Holdings, Inc.",
+"Sector": "Healthcare",
+"Industry": "Biotechnology",
+"Summary": "Harmony Biosciences Holdings, Inc., a commercial-stage pharmaceutical company, focuses on developing and commercializing therapies for patients with rare neurological diseases in the United States. The company offers WAKIX (pitolisant), a molecule with a novel mechanism of action for the treatment of excessive daytime sleepiness in adult patients with narcolepsy.",
+"City": "Plymouth Meeting",
+"Country": "United States",
+"Website": "https://www.harmonybiosciences.com",
+"Fetched": "2026-10-26"
+},
+"JAKK": {
+"Name": "JAKKS Pacific, Inc.",
+"Sector": "Consumer Cyclical",
+"Industry": "Leisure",
+"Summary": "JAKKS Pacific, Inc. designs, produces, markets, sells, and distributes toys and related products, consumer and electronic products, kids indoor and outdoor furniture, costumes, and sporting goods and home furnishings space products worldwide. The company operates through two segments, Toys/Consumer Products and Costumes.",
+"City": "Santa Monica",
+"Country": "United States",
+"Website": "https://www.jakks.com",
+"Fetched": "2026-10-26"
+},
+"JBL": {
+"Name": "Jabil Inc.",
+"Sector": "Technology",
+"Industry": "Electronic Components",
+"Summary": "Jabil Inc. provides engineering, manufacturing, and supply chain solutions worldwide. It operates in three segments: Regulated Industries, Intelligent Infrastructure, and Connected Living and Digital Commerce.",
+"City": "Saint Petersburg",
+"Country": "United States",
+"Website": "https://www.jabil.com",
+"Fetched": "2026-10-26"
+},
+"KB": {
+"Name": "KB Financial Group Inc.",
+"Sector": "Financial Services",
+"Industry": "Banks - Regional",
+"Summary": "KB Financial Group Inc. provides financial products and services in South Korea, the United States, New Zealand, China, Cambodia, the United Kingdom, Indonesia, and internationally.",
+"City": "Seoul",
+"Country": "South Korea",
+"Website": "https://www.kbfg.com",
+"Fetched": "2026-10-26"
+},
+"KHNGY": {
+"Name": "Kuehne + Nagel International AG",
+"Sector": "Industrials",
+"Industry": "Integrated Freight & Logistics",
+"Summary": "Kuehne + Nagel International AG, together with its subsidiaries, provides integrated logistics services in Europe, the Middle East, Africa, the Americas, and the Asia-Pacific. The company operates through four segments: Sea Logistics, Air Logistics, Road Logistics, and Contract Logistics.",
+"City": "Schindellegi",
+"Country": "Switzerland",
+"Website": "https://www.kuehne-nagel.com",
+"Fetched": "2026-10-26"
+},
+"KSS": {
+"Name": "Kohl's Corporation",
+"Sector": "Consumer Cyclical",
+"Industry": "Department Stores",
+"Summary": "Kohl's Corporation operates as an omnichannel retailer in the United States. It offers apparel, footwear, accessories, beauty products, and home products through its stores and website. The company provides its products primarily under the brand names of Apt. 9, Croft & Barrow, FLX, Jumping Beans, SO, Sonoma Goods for Life, and Tek Gear, as well as LC Lauren Conrad, Nine West, and Simply Vera Vera Wang. Kohl's Corporation was founded in 1988 and is headquartered in Menomonee Falls, Wisconsin.",
+"City": "Menomonee Falls",
+"Country": "United States",
+"Website": "https://www.corporate.kohls.com",
+"Fetched": "2026-10-26"
+},
+"KTOS": {
+"Name": "Kratos Defense & Security Solutions, Inc.",
+"Sector": "Industrials",
+"Industry": "Aerospace & Defense",
+"Summary": "Kratos Defense & Security Solutions, Inc., a technology company, provides technology, hardware, products, system, and software for the defense, national security, and commercial markets in the United States, other North America, the Asia Pacific, the Middle East, Europe, and Internationally. The company operates through Kratos Government Solutions and Unmanned Systems segments.",
+"City": "San Diego",
+"Country": "United States",
+"Website": "https://www.kratosdefense.com",
+"Fetched": "2026-10-26"
+},
+"MMS": {
+"Name": "Maximus, Inc.",
+"Sector": "Industrials",
+"Industry": "Specialty Business Services",
+"Summary": "Maximus, Inc. operates as a provider of government services worldwide. The company operates through three segments: U.S. Federal Services, U.S. Services, and Outside the U.S. The U.S.",
+"City": "McLean",
+"Country": "United States",
+"Website": "https://www.maximus.com",
+"Fetched": "2026-10-26"
+},
+"MSM": {
+"Name": "MSC Industrial Direct Co., Inc.",
+"Sector": "Industrials",
+"Industry": "Industrial Distribution",
+"Summary": "MSC Industrial Direct Co., Inc., together with its subsidiaries, engages in the distribution of metalworking and maintenance, repair, and operations (MRO) products and services in the United States, Canada, Mexico, the United Kingdom, and internationally.",
+"City": "Melville",
+"Country": "United States",
+"Website": "https://www.mscdirect.com",
+"Fetched": "2026-10-26"
+},
+"NAVI": {
+"Name": "Navient Corporation",
+"Sector": "Financial Services",
+"Industry": "Credit Services",
+"Summary": "Navient Corporation provides technology-enabled education finance for education in the United States. It operates through two segments: Federal Education Loans and Consumer Lending. The company owns and manages portfolio of private education loans; and offers education lending and digital financial services, in-school student loans, and refinancing products under Earnest brand.",
+"City": "Herndon",
+"Country": "United States",
+"Website": "https://www.navient.com",
+"Fetched": "2026-10-26"
+},
+"NB": {
+"Name": "NioCorp Developments Ltd.",
+"Sector": "Basic Materials",
+"Industry": "Other Industrial Metals & Mining",
+"Summary": "NioCorp Developments Ltd. engages in the exploration and development of mineral deposits in North America. Its principal mineral property is the Elk Creek niobium, scandium, and titanium project that consists of 550 acres parcel of land and associated mineral rights, and an additional 80 acres of surface rights and 80 acres of mineral rights, as well as an optioned land package that covers an area of 1,011 acres located in Johnson County, southeast Nebraska.",
+"City": "Centennial",
+"Country": "United States",
+"Website": "https://www.niocorp.com",
+"Fetched": "2026-10-26"
+},
+"NBIS": {
+"Name": "Nebius Group N.V.",
+"Sector": "Communication Services",
+"Industry": "Internet Content & Information",
+"Summary": "Nebius Group N.V., a technology company, engages in building full-stack infrastructure to service the global AI industry in the United States, the United Kingdom, and internationally. It offers Nebius builds full-stack infrastructure for AI, including large-scale GPU clusters, cloud platforms, and tools and services for developers.",
+"City": "Schiphol",
+"Country": "Netherlands",
+"Website": "https://nebius.com",
+"Fetched": "2026-10-26"
+},
+"NEXA": {
+"Name": "Nexa Resources S.A.",
+"Sector": "Basic Materials",
+"Industry": "Other Industrial Metals & Mining",
+"Summary": "Nexa Resources S.A., together with its subsidiaries, engages in the zinc mining and smelting business worldwide. The company operates in two segments, Mining and Smelting. It produces metallic zinc, zamac, gold, sulfuric acid and zinc oxide, as well as by-products, such as sulfuric acid, silver concentrate, copper cement, copper sulfate, lead concentrate, lead-silver concentrate, and other metallurgical by-products.",
+"City": "Luxembourg",
+"Country": "Luxembourg",
+"Website": "https://www.nexaresources.com",
+"Fetched": "2026-10-26"
+},
+"NVDA": {
+"Name": "NVIDIA Corporation",
+"Sector": "Technology",
+"Industry": "Semiconductors",
+"Summary": "NVIDIA Corporation operates as a data center scale AI infrastructure company in the United States, Taiwan, China, Hong Kong, Europe, and internationally. It operates through Compute & Networking, and Graphics segments. The Compute & Networking segment provides data center accelerated computing and networking platforms and artificial intelligence solutions and software, and automotive platforms and autonomous and electric vehicle solutions, including software.",
+"City": "Santa Clara",
+"Country": "United States",
+"Website": "https://www.nvidia.com",
+"Fetched": "2026-10-26"
+},
+"PALAF": {
+"Name": "Paladin Energy Ltd",
+"Sector": "Energy",
+"Industry": "Uranium",
+"Summary": "Paladin Energy Ltd, through its subsidiaries, engages in the development and exploration of mineral properties in Australia, Canada, and Namibia. The company explores for uranium deposits. Its principal properties include the Langer Heinrich Mine (LHS), located in the Republic of Namibia in southern Africa, and the Patterson Lake South (PLS) property, located in northern Saskatchewan, Canada. The company was formerly known as Paladin Resources Ltd and changed its name to Paladin Energy Ltd in November 2007.",
+"City": "Perth",
+"Country": "Australia",
+"Website": "https://www.paladinenergy.com.au",
+"Fetched": "2026-10-26"
+},
+"PARR": {
+"Name": "Par Pacific Holdings, Inc.",
+"Sector": "Energy",
+"Industry": "Oil & Gas Refining & Marketing",
+"Summary": "Par Pacific Holdings, Inc., an energy company, provides renewable and conventional fuels in the United States. The company operates through three segments: Refining, Retail, and Logistics. The Refining segment owns and operates refineries that convert crude oil into gasoline, distillate, asphalt, and other products.",
+"City": "Houston",
+"Country": "United States",
+"Website": "https://www.parpacific.com",
+"Fetched": "2026-10-26"
+},
+"PEB": {
+"Name": "Pebblebrook Hotel Trust",
+"Sector": "Real Estate",
+"Industry": "REIT - Hotel & Motel",
+"Summary": "Pebblebrook Hotel Trust is a publicly traded real estate investment trust and the largest owner of urban and resort lifestyle hotels in the United States. The Company owns 43 hotels, totaling approximately 10,900 guest rooms across 14 urban and resort markets. Pebblebrook Hotel Trust is based in Bethesda, United States. Pebblebrook Hotel Trust was established in October, 02 2009 and incorporated in Maryland.",
+"City": "Bethesda",
+"Country": "United States",
+"Website": "https://www.pebblebrookhotels.com",
+"Fetched": "2026-10-26"
+},
+"PENG": {
+"Name": "Penguin Solutions, Inc.",
+"Sector": "Technology",
+"Industry": "Information Technology Services",
+"Summary": "Penguin Solutions, Inc. designs, builds, deploys and manages data centers for enterprises, sovereign AI initiatives, and neocloud providers worldwide. The company operates through three segments: Advanced Computing, Integrated Memory, and Optimized LED.",
+"City": "Fremont",
+"Country": "United States",
+"Website": "https://www.penguinsolutions.com",
+"Fetched": "2026-10-26"
+},
+"PINE": {
+"Name": "Alpine Income Property Trust, Inc.",
+"Sector": "Real Estate",
+"Industry": "REIT - Retail",
+"Summary": "Alpine Income Property Trust, Inc. is a publicly traded real estate investment trust. The firm seeks to deliver attractive risk-adjusted returns and dependable cash dividends by investing in, owning and operating a portfolio of single tenant net leased commercial income properties that are predominately leased to high-quality publicly traded and credit-rated tenants.",
+"City": "Winter Park",
+"Country": "United States",
+"Website": "https://www.alpinereit.com",
+"Fetched": "2026-10-26"
+},
+"PR": {
+"Name": "Permian Resources Corporation",
+"Sector": "Energy",
+"Industry": "Oil & Gas E&P",
+"Summary": "Permian Resources Corporation, an independent oil and natural gas company, focuses on the development of crude oil and associated liquids-rich natural gas reserves in the United States. The company's assets primarily focus on the Delaware Basin, a sub-basin of the Permian Basin. Its properties consist of acreage blocks in Reeves County in West Texas and Lea County in New Mexico. The company was formerly known as Centennial Resource Development, Inc.",
+"City": "Midland",
+"Country": "United States",
+"Website": "https://www.permianres.com",
+"Fetched": "2026-10-26"
+},
+"REZI": {
+"Name": "Resideo Technologies, Inc.",
+"Sector": "Industrials",
+"Industry": "Industrial Distribution",
+"Summary": "Resideo Technologies, Inc. develops, manufactures, sells, and distributes comfort, energy management, and safety and security solutions in the United States, Europe, and internationally. The company operates through Products and Solutions segment.",
+"City": "Scottsdale",
+"Country": "United States",
+"Website": "https://www.resideo.com",
+"Fetched": "2026-10-26"
+},
+"RS": {
+"Name": "Reliance, Inc.",
+"Sector": "Basic Materials",
+"Industry": "Steel",
+"Summary": "Reliance, Inc. operates as a diversified metal solutions provider and metals service center company primarily in the United States and Canada. The company distributes metal products, including alloy, aluminum, brass, copper, carbon steel, stainless steel, titanium, and other specialty steel products; and provides metals processing services to consumer products, general manufacturing, non-residential construction, transportation, aerospace, energy, electronics and semiconductor fabrication, industrial machinery,…",
+"City": "Phoenix",
+"Country": "United States",
+"Website": "https://reliance.com",
+"Fetched": "2026-10-26"
+},
+"RXO": {
+"Name": "RXO, Inc.",
+"Sector": "Industrials",
+"Industry": "Trucking",
+"Summary": "RXO, Inc. engages in truck brokerage business in the United States, Canada, Mexico, Asia, and Europe. It offers truckload freight brokering services. The company also provides asset-light managed transportation and last mile services, as well as freight forwarding services, including facilitation of ocean and air transportation, customs brokerage, and additional domestic services including middle mile. RXO, Inc. was incorporated in 2022 and is headquartered in Charlotte, North Carolina.",
+"City": "Charlotte",
+"Country": "United States",
+"Website": "https://www.rxo.com",
+"Fetched": "2026-10-26"
+},
+"SFNC": {
+"Name": "Simmons First National Corporation",
+"Sector": "Financial Services",
+"Industry": "Banks - Regional",
+"Summary": "Simmons First National Corporation operates as the bank holding company for Simmons Bank that provides banking and other financial products and services to individuals and businesses. The company offers deposits, checking, and savings accounts; loan products, such as consumer, real estate, commercial, agricultural, equipment, warehouse lending, and SBA lending; specialized products and services, including credit cards, trust and fiduciary services, investments, and insurance; and treasury management services.",
+"City": "Pine Bluff",
+"Country": "United States",
+"Website": "https://www.simmonsbank.com",
+"Fetched": "2026-10-26"
+},
+"SHG": {
+"Name": "Shinhan Financial Group Co., Ltd.",
+"Sector": "Financial Services",
+"Industry": "Banks - Regional",
+"Summary": "Shinhan Financial Group Co., Ltd. provides financial products and services in South Korea and overseas. It offers credit, lending and receiving deposits; credit cards, short-term and long-term card loan services, installment financing, and leases; securities trading, consignment trading, and underwriting; life and non-life insurance business; facility rental and new technology business financing; and real estate trust, investment advisory services, venture business investment, and other businesses.",
+"City": "Seoul",
+"Country": "South Korea",
+"Website": "https://www.shinhangroup.com",
+"Fetched": "2026-10-26"
+},
+"SHO": {
+"Name": "Sunstone Hotel Investors, Inc.",
+"Sector": "Real Estate",
+"Industry": "REIT - Hotel & Motel",
+"Summary": "Sunstone Hotel Investors, Inc. is a lodging real estate investment trust (REIT). Sunstone's strategy is to create long-term stakeholder value through the acquisition, active ownership, and disposition of well-located hotel and resort real estate. Sunstone Hotel Investors, Inc. was incorporated in 1995 and is based in Aliso Viejo, United States.",
+"City": "Aliso Viejo",
+"Country": "United States",
+"Website": "https://www.sunstonehotels.com",
+"Fetched": "2026-10-26"
+},
+"SHOP": {
+"Name": "Shopify Inc.",
+"Sector": "Technology",
+"Industry": "Software - Application",
+"Summary": "Shopify Inc., a commerce technology company, provides tools to start, scale, market, and run a business of various sizes in Canada, the United States, Europe, the Middle East, Africa, the Asia Pacific, and Latin America.",
+"City": "Ottawa",
+"Country": "Canada",
+"Website": "https://www.shopify.com",
+"Fetched": "2026-10-26"
+},
+"SNPS": {
+"Name": "Synopsys, Inc.",
+"Sector": "Technology",
+"Industry": "Software - Infrastructure",
+"Summary": "Synopsys, Inc. provides design IP solutions in the semiconductor and electronics industries. It operates in two segments, Design Automation and Design IP.",
+"City": "Sunnyvale",
+"Country": "United States",
+"Website": "https://www.synopsys.com",
+"Fetched": "2026-10-26"
+},
+"STAA": {
+"Name": "STAAR Surgical Company",
+"Sector": "Healthcare",
+"Industry": "Medical Instruments & Supplies",
+"Summary": "STAAR Surgical Company, together with its subsidiaries, designs, develops, manufactures, and sells phakic implantable lenses for the eye and accessory delivery systems to deliver the lenses into the eye. The company offers implantable collamer lens product family (ICLs) comprising EVO ICL, EVO+ ICL, EVO Visian ICL, and EVO Viva ICL for use in refractive surgery for the treatment of visual disorders, such as myopia, hyperopia, astigmatism, and presbyopia.",
+"City": "Lake Forest",
+"Country": "United States",
+"Website": "https://www.staar.com",
+"Fetched": "2026-10-26"
+},
+"STX": {
+"Name": "Seagate Technology Holdings plc",
+"Sector": "Technology",
+"Industry": "Computer Hardware",
+"Summary": "Seagate Technology Holdings plc engages in providing data storage solutions in Singapore, the United States, the Netherlands, and internationally. The company offers External and internal hard drives; external and internal solid-state drives (SSDs); enterprise hard drives and SSDs; data storage systems; network attached storage (NAS) hard drives; video and analytics hard drives; and hyperscale and cloud solution.",
+"City": "Singapore",
+"Country": "Singapore",
+"Website": "https://www.seagate.com",
+"Fetched": "2026-10-26"
+},
+"TALO": {
+"Name": "Talos Energy Inc.",
+"Sector": "Energy",
+"Industry": "Oil & Gas E&P",
+"Summary": "Talos Energy Inc., through its subsidiaries, engages in the exploration and production of oil and gas in the United States and Mexico. The company operates through two segments: Upstream, and Carbon Capture and Sequestration. It also engages in the exploration and production of natural gas liquid. Talos Energy Inc. was founded in 2011 and is headquartered in Houston, Texas.",
+"City": "Houston",
+"Country": "United States",
+"Website": "https://www.talosenergy.com",
+"Fetched": "2026-10-26"
+},
+"TGS": {
+"Name": "Transportadora de Gas del Sur S.A.",
+"Sector": "Energy",
+"Industry": "Oil & Gas Integrated",
+"Summary": "Transportadora de Gas del Sur S.A. engages in transportation of natural gas, and production and commercialization of natural gas liquids in Argentina and internationally. The company operates through four segments: Natural Gas Transportation Services; Liquids Production and Commercialization; Midstream; and Telecommunications. The Natural Gas Transportation segment transports natural gas through pipeline system to distribution companies, power plants, and industrial customers.",
+"City": "Buenos Aires",
+"Country": "Argentina",
+"Website": "https://www.tgs.com.ar",
+"Fetched": "2026-10-26"
+},
+"TTDKY": {
+"Name": "TDK Corporation",
+"Sector": "Technology",
+"Industry": "Electronic Components",
+"Summary": "TDK Corporation, together with its subsidiaries, engages in the manufacture and sale of electronic components in Japan, Europe, China, Asia, the Americas, and internationally. The company operates through Passive Components, Sensor Application Products, Magnetic Application Products, Energy Application Products, and Others segments.",
+"City": "Tokyo",
+"Country": "Japan",
+"Website": "https://www.tdk.com/en/index.html",
+"Fetched": "2026-10-26"
+},
+"TTE": {
+"Name": "TotalEnergies SE",
+"Sector": "Energy",
+"Industry": "Oil & Gas Integrated",
+"Summary": "TotalEnergies SE, an integrated energy company, produces and markets oil and biofuels, natural gas, biogas and low-carbon hydrogen, renewables, and electricity in France, the United States, Europe, Africa, and internationally. It operates through Exploration & Production, Integrated LNG, Integrated Power, Refining & Chemicals, and Marketing & Services segments. The Exploration & Production segment engages in the activities of exploration and production of oil and natural gas, as well as carbon storage.",
+"City": "Courbevoie",
+"Country": "France",
+"Website": "https://totalenergies.com",
+"Fetched": "2026-10-26"
+},
+"TXN": {
+"Name": "Texas Instruments Incorporated",
+"Sector": "Technology",
+"Industry": "Semiconductors",
+"Summary": "Texas Instruments Incorporated designs, manufactures, and sells semiconductors to electronics designers and manufacturers in the United States, China, the rest of Asia, Europe, the Middle East, Africa, Japan, and internationally. It operates through Analog and Embedded Processing segments.",
+"City": "Dallas",
+"Country": "United States",
+"Website": "https://www.ti.com",
+"Fetched": "2026-10-26"
+},
+"UCB": {
+"Name": "United Community Banks, Inc.",
+"Sector": "Financial Services",
+"Industry": "Banks - Regional",
+"Summary": "United Community Banks, Inc. operates as the bank holding company for United Community Bank that provides financial services in the United States. The company offers deposit products, including checking, savings, money market, and other deposit accounts. It also provides loans comprising owner occupied and income producing CRE, commercial and industrial, equipment financing, residential mortgage, home equity, manufactured housing, and consumer loans, as well as commercial and residential construction and land.",
+"City": "Greenville",
+"Country": "United States",
+"Website": "https://www.ucbi.com",
+"Fetched": "2026-10-26"
+},
+"UGP": {
+"Name": "Ultrapar Participações S.A.",
+"Sector": "Energy",
+"Industry": "Oil & Gas Refining & Marketing",
+"Summary": "Ultrapar Participações S.A., through its subsidiaries, operates in the energy, mobility, and logistics infrastructure sectors in Brazil, the rest of Europe, the United States, Canada, other Latin American countries, Oceania, and internationally. It operates through Ultragaz, Ipiranga, Ultracargo, and Hidrovias segments.",
+"City": "São Paulo",
+"Country": "Brazil",
+"Website": "https://www.ultra.com.br",
+"Fetched": "2026-10-26"
+},
+"UNF": {
+"Name": "UniFirst Corporation",
+"Sector": "Industrials",
+"Industry": "Specialty Business Services",
+"Summary": "UniFirst Corporation provides workplace uniforms and protective work wear clothing in the United States, Europe, and Canada. It operates in three segments: Uniform & Facility Service Solutions; First Aid & Safety Solutions; and Other. The company offers uniforms, including shirts, pants, jackets, coveralls, lab coats, smocks, and aprons; specialized protective wear comprising flame resistant and high visibility garments; and first aid cabinet services and other safety supplies, as well as safety training services.",
+"City": "Wilmington",
+"Country": "United States",
+"Website": "https://www.unifirst.com",
+"Fetched": "2026-10-26"
+},
+"UPBD": {
+"Name": "Upbound Group, Inc.",
+"Sector": "Technology",
+"Industry": "Software - Application",
+"Summary": "Upbound Group, Inc., a technology and data-driven company, provides financial solutions in the United States, Puerto Rico, and Mexico. It operates through four segments: Acima, Rent-A-Center, Brigit, and Mexico. The company also provides furniture, including mattresses, tires, consumer electronics, appliances, tools, handbags, computers, and accessories.",
+"City": "Plano",
+"Country": "United States",
+"Website": "https://www.upbound.com",
+"Fetched": "2026-10-26"
+},
+"URI": {
+"Name": "United Rentals, Inc.",
+"Sector": "Industrials",
+"Industry": "Rental & Leasing Services",
+"Summary": "United Rentals, Inc., through its subsidiaries, operates as an equipment rental company in the United States, Canada, Europe, Australia, and New Zealand. It operates through two segments, General Rentals and Specialty.",
+"City": "Stamford",
+"Country": "United States",
+"Website": "https://www.unitedrentals.com",
+"Fetched": "2026-10-26"
+},
+"VNCE": {
+"Name": "Vince Holding Corp.",
+"Sector": "Consumer Cyclical",
+"Industry": "Apparel Manufacturing",
+"Summary": "Vince Holding Corp. operates as a retail company in the United States and internationally. It operates in two segments, Vince Wholesale and Vince Direct-to-Consumer. The company offers women's products, including cashmere sweaters and silk blouses, as well as leather and suede jackets, dresses, skirts, pants, t-shirts, footwear, outerwear, and accessories; and men's products, such as cashmere sweaters, woven shirts, core and fashion pants, blazers, outerwear, footwear, and accessories under the Vince brand.",
+"City": "New York",
+"Country": "United States",
+"Website": "https://www.vince.com",
+"Fetched": "2026-10-26"
+},
+"VNOM": {
+"Name": "Viper Energy, Inc.",
+"Sector": "Energy",
+"Industry": "Oil & Gas Midstream",
+"Summary": "Viper Energy, Inc. owns, acquires, and exploits oil and natural gas properties in North America. It focuses on owning and acquiring mineral and royalty interests in the Permian Basin. Viper Energy, Inc. was formerly known as Viper Energy Partners LP and changed its name to Viper Energy, Inc. in November 2023. Viper Energy, Inc. was founded in 2013 and is based in Midland, Texas. Viper Energy, Inc. operates as a subsidiary of Diamondback Energy, Inc.",
+"City": "Midland",
+"Country": "United States",
+"Website": "https://www.viperenergy.com",
+"Fetched": "2026-10-26"
+},
+"VSNT": {
+"Name": "Versant Media Group, Inc.",
+"Sector": "Communication Services",
+"Industry": "Entertainment",
+"Summary": "Versant Media Group, Inc. engages in the media and entertainment business in the United States. The company produces, licenses, and acquires content that is distributed through various outlets, including networks and digital platforms. It delivers news, sports and entertainment content through its portfolio of brands, which includes MS NOW, CNBC, USA Network, Golf Channel, GolfNow, Rotten Tomatoes, SportsEngine, E!, SYFY, Oxygen True Crime, Fandango, and Free TV Networks.",
+"City": "New York",
+"Country": "United States",
+"Website": "https://www.versantmedia.com",
+"Fetched": "2026-10-26"
+},
+"XIFR": {
+"Name": "XPLR Infrastructure, LP",
+"Sector": "Utilities",
+"Industry": "Utilities - Renewable",
+"Summary": "XPLR Infrastructure, LP engages in the energy selling business in the United States. It operates a portfolio of contracted clean energy assets, including wind, solar, and battery storage projects. The company was formerly known as NextEra Energy Partners, LP and changed its name to XPLR Infrastructure, LP in January 2025. XPLR Infrastructure, LP was incorporated in 2014 and is based in Juno Beach, Florida.",
+"City": "Juno Beach",
+"Country": "United States",
+"Website": "https://www.investor.xplrinfrastructure.com",
+"Fetched": "2026-10-26"
+},
+"XOM": {
+"Name": "ExxonMobil Holdings Corporation",
+"Sector": "Energy",
+"Industry": "Oil & Gas Integrated",
+"Summary": "ExxonMobil Holdings Corporation engages in the exploration and production of crude oil and natural gas in the United States, Canada, and internationally. The company operates through Upstream, Energy Products, Chemical Products, and Specialty Products segments. Its Upstream segment explores for and produces crude oil and natural gas. The Energy Products segment offers fuels, aromatics, and catalysts, as well as licensing services.",
+"City": "Spring",
+"Country": "United States",
+"Website": "https://corporate.exxonmobil.com",
+"Fetched": "2026-10-26"
+}
+}</script>
 <script>
 const A = JSON.parse(document.getElementById('analysis-data').textContent);
 // Screeners Shawn removed from the page (2026-10-18: 'zacks rank 1 only' lagged the rest). Backtest data is kept.
@@ -28468,7 +29176,13 @@ function toggleCardPanel(name){
   let S=null; try{ S=JSON.parse(document.getElementById('scorecard-data').textContent); }catch(e){}
   const HT={}; const arr=v=>v==null?[]:(Array.isArray(v)?v:[v]);
   if(S&&S.Heat){ arr(S.Heat.Tiles).forEach(t=>HT[t.T]=t); arr(S.Heat.Extra).forEach(t=>{ if(!HT[t.T]) HT[t.T]=t; }); }
-  const known=t=>!!(t&&(charts[t]||ZR[t]||HT[t]));
+  let PROF={}; try{ PROF=JSON.parse(document.getElementById('profiles-data').textContent)||{}; }catch(e){ PROF={}; }
+  const esc=x=>String(x||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  function descHTML(t){ const p=PROF[t]; if(!p||!p.Summary) return '';
+    const path=[p.Sector,p.Industry].filter(Boolean).map(esc).join(' &gt; ');
+    const where=[p.City,p.Country].filter(Boolean).map(esc).join(', ');
+    return `<div class="d-h"><b>Description</b><span>${path}${where?' · '+where:''}</span></div>${esc(p.Summary)}`; }
+  const known=t=>!!(t&&(charts[t]||ZR[t]||HT[t]||PROF[t]));
   // which element is a ticker? explicit data-chart, or one of the page's ticker styles holding a known symbol
   const SEL='[data-chart],.tick,.stick,.ptick,.zv-tk,.hh-tick,.cticker,.cp-tk';
   function tickerOf(el){
@@ -28484,9 +29198,9 @@ function toggleCardPanel(name){
     pop.style.left=x+'px'; pop.style.top=y+'px';
   }
   function showPop(t, el){
-    cur=el; const z=ZR[t]; ttl.textContent=(z&&z.Company?z.Company+' ':'')+'('+t+')';
+    cur=el; const z=ZR[t]; const nm=(PROF[t]&&PROF[t].Name)||(z&&z.Company)||''; ttl.textContent=(nm?nm+' ':'')+'('+t+')';
     $('#cppSub').textContent='snapshot + 12 Month EPS vs. price · Research Wizard';
-    $('#cppSnap').innerHTML=snapHTML(t);
+    $('#cppSnap').innerHTML=snapHTML(t); $('#cppDesc').innerHTML=descHTML(t);
     const b=charts[t];
     if(b){ img.hidden=false; miss.hidden=true; img.src='data:image/png;base64,'+b; img.alt='12-month EPS and price chart for '+t; }
     else { img.hidden=true; img.removeAttribute('src'); miss.hidden=false; }
@@ -28533,7 +29247,7 @@ function toggleCardPanel(name){
     const box=$('#stockSheet .ss');
     box.innerHTML=`
       <div class="ss-top">
-        <div class="ss-name"><h3 id="ssName">${z.Company||t}<span class="ss-tk">${t}</span></h3>
+        <div class="ss-name"><h3 id="ssName">${esc((PROF[t]&&PROF[t].Name)||z.Company||t)}<span class="ss-tk">${t}</span></h3>
           <div class="ss-px">${price!=null?'$'+f1(price):'–'}<small>stock price as of ${(S&&S.PricesAsOf)||''}</small></div></div>
         <div class="ss-rank"><div class="lab">Zacks Rank: <b>${rank?rank+'-'+RANKW[rank]:'not graded'}</b></div><div class="ss-meter" aria-hidden="true">${meter}</div>
           <div class="ss-style">Style &nbsp; Value ${zvBadge(z.Value)} Growth ${zvBadge(z.Growth)} Momentum ${zvBadge(z.Momentum)} VGM ${zvBadge(z.VGM)}</div></div>
@@ -28554,6 +29268,7 @@ function toggleCardPanel(name){
         </tbody></table>
         <div class="ss-chart"><h4>Price, 12 Month EPS &amp; Consensus Estimate</h4>
           ${charts[t]?`<img id="ssImg" src="data:image/png;base64,${charts[t]}" alt="12-month EPS and price chart for ${t}"><div class="ss-zoomhint">Click the chart to see it full size</div>`:'<div class="ss-miss">No chart was captured for this ticker on the last refresh.</div>'}</div>
+        ${descHTML(t)?`<div class="ss-desc">${descHTML(t)}</div>`:''}
         <div class="ss-sec">
           <div class="ss-box"><h4>Earnings estimates <span>(Zacks consensus, per share)</span></h4>
             <table class="ss-eps"><thead><tr><th></th><th>Last FY</th><th>This FY</th><th>Next FY</th></tr></thead>
