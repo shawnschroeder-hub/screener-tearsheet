@@ -136,13 +136,28 @@ h1,h2,h3{margin:0;font-family:var(--serif);font-weight:600;letter-spacing:-.02em
 /* hover chart popup (Shawn 2026-10-26: hover KB / CRON / FTK -> its 12 Month EPS chart) */
 [data-chart]{cursor:zoom-in}
 .cticker[data-chart]:hover,.cticker[data-chart]:focus-visible{border-color:var(--accent);outline:none}
-.chart-pop{position:fixed;z-index:70;width:min(640px,calc(100vw - 24px));background:var(--surface);border:1px solid var(--hair-strong);
+.chart-pop{position:fixed;z-index:70;width:min(900px,calc(100vw - 24px));background:var(--surface);border:1px solid var(--hair-strong);
   border-radius:10px;box-shadow:0 18px 50px rgba(0,0,0,.45);padding:10px 12px 12px;pointer-events:none}
 .chart-pop.pinned{pointer-events:auto}
 .chart-pop .cpp-h{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
 .chart-pop .cpp-h b{font-size:14px}
 .chart-pop .cpp-h span{font-size:11.5px;color:var(--muted)}
 .chart-pop img{display:block;width:100%;height:auto;border-radius:6px;background:#fff;max-width:100%}
+.chart-pop .cpp-body{display:grid;grid-template-columns:250px minmax(0,1fr);gap:12px;align-items:start}
+@media(max-width:700px){.chart-pop .cpp-body{grid-template-columns:1fr}.chart-pop .cpp-chart{display:none}}
+.cpp-snap{font-size:12px;min-width:0}
+.cpp-snap .cs-rank{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:6px}
+.cpp-snap .cs-rank b{font-size:13px}
+.cpp-snap .ss-meter i{width:20px;height:16px;font-size:10px}
+.cpp-snap .cs-style{display:flex;gap:4px;align-items:center;color:var(--muted);font-size:11px;margin-bottom:6px;flex-wrap:wrap}
+.cpp-snap table{width:100%;border-collapse:collapse;min-width:0!important}
+.cpp-snap td{padding:4px 0;border-bottom:1px solid var(--hair);font-size:12px;position:static!important;background:none!important;text-align:left}
+.cpp-snap td:first-child{color:var(--muted);padding-left:0!important}
+.cpp-snap td:last-child{text-align:right;font-family:var(--mono);font-weight:600;white-space:nowrap}
+.cpp-snap td.pos{color:var(--pos)} .cpp-snap td.neg{color:var(--neg)}
+.cpp-snap .cs-held{margin-top:6px;font-size:11px;color:var(--muted);line-height:1.4}
+.cpp-snap .cs-held b{color:var(--ink);font-weight:600}
+.chart-pop .cpp-tip{margin-top:6px;font-size:11px;color:var(--muted);text-align:right}
 .chart-pop .cpp-miss{font-size:12.5px;color:var(--muted);padding:18px 4px}
 .chart-pop .cpp-x{margin-left:auto;background:var(--surface-2);border:1px solid var(--hair-strong);color:var(--ink);font:inherit;font-size:12px;border-radius:6px;padding:3px 9px;cursor:pointer;display:none}
 .chart-pop.pinned .cpp-x{display:inline-block}
@@ -178,7 +193,10 @@ h1,h2,h3{margin:0;font-family:var(--serif);font-weight:600;letter-spacing:-.02em
 .ss-stats td:last-child{text-align:right;font-family:var(--mono);font-weight:600;white-space:nowrap}
 .ss-stats td.pos{color:var(--pos)} .ss-stats td.neg{color:var(--neg)}
 .ss-chart h4{font-size:15px;margin:0 0 8px;color:var(--pos)}
-.ss-chart img{display:block;width:100%;height:auto;border-radius:6px;background:#fff;max-width:100%}
+.ss-chart img{display:block;width:100%;height:auto;border-radius:6px;background:#fff;max-width:100%;cursor:zoom-in}
+.ss-chart .ss-zoomhint{font-size:11px;color:var(--muted);margin-top:4px;text-align:right}
+.ss-big{position:fixed;inset:0;z-index:90;background:rgba(5,8,12,.9);display:flex;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));cursor:zoom-out}
+.ss-big img{max-width:100%;max-height:100%;width:min(1300px,100%);height:auto;object-fit:contain;border-radius:8px;background:#fff}
 .ss-chart .ss-miss{font-size:13px;color:var(--muted);padding:30px 0}
 .ss-sec{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
 @media(max-width:760px){.ss-sec{grid-template-columns:1fr}}
@@ -497,7 +515,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   <section class="bottomline" id="bottomline"></section>
   <section class="card-panel" id="cardPanel" hidden aria-live="polite"></section>
   <div class="ss-wrap" id="stockSheet" hidden><div class="ss" role="dialog" aria-modal="true" aria-labelledby="ssName"></div></div>
-  <div class="chart-pop" id="chartPop" hidden role="dialog" aria-label="Stock chart"><div class="cpp-h"><b id="cppT"></b><span>12 Month EPS vs. price, with consensus estimate · Research Wizard</span><button class="cpp-x" id="cppX" type="button">Close</button></div><img id="cppImg" alt=""><div class="cpp-miss" id="cppMiss" hidden>No chart was captured for this ticker on the last refresh.</div></div>
+  <div class="chart-pop" id="chartPop" hidden role="dialog" aria-label="Stock chart"><div class="cpp-h"><b id="cppT"></b><span id="cppSub"></span><button class="cpp-x" id="cppX" type="button">Close</button></div><div class="cpp-body"><div class="cpp-snap" id="cppSnap"></div><div class="cpp-chart"><img id="cppImg" alt=""><div class="cpp-miss" id="cppMiss" hidden>No chart was captured for this ticker on the last refresh.</div></div></div><div class="cpp-tip">Click the ticker for the full stock sheet</div></div>
   <section class="rank1-compare" id="rank1Compare"></section>
   <div class="callout" id="readme"></div>
 
@@ -579,7 +597,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 </div>
 
 <script id="analysis-data" type="application/json">{
-    "GeneratedAt":  "2026-10-26 12:39",
+    "GeneratedAt":  "2026-10-26 13:07",
     "PicksAsOf":  "07/24/26",
     "LivePicks":  [
                       {
@@ -28467,6 +28485,8 @@ function toggleCardPanel(name){
   }
   function showPop(t, el){
     cur=el; const z=ZR[t]; ttl.textContent=(z&&z.Company?z.Company+' ':'')+'('+t+')';
+    $('#cppSub').textContent='snapshot + 12 Month EPS vs. price · Research Wizard';
+    $('#cppSnap').innerHTML=snapHTML(t);
     const b=charts[t];
     if(b){ img.hidden=false; miss.hidden=true; img.src='data:image/png;base64,'+b; img.alt='12-month EPS and price chart for '+t; }
     else { img.hidden=true; img.removeAttribute('src'); miss.hidden=false; }
@@ -28485,6 +28505,25 @@ function toggleCardPanel(name){
   const md=d=>d?(+String(d).slice(5,7))+'/'+(+String(d).slice(8,10))+'/'+String(d).slice(2,4):'';
   function holders(t){ const out=[]; (A.LivePicks||[]).forEach(x=>{ if((x.Tickers||'').split(';').includes(t)) out.push(x.Screen); });
     (typeof CARD_PICKS!=='undefined'?CARD_PICKS:[]).forEach(x=>{ if((x.Tickers||'').split(';').includes(t)&&!out.includes(x.Screen)) out.push(x.Screen); }); return out; }
+  function snapHTML(t){
+    const z=ZR[t]||{}, h=HT[t]||{}, hold=holders(t); const rank=+z.Rank||null;
+    const price=h.Price!=null?h.Price:z.Price, e0=z.EpsFY0, e1=z.EpsFY1, e2=z.EpsFY2;
+    const g1=(e0&&e1)?(e1/e0-1)*100*(e0<0?-1:1):null, g2=(e1&&e2)?(e2/e1-1)*100*(e1<0?-1:1):null;
+    const meter=[1,2,3,4,5].map(n=>`<i class="r${n}${rank===n?' on':''}">${n}</i>`).join('');
+    return `<div class="cs-rank"><b>${rank?'Zacks #'+rank+' '+RANKW[rank]:'Not graded'}</b><span class="ss-meter">${meter}</span></div>
+      <div class="cs-style">V ${zvBadge(z.Value)} G ${zvBadge(z.Growth)} M ${zvBadge(z.Momentum)} VGM ${zvBadge(z.VGM)}</div>
+      <table><tbody>
+        <tr><td>Price</td><td>${price!=null?'$'+f1(price):'–'}</td></tr>
+        <tr><td>52 wk high–low</td><td>${h.Hi52!=null?f1(h.Hi52)+' – '+f1(h.Lo52):'–'}</td></tr>
+        <tr><td>Last 5 days</td><td class="${cls(h.Week)}">${pc(h.Week)}</td></tr>
+        <tr><td>Since picked${h.First?' '+md(h.First):''}</td><td class="${cls(h.FirstRet)}">${pc(h.FirstRet)}</td></tr>
+        <tr><td>EPS this yr / next</td><td>${e1!=null?'$'+f1(e1):'–'} / ${e2!=null?'$'+f1(e2):'–'}</td></tr>
+        <tr><td>EPS growth this yr</td><td class="${cls(g1)}">${pc(g1)}</td></tr>
+        <tr><td>EPS growth next yr</td><td class="${cls(g2)}">${pc(g2)}</td></tr>
+        <tr><td>Qtr est. change 4 wk</td><td class="${cls(z.ChgQtrEst4w)}">${z.ChgQtrEst4w==null?'–':pc(z.ChgQtrEst4w)}</td></tr>
+      </tbody></table>
+      <div class="cs-held">${hold.length?'On <b>'+hold.length+'</b> screener'+(hold.length===1?'':'s')+': '+hold.join(', '):'Not on a screener this scan'}</div>`;
+  }
   function openSheet(t){
     hidePop(); const z=ZR[t]||{}, h=HT[t]||{}, hold=holders(t);
     const price=h.Price!=null?h.Price:z.Price; const rank=+z.Rank||null;
@@ -28514,7 +28553,7 @@ function toggleCardPanel(name){
           <tr><td>Broker rating chg (1 wk)</td><td class="${cls(z.ChgRtg1w)}">${z.ChgRtg1w==null||z.ChgRtg1w===''?'–':pc(z.ChgRtg1w)}</td></tr>
         </tbody></table>
         <div class="ss-chart"><h4>Price, 12 Month EPS &amp; Consensus Estimate</h4>
-          ${charts[t]?`<img src="data:image/png;base64,${charts[t]}" alt="12-month EPS and price chart for ${t}">`:'<div class="ss-miss">No chart was captured for this ticker on the last refresh.</div>'}</div>
+          ${charts[t]?`<img id="ssImg" src="data:image/png;base64,${charts[t]}" alt="12-month EPS and price chart for ${t}"><div class="ss-zoomhint">Click the chart to see it full size</div>`:'<div class="ss-miss">No chart was captured for this ticker on the last refresh.</div>'}</div>
         <div class="ss-sec">
           <div class="ss-box"><h4>Earnings estimates <span>(Zacks consensus, per share)</span></h4>
             <table class="ss-eps"><thead><tr><th></th><th>Last FY</th><th>This FY</th><th>Next FY</th></tr></thead>
@@ -28531,13 +28570,17 @@ function toggleCardPanel(name){
   }
   function closeSheet(){ sheetWrap.hidden=true; document.body.style.overflow=''; }
   document.addEventListener('click',e=>{
-    if(!sheetWrap.hidden){ if(e.target===sheetWrap||e.target.id==='ssClose') closeSheet(); return; }
+    const big=document.getElementById('ssBig'); if(big){ big.remove(); return; }
+    if(!sheetWrap.hidden){
+      if(e.target.id==='ssImg'){ const d=document.createElement('div'); d.className='ss-big'; d.id='ssBig'; d.setAttribute('role','dialog'); d.setAttribute('aria-label','Chart, full size');
+        d.innerHTML='<img alt="'+e.target.alt+'" src="'+e.target.src+'">'; document.body.appendChild(d); return; }
+      if(e.target===sheetWrap||e.target.id==='ssClose') closeSheet(); return; }
     const hit=tickerOf(e.target); if(!hit) return;
     // a whole tile/row in the Zacks table is not a ticker click; only the symbol itself is
     e.preventDefault(); e.stopPropagation(); openSheet(hit.t);
   }, true);
   document.addEventListener('keydown',e=>{
-    if(e.key==='Escape'){ if(!sheetWrap.hidden) closeSheet(); else hidePop(); return; }
+    if(e.key==='Escape'){ const big=document.getElementById('ssBig'); if(big){ big.remove(); return; } if(!sheetWrap.hidden) closeSheet(); else hidePop(); return; }
     if((e.key==='Enter'||e.key===' ')&&sheetWrap.hidden){ const hit=tickerOf(e.target); if(hit&&e.target===hit.host){ e.preventDefault(); openSheet(hit.t); } }
   });
 })();
