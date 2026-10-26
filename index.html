@@ -464,7 +464,13 @@ svg.zv-spark{overflow:visible;flex-shrink:0}.zv-spark path{fill:none;stroke-widt
 .hh-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px 14px;margin-bottom:4px}
 .hh-title{color:#fff;font-family:var(--serif);font-size:17px;font-weight:600}
 .hh-sub{color:#9db2d6;font-size:11.5px}
-.hh-row{display:flex;gap:4px;height:140px}
+.hh-row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-top:10px}
+.hh-tile{min-height:132px;gap:4px}
+.hh-rank{white-space:nowrap}
+.hh-ret{white-space:nowrap}.hh-ret-l{font-size:11px;font-weight:600;opacity:.85}
+.hh-first{max-width:100%;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:980px){.hh-row{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:560px){.hh-row{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .hh-first{align-self:flex-start;font-family:var(--mono);font-size:11px;font-weight:700;padding:1px 6px;border-radius:4px;background:rgba(0,0,0,.3);color:#fff;white-space:nowrap}
 .hh-first.bad{background:#7a0d14;color:#ffd7d9;box-shadow:0 0 0 1.5px #ff6b72}
 .hh-rowlabel{color:#d1d4dc;font-size:12px;margin:8px 0 5px}.hh-rowlabel b{color:#fff;font-size:13px}
@@ -604,7 +610,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 </div>
 
 <script id="analysis-data" type="application/json">{
-    "GeneratedAt":  "2026-10-26 13:18",
+    "GeneratedAt":  "2026-10-26 13:20",
     "PicksAsOf":  "07/24/26",
     "LivePicks":  [
                       {
@@ -30113,42 +30119,33 @@ try{ const saved=localStorage.getItem('st-theme'); if(saved==='light') document.
 /* ---- header heat strip (Shawn 2026-10-11): everything his two top screeners, filtered zacks rank4 and
    rank2, hold right now - one labelled row per screener, tiles coloured by this week's return (scorecard
    Heat data), NEW tag in its own corner (never inside the ticker). ---- */
-function renderHeroHeat(){
+function renderHeroHeat(){ // TOP5-STRIP
   const box=$('#heroHeat'); if(!box) return;
   let S=null; try{ S=JSON.parse(document.getElementById('scorecard-data').textContent); }catch(e){ S=null; }
   const H=S&&S.Heat; const tiles=H?(Array.isArray(H.Tiles)?H.Tiles:[H.Tiles]):[];
-  const FOCUS=['filtered zacks rank4','filtered zacks rank2'];
-  const picks=(A.LivePicks||[]).filter(x=>FOCUS.includes(x.Screen));
-  const total=(A.LivePicks||[]).length;
-  if(!picks.length){ box.innerHTML=''; return; }
+  const lp=(A.LivePicks||[]), total=lp.length;
+  const rows=standoutRows(); if(!rows.length){ box.innerHTML=''; return; }
+  const top=rows.slice(0,5);
   const byT={}; tiles.forEach(t=>byT[t.T]=t);
-  const byPower={}; standoutRows().forEach(r=>byPower[r.t]=r);
   const fmt=v=>(v>0?'+':'')+(+v).toFixed(1)+'%';
-  const all=[]; picks.forEach(x=>(x.Tickers||'').split(';').filter(Boolean).forEach(t=>all.push(t)));
-  const vals=all.map(t=>byT[t]&&byT[t].Week!=null?byT[t].Week:null).filter(v=>v!=null);
+  const vals=top.map(r=>byT[r.t]&&byT[r.t].Week!=null?byT[r.t].Week:null).filter(v=>v!=null);
   const cap=Math.max(5,Math.min(12,vals.length?Math.max(...vals.map(Math.abs)):5));
   const mix=(a,b,t)=>{ const h=c=>[parseInt(c.slice(1,3),16),parseInt(c.slice(3,5),16),parseInt(c.slice(5,7),16)]; const A2=h(a),B2=h(b); return 'rgb('+A2.map((v,i)=>Math.round(v+(B2[i]-v)*t)).join(',')+')'; };
   const YEL='#e6c445', G1='#1f9d55', G2='#0a4a2a', R1='#e5484d', R2='#6a0f16';
   const col=v=>{ if(v==null) return '#2a2e39'; const a=Math.min(1,Math.abs(v)/cap); const lo=v>=0?G1:R1, hi=v>=0?G2:R2; return a<0.5?mix(YEL,lo,a/0.5):mix(lo,hi,(a-0.5)/0.5); };
   const txt=v=>(v==null||Math.abs(v)/cap<0.22)?'#131722':'#fff';
-  const asof=picks[0].AsOf||'';
-  // one row, each stock once (Shawn: "if the stock is the same we don't need to duplicate it");
-  // the tile's top label says which of the two screens hold it
-  const holders={}; picks.forEach(x=>(x.Tickers||'').split(';').filter(Boolean).forEach(t=>{ (holders[t]=holders[t]||[]).push(x.Screen); }));
-  const short=n=>n.replace('filtered zacks ','');
-  const wk=t=>(byT[t]&&byT[t].Week!=null)?byT[t].Week:-1e9;
-  const uniq=Object.keys(holders).sort((a,b)=>holders[b].length-holders[a].length||wk(b)-wk(a));
-  const tile=tk=>{ const t=byT[tk], r=byPower[tk]; const v=t?t.Week:null; const isNew=HAVE_PREV&&!PREV_ALL.has(tk); const who=holders[tk].map(short).join(' + ');
-    return `<div class="hh-tile" data-chart="${tk}" tabindex="0" style="flex:1 1 0;background:${col(v)};color:${txt(v)}" title="${tk}: held by ${holders[tk].join(' and ')}${r?' · power '+r.power.toFixed(1)+' · '+r.n+' of '+total+' screeners overall':''}">`
-      +`<div class="hh-rank">${who}${isNew?'<span class="newtag">NEW</span>':''}</div>`
+  const asof=(lp[0]&&lp[0].AsOf)||'';
+  const tile=(r,i)=>{ const tk=r.t, t=byT[tk]; const v=t?t.Week:null; const isNew=HAVE_PREV&&!PREV_ALL.has(tk);
+    const md=d=>(+d.slice(5,7))+'/'+(+d.slice(8,10));
+    return `<div class="hh-tile" data-chart="${tk}" tabindex="0" style="background:${col(v)};color:${txt(v)}">`
+      +`<div class="hh-rank"><span>#${i+1} strongest</span>${isNew?'<span class="newtag">NEW</span>':''}</div>`
       +`<div class="hh-tick">${tk}</div>`
-      +`<div class="hh-ret">${v==null?'–':fmt(v)} <span style="font-size:11px;font-weight:600;opacity:.85">this week</span></div>`
-      +(t&&t.FirstRet!=null&&t.First?`<div class="hh-first${t.FirstRet<=-5?' bad':''}" title="${tk} since the close on ${t.First}, the first scan in its current run of picks">${fmt(t.FirstRet)} since picked ${(+t.First.slice(5,7))+'/'+(+t.First.slice(8,10))}</div>`:'')
-      +`<div class="hh-meta">${r?r.n+' of '+total+' screeners · power '+r.power.toFixed(1):''}${t&&t.Price!=null?' · $'+t.Price:''}</div></div>`; };
-  const legend=picks.map(x=>{ const n=(x.Tickers||'').split(';').filter(Boolean).length; return `<b>${short(x.Screen)}</b> ${(+x.CAGR).toFixed(0)}%/yr backtest · ${n} stock${n===1?'':'s'}`; }).join(' &nbsp;·&nbsp; ');
-  box.innerHTML=`<div class="hh-head"><span class="hh-title">Everything filtered zacks rank4 and rank2 hold right now · ${uniq.length} stock${uniq.length===1?'':'s'}</span>`
-    +`<span class="hh-sub">picks captured ${asof} · colour = return over the last 5 trading days${H&&H.WeekFrom?' ('+H.WeekFrom+' to '+H.WeekTo+')':''} · S&amp;P 500 ${H&&H.SpyWeek!=null?fmt(H.SpyWeek):'–'} · yellow = flat, darker green/red = bigger move · top label = which screens hold it · dark chip = return since the stock was first picked, outlined red when it is down 5% or more</span></div>`
-    +`<div class="hh-rowlabel">${legend}</div><div class="hh-row">${uniq.map(tile).join('')}</div>`;
+      +`<div class="hh-ret">${v==null?'–':fmt(v)} <span class="hh-ret-l">this week</span></div>`
+      +(t&&t.FirstRet!=null&&t.First?`<div class="hh-first${t.FirstRet<=-5?' bad':''}">${fmt(t.FirstRet)} since ${md(t.First)}</div>`:'')
+      +`<div class="hh-meta">${r.n} of ${total} screeners · power ${r.power.toFixed(0)}${t&&t.Price!=null?' · $'+(+t.Price).toFixed(2):''}</div></div>`; };
+  box.innerHTML=`<div class="hh-head"><span class="hh-title">This week's 5 strongest stocks</span>`
+    +`<span class="hh-sub">ranked across all ${total} screeners by how many hold each stock, weighted by each screener's track record · picks captured ${asof} · colour = last 5 trading days${H&&H.WeekFrom?' ('+H.WeekFrom+' to '+H.WeekTo+')':''}, S&amp;P 500 ${H&&H.SpyWeek!=null?fmt(H.SpyWeek):'–'} · hover a stock for its chart, click for the full sheet</span></div>`
+    +`<div class="hh-row">${top.map(tile).join('')}</div>`;
 }
 renderHeroHeat(); renderBottomLine(); renderTable(); renderPowerCompare(); renderWVM(); renderCombos(); renderPicks();
 // deep links: #live, #standouts, #top3, #zacks, #scorecard, #heat open that panel on load
