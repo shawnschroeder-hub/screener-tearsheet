@@ -104,7 +104,13 @@ h1,h2,h3{margin:0;font-family:var(--serif);font-weight:600;letter-spacing:-.02em
 .bottomline .hero.pickable{cursor:pointer;transition:border-color .15s,background .15s}
 .bottomline .hero.pickable:hover{border-color:var(--accent-line)}
 .bottomline .hero.pickable[aria-expanded="true"]{border-color:var(--accent);background:var(--surface-2)}
-.bottomline .hero .peek{margin-top:14px;padding-top:10px;border-top:1px dotted var(--hair);font-size:12px;font-weight:600;color:var(--accent);display:flex;justify-content:space-between;gap:8px}
+.bottomline .hero .cstocks{margin-top:14px;padding-top:11px;border-top:1px dotted var(--hair)}
+.bottomline .hero .cstocks-lab{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.bottomline .hero .cstocks-list{display:flex;flex-wrap:wrap;gap:5px}
+.cticker{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);background:var(--surface-2);border:1px solid var(--hair-strong);border-radius:4px;padding:2px 7px}
+.cticker.new{background:var(--new-soft);color:var(--new);border-color:var(--new-line)}
+.cstocks-none{font-size:12px;color:var(--muted)}
+.bottomline .hero .peek{margin-top:10px;font-size:12px;font-weight:600;color:var(--accent);display:flex;justify-content:space-between;gap:8px}
 .bottomline .hero .peek i{font-style:normal;font-family:var(--mono);color:var(--muted);font-weight:500}
 .card-panel{background:var(--surface);border:1px solid var(--accent-line);border-radius:8px;padding:16px 18px 18px;margin:-4px 0 16px}
 .cp-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin-bottom:12px}
@@ -510,7 +516,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 </div>
 
 <script id="analysis-data" type="application/json">{
-    "GeneratedAt":  "2026-10-26 12:02",
+    "GeneratedAt":  "2026-10-26 12:08",
     "PicksAsOf":  "07/24/26",
     "LivePicks":  [
                       {
@@ -28166,7 +28172,8 @@ function renderBottomLine(){
     const t=s.Weekly;
     const c=el('div','card hero pickable'+(i===0?' gold':''));
     c.dataset.screen=s.Screen; c.tabIndex=0; c.setAttribute('role','button'); c.setAttribute('aria-expanded','false');
-    c.setAttribute('aria-controls','cardPanel'); const nPicks=cardPicksFor(s).list.length;
+    c.setAttribute('aria-controls','cardPanel'); const cpi=cardPicksFor(s), nPicks=cpi.list.length;
+    const chips=cpi.list.map(tk=>`<span class="cticker${cpi.news.has(tk)?' new':''}" title="${cpi.news.has(tk)?'New to this screener':''}">${tk}</span>`).join('');
     c.innerHTML=`<h2>${s.Screen}</h2>
       <div class="tag">${i===0?'Best 1-year return':'#'+(i+1)+' by 1-year return'} · weekly hold · ${s.Folder}</div>
       <div class="big pos">${pct(t.Ret1y)}</div>
@@ -28177,7 +28184,9 @@ function renderBottomLine(){
         <div><b class="pos">${pct(t.CAGR)}</b>per yr over 5 yrs</div>
         <div><b>${t.Beat12}%</b>12-mo beat rate</div>
       </div>
-      <div class="peek"><span>Show current stocks</span><i>${nPicks?nPicks+' stock'+(nPicks===1?'':'s'):''} ▾</i></div>`;
+      <div class="cstocks"><div class="cstocks-lab">Current stocks${cpi.src==='live'?'':' (backtest)'}:</div>
+        <div class="cstocks-list">${nPicks?chips:'<span class="cstocks-none">none passing today</span>'}</div>
+        <div class="peek"><span>Details for each stock</span><i>▾</i></div></div>`;
     c.onclick=()=>toggleCardPanel(s.Screen);
     c.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggleCardPanel(s.Screen); } };
     bl.appendChild(c);
