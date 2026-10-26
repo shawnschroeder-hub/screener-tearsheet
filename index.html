@@ -149,7 +149,8 @@ h1,h2,h3{margin:0;font-family:var(--serif);font-weight:600;letter-spacing:-.02em
 .cpp-snap .cs-rank{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:6px}
 .cpp-snap .cs-rank b{font-size:13px}
 .cpp-snap .ss-meter i{width:20px;height:16px;font-size:10px}
-.cpp-snap .cs-style{display:flex;gap:4px;align-items:center;color:var(--muted);font-size:11px;margin-bottom:6px;flex-wrap:wrap}
+.cpp-snap .cs-style{display:grid;grid-template-columns:1fr 1fr;gap:5px 8px;color:var(--muted);font-size:11.5px;margin-bottom:8px}
+.cpp-snap .cs-g{display:flex;align-items:center;justify-content:space-between;gap:4px}
 .cpp-snap table{width:100%;border-collapse:collapse;min-width:0!important}
 .cpp-snap td{padding:4px 0;border-bottom:1px solid var(--hair);font-size:12px;position:static!important;background:none!important;text-align:left}
 .cpp-snap td:first-child{color:var(--muted);padding-left:0!important}
@@ -603,7 +604,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 </div>
 
 <script id="analysis-data" type="application/json">{
-    "GeneratedAt":  "2026-10-26 13:11",
+    "GeneratedAt":  "2026-10-26 13:18",
     "PicksAsOf":  "07/24/26",
     "LivePicks":  [
                       {
@@ -29150,7 +29151,7 @@ function toggleCardPanel(name){
     return `<div class="cp-tile${isNew?' isnew':''}" data-chart="${tk}" tabindex="0">
       <div class="cp-top"><span class="cp-tk">${tk}</span>${isNew?'<span class="newtag">NEW</span>':''}${z?zvRank(z.Rank):''}</div>
       <div class="cp-co">${z?z.Company:'&nbsp;'}</div>
-      ${z?`<div class="cp-grades">V ${zvBadge(z.Value)} G ${zvBadge(z.Growth)} M ${zvBadge(z.Momentum)}</div>`:''}
+      ${z?`<div class="cp-grades">Value ${zvBadge(z.Value)} Growth ${zvBadge(z.Growth)} Momentum ${zvBadge(z.Momentum)}</div>`:''}
       <div class="cp-nums"><div><b>${price==null?'–':'$'+(+price).toFixed(2)}</b>price</div>
         <div><b class="${cls(h&&h.Week)}">${f(h&&h.Week)}</b>last 5 days</div>
         ${h&&h.FirstRet!=null?`<div style="grid-column:1/-1"><b class="${cls(h.FirstRet)}">${f(h.FirstRet)}</b>since picked ${md(h.First)}</div>`:''}</div>
@@ -29161,7 +29162,7 @@ function toggleCardPanel(name){
   p.innerHTML=`<div class="cp-head"><h3>${s.Screen} · ${info.list.length} stock${info.list.length===1?'':'s'} right now</h3>
       <span class="cp-src">${src}</span><button class="cp-close" type="button">Close</button></div>`
     + (info.list.length?`<div class="cp-grid">${tiles}</div>`:`<div class="cp-note">This screener has no stocks passing it right now.</div>`)
-    + `<div class="cp-note">Zacks Rank 1 = Strong Buy … 5 = Strong Sell; V/G/M = Value, Growth, Momentum grades. Research only, not financial advice; check the news on any name before acting.</div>`;
+    + `<div class="cp-note">Zacks Rank 1 = Strong Buy … 5 = Strong Sell; Value / Growth / Momentum are Zacks Style grades, A best to F worst. Research only, not financial advice; check the news on any name before acting.</div>`;
   p.querySelector('.cp-close').onclick=()=>toggleCardPanel(openCard);
   p.hidden=false;
 }
@@ -29225,7 +29226,7 @@ function toggleCardPanel(name){
     const g1=(e0&&e1)?(e1/e0-1)*100*(e0<0?-1:1):null, g2=(e1&&e2)?(e2/e1-1)*100*(e1<0?-1:1):null;
     const meter=[1,2,3,4,5].map(n=>`<i class="r${n}${rank===n?' on':''}">${n}</i>`).join('');
     return `<div class="cs-rank"><b>${rank?'Zacks #'+rank+' '+RANKW[rank]:'Not graded'}</b><span class="ss-meter">${meter}</span></div>
-      <div class="cs-style">V ${zvBadge(z.Value)} G ${zvBadge(z.Growth)} M ${zvBadge(z.Momentum)} VGM ${zvBadge(z.VGM)}</div>
+      <div class="cs-style"><span class="cs-g">Value ${zvBadge(z.Value)}</span><span class="cs-g">Growth ${zvBadge(z.Growth)}</span><span class="cs-g">Momentum ${zvBadge(z.Momentum)}</span><span class="cs-g" title="Value, Growth and Momentum combined">Overall (VGM) ${zvBadge(z.VGM)}</span></div>
       <table><tbody>
         <tr><td>Price</td><td>${price!=null?'$'+f1(price):'–'}</td></tr>
         <tr><td>52 wk high–low</td><td>${h.Hi52!=null?f1(h.Hi52)+' – '+f1(h.Lo52):'–'}</td></tr>
