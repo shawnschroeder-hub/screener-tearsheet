@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
+<title>Nafplio Old Town Property Watch</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: brochure. Photo-led hero, sticky section nav, one 72rem column of sections; photos lead every listing. */
+:root{
+  --bg:#f6f7f8; --surface:#ffffff; --ink:#14212b; --muted:#5b6872; --line:#dde2e6;
+  --sea:#0f5f86; --sea-soft:#e3eef5; --ochre:#c58a1b; --ok:#2f7d4f; --bad:#b03a2e;
+  --shadow:0 1px 2px rgba(20,33,43,.06),0 8px 24px rgba(20,33,43,.06);
+  --display:"Marcellus","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --body:"Instrument Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0e1419; --surface:#151d24; --ink:#e7edf1; --muted:#9aa8b2; --line:#26323b;
+  --sea:#5fb3dc; --sea-soft:#14303f; --ochre:#e0a83c; --ok:#5cc28a; --bad:#ef7b6e;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1419; --surface:#151d24; --ink:#e7edf1; --muted:#9aa8b2; --line:#26323b;
+  --sea:#5fb3dc; --sea-soft:#14303f; --ochre:#e0a83c; --ok:#5cc28a; --bad:#ef7b6e;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25); color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+a{color:var(--sea)}
+.wrap{max-width:74rem;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0;letter-spacing:.005em}
+h2{font-size:clamp(1.6rem,3vw,2.1rem);line-height:1.15}
+h3{font-size:1.2rem;line-height:1.25}
+.eyebrow{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0}
+.lede{color:var(--muted);max-width:68ch;margin:0}
+.num{font-variant-numeric:tabular-nums}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--sea);outline-offset:2px}
+
+/* hero */
+.hero{position:relative;min-height:min(78vh,640px);display:flex;align-items:flex-end;color:#fff;background:#0b1820}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,16,22,.15) 0%,rgba(6,16,22,.25) 40%,rgba(6,16,22,.82) 100%)}
+.hero .wrap{position:relative;z-index:1;width:100%;padding-block:48px 34px;display:flex;flex-direction:column;gap:14px}
+.hero .eyebrow{color:rgba(255,255,255,.82)}
+.hero h1{font-size:clamp(2.2rem,5.4vw,3.9rem);line-height:1.04;max-width:18ch}
+.hero p.sub{margin:0;max-width:62ch;font-size:1.05rem;color:rgba(255,255,255,.9)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,10.5rem),1fr));gap:1px;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.22);border-radius:var(--r);overflow:hidden;margin-top:10px;backdrop-filter:blur(6px)}
+.stat{background:rgba(8,20,28,.55);padding:12px 16px;display:flex;flex-direction:column;gap:2px}
+.stat b{font-family:var(--display);font-weight:400;font-size:1.55rem;line-height:1.1;font-variant-numeric:tabular-nums}
+.stat span{font-size:.78rem;color:rgba(255,255,255,.78)}
+.credit{position:absolute;right:max(10px,env(safe-area-inset-right,0px));top:10px;z-index:1;font-size:.7rem;color:rgba(255,255,255,.75)}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.nav a{flex:none;padding:13px 12px;text-decoration:none;color:var(--muted);font-size:.9rem;border-bottom:2px solid transparent}
+.nav a:hover{color:var(--ink)}
+.nav a.on{color:var(--ink);border-bottom-color:var(--sea)}
+
+section.sec{padding-block:56px 8px;scroll-margin-top:56px}
+.sec-head{display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
+
+/* buttons */
+.btns{display:flex;flex-wrap:wrap;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none;font-size:.85rem;font-weight:500;cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--sea);color:var(--sea)}
+.btn.primary{background:var(--sea);border-color:var(--sea);color:#fff}
+.btn.primary:hover{filter:brightness(1.08);color:#fff}
+.btn svg{width:15px;height:15px;flex:none}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:.75rem;padding:3px 9px;border-radius:999px;background:var(--sea-soft);color:var(--sea);font-weight:500;white-space:nowrap}
+.chip.ochre{background:color-mix(in srgb,var(--ochre) 16%,transparent);color:var(--ochre)}
+.chip.muted{background:color-mix(in srgb,var(--muted) 14%,transparent);color:var(--muted)}
+
+/* featured */
+.feature{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:900px){.feature{grid-template-columns:1fr}}
+.gallery{display:flex;flex-direction:column;gap:10px;min-width:0}
+.stage{position:relative;aspect-ratio:3/2;border-radius:var(--r);overflow:hidden;background:var(--line);max-width:100%}
+.stage img{width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in}
+.stage .nav-btn{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:0;background:rgba(255,255,255,.88);color:#14212b;display:grid;place-items:center;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+.stage .prev{left:12px}.stage .next{right:12px}
+.stage .count{position:absolute;left:12px;bottom:12px;background:rgba(10,20,28,.7);color:#fff;font-size:.78rem;padding:4px 10px;border-radius:999px}
+.stage .expand{position:absolute;right:12px;bottom:12px;background:rgba(10,20,28,.7);color:#fff;font-size:.78rem;padding:4px 10px;border-radius:999px;border:0;cursor:pointer}
+.thumbs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.thumbs button{flex:none;width:92px;aspect-ratio:3/2;padding:0;border:2px solid transparent;border-radius:6px;overflow:hidden;cursor:pointer;background:var(--line);opacity:.72}
+.thumbs button.on{border-color:var(--sea);opacity:1}
+.thumbs img{width:100%;height:100%;object-fit:cover;display:block}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:16px;box-shadow:var(--shadow);min-width:0}
+.price{font-family:var(--display);font-size:2.3rem;line-height:1;font-variant-numeric:tabular-nums}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 18px;margin:0}
+.facts div{display:flex;flex-direction:column;gap:1px;border-top:1px solid var(--line);padding-top:8px}
+.facts dt{font-size:.75rem;color:var(--muted)}
+.facts dd{margin:0;font-weight:600;font-variant-numeric:tabular-nums}
+.agent{display:flex;flex-direction:column;gap:4px;font-size:.88rem;border-top:1px solid var(--line);padding-top:14px}
+.agent strong{font-weight:600}
+.note{font-size:.82rem;color:var(--muted);margin:0;max-width:75ch}
+
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,21rem),1fr));gap:20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow);min-width:0;scroll-margin-top:70px}
+.card.flash{outline:3px solid var(--ochre);outline-offset:2px}
+.card .ph{position:relative;aspect-ratio:4/3;background:var(--line);cursor:zoom-in;border:0;padding:0;display:block;width:100%}
+.card .ph{overflow:hidden}
+.card .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.card .ph .count{position:absolute;right:10px;bottom:10px;background:rgba(10,20,28,.72);color:#fff;font-size:.75rem;padding:3px 9px;border-radius:999px;display:inline-flex;gap:5px;align-items:center}
+.card .ph .dist{position:absolute;left:10px;top:10px;background:rgba(255,255,255,.93);color:#14212b;font-size:.75rem;padding:3px 9px;border-radius:999px;font-weight:600}
+.card .ph .idx{position:absolute;right:10px;top:10px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:.75rem;font-weight:600;color:#fff;background:var(--sea);border:2px solid #fff}
+.card .ph .nophoto{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted);font-size:.85rem}
+.card .body{padding:16px 16px 18px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card .row1{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.card .p{font-family:var(--display);font-size:1.5rem;line-height:1.1;font-variant-numeric:tabular-nums}
+.card .ppm{font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.card .meta{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:.84rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.card .desc{font-size:.86rem;margin:0}
+.card .btns{margin-top:auto}
+.card .btn{padding:6px 11px;font-size:.8rem}
+.card.compact .ph{aspect-ratio:16/10}
+
+/* map */
+.mapbox{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:#aad3df}
+.mapbox img{display:block;width:100%;height:auto}
+.mapscroll{overflow-x:auto}
+.mapscroll .mapbox{min-width:640px}
+.pin{position:absolute;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;border:2px solid #fff;background:#7b8790;color:#fff;font-size:.72rem;font-weight:600;display:grid;place-items:center;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.35);padding:0}
+.pin.near{background:var(--sea)}
+.pin.star{background:var(--ochre);width:34px;height:34px;font-size:.95rem;z-index:3}
+.pin:hover{transform:translate(-50%,-50%) scale(1.15);z-index:4}
+.ring{position:absolute;border:2px dashed var(--ochre);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;background:color-mix(in srgb,var(--ochre) 8%,transparent)}
+.pop{position:absolute;z-index:6;width:240px;background:var(--surface);color:var(--ink);border-radius:var(--r);box-shadow:0 10px 30px rgba(0,0,0,.3);overflow:hidden;font-size:.84rem}
+.pop img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block}
+.pop .in{padding:10px 12px;display:flex;flex-direction:column;gap:6px}
+.pop .x{position:absolute;right:6px;top:6px;width:26px;height:26px;border-radius:50%;border:0;background:rgba(255,255,255,.9);color:#14212b;cursor:pointer}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.82rem;color:var(--muted);margin-top:10px;align-items:center}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.osm{position:absolute;right:0;bottom:0;background:rgba(255,255,255,.85);color:#333;font-size:.68rem;padding:2px 6px}
+
+/* table */
+.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+.search{font:inherit;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);width:min(100%,20rem)}
+.tbox{overflow:auto;max-height:36rem;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.85rem;font-variant-numeric:tabular-nums}
+th{position:sticky;top:0;background:var(--surface);text-align:left;font-weight:600;color:var(--muted);font-size:.78rem;border-bottom:1px solid var(--line);white-space:nowrap;padding:0;z-index:1}
+th button{background:none;border:0;padding:10px 12px;cursor:pointer;width:100%;text-align:inherit;color:inherit;font-weight:600}
+th.r,td.r{text-align:right}
+th[aria-sort=ascending] button::after{content:" ↑"}th[aria-sort=descending] button::after{content:" ↓"}
+td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+td .tn{display:flex;align-items:center;gap:10px;min-width:15rem}
+td .tn img{width:64px;height:44px;object-fit:cover;border-radius:5px;flex:none;background:var(--line)}
+td .links{display:flex;gap:10px;white-space:nowrap;font-size:.8rem}
+tr.near td{background:color-mix(in srgb,var(--sea) 5%,transparent)}
+
+/* chart */
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:var(--shadow)}
+.chart svg{display:block;width:100%;height:auto}
+
+/* news */
+.news{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,22rem),1fr));gap:16px}
+.ncard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:10px;box-shadow:var(--shadow)}
+.ncard .top{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:.78rem;color:var(--muted)}
+.ncard h3{font-family:var(--body);font-weight:600;font-size:1rem;line-height:1.35}
+.ncard h3 a{color:var(--ink);text-decoration:none}.ncard h3 a:hover{color:var(--sea);text-decoration:underline}
+.ncard p{margin:0;font-size:.86rem}
+.ncard .why{border-left:3px solid var(--ochre);padding-left:10px;color:var(--ink)}
+.ncard .src{font-size:.76rem;color:var(--muted);margin-top:auto}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.filters button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 13px;font-size:.84rem;cursor:pointer;color:var(--muted)}
+.filters button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+/* guide */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:20px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:12px;box-shadow:var(--shadow);min-width:0}
+.box ul{margin:0;padding-left:1.15em;display:flex;flex-direction:column;gap:7px;font-size:.9rem}
+.calc{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.calc input{font:inherit;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);width:12rem;font-variant-numeric:tabular-nums}
+.totals{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,14rem),1fr));gap:12px}
+.total{border:1px solid var(--line);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+.total b{font-family:var(--display);font-weight:400;font-size:1.45rem;font-variant-numeric:tabular-nums}
+.total.bad b{color:var(--bad)}
+.total span{font-size:.78rem;color:var(--muted)}
+.log{display:flex;flex-direction:column;gap:0;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);overflow:hidden}
+.log div{display:grid;grid-template-columns:7rem 8rem 1fr;gap:12px;padding:10px 14px;border-bottom:1px solid var(--line);font-size:.85rem}
+.log div:last-child{border-bottom:0}
+@media (max-width:640px){.log div{grid-template-columns:1fr}}
+.fb-form{display:flex;flex-direction:column;gap:8px}
+.fb-l{font-size:.82rem;font-weight:600;color:var(--muted)}
+.fb-form textarea,.fb-form input{font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);width:100%;box-sizing:border-box;resize:vertical}
+.fb-fallback{border:1px solid var(--line);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:10px;background:var(--sea-soft)}
+.fb-addr{font-size:.95rem;user-select:all;padding:4px 8px;background:var(--surface);border-radius:6px}
+footer{padding-block:48px 64px;color:var(--muted);font-size:.8rem}
+footer p{max-width:85ch}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:50;background:rgba(5,10,14,.94);display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top,0px) + 12px) max(12px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 12px) max(12px,env(safe-area-inset-left,0px));color:#fff}
+.lb[hidden],[hidden]{display:none!important}
+.lb .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:.9rem}
+.lb .bar .t{font-family:var(--display);font-size:1.15rem}
+.lb .bar button,.lb .arrow{border:0;background:rgba(255,255,255,.14);color:#fff;border-radius:999px;cursor:pointer}
+.lb .bar button{padding:7px 14px}
+.lb .main{flex:1;display:flex;align-items:center;justify-content:center;gap:12px;min-height:0;padding-block:10px}
+.lb .main img{max-width:100%;max-height:100%;object-fit:contain;border-radius:4px;min-width:0}
+.lb .arrow{width:48px;height:48px;flex:none;font-size:1.4rem}
+.lb .strip{display:flex;gap:6px;overflow-x:auto;justify-content:safe center}
+.lb .strip button{flex:none;width:70px;aspect-ratio:3/2;border:2px solid transparent;border-radius:4px;overflow:hidden;padding:0;opacity:.55;cursor:pointer;background:#222}
+.lb .strip button.on{border-color:#fff;opacity:1}
+.lb .strip img{width:100%;height:100%;object-fit:cover;display:block}
+@media (max-width:640px){.lb .arrow{display:none}}
+/* print / PDF brochure */
+.print-only{display:none}
+@page{size:A4;margin:12mm}
+@media print{
+  html,body{background:#fff;color:#14212b;-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11.5px}
+  :root{--bg:#fff;--surface:#fff;--ink:#14212b;--muted:#4f5c66;--line:#d6dce0;--sea:#0f5f86;--sea-soft:#e3eef5;--ochre:#b47a12;--shadow:none}
+  .nav,.tools,.filters,.lb,.stage .nav-btn,.stage .expand,.credit,.no-print,#compare,#log{display:none!important}
+  .print-only{display:block}
+  .hero{min-height:0;height:auto}
+  .hero .wrap{padding-block:150px 22px}
+  .hero h1{font-size:32px;max-width:none}.stat b{font-size:18px}
+  section.sec{padding-block:18px 0}
+  #near,#map,#oldtown,#sold,#news,#guide{break-before:page}
+  button.btn{display:none!important}
+  .card .ph{aspect-ratio:auto;height:46mm}
+  .card .body{padding:10px 12px 12px;gap:6px}
+  .card .p{font-size:17px}
+  .card .desc{font-size:10.5px}
+  .card.compact .ph{height:38mm}
+  .feature{grid-template-columns:1fr}
+  .thumbs{flex-wrap:wrap;overflow:visible}
+  .thumbs button{width:calc(25% - 6px);opacity:1;border-color:transparent!important}
+  .stage{aspect-ratio:16/9}
+  .cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .card,.ncard,.box,.panel,.total{break-inside:avoid;box-shadow:none}
+  .card .ph{aspect-ratio:16/10}
+  .card .btn,.panel .btn{padding:3px 8px;font-size:10px}
+  .mapscroll{overflow:visible}.mapscroll .mapbox{min-width:0}
+  .pop{display:none}
+  .tbox{max-height:none;overflow:visible}
+  .news{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .chart{box-shadow:none}
+  a{color:#0f5f86}
+}
+@media (prefers-reduced-motion:no-preference){.card,.btn,.pin{transition:transform .15s ease,border-color .15s ease,color .15s ease}.card:hover{transform:translateY(-2px)}}
+</style>
+
+<script id="nf-data" type="application/json">{"built": "2026-10-28 14:30", "today": "2026-10-28", "near_m": 150, "square": {"lat": 37.566, "lon": 22.7968, "xy": [50.0, 50.75]}, "listings": [{"id": "ev-W030IT7", "name": "Syntagma Square penthouse (the brochure unit)", "type": "Apartment", "beds": 3, "baths": 2, "pin": "On the square, per listing", "agency": "Engel & Völkers", "notes": "2nd-floor penthouse in a 1780 Venetian-era building, fully renovated 2024. Large balcony fronting Syntagma Square; views of Akronafplia, Palamidi, the Trianon mosque and the Archaeological Museum. Furnished, energy class E. Listing W-030IT7, advisor Thanos Panagopoulos, +30 211 105 5200.", "url": "https://engelvoelkers.com/gr/en/exposes/205bf040-8582-5c4d-893e-0ec355af311a", "listed": "", "first_seen": "2026-10-27", "area_m2": 165.0, "price_eur": 1350000.0, "eur_m2": 8182, "dist_m": 0, "near": true, "months": null, "gv": true, "map_url": "https://www.google.com/maps/search/?api=1&query=37.566,22.7968", "street_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=37.566,22.7968", "video": null, "photos": ["photos/ev-W030IT7/01.webp", "photos/ev-W030IT7/02.webp", "photos/ev-W030IT7/03.webp", "photos/ev-W030IT7/04.webp", "photos/ev-W030IT7/05.webp", "photos/ev-W030IT7/06.webp", "photos/ev-W030IT7/07.webp", "photos/ev-W030IT7/08.webp", "photos/ev-W030IT7/09.webp", "photos/ev-W030IT7/10.webp", "photos/ev-W030IT7/11.webp", "photos/ev-W030IT7/12.webp", "photos/ev-W030IT7/13.webp", "photos/ev-W030IT7/14.webp", "photos/ev-W030IT7/15.webp", "photos/ev-W030IT7/16.webp", "photos/ev-W030IT7/17.webp", "photos/ev-W030IT7/18.webp"], "x": 50.0, "y": 50.75}, {"id": "sg-1120143274", "name": "Ground-floor cottage", "type": "House", "beds": 2, "baths": 1, "pin": "Exact pin", "agency": "Skouras (also Estate Value)", "notes": "Smallest and cheapest house near the square. The same house appears with two agencies (68 to 70 m²).", "url": "https://www.spitogatos.gr/en/property/1120143274", "listed": "2025-11-17", "first_seen": "2026-10-27", "area_m2": 68.0, "price_eur": 300000.0, "eur_m2": 4412, "dist_m": 75, "near": true, "months": 11, "gv": false, "map_url": "https://www.google.com/maps/search/?api=1&query=37.5654,22.7964", "street_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=37.5654,22.7964", "video": null, "photos": ["photos/sg-1120143274/01.webp", "photos/sg-1120143274/02.webp", "photos/sg-1120143274/03.webp", "photos/sg-1120143274/04.webp", "photos/sg-1120143274/05.webp", "photos/sg-1120143274/06.webp", "photos/sg-1120143274/07.webp", "photos/sg-1120143274/08.webp", "photos/sg-1120143274/09.webp", "photos/sg-1120143274/10.webp", "photos/sg-1120143274/11.webp", "photos/sg-1120143274/12.webp"], "x": 46.43, "y": 59.7}, {"id": "sg-1119642176", "name": "First-floor apartment", "type": "Apartment", "beds": 3, "baths": 1, "pin": "Exact pin", "agency": "Errikos / Andrianopoulos", "notes": "Listed by two agencies. The text says only 'Nafplio Center', so confirm the street.", "url": "https://www.spitogatos.gr/en/property/1119642176", "listed": "2026-03-31", "first_seen": "2026-10-27", "area_m2": 100.0, "price_eur": 310000.0, "eur_m2": 3100, "dist_m": 80, "near": true, "months": 7, "gv": false, "map_url": "https://www.google.com/maps/search/?api=1&query=37.5653,22.7971", "street_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=37.5653,22.7971", "video": null, "photos": ["photos/sg-1119642176/01.webp", "photos/sg-1119642176/02.webp", "photos/sg-1119642176/03.webp", "photos/sg-1119642176/04.webp", "photos/sg-1119642176/05.webp", "photos/sg-1119642176/06.webp", "photos/sg-1119642176/07.webp", "photos/sg-1119642176/08.webp", "photos/sg-1119642176/09.webp", "photos/sg-1119642176/10.webp", "photos/sg-1119642176/11.webp", "photos/sg-1119642176/12.webp"], "x": 52.68, "y": 61.2}, {"id": "sg-1118479352", "name": "Neoclassical stone house, 1890", "type": "House", "beds": 3, "baths": 3, "pin": "Exact pin", "agency": "PS Real Estate", "notes": "Preserved stone neoclassical, renovation finishing 2026; three kitchens and three living rooms, so it works as three units. The listing text quotes €1,350,000, so the ask may have dropped.", "url": "https://www.spitogatos.gr/en/property/1118479352", "listed": "2025-10-27", "first_seen": "2026-10-27", "area_m2": 238.0, "price_eur": 1500000.0, "eur_m2": 6303, "dist_m": 85, "near": true, "months": 12, "gv": true, "map_url": "https://www.google.com/maps/search/?api=1&query=37.5666,22.7974", "street_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=37.5666,22.7974", "video": null, "photos": ["photos/sg-1118479352/01.webp", "photos/sg-1118479352/02.webp", "photos/sg-1118479352/03.webp", "photos/sg-1118479352/04.webp", "photos/sg-1118479352/05.webp", "photos/sg-1118479352/06.webp", "photos/sg-1118479352/07.webp", "photos/sg-1118479352/08.webp", "photos/sg-1118479352/09.webp", "photos/sg-1118479352/10.webp", "photos/sg-1118479352/11.webp", "photos/sg-1118479352/12.webp"], "x": 55.36, "y": 41.79}, {"id": "sg-1118741901", "name": "Restored residence", "type": "House", "beds": 3, "baths": 3, "pin": "Exact pin", "agency": "Skouras", "notes": "Exclusive to Skouras, in 'an extremely developed and beautiful neighborhood of the old town'.", "url": "https://www.spitogatos.gr/en/property/1118741901", "listed": "2025-11-28", "first_seen": "2026-10-27", "area_m2": 195.0, "price_eur": 990000.0, "eur_m2": 5077, "dist_m": 95, "near": true, "months": 11, "gv": true, "map_url": "https://www.google.com/maps/search/?api=1&query=37.5652,22.7965", "street_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=37.5652,22.7965", "video": "https://www.youtube.com/watch?v=c_VKDnkh9ao", "photos": ["photos/sg-1118741901/01.webp", "photos/sg-1118741901/02.webp", "photos/sg-1118741901/03.webp", "photos/sg-1118741901/04.webp", "photos/sg-1118741901/05.webp", "photos/sg-1118741901/06.webp", "photos/sg-1118741901/07.webp", "photos/sg-1118741901/08.webp", "photos/sg-1118741901/09.webp", "photos/sg-1118741901/10.webp", "photos/sg-1118741901/11.webp", "photos/sg-1118741901/12.webp"], "x": 47.32, "y": 62.69}, {"id": "sg-1120372135", "name": "Apartment in a 1900 building", "type": "Apartment", "beds": 3, "baths": 1, "pin": "Exact pin", "agency": "Iliadis Real Estate", "notes": "Plot 210 m², good condition, energy class G (will need upgrading).", "url": "https://www.spitogatos.gr/en/property/1120372135", "listed": "2026-07-13", "first_seen": "2026-10-27", "area_m2": 90.0, "price_eur": 330000.0, "eur_m2": 3667, "dist_m": 100, "near": true, "months": 4, "gv": false, "map_url": "https://www.google.com/maps/search/?api=1&query=37.5661,22.7957", "street_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=37.5661,22.7957", "video": null, "photos": ["photos/sg-1120372135/01.webp", "photos/sg-1120372135/02.webp", "photos/sg-1120372135/03.webp", "photos/sg-1120372135/04.webp", "photos/sg-1120372135/05.webp", "photos/sg-1120372135/06.webp", "photos/sg-1120372135/07.webp", "photos/sg-1120372135/08.webp", "photos/sg-1120372135/09.webp", "photos/sg-1120372135/10.webp", "photos/sg-1120372135/11.webp", "photos/sg-1120372135/12.webp"], "x": 40.18, "y": 49.25}, {"id": "sg-1118903491", "name": "Two-level maisonette off the square", "type": "Maisonette", "beds": 3, "baths": 2, "pin": "Exact pin", "agency": "Estate Value", "notes": "Furnished, 'a few meters from Syntagma Square' on a central alley; roof terrace looking at Akronafplia and Palamidi.", "url": "https://www.spitogatos.gr/en/property/1118903491", "listed": "2025-12-30", "first_seen": "2026-10-27", "area_m2": 105.0, "price_eur": 450000.0, "eur_m2": 4286, "dist_m": 110, "near": true, "months": 10, "gv": false, "map_url": "https://www.google.com/maps/search/?api=1&query=37.5666,22.7978", "street_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=37.5666,22.7978", "video": null, "photos": ["photos/sg-1118903491/01.webp", "photos/sg-1118903491/02.webp", "photos/sg-1118903491/03.webp", "photos/sg-1118903491/04.webp", "photos/sg-1118903491/05.webp", "photos/sg-1118903491/06.webp", "photos/sg-1118903491/07.webp", "photos/sg-1118903491/08.webp", "photos/sg-1118903491/09.webp", "photos/sg-1118903491/10.webp", "photos/sg-1118903491/11.webp", "photos/sg-1118903491/12.webp"], "x": 58.93, "y": 41.79}, {"id": "sg-1120337906", "name": "Four-level traditional residence", "type": "House", "beds": 4, "baths": 2, "pin": "Exact pin", "agency": "No agency shown", "notes": "Quiet lived-in street; can be one home or two (main home plus a rental).", "url": "https://www.spitogatos.gr/en/property/1120337906", "listed": "2026-07-09", "first_seen": "2026-10-27", "area_m2": 215.0, "price_eur": 650000.0, "eur_m2": 3023, "dist_m": 125, "near": true, "months": 4, "gv": true, "map_url": "https://www.google.com/maps/search/?api=1&query=37.5656,22.7955", "street_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=37.5656,22.7955", "video": null, "photos": ["photos/sg-1120337906/01.webp", "photos/sg-1120337906/02.webp", "photos/sg-1120337906/03.webp", "photos/sg-1120337906/04.webp", "photos/sg-1120337906/05.webp", "photos/sg-1120337906/06.webp", "photos/sg-1120337906/07.webp", "photos/sg-1120337906/08.webp", "photos/sg-1120337906/09.webp", "photos/sg-1120337906/10.webp", "photos/sg-1120337906/11.webp", "photos/sg-1120337906/12.webp"], "x": 38.39, "y": 56.72}, {"id": "sg-1117855903", "name": "Restored neoclassical below Akronafplia", "type": "House", "beds": 3, "baths": 3, "pin": "Exact pin", "agency": "Skouras / Property Shop", "notes": "Four levels with a sea view, on 'one of the most historic and picturesque streets'.", "url": "https://www.spitogatos.gr/en/property/1117855903", "listed": "2025-07-02", "first_seen": "2026-10-27", "area_m2": 262.0, "price_eur": 1250000.0, "eur_m2": 4771, "dist_m": 125, "near": true, "months": 16, "gv": true, "map_url": "https://www.google.com/maps/search/?api=1&query=37.5653,22.7957", "street_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=37.5653,22.7957", "video": null, "photos": ["photos/sg-1117855903/01.webp", "photos/sg-1117855903/02.webp", "photos/sg-1117855903/03.webp", "photos/sg-1117855903/04.webp", "photos/sg-1117855903/05.webp", "photos/sg-1117855903/06.webp", "photos/sg-1117855903/07.webp", "photos/sg-1117855903/08.webp", "photos/sg-1117855903/09.webp", "photos/sg-1117855903/10.webp", "photos/sg-1117855903/11.webp", "photos/sg-1117855903/12.webp"], "x": 40.18, "y": 61.2}, {"id": "sg-1117356434", "name": "Preserved 1860 building, former tavern", "type": "Mixed use", "beds": 1, "baths": 1, "pin": "Exact pin", "agency": "Golden Home", "notes": "Busy pedestrian street steps from the square and the Old Parliament; 4.5 m ceilings, structural work done 2014.", "url": "https://www.spitogatos.gr/en/property/1117356434", "listed": "2025-04-01", "first_seen": "2026-10-27", "area_m2": 98.0, "price_eur": 520000.0, "eur_m2": 5306, "dist_m": 125, "near": true, "months": 19, "gv": false, "map_url": "https://www.google.com/maps/search/?api=1&query=37.5654,22.798", "street_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=37.5654,22.798", "video": null, "photos": ["photos/sg-1117356434/01.webp"], "x": 60.71, "y": 59.7}, {"id": "sg-1115163800", "name": "Top-floor apartment in a neoclassical", "type": "Apartment", "beds": 5, "baths": 2, "pin": "Exact pin", "agency": "Skouras", "notes": "Five rooms usable as bedrooms; on the market since January 2024.", "url": "https://www.spitogatos.gr/en/property/1115163800", "listed": "2024-01-09", "first_seen": "2026-10-27", "area_m2": 140.0, "price_eur": 750000.0, "eur_m2": 5357, "dist_m": 140, "near": true, "months": 34, "gv": true, "map_url": "https://www.google.com/maps/search/?api=1&query=37.5653,22.7981", "street_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=37.5653,22.7981", "video": null, "photos": ["photos/sg-1115163800/01.webp", "photos/sg-1115163800/02.webp", "photos/sg-1115163800/03.webp", "photos/sg-1115163800/04.webp", "photos/sg-1115163800/05.webp", "photos/sg-1115163800/06.webp", "photos/sg-1115163800/07.webp", "photos/sg-1115163800/08.webp", "photos/sg-1115163800/09.webp", "photos/sg-1115163800/10.webp", "photos/sg-1115163800/11.webp", "photos/sg-1115163800/12.webp"], "x": 61.61, "y": 61.2}, {"id": "sg-1115165356", "name": "Renovated three-level house", "type": "House", "beds": 3, "baths": 3, "pin": "Exact pin", "agency": "Skouras / Estate Value", "notes": "'100 meters from Syntagma Square', fully renovated, plot 80 m².", "url": "https://www.spitogatos.gr/en/property/1115165356", "listed": "2024-01-09", "first_seen": "2026-10-27", "area_m2": 130.0, "price_eur": 550000.0, "eur_m2": 4231, "dist_m": 145, "near": true, "months": 34, "gv": true, "map_url": "https://www.google.com/maps/search/?api=1&query=37.5655,22.7983", "street_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=37.5655,22.7983", "video": null, "photos": ["photos/sg-1115165356/01.webp", "photos/sg-1115165356/02.webp", "photos/sg-1115165356/03.webp", "photos/sg-1115165356/04.webp", "photos/sg-1115165356/05.webp", "photos/sg-1115165356/06.webp", "photos/sg-1115165356/07.webp", "photos/sg-1115165356/08.webp", "photos/sg-1115165356/09.webp", "photos/sg-1115165356/10.webp", "photos/sg-1115165356/11.webp", "photos/sg-1115165356/12.webp"], "x": 63.39, "y": 58.21}, {"id": "sg-1119437324", "name": "Building by Agios Spyridon church", "type": "Building", "beds": 4, "baths": 2, "pin": "Approximate pin", "agency": "Katsaros Fasoulis", "notes": "Plot 92 m², beside the church where Kapodistrias was assassinated in 1831.", "url": "https://www.spitogatos.gr/en/property/1119437324", "listed": "2026-02-24", "first_seen": "2026-10-27", "area_m2": 216.0, "price_eur": 520000.0, "eur_m2": 2407, "dist_m": 145, "near": true, "months": 8, "gv": true, "map_url": "https://www.google.com/maps/search/?api=1&query=37.5652,22.7981", "street_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=37.5652,22.7981", "video": null, "photos": ["photos/sg-1119437324/01.webp", "photos/sg-1119437324/02.webp", "photos/sg-1119437324/03.webp", "photos/sg-1119437324/04.webp", "photos/sg-1119437324/05.webp", "photos/sg-1119437324/06.webp"], "x": 61.61, "y": 62.69}, {"id": "sg-1119418120", "name": "Three apartments in one building", "type": "Building", "beds": null, "baths": null, "pin": "Exact pin", "agency": "Katsaros Fasoulis", "notes": "Sold together, 200 m² in total.", "url": "https://www.spitogatos.gr/en/property/1119418120", "listed": "2026-02-19", "first_seen": "2026-10-27", "area_m2": 200.0, "price_eur": 520000.0, "eur_m2": 2600, "dist_m": 180, "near": false, "months": 8, "gv": true, "map_url": "https://www.google.com/maps/search/?api=1&query=37.5652,22.7986", "street_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=37.5652,22.7986", "video": null, "photos": ["photos/sg-1119418120/01.webp", "photos/sg-1119418120/02.webp", "photos/sg-1119418120/03.webp", "photos/sg-1119418120/04.webp", "photos/sg-1119418120/05.webp", "photos/sg-1119418120/06.webp"], "x": 66.07, "y": 62.69}, {"id": "sg-1119280323", "name": "Harbour-front apartment", "type": "Apartment", "beds": 3, "baths": 2, "pin": "Exact pin", "agency": "Skouras", "notes": "Fully renovated, with the closest view of the harbour and Bourtzi. Just outside the Old Town grid.", "url": "https://www.spitogatos.gr/en/property/1119280323", "listed": "2026-01-30", "first_seen": "2026-10-27", "area_m2": 137.0, "price_eur": 1350000.0, "eur_m2": 9854, "dist_m": 190, "near": false, "months": 9, "gv": true, "map_url": "https://www.google.com/maps/search/?api=1&query=37.5674,22.798", "street_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=37.5674,22.798", "video": "https://www.youtube.com/watch?v=yres740mAMU", "photos": ["photos/sg-1119280323/01.webp", "photos/sg-1119280323/02.webp", "photos/sg-1119280323/03.webp", "photos/sg-1119280323/04.webp", "photos/sg-1119280323/05.webp", "photos/sg-1119280323/06.webp"], "x": 60.71, "y": 29.85}, {"id": "sg-1119684310", "name": "Complex of three small homes", "type": "House", "beds": 4, "baths": 2, "pin": "Exact pin", "agency": "Skouras", "notes": "Three independent residences in one complex.", "url": "https://www.spitogatos.gr/en/property/1119684310", "listed": "2026-04-08", "first_seen": "2026-10-27", "area_m2": 194.5, "price_eur": 550000.0, "eur_m2": 2828, "dist_m": 195, "near": false, "months": 7, "gv": true, "map_url": "https://www.google.com/maps/search/?api=1&query=37.5653,22.7988", "street_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=37.5653,22.7988", "video": "https://www.youtube.com/watch?v=0oX9-XdazJ0", "photos": ["photos/sg-1119684310/01.webp", "photos/sg-1119684310/02.webp", "photos/sg-1119684310/03.webp", "photos/sg-1119684310/04.webp", "photos/sg-1119684310/05.webp", "photos/sg-1119684310/06.webp"], "x": 67.86, "y": 61.2}, {"id": "sg-1117099157", "name": "Corner building, Vas. Olgas and Othonos", "type": "Mixed use", "beds": null, "baths": 4, "pin": "Exact pin", "agency": "Skouras", "notes": "Shop, ground-floor flat, first floor and a small penthouse. Skouras' own site also shows €1,750,000.", "url": "https://www.spitogatos.gr/en/property/1117099157", "listed": "2025-02-10", "first_seen": "2026-10-27", "area_m2": 221.0, "price_eur": 1500000.0, "eur_m2": 6787, "dist_m": 200, "near": false, "months": 21, "gv": true, "map_url": "https://www.google.com/maps/search/?api=1&query=37.5672,22.7985", "street_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=37.5672,22.7985", "video": null, "photos": ["photos/sg-1117099157/01.webp", "photos/sg-1117099157/02.webp", "photos/sg-1117099157/03.webp", "photos/sg-1117099157/04.webp", "photos/sg-1117099157/05.webp", "photos/sg-1117099157/06.webp"], "x": 65.18, "y": 32.84}, {"id": "sg-1117858336", "name": "Listed building with a four-room pension", "type": "Mixed use", "beds": 4, "baths": 4, "pin": "Exact pin", "agency": "Skouras", "notes": "Ground-floor shop plus a working pension; renovated 2011.", "url": "https://www.spitogatos.gr/en/property/1117858336", "listed": "2025-07-02", "first_seen": "2026-10-27", "area_m2": 240.0, "price_eur": 1450000.0, "eur_m2": 6042, "dist_m": 230, "near": false, "months": 16, "gv": true, "map_url": "https://www.google.com/maps/search/?api=1&query=37.5672,22.7989", "street_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=37.5672,22.7989", "video": null, "photos": ["photos/sg-1117858336/01.webp", "photos/sg-1117858336/02.webp", "photos/sg-1117858336/03.webp", "photos/sg-1117858336/04.webp", "photos/sg-1117858336/05.webp", "photos/sg-1117858336/06.webp"], "x": 68.75, "y": 32.84}, {"id": "sg-1120563498", "name": "Listed house in Psaromachalas", "type": "House", "beds": null, "baths": null, "pin": "Approximate pin", "agency": "Engel & Völkers", "notes": "In Psaromachalas, the old fishermen's quarter under Akronafplia.", "url": "https://www.spitogatos.gr/en/property/1120563498", "listed": "2026-08-04", "first_seen": "2026-10-27", "area_m2": 241.0, "price_eur": 620000.0, "eur_m2": 2573, "dist_m": 230, "near": false, "months": 3, "gv": true, "map_url": "https://www.google.com/maps/search/?api=1&query=37.5658,22.7942", "street_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=37.5658,22.7942", "video": null, "photos": ["photos/sg-1120563498/01.webp", "photos/sg-1120563498/02.webp", "photos/sg-1120563498/03.webp", "photos/sg-1120563498/04.webp", "photos/sg-1120563498/05.webp", "photos/sg-1120563498/06.webp"], "x": 26.79, "y": 53.73}, {"id": "sg-1118653552", "name": "Turkish House of Sinani", "type": "House", "beds": 6, "baths": 4, "pin": "Exact pin", "agency": "PS Real Estate", "notes": "Listed historic residence dating from around 1800.", "url": "https://www.spitogatos.gr/en/property/1118653552", "listed": "2025-11-17", "first_seen": "2026-10-27", "area_m2": 300.0, "price_eur": 700000.0, "eur_m2": 2333, "dist_m": 240, "near": false, "months": 11, "gv": true, "map_url": "https://www.google.com/maps/search/?api=1&query=37.5656,22.7995", "street_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=37.5656,22.7995", "video": null, "photos": ["photos/sg-1118653552/01.webp", "photos/sg-1118653552/02.webp", "photos/sg-1118653552/03.webp", "photos/sg-1118653552/04.webp", "photos/sg-1118653552/05.webp", "photos/sg-1118653552/06.webp"], "x": 74.11, "y": 56.72}, {"id": "sg-1115793289", "name": "Old stone house with gulf view", "type": "House", "beds": null, "baths": null, "pin": "Approximate pin", "agency": "Mesogios Group", "notes": "Listed as 10 rooms and 10 baths; conversion possible.", "url": "https://www.spitogatos.gr/en/property/1115793289", "listed": "2024-05-16", "first_seen": "2026-10-27", "area_m2": 260.0, "price_eur": 1050000.0, "eur_m2": 4038, "dist_m": 245, "near": false, "months": 29, "gv": true, "map_url": "https://www.google.com/maps/search/?api=1&query=37.5649,22.7944", "street_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=37.5649,22.7944", "video": null, "photos": ["photos/sg-1115793289/01.webp", "photos/sg-1115793289/02.webp", "photos/sg-1115793289/03.webp", "photos/sg-1115793289/04.webp", "photos/sg-1115793289/05.webp", "photos/sg-1115793289/06.webp"], "x": 28.57, "y": 67.17}, {"id": "sg-1120883363", "name": "Listed neoclassical, four levels", "type": "Building", "beds": 4, "baths": 3, "pin": "Exact pin", "agency": "Royal Estates", "notes": "Near Syntagma Square and the Courthouse; partly renovated, more restoration needed.", "url": "https://www.spitogatos.gr/en/property/1120883363", "listed": "2026-09-19", "first_seen": "2026-10-27", "area_m2": 341.0, "price_eur": 1250000.0, "eur_m2": 3666, "dist_m": 255, "near": false, "months": 1, "gv": true, "map_url": "https://www.google.com/maps/search/?api=1&query=37.5658,22.7997", "street_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=37.5658,22.7997", "video": null, "photos": ["photos/sg-1120883363/01.webp", "photos/sg-1120883363/02.webp", "photos/sg-1120883363/03.webp", "photos/sg-1120883363/04.webp", "photos/sg-1120883363/05.webp", "photos/sg-1120883363/06.webp"], "x": 75.89, "y": 53.73}, {"id": "sg-1114636411", "name": "Small house on a 250 m² plot", "type": "House", "beds": 2, "baths": 1, "pin": "Approximate pin", "agency": "Errikos Real Estate", "notes": "Lowest ask found. The text says only 'Nafplio Center', so confirm it is inside the walls.", "url": "https://www.spitogatos.gr/en/property/1114636411", "listed": "2023-09-22", "first_seen": "2026-10-27", "area_m2": 85.0, "price_eur": 190000.0, "eur_m2": 2235, "dist_m": 275, "near": false, "months": 37, "gv": false, "map_url": "https://www.google.com/maps/search/?api=1&query=37.5639,22.7984", "street_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=37.5639,22.7984", "video": null, "photos": ["photos/sg-1114636411/01.webp", "photos/sg-1114636411/02.webp", "photos/sg-1114636411/03.webp", "photos/sg-1114636411/04.webp", "photos/sg-1114636411/05.webp", "photos/sg-1114636411/06.webp"], "x": 64.29, "y": 82.09}, {"id": "sg-1118040659", "name": "Large two-level apartment", "type": "Apartment", "beds": 8, "baths": 4, "pin": "Exact pin", "agency": "PS Real Estate", "notes": "East edge of the Old Town near the Land Gate; four kitchens.", "url": "https://www.spitogatos.gr/en/property/1118040659", "listed": "2025-08-04", "first_seen": "2026-10-27", "area_m2": 453.0, "price_eur": 700000.0, "eur_m2": 1545, "dist_m": 540, "near": false, "months": 15, "gv": true, "map_url": "https://www.google.com/maps/search/?api=1&query=37.5661,22.8029", "street_url": "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=37.5661,22.8029", "video": null, "photos": ["photos/sg-1118040659/01.webp"], "x": null, "y": null}], "sold": [{"id": "sk-655340", "name": "Old Town house", "type": "House", "where": "Old Town", "area_m2": 200, "last_ask_eur": 450000, "status": "Sold", "agency": "Skouras", "notes": "Sold tag on the agency site. Closing price and date not published.", "url": "https://www.skourasrealestate.gr/index.php?option=com_estateagent&view=showproperty&id=1612747&Itemid=107&lang=en", "first_seen": "2026-10-27", "eur_m2": 2250, "photos": []}, {"id": "sg-1112213406", "name": "Historic house in the Old Town centre", "type": "House", "where": "Old Town", "area_m2": 239, "last_ask_eur": 660000, "status": "Sold", "agency": "Argoliki Mesitiki", "notes": "Listing text opens with 'Sold.' First listed Feb 2024.", "url": "https://www.spitogatos.gr/en/property/1112213406", "first_seen": "2026-10-27", "eur_m2": 2762, "photos": ["photos/sg-1112213406/01.webp", "photos/sg-1112213406/02.webp", "photos/sg-1112213406/03.webp", "photos/sg-1112213406/04.webp", "photos/sg-1112213406/05.webp", "photos/sg-1112213406/06.webp"]}, {"id": "sk-653989", "name": "Old Town apartment", "type": "Apartment", "where": "Old Town", "area_m2": 93, "last_ask_eur": 380000, "status": "Sold", "agency": "Skouras", "notes": "Sold tag on the agency site.", "url": "https://www.skourasrealestate.gr/index.php?option=com_estateagent&view=showproperty&id=1373589&Itemid=107&lang=en", "first_seen": "2026-10-27", "eur_m2": 4086, "photos": []}, {"id": "sk-650460", "name": "Old Town apartment", "type": "Apartment", "where": "Old Town", "area_m2": 94, "last_ask_eur": 365000, "status": "Sold", "agency": "Skouras", "notes": "Sold tag on the agency site.", "url": "https://www.skourasrealestate.gr/index.php?option=com_estateagent&view=showproperty&id=1457695&Itemid=107&lang=en", "first_seen": "2026-10-27", "eur_m2": 3883, "photos": []}, {"id": "sk-653767", "name": "Old Town retail shop", "type": "Shop", "where": "Old Town", "area_m2": 85, "last_ask_eur": 320000, "status": "Sold", "agency": "Skouras", "notes": "Sold tag on the agency site.", "url": "https://www.skourasrealestate.gr/index.php?option=com_estateagent&view=showproperty&id=1307934&Itemid=107&lang=en", "first_seen": "2026-10-27", "eur_m2": 3765, "photos": []}, {"id": "sk-1364138", "name": "Sea-view apartment", "type": "Apartment", "where": "Nafplio, outside the walls", "area_m2": 87, "last_ask_eur": 250000, "status": "Sold", "agency": "Skouras", "notes": "Sold tag; not inside the Old Town.", "url": "https://www.skourasrealestate.gr/index.php?option=com_estateagent&view=showproperty&id=1662025&Itemid=107&lang=en", "first_seen": "2026-10-27", "eur_m2": 2874, "photos": []}, {"id": "sg-1120533348", "name": "Apartment by the historic centre", "type": "Apartment", "where": "Just outside the walls", "area_m2": 112, "last_ask_eur": 290000, "status": "Under offer", "agency": "Skouras", "notes": "Marked 'under selling procedure'. Listed Jul 2026.", "url": "https://www.spitogatos.gr/en/property/1120533348", "first_seen": "2026-10-27", "eur_m2": 2589, "photos": ["photos/sg-1120533348/01.webp", "photos/sg-1120533348/02.webp", "photos/sg-1120533348/03.webp", "photos/sg-1120533348/04.webp", "photos/sg-1120533348/05.webp", "photos/sg-1120533348/06.webp"]}], "hotels": [{"ref": "2533943", "name": "Hotel with sea view", "area_m2": 620, "price_eur": 3500000, "bedrooms": 8, "agency": "Skouras", "url": "https://www.skourasrealestate.gr/index.php?option=com_estateagent&view=showproperty&id=1665105&Itemid=107&lang=en"}, {"ref": "2285961", "name": "Hotel", "area_m2": 541, "price_eur": 1890000, "bedrooms": 10, "agency": "Skouras", "url": "https://www.skourasrealestate.gr/index.php?option=com_estateagent&view=showproperty&id=1664268&Itemid=107&lang=en"}, {"ref": "2319965", "name": "Hotel", "area_m2": 337, "price_eur": 1250000, "bedrooms": null, "agency": "Skouras", "url": "https://www.skourasrealestate.gr/index.php?option=com_estateagent&view=showproperty&id=1664374&Itemid=107&lang=en"}, {"ref": "654893", "name": "Hotel, centre", "area_m2": 242, "price_eur": 1250000, "bedrooms": null, "agency": "Skouras", "url": "https://www.skourasrealestate.gr/index.php?option=com_estateagent&view=showproperty&id=1552670&Itemid=107&lang=en"}, {"ref": "655196", "name": "Hotel", "area_m2": 217, "price_eur": 900000, "bedrooms": null, "agency": "Skouras", "url": "https://www.skourasrealestate.gr/index.php?option=com_estateagent&view=showproperty&id=1614818&Itemid=107&lang=en"}, {"ref": "652291", "name": "Whole building", "area_m2": 366, "price_eur": 1400000, "bedrooms": null, "agency": "Skouras", "url": "https://www.skourasrealestate.gr/index.php?option=com_estateagent&view=showproperty&id=706789&Itemid=107&lang=en"}, {"ref": "651186", "name": "Whole building", "area_m2": 126, "price_eur": 1250000, "bedrooms": null, "agency": "Skouras", "url": "https://www.skourasrealestate.gr/index.php?option=com_estateagent&view=showproperty&id=362162&Itemid=107&lang=en"}], "market": [{"id": "restored", "measure": "Restored Old Town houses, asking", "low": 3000, "high": 5500, "unit": "€/m²", "as_of": "Jul 2026", "source": "BuyGreece guide (indicative)", "url": "https://www.buygreece.us/nafplio-real-estate"}, {"id": "shell", "measure": "Old Town houses to restore, asking", "low": 1200, "high": 2200, "unit": "€/m²", "as_of": "Jul 2026", "source": "BuyGreece guide (indicative)", "url": "https://www.buygreece.us/nafplio-real-estate"}, {"id": "center", "measure": "Nafplio Center zone, average asking", "low": 3007, "high": 3007, "unit": "€/m²", "as_of": "Sep 2026", "source": "Indomio", "url": "https://www.indomio.gr/en/agora-akiniton/peloponnisos/nafplio/"}, {"id": "town", "measure": "Nafplio average asking", "low": 2850, "high": 2850, "unit": "€/m²", "as_of": "Sep 2026", "source": "Indomio", "url": "https://www.indomio.gr/en/agora-akiniton/peloponnisos/nafplio/"}, {"id": "town_yoy", "measure": "Nafplio asking prices, change in a year", "low": 8.9, "high": 8.9, "unit": "%", "as_of": "Sep 2026", "source": "Indomio", "url": "https://www.indomio.gr/en/agora-akiniton/peloponnisos/nafplio/"}, {"id": "newtown", "measure": "New-town apartments, asking", "low": 1500, "high": 2400, "unit": "€/m²", "as_of": "Jul 2026", "source": "BuyGreece guide (indicative)", "url": "https://www.buygreece.us/nafplio-real-estate"}, {"id": "greece", "measure": "Greece national average", "low": 2561, "high": 2561, "unit": "€/m²", "as_of": "2026", "source": "BuyGreece guide", "url": "https://www.buygreece.us/nafplio-real-estate"}, {"id": "recorded", "measure": "Greece recorded sale prices, change Jan to Sep 2026", "low": 7.7, "high": 7.7, "unit": "%", "as_of": "Sep 2026", "source": "EstateBrains (via The National Herald)", "url": "https://www.thenationalherald.com/greek-home-prices-rose-but-less-than-the-headlines-say-not-where-expected/"}, {"id": "bog", "measure": "Greek apartment prices, change in a year", "low": 5.5, "high": 5.5, "unit": "%", "as_of": "Q2 2026", "source": "Bank of Greece", "url": "https://www.avlarealestate.com/en/post/greece-golden-visa-real-estate-market-report-21-october-2026"}, {"id": "str_adr", "measure": "Short-let nightly rate, Nafplio", "low": 100, "high": 132, "unit": "€ / $", "as_of": "2026", "source": "Airbtics (€100) and AirROI ($132)", "url": "https://airbtics.com/annual-airbnb-revenue-in-nafplio-greece"}, {"id": "str_occ", "measure": "Short-let occupancy, Nafplio", "low": 39.8, "high": 55, "unit": "%", "as_of": "2026", "source": "AirROI (39.8%) and Airbtics (55%)", "url": "https://airroi.com/airbnb-data/greece/peloponnese,-western-greece-and-the-ionian/municipal-unit-of-nafplio"}, {"id": "hotel_adr", "measure": "Hotel average daily rate, Nafplio", "low": 88, "high": 88, "unit": "€", "as_of": "2025", "source": "GBR Consulting (via euro2day)", "url": "https://www.euro2day.gr/en/article/2349429/tourism-the-athensthessaloniki-brawl-and-the-surpr"}], "costs": [{"id": "transfer", "item": "Transfer tax (today)", "low_pct": 3.09, "high_pct": 3.09, "status": "In force", "note": "3% plus a 3% municipal surcharge on the tax, charged on the higher of the price or the state's objective value."}, {"id": "transfer_noneu", "item": "Transfer tax, non-EU buyers (proposed)", "low_pct": 15, "high_pct": 15, "status": "Proposed", "note": "Announced Sep 6, 2026 for homes bought by non-EU individuals. Reported start Jul 1, 2027. No bill published yet."}, {"id": "notary", "item": "Notary", "low_pct": 0.8, "high_pct": 1.2, "status": "In force", "note": "Plus 24% VAT on the fee."}, {"id": "lawyer", "item": "Buyer's lawyer", "low_pct": 1, "high_pct": 2, "status": "In force", "note": "Title, listed status, permits, debts and the building's rules."}, {"id": "cadastre", "item": "Land registry (Ktimatologio)", "low_pct": 0.5, "high_pct": 0.5, "status": "In force", "note": "Registering the deed."}, {"id": "agent", "item": "Agent commission", "low_pct": 2.48, "high_pct": 3.72, "status": "In force", "note": "Usually 2-3% plus 24% VAT, often split with the seller."}], "news": [{"id": "n-2026-10-23-prices", "date": "2026-10-23", "headline": "Greek home prices rose 7.7% this year, less than headlines suggest", "topic": "Prices", "region": "Greece", "summary": "EstateBrains found recorded sale prices per m² up 9.4% in 2025 and 7.7% from January to September 2026, while asking prices rose 5.8%. Transfers reached 223,267 in 2025 and new mortgage lending rose 46% to €2.65 billion.", "why": "Prices are still climbing about 8% a year, so waiting is not free.", "source": "The National Herald", "url": "https://www.thenationalherald.com/greek-home-prices-rose-but-less-than-the-headlines-say-not-where-expected/"}, {"id": "n-2026-10-21-tax15", "date": "2026-10-21", "headline": "15% transfer tax for non-EU buyers: still no bill", "topic": "Tax", "region": "Greece", "summary": "The government announced on Sep 6 that non-EU individuals buying homes would pay 15% transfer tax instead of 3%. Reports now give Jul 1, 2027 as the start, but no bill had been published as of Oct 21.", "why": "On a €1.35M purchase that is about €202,500 instead of about €41,700. A deed signed before the start date should avoid it; confirm with Greek counsel.", "source": "AVLA weekly report (citing agentnews.gr, zagdim.com)", "url": "https://www.avlarealestate.com/en/post/greece-golden-visa-real-estate-market-report-21-october-2026"}, {"id": "n-2026-10-15-gv", "date": "2026-10-15", "headline": "Minister warns Golden Visa holders over discounts and short lets", "topic": "Golden Visa", "region": "Greece", "summary": "Migration Minister Plevris said permits will be revoked where rebates push the real price under the threshold, or where the home is sublet short-term. No new law was announced.", "why": "A home used for a Golden Visa cannot be put on Airbnb.", "source": "IMI Daily (citing ERT)", "url": "https://www.avlarealestate.com/en/post/greece-golden-visa-real-estate-market-report-21-october-2026"}, {"id": "n-2026-10-14-vat", "date": "2026-10-14", "headline": "VAT break on new builds runs to Dec 31, 2026", "topic": "Tax", "region": "Greece", "summary": "The suspension of 24% VAT on new-build homes ends Dec 31, 2026. An extension has been announced but not legislated.", "why": "Not relevant to Old Town resales, which pay transfer tax instead of VAT.", "source": "katslaw.eu (via AVLA)", "url": "https://www.avlarealestate.com/en/post/greece-golden-visa-real-estate-market-report-21-october-2026"}, {"id": "n-2026-10-13-cgt", "date": "2026-10-13", "headline": "Capital gains tax suspension ends with 2026 unless extended", "topic": "Tax", "region": "Greece", "summary": "The 15% capital gains tax on resales by individuals is suspended until Dec 31, 2026. No extension had been legislated as of Oct 13.", "why": "Matters when Chris sells, and may push some owners to sell before year end.", "source": "BuyGreece guide", "url": "https://www.buygreece.us/nafplio-real-estate"}, {"id": "n-2026-10-07-gvvote", "date": "2026-10-07", "headline": "Motion to scrap the property Golden Visa rejected", "topic": "Golden Visa", "region": "Greece", "summary": "Parliament rejected the main opposition party's motion to abolish the real estate route to a Golden Visa.", "why": "The €400,000 route for Argolida stays open for now.", "source": "IMI Daily (via AVLA)", "url": "https://www.avlarealestate.com/en/post/greece-golden-visa-real-estate-market-report-21-october-2026"}, {"id": "n-2026-09-15-nafplio", "date": "2026-09-30", "headline": "Nafplio asking prices up 8.9% in a year", "topic": "Prices", "region": "Nafplio", "summary": "Indomio's September index puts Nafplio at about €2,850 per m² on average and the Center zone at about €3,007, up 8.9% from September 2025.", "why": "Nafplio is rising faster than the national index.", "source": "Indomio", "url": "https://www.indomio.gr/en/agora-akiniton/peloponnisos/nafplio/"}, {"id": "n-2026-09-23-permits", "date": "2026-09-23", "headline": "Golden Visa permits reach 34,759", "topic": "Golden Visa", "region": "Greece", "summary": "The August bulletin showed 34,759 valid investor permits, with 7,686 applications pending, 5,571 of them in Attica.", "why": "Demand is concentrated in Athens; Nafplio sees far less Golden Visa buying.", "source": "Ministry of Migration (via AVLA)", "url": "https://www.avlarealestate.com/en/post/greece-golden-visa-real-estate-market-report-21-october-2026"}, {"id": "n-2026-09-15-bog", "date": "2026-09-15", "headline": "Bank of Greece: apartment prices up 5.5% in a year", "topic": "Prices", "region": "Greece", "summary": "Q2 2026 apartment prices rose 5.5% year on year, with Athens at 5.0% and Thessaloniki at 4.7%. Growth is slowing from 9.1% in 2024.", "why": "Official index: steady growth, slower than 2024.", "source": "Bank of Greece (via AVLA)", "url": "https://www.avlarealestate.com/en/post/greece-golden-visa-real-estate-market-report-21-october-2026"}, {"id": "n-2026-09-14-str", "date": "2026-09-14", "headline": "Tax office checks Airbnb income against platform data", "topic": "Short lets", "region": "Greece", "summary": "AADE is comparing 2025 income declared by short-let hosts with data from the major booking platforms.", "why": "Any rental income from a Nafplio home will be visible to the Greek tax office.", "source": "To Vima", "url": "https://www.tovima.com/tag/short-term-rentals-greece/"}, {"id": "n-2026-07-02-condo", "date": "2026-07-02", "headline": "Bill to overhaul apartment-building rules, including Airbnb", "topic": "Short lets", "region": "Greece", "summary": "A Justice Ministry bill would lower the majority needed for building decisions, allow large units to be split and set rules for short-term rentals inside buildings.", "why": "Matters for an apartment like the penthouse: the building's rules could limit short lets.", "source": "To Vima", "url": "https://www.tovima.com/tag/short-term-rentals-greece/"}, {"id": "n-2026-07-01-freeze", "date": "2026-07-01", "headline": "Airbnb freeze in central Athens and Thessaloniki continues", "topic": "Short lets", "region": "Greece", "summary": "No new short-let registration numbers are issued in central Athens and central Thessaloniki through Dec 31, 2026. A registration is cancelled when a property is sold.", "why": "Nafplio is not in a freeze zone, but a buyer must register again after closing.", "source": "Greek City Times", "url": "https://greekcitytimes.com/2026/01/25/airbnb-restrictions-greece-2026-red-zones-athens-thessaloniki"}, {"id": "n-2026-01-02-longlet", "date": "2026-01-02", "headline": "Three-year tax holiday for switching short lets to long leases", "topic": "Short lets", "region": "Greece", "summary": "Owners who move a property from short-term to long-term rental by Dec 31, 2026 pay no tax on that rent for three years.", "why": "Mainly an incentive for current owners; shows policy is leaning against short lets.", "source": "To Vima", "url": "https://www.tovima.com/tag/short-term-rentals-greece/"}], "changes": [{"id": "c-2026-10-28-check", "date": "2026-10-28", "kind": "Checked", "listing": "All", "detail": "24 Old Town homes for sale, 13 within 150 m of the square. 0 changes today.", "url": ""}, {"id": "c-2026-10-27-start", "date": "2026-10-27", "kind": "Started", "listing": "All", "detail": "First snapshot: 24 Old Town homes for sale, 7 sold or under offer.", "url": ""}], "map": {"w": 1800, "h": 1359}}</script>
+
+<header class="hero" id="top">
+  <img id="hero-img" alt="Aerial view of Syntagma Square in Nafplio's Old Town, with the harbour and Bourtzi castle behind">
+  <span class="credit">Photo: Engel &amp; Völkers listing W-030IT7</span>
+  <div class="wrap">
+    <p class="eyebrow">Prepared for Chris Athus · <span id="updated"></span></p>
+    <h1>Nafplio Old Town, around Syntagma Square</h1>
+    <p class="sub print-only">Every listing name, "Listing", "Map" and "Street View" in this PDF is a clickable link to the agency's page (full photo gallery) or Google Maps.</p>
+    <p class="sub">Homes for sale in the lanes around the square from the Engel &amp; Völkers brochure, with photos, locations, recent sales and what Greek buyers need to know. Checked every day at 2 PM Central.</p>
+    <div class="stats" id="stats"></div>
+  </div>
+</header>
+
+<nav class="nav" aria-label="Sections"><div class="wrap" id="navlinks">
+  <a href="#penthouse">The penthouse</a><a href="#near">Near the square</a><a href="#map">Map</a><a href="#oldtown">Rest of the Old Town</a><a href="#compare">Compare all</a><a href="#sold">Sold and prices</a><a href="#news">Greece news</a><a href="#guide">Buying guide</a><a href="#feedback">Feedback</a><a href="#log">Daily log</a>
+</div></nav>
+
+<main>
+  <section class="sec" id="penthouse"><div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">The unit in the brochure</p>
+      <h2>Penthouse on Syntagma Square</h2>
+      <p class="lede">The red outline in the brochure marks the top floor of a building facing the square, beside the Trianon's tiled dome. Engel &amp; Völkers listing W-030IT7 matches it: the only Old Town penthouse they have on the square. Ask the agent to confirm, and whether other units in the building are coming up.</p>
+    </div>
+    <div class="feature" id="feature"></div>
+  </div></section>
+
+  <section class="sec" id="near"><div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Shortlist</p>
+      <h2>For sale within <span class="near-m"></span> of the square</h2>
+      <p class="lede">Closest first. Tap a photo to see the whole gallery. Each home links to the agency listing, its pin on Google Maps, Street View, and a video tour where the agency made one. Numbers match the pins on the map.</p>
+    </div>
+    <div class="cards" id="near-cards"></div>
+  </div></section>
+
+  <section class="sec" id="map"><div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Where they are</p>
+      <h2>Map of the Old Town</h2>
+      <p class="lede">Every listing pinned on the street map. Gold is the brochure penthouse, blue is within <span class="near-m"></span> of Syntagma Square (dashed circle), grey is the rest of the Old Town. Tap a pin for its photo and price.</p>
+    </div>
+    <div class="mapscroll"><div class="mapbox" id="mapbox"><img src="map/oldtown.jpg" alt="Street map of Nafplio Old Town"><span class="osm">© OpenStreetMap contributors</span></div></div>
+    <div class="legend"><span><i style="background:var(--ochre)"></i>Brochure penthouse</span><span><i style="background:var(--sea)"></i>Near the square</span><span><i style="background:#7b8790"></i>Elsewhere in the Old Town</span>
+      <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=37.5660,22.7968" target="_blank" rel="noopener">Open the square in Google Maps ↗</a></div>
+    <p class="note" style="margin-top:8px">Pins come from the agencies' own map points. Some agencies blur them by a few dozen metres, so confirm the exact building with the agent.</p>
+  </div></section>
+
+  <section class="sec" id="oldtown"><div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Wider search</p>
+      <h2>Elsewhere in the Old Town</h2>
+      <p class="lede">Still inside the walls, a short walk from the square: Psaromachalas under Akronafplia, the streets toward the Land Gate and the harbour front.</p>
+    </div>
+    <div class="cards" id="far-cards"></div>
+  </div></section>
+
+  <section class="sec" id="compare"><div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Side by side</p>
+      <h2>Compare every Old Town listing</h2>
+      <p class="lede">Sort any column. "Golden Visa size" means at least €400,000 and 120 m², the minimum for a Greek residence permit through property in Argolida.</p>
+    </div>
+    <div class="tools"><input class="search" id="q" type="search" placeholder="Search name, type or agency" aria-label="Search listings"></div>
+    <div class="tbox"><table id="tbl"><thead><tr>
+      <th data-k="name"><button>Home</button></th>
+      <th data-k="dist_m" class="r" aria-sort="ascending"><button>From square</button></th>
+      <th data-k="price_eur" class="r"><button>Asking</button></th>
+      <th data-k="area_m2" class="r"><button>Size</button></th>
+      <th data-k="eur_m2" class="r"><button>Per m²</button></th>
+      <th data-k="beds" class="r"><button>Beds</button></th>
+      <th data-k="months" class="r"><button>On market</button></th>
+      <th data-k="gv"><button>Golden Visa size</button></th>
+      <th data-k="agency"><button>Agency</button></th>
+      <th><button disabled>View</button></th>
+    </tr></thead><tbody></tbody></table></div>
+  </div></section>
+
+  <section class="sec" id="sold"><div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">What things go for</p>
+      <h2>Sold, under offer and price per m²</h2>
+      <p class="lede">Greece publishes no closing prices; only the notary and the land registry see them. These are listings an agency has tagged sold, with the last asking price. Agents will usually share real closing prices if asked.</p>
+    </div>
+    <div class="cards" id="sold-cards"></div>
+    <div class="sec-head" style="margin-top:36px"><h3>Asking price per m², every Old Town listing</h3>
+      <p class="note">Bands show what local agents quote: restored Old Town houses and houses that need restoring. The dashed line is the Nafplio average asking price. Blue bars are near the square; gold is the penthouse.</p></div>
+    <div class="chart" id="ppm"></div>
+    <div class="sec-head" style="margin-top:36px"><h3>Benchmarks</h3></div>
+    <div class="tbox" style="max-height:none"><table id="bench"><thead><tr><th><button disabled>Measure</button></th><th class="r"><button disabled>Value</button></th><th><button disabled>As of</button></th><th><button disabled>Source</button></th></tr></thead><tbody></tbody></table></div>
+    <div class="sec-head" style="margin-top:36px"><h3>Whole buildings and small hotels</h3><p class="note">Old Town buildings sold as businesses (Skouras Real Estate). Useful price markers, or a home with rentals in one building.</p></div>
+    <div class="tbox" style="max-height:none"><table id="hotels"><thead><tr><th><button disabled>Property</button></th><th class="r"><button disabled>Size</button></th><th class="r"><button disabled>Asking</button></th><th class="r"><button disabled>Per m²</button></th><th class="r"><button disabled>Bedrooms</button></th><th><button disabled>View</button></th></tr></thead><tbody></tbody></table></div>
+  </div></section>
+
+  <section class="sec" id="news"><div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Updated daily</p>
+      <h2>Greece property news</h2>
+      <p class="lede">Real estate news from Nafplio and across Greece, newest first, each with a line on what it means for a buyer in the Old Town.</p>
+    </div>
+    <div class="filters" id="nfilters">
+      <button data-t="" aria-pressed="true">All</button><button data-t="Tax" aria-pressed="false">Tax</button><button data-t="Golden Visa" aria-pressed="false">Golden Visa</button><button data-t="Prices" aria-pressed="false">Prices</button><button data-t="Short lets" aria-pressed="false">Short lets</button><button data-t="Nafplio" aria-pressed="false">Nafplio</button>
+    </div>
+    <div class="news" id="news-list"></div>
+  </div></section>
+
+  <section class="sec" id="guide"><div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Before an offer</p>
+      <h2>Buying guide</h2>
+    </div>
+    <div class="box" style="margin-bottom:20px">
+      <h3>What buying costs on top of the price</h3>
+      <p class="note">Enter a price. The second total applies the proposed 15% transfer tax for non-EU buyers (a US citizen buying in his own name would count). It is reported to start July 1, 2027 but is not yet law.</p>
+      <div class="calc"><label for="price-in">Purchase price (€)</label><input id="price-in" type="number" min="0" step="10000" inputmode="numeric"></div>
+      <div class="totals" id="totals"></div>
+      <div class="tbox" style="max-height:none"><table id="costs"><thead><tr><th><button disabled>Item</button></th><th class="r"><button disabled>Rate</button></th><th class="r"><button disabled>On this price</button></th><th><button disabled>Status</button></th><th><button disabled>Note</button></th></tr></thead><tbody></tbody></table></div>
+    </div>
+    <div class="grid2">
+      <div class="box"><h3>Old Town rules a buyer inherits</h3><ul>
+        <li>The Old Town is a protected traditional settlement and many buildings are individually listed. Façade, roof, window and colour changes need approval from the Ephorate of Antiquities of Argolida.</li>
+        <li>Not every house inside the walls is listed. The lawyer should confirm the exact building's status; it decides what can change and whether restoration grants apply.</li>
+        <li>Every sale needs an engineer's certificate that the building has no illegal works, or that they were legalised (Law 4495/2017).</li>
+        <li>Apartments such as the penthouse sit in shared buildings. Read the building rules for limits on short lets, works and shared costs.</li>
+        <li>Cars are restricted in the lanes; parking is by the harbour and the Land Gate.</li></ul></div>
+      <div class="box"><h3>Golden Visa and renting</h3><ul>
+        <li>In Argolida the property route needs one home of at least €400,000 and 120 m². Smaller units cannot be combined. Restoring a formally listed building can qualify at €250,000.</li>
+        <li>A Golden Visa home cannot be rented short-term; in October 2026 the minister warned permits will be revoked for it. Long leases are allowed.</li>
+        <li>Short lets elsewhere need an AMA registration from the tax office and safety equipment (Law 5170/2025). Registration ends when a property is sold.</li>
+        <li>Nafplio is not in the Athens or Thessaloniki short-let freeze zones.</li></ul></div>
+      <div class="box"><h3>Living on Syntagma Square</h3><ul>
+        <li>The square is the Old Town's living room: café tables fill the marble paving from spring to autumn, with music and events into summer nights. Upper floors trade some quiet for the view.</li>
+        <li>A few minutes on foot: the harbour promenade and Bourtzi boats, Arvanitia beach, the 999 steps to Palamidi, the Archaeological Museum and the Old Parliament.</li>
+        <li>Nafplio was the first capital of modern Greece (1829 to 1834). Its Venetian, Ottoman and neoclassical buildings are why so many are listed.</li>
+        <li>About two hours by car from Athens airport; busy with Athenian weekenders all year and tourists April to October.</li></ul></div>
+      <div class="box"><h3>Checklist before an offer</h3><ul>
+        <li>Get a Greek tax number (AFM) and a Greek bank account.</li>
+        <li>Hire an independent lawyer to check title, debts, listed status and permits at the land registry.</li>
+        <li>Commission an engineer for the legality certificate and a structural survey.</li>
+        <li>Compare the price with the state's objective value for the street.</li>
+        <li>Ask agents for closing prices of recent Old Town sales.</li>
+        <li>Time the deed: if the 15% rule passes, the signing date should decide which rate applies.</li></ul></div>
+    </div>
+  </div></section>
+
+  <section class="sec" id="feedback"><div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Help shape this brief</p>
+      <h2>Feedback</h2>
+      <p class="lede">What is useful, what is missing, what you would change. Every note is read and folded into the next daily update.</p>
+    </div>
+    <div class="box" style="max-width:52rem">
+      <div class="fb-form no-print">
+        <label class="fb-l" for="fb-like">What works well</label>
+        <textarea id="fb-like" rows="3" placeholder="e.g. the photo galleries, the map"></textarea>
+        <label class="fb-l" for="fb-change">What would make it better</label>
+        <textarea id="fb-change" rows="4" placeholder="e.g. add rentals, show floor plans, widen the search to Pronia"></textarea>
+        <label class="fb-l" for="fb-name">Your name (optional)</label>
+        <input id="fb-name" type="text" autocomplete="name">
+        <div class="btns"><button class="btn primary" id="fb-send" type="button">Send feedback</button></div>
+        <p class="note" id="fb-status" role="status"></p>
+        <div id="fb-fallback" hidden class="fb-fallback">
+          <p style="margin:0">Your note is ready. Paste it into an email to Shawn Schroeder:</p>
+          <div class="btns" style="align-items:center"><code class="fb-addr" id="fb-addr">sschroeder@amsted.com</code><button class="btn" id="fb-copy-addr" type="button">Copy address</button><button class="btn" id="fb-copy" type="button">Copy my note again</button><a class="btn" id="fb-mail" href="mailto:sschroeder@amsted.com">Open email</a></div>
+        </div>
+      </div>
+      <p class="note print-only" style="color:var(--ink)">To suggest changes, reply to the email this brief came with, or write to Shawn Schroeder at sschroeder@amsted.com. Every note is read and folded into the next daily update.</p>
+    </div>
+  </div></section>
+
+  <section class="sec" id="log"><div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Daily check, 2 PM Central</p><h2>What changed</h2></div>
+    <div class="log" id="log-list"></div>
+  </div></section>
+</main>
+
+<footer><div class="wrap">
+  <p>Listings and photos: <a href="https://www.spitogatos.gr/en/for_sale-homes/palia-poli-center-nafplio" target="_blank" rel="noopener">Spitogatos (Palia Poli zone)</a>, <a href="https://www.skourasrealestate.gr/index.php?option=com_estateagent&amp;view=dosearch&amp;ns=1&amp;Itemid=105&amp;multi_location%5B0%5D=2000004&amp;lang=en" target="_blank" rel="noopener">Skouras Real Estate</a> and <a href="https://engelvoelkers.com/gr/en/exposes/205bf040-8582-5c4d-893e-0ec355af311a" target="_blank" rel="noopener">Engel &amp; Völkers</a>. Photos belong to the listing agencies and are shown for private evaluation only. Map © OpenStreetMap contributors. Prices: Indomio, BuyGreece, Bank of Greece, EstateBrains. All prices are asking prices. This is research, not legal or tax advice; Greek counsel should confirm every rule before signing.</p>
+</div></footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Photo gallery">
+  <div class="bar"><span class="t" id="lb-t"></span><span><span id="lb-n" class="num"></span>&nbsp;&nbsp;<button id="lb-x">Close ✕</button></span></div>
+  <div class="main"><button class="arrow" id="lb-p" aria-label="Previous photo">‹</button><img id="lb-img" alt=""><button class="arrow" id="lb-nx" aria-label="Next photo">›</button></div>
+  <div class="strip" id="lb-strip"></div>
+</div>
+
+<script>
+(() => {
+  const D = JSON.parse(document.getElementById('nf-data').textContent);
+  const $ = (s, el = document) => el.querySelector(s);
+  const h = (tag, attrs = {}, ...kids) => { const e = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) { if (v == null || v === false) continue; if (k === 'class') e.className = v; else if (k === 'text') e.textContent = v; else if (k.startsWith('on')) e.addEventListener(k.slice(2), v); else e.setAttribute(k, v === true ? '' : v); } kids.flat().forEach((c) => c != null && e.append(c)); return e; };
+  const nf = new Intl.NumberFormat('en-US');
+  const eur = (v) => v == null ? '—' : '€' + nf.format(Math.round(v));
+  const m2 = (v) => v == null ? '—' : nf.format(v) + ' m²';
+  const ppm = (v) => v == null ? '—' : '€' + nf.format(Math.round(v)) + '/m²';
+  const dist = (v) => v == null ? '—' : (v < 10 ? 'On the square' : nf.format(v) + ' m');
+  const dt = (s) => { if (!s) return '—'; const d = new Date(String(s).slice(0, 10) + 'T12:00:00Z'); return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' }); };
+  const median = (a) => { const s = a.filter((x) => x != null).sort((x, y) => x - y); const n = s.length; return n ? (n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2) : null; };
+  const ext = (href, label, cls = 'btn', icon) => h('a', { class: cls, href, target: '_blank', rel: 'noopener' }, icon ? ico(icon) : null, label);
+  const ICONS = { photo: 'M4 5h16v14H4zM4 15l4-4 4 4 3-3 5 5', pin: 'M12 21s-6-5.6-6-10a6 6 0 1 1 12 0c0 4.4-6 10-6 10zM12 11.5a1.8 1.8 0 1 0 0-.01', street: 'M12 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM10 21l1-7-2-2 1-4h4l1 4-2 2 1 7', video: 'M4 6h11v12H4zM15 10l5-3v10l-5-3', link: 'M14 4h6v6M20 4l-9 9M18 14v6H4V6h6' };
+  const ico = (k) => { const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); s.setAttribute('viewBox', '0 0 24 24'); s.setAttribute('fill', 'none'); s.setAttribute('stroke', 'currentColor'); s.setAttribute('stroke-width', '1.8'); s.setAttribute('stroke-linecap', 'round'); s.setAttribute('stroke-linejoin', 'round'); const p = document.createElementNS('http://www.w3.org/2000/svg', 'path'); p.setAttribute('d', ICONS[k]); s.append(p); return s; };
+
+  const L = D.listings, NEAR = D.near_m;
+  const PH = L.find((r) => r.id === 'ev-W030IT7');
+  const near = L.filter((r) => r.near && r.id !== 'ev-W030IT7');
+  const far = L.filter((r) => !r.near);
+  const num = new Map(); L.filter((r) => r.id !== 'ev-W030IT7').forEach((r, i) => num.set(r.id, i + 1));
+  document.querySelectorAll('.near-m').forEach((e) => { e.textContent = NEAR + ' m'; });
+
+  // lightbox
+  const lb = $('#lb'); let lbSet = [], lbI = 0;
+  const lbShow = (i) => { lbI = (i + lbSet.length) % lbSet.length; $('#lb-img').src = lbSet[lbI]; $('#lb-n').textContent = `${lbI + 1} / ${lbSet.length}`; [...$('#lb-strip').children].forEach((b, j) => b.classList.toggle('on', j === lbI)); $('#lb-strip').children[lbI]?.scrollIntoView({ block: 'nearest', inline: 'center' }); };
+  const openLB = (set, i, title) => { if (!set.length) return; lbSet = set; $('#lb-t').textContent = title; $('#lb-strip').replaceChildren(...set.map((src, j) => h('button', { 'aria-label': `Photo ${j + 1}`, onclick: () => lbShow(j) }, h('img', { src, alt: '', loading: 'lazy' })))); lb.hidden = false; document.body.style.overflow = 'hidden'; lbShow(i); $('#lb-x').focus(); };
+  const closeLB = () => { lb.hidden = true; document.body.style.overflow = ''; };
+  $('#lb-x').addEventListener('click', closeLB); $('#lb-p').addEventListener('click', () => lbShow(lbI - 1)); $('#lb-nx').addEventListener('click', () => lbShow(lbI + 1));
+  lb.addEventListener('click', (e) => { if (e.target === lb || e.target.classList.contains('main')) closeLB(); });
+  document.addEventListener('keydown', (e) => { if (lb.hidden) return; if (e.key === 'Escape') closeLB(); if (e.key === 'ArrowLeft') lbShow(lbI - 1); if (e.key === 'ArrowRight') lbShow(lbI + 1); });
+  let tx = null; lb.addEventListener('touchstart', (e) => { tx = e.touches[0].clientX; }, { passive: true }); lb.addEventListener('touchend', (e) => { if (tx == null) return; const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 40) lbShow(lbI + (dx < 0 ? 1 : -1)); tx = null; });
+
+  // hero
+  const heroSrc = PH && PH.photos.length ? PH.photos[PH.photos.length - 1] : (L.find((r) => r.photos.length) || {}).photos?.[0];
+  if (heroSrc) $('#hero-img').src = heroSrc;
+  $('#updated').textContent = 'Updated ' + dt(D.today);
+  const nearAll = L.filter((r) => r.near);
+  const stats = [
+    [String(L.length), 'Old Town homes for sale'],
+    [String(nearAll.length), `Within ${NEAR} m of the square`],
+    [nearAll.length ? `${eur(Math.min(...nearAll.map((r) => r.price_eur)))}–${nf.format(Math.round(Math.max(...nearAll.map((r) => r.price_eur)) / 1000))}k` : '—', 'Price range near the square'],
+    [ppm(median(L.map((r) => r.eur_m2))), 'Median asking price per m²'],
+    [String(D.sold.filter((s) => s.status === 'Sold').length), 'Tagged sold recently'],
+  ];
+  $('#stats').replaceChildren(...stats.map(([v, l]) => h('div', { class: 'stat' }, h('b', { text: v }), h('span', { text: l }))));
+
+  // links row for a listing
+  const linkRow = (r, withPhotos) => h('div', { class: 'btns' },
+    withPhotos && r.photos.length ? h('button', { class: 'btn primary', type: 'button', onclick: () => openLB(r.photos, 0, r.name) }, ico('photo'), `Photos (${r.photos.length})`) : null,
+    r.url ? ext(r.url, 'Listing', withPhotos && r.photos.length ? 'btn' : 'btn primary', 'link') : null,
+    r.map_url ? ext(r.map_url, 'Map', 'btn', 'pin') : null,
+    r.street_url ? ext(r.street_url, 'Street View', 'btn', 'street') : null,
+    r.video ? ext(r.video, 'Video tour', 'btn', 'video') : null);
+
+  // featured penthouse
+  if (PH) {
+    let gi = 0;
+    const stageImg = h('img', { src: PH.photos[0] || '', alt: 'Penthouse on Syntagma Square, photo 1', onclick: () => openLB(PH.photos, gi, PH.name) });
+    const count = h('span', { class: 'count num' });
+    const thumbs = h('div', { class: 'thumbs' });
+    const setG = (i) => { gi = (i + PH.photos.length) % PH.photos.length; stageImg.src = PH.photos[gi]; stageImg.alt = `Penthouse on Syntagma Square, photo ${gi + 1}`; count.textContent = `${gi + 1} / ${PH.photos.length}`; [...thumbs.children].forEach((b, j) => b.classList.toggle('on', j === gi)); thumbs.children[gi]?.scrollIntoView({ block: 'nearest', inline: 'nearest' }); };
+    PH.photos.forEach((src, j) => thumbs.append(h('button', { 'aria-label': `Show photo ${j + 1}`, onclick: () => setG(j) }, h('img', { src, alt: '', loading: 'lazy' }))));
+    const stage = h('div', { class: 'stage' }, stageImg,
+      h('button', { class: 'nav-btn prev', 'aria-label': 'Previous photo', onclick: () => setG(gi - 1) }, '‹'),
+      h('button', { class: 'nav-btn next', 'aria-label': 'Next photo', onclick: () => setG(gi + 1) }, '›'), count,
+      h('button', { class: 'expand', onclick: () => openLB(PH.photos, gi, PH.name) }, 'Full screen'));
+    const facts = h('dl', { class: 'facts' }, ...[['Size', m2(PH.area_m2)], ['Price per m²', ppm(PH.eur_m2)], ['Bedrooms', PH.beds ?? '—'], ['Bathrooms', (PH.baths ?? '—') + ' + guest WC'], ['Floor', '2nd (top), penthouse'], ['Building', '1780, renovated 2024'], ['Energy class', 'E'], ['Golden Visa size', PH.gv ? 'Yes' : 'No']].map(([k, v]) => h('div', {}, h('dt', { text: k }), h('dd', { text: String(v) }))));
+    const panel = h('div', { class: 'panel' },
+      h('div', {}, h('span', { class: 'chip ochre' }, 'Engel & Völkers · W-030IT7')),
+      h('div', { class: 'price', text: eur(PH.price_eur) }), facts,
+      h('p', { class: 'note', style: 'color:var(--ink)', text: 'Large balcony fronting the square. Views of Akronafplia, Palamidi, the Trianon mosque and the Archaeological Museum. Marble and oak floors, solid-wood doors and shutters, underfloor heating. Sold furnished.' }),
+      linkRow(PH, false),
+      h('div', { class: 'agent' }, h('strong', { text: 'Thanos Panagopoulos' }), h('span', { text: 'Engel & Völkers Greece Second Home, Athens' }), h('span', { class: 'num', text: 'Tel. +30 211 105 5200' }), h('span', { text: 'secondhome.greece@engelvoelkers.com' })));
+    $('#feature').replaceChildren(h('div', { class: 'gallery' }, stage, thumbs), panel);
+    setG(0);
+  }
+
+  // listing cards
+  const card = (r, compact) => {
+    const n = num.get(r.id);
+    const ph = h('button', { class: 'ph', type: 'button', 'aria-label': `Open photos of ${r.name}`, onclick: () => openLB(r.photos, 0, r.name) },
+      r.photos[0] ? h('img', { src: r.photos[0], alt: r.name, loading: 'lazy' }) : h('span', { class: 'nophoto', text: 'No photos published' }),
+      h('span', { class: 'dist', text: dist(r.dist_m) + ' from the square' }),
+      n ? h('span', { class: 'idx', text: String(n) }) : null,
+      r.photos.length ? h('span', { class: 'count' }, ico('photo'), String(r.photos.length)) : null);
+    if (!r.photos.length) ph.disabled = true;
+    const chips = h('div', { class: 'btns', style: 'gap:6px' }, h('span', { class: 'chip muted', text: r.type }),
+      r.gv ? h('span', { class: 'chip', text: 'Golden Visa size' }) : null,
+      r.video ? h('span', { class: 'chip ochre', text: 'Video tour' }) : null,
+      r.months != null && r.months <= 1 ? h('span', { class: 'chip ochre', text: 'New' }) : null);
+    return h('article', { class: 'card' + (compact ? ' compact' : ''), id: 'l-' + r.id }, ph,
+      h('div', { class: 'body' },
+        h('div', { class: 'row1' }, h('span', { class: 'p', text: eur(r.price_eur) }), h('span', { class: 'ppm', text: ppm(r.eur_m2) })),
+        h('h3', { text: r.name }),
+        h('div', { class: 'meta' }, h('span', { text: m2(r.area_m2) }), r.beds != null ? h('span', { text: r.beds + ' bed' }) : null, r.baths != null ? h('span', { text: r.baths + ' bath' }) : null, h('span', { text: r.agency }), r.months != null ? h('span', { text: r.months < 1 ? 'Listed this month' : `On market ${r.months} mo` }) : null),
+        chips,
+        h('p', { class: 'desc', text: r.notes || '' }),
+        linkRow(r, true)));
+  };
+  $('#near-cards').replaceChildren(...near.map((r) => card(r)));
+  $('#far-cards').replaceChildren(...far.map((r) => card(r, true)));
+
+  // map
+  const mb = $('#mapbox');
+  if (D.square.xy && D.square.xy[0] != null) {
+    const imgW = D.map.w; // ring radius as a share of map width: NEAR metres over the map's metre width
+    const metresWide = (22.8024 - 22.7912) * 111320 * Math.cos(D.square.lat * Math.PI / 180);
+    const dPct = NEAR * 2 / metresWide * 100;
+    mb.append(h('span', { class: 'ring', style: `left:${D.square.xy[0]}%;top:${D.square.xy[1]}%;width:${dPct}%;aspect-ratio:1` }));
+  }
+  let pop = null;
+  const closePop = () => { pop?.remove(); pop = null; };
+  L.filter((r) => r.x != null).sort((a, b) => b.dist_m - a.dist_m).forEach((r) => {
+    const star = r.id === 'ev-W030IT7';
+    const b = h('button', { class: 'pin' + (star ? ' star' : r.near ? ' near' : ''), style: `left:${r.x}%;top:${r.y}%`, 'aria-label': `${r.name}, ${eur(r.price_eur)}`, text: star ? '★' : String(num.get(r.id)) });
+    b.addEventListener('click', (e) => {
+      e.stopPropagation(); closePop();
+      pop = h('div', { class: 'pop' }, r.photos[0] ? h('img', { src: r.photos[0], alt: '' }) : null, h('button', { class: 'x', 'aria-label': 'Close', onclick: closePop }, '✕'),
+        h('div', { class: 'in' }, h('strong', { text: r.name }), h('span', { class: 'num', text: `${eur(r.price_eur)} · ${m2(r.area_m2)} · ${dist(r.dist_m)}` }),
+          h('div', { class: 'btns' }, h('button', { class: 'btn primary', onclick: () => { closePop(); const el = document.getElementById(star ? 'penthouse' : 'l-' + r.id); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); if (!star) { el.classList.add('flash'); setTimeout(() => el.classList.remove('flash'), 1800); } } }, 'Details'), r.photos.length ? h('button', { class: 'btn', onclick: () => openLB(r.photos, 0, r.name) }, 'Photos') : null)));
+      const W = mb.clientWidth, H = mb.clientHeight; const px = r.x / 100 * W, py = r.y / 100 * H;
+      pop.style.left = Math.min(Math.max(8, px - 120), W - 248) + 'px';
+      pop.style.top = (py > H * 0.55 ? Math.max(8, py - 250) : py + 20) + 'px';
+      mb.append(pop);
+    });
+    mb.append(b);
+  });
+  mb.addEventListener('click', closePop);
+
+  // compare table
+  const tbody = $('#tbl tbody'); let sk = 'dist_m', sd = 1, q = '';
+  const drawT = () => {
+    const rows = L.filter((r) => !q || [r.name, r.type, r.agency, r.notes].join(' ').toLowerCase().includes(q)).sort((a, b) => { const x = a[sk], y = b[sk]; if (x == null) return 1; if (y == null) return -1; return (typeof x === 'number' ? x - y : String(x).localeCompare(String(y))) * sd; });
+    tbody.replaceChildren(...rows.map((r) => h('tr', { class: r.near ? 'near' : '' },
+      h('td', {}, h('div', { class: 'tn' }, r.photos[0] ? h('img', { src: r.photos[0], alt: '', loading: 'lazy' }) : h('img', { alt: '' }), h('a', { href: '#' + (r.id === 'ev-W030IT7' ? 'penthouse' : 'l-' + r.id), text: r.name }))),
+      h('td', { class: 'r', text: dist(r.dist_m) }), h('td', { class: 'r', text: eur(r.price_eur) }), h('td', { class: 'r', text: m2(r.area_m2) }), h('td', { class: 'r', text: ppm(r.eur_m2) }), h('td', { class: 'r', text: r.beds ?? '—' }), h('td', { class: 'r', text: r.months == null ? '—' : r.months + ' mo' }), h('td', { text: r.gv ? 'Yes' : 'No' }), h('td', { text: r.agency }),
+      h('td', {}, h('div', { class: 'links' }, r.photos.length ? h('a', { href: '#', onclick: (e) => { e.preventDefault(); openLB(r.photos, 0, r.name); }, text: 'Photos' }) : null, ext(r.url, 'Listing ↗', ''), ext(r.map_url, 'Map ↗', ''), r.video ? ext(r.video, 'Video ↗', '') : null)))));
+  };
+  document.querySelectorAll('#tbl th[data-k] button').forEach((b) => b.addEventListener('click', () => { const k = b.parentElement.dataset.k; sd = sk === k ? -sd : (['name', 'agency', 'dist_m'].includes(k) ? 1 : -1); sk = k; document.querySelectorAll('#tbl th').forEach((t) => t.setAttribute('aria-sort', t.dataset.k === k ? (sd > 0 ? 'ascending' : 'descending') : 'none')); drawT(); }));
+  $('#q').addEventListener('input', (e) => { q = e.target.value.trim().toLowerCase(); drawT(); });
+  drawT();
+
+  // sold cards
+  $('#sold-cards').replaceChildren(...D.sold.map((s) => h('article', { class: 'card compact' },
+    h('button', { class: 'ph', type: 'button', onclick: () => openLB(s.photos, 0, s.name), disabled: !s.photos.length, 'aria-label': `Photos of ${s.name}` }, s.photos[0] ? h('img', { src: s.photos[0], alt: s.name, loading: 'lazy' }) : h('span', { class: 'nophoto', text: 'Photos on the agency page' }), h('span', { class: 'dist', text: s.status })),
+    h('div', { class: 'body' }, h('div', { class: 'row1' }, h('span', { class: 'p', text: eur(s.last_ask_eur) }), h('span', { class: 'ppm', text: ppm(s.eur_m2) })),
+      h('h3', { text: s.name }), h('div', { class: 'meta' }, h('span', { text: m2(s.area_m2) }), h('span', { text: s.where }), h('span', { text: s.agency })), h('p', { class: 'desc', text: s.notes }),
+      h('div', { class: 'btns' }, s.photos.length ? h('button', { class: 'btn primary', type: 'button', onclick: () => openLB(s.photos, 0, s.name) }, ico('photo'), `Photos (${s.photos.length})`) : null, ext(s.url, 'Agency page', s.photos.length ? 'btn' : 'btn primary', 'link'))))));
+
+  // price per m2 chart
+  (() => {
+    const box = $('#ppm'); const rows = [...L].sort((a, b) => b.eur_m2 - a.eur_m2);
+    const band = (id) => D.market.find((m) => m.id === id);
+    const restored = band('restored'), shell = band('shell'), town = band('town');
+    const W = 900, bh = 18, gap = 7, top = 34, bot = 30, Lw = 270, Rw = 70; const H = top + rows.length * (bh + gap) + bot;
+    const xmax = Math.max(...rows.map((r) => r.eur_m2), restored ? restored.high : 0) * 1.04;
+    const x = (v) => Lw + (v / xmax) * (W - Lw - Rw);
+    const NS = 'http://www.w3.org/2000/svg'; const s = (t, a, txt) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (txt != null) e.textContent = txt; return e; };
+    const svg = s('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': 'Asking price per square metre by listing' });
+    const css = getComputedStyle(document.documentElement);
+    [[shell, 'var(--muted)', 'To restore'], [restored, 'var(--sea)', 'Restored Old Town']].forEach(([b, c, label]) => { if (!b) return; svg.append(s('rect', { x: x(b.low), y: top - 8, width: x(b.high) - x(b.low), height: H - top - bot + 8, fill: c, 'fill-opacity': .09 })); svg.append(s('text', { x: x(b.low) + 4, y: top - 14, 'font-size': 12, fill: 'var(--muted)' }, `${label} €${nf.format(b.low)}–${nf.format(b.high)}`)); });
+    for (let v = 0; v <= xmax; v += 2000) { svg.append(s('line', { x1: x(v), x2: x(v), y1: top - 8, y2: H - bot, stroke: 'var(--line)' })); svg.append(s('text', { x: x(v), y: H - bot + 18, 'text-anchor': 'middle', 'font-size': 12, fill: 'var(--muted)' }, '€' + nf.format(v))); }
+    if (town) { svg.append(s('line', { x1: x(town.low), x2: x(town.low), y1: top - 8, y2: H - bot, stroke: 'var(--ink)', 'stroke-dasharray': '4 4' })); }
+    rows.forEach((r, i) => {
+      const y = top + i * (bh + gap); const nm = r.name.length > 38 ? r.name.slice(0, 37) + '…' : r.name;
+      svg.append(s('text', { x: Lw - 10, y: y + bh / 2 + 4, 'text-anchor': 'end', 'font-size': 12.5, fill: 'var(--ink)' }, nm));
+      svg.append(s('rect', { x: Lw, y, width: Math.max(2, x(r.eur_m2) - Lw), height: bh, rx: 3, fill: r.id === 'ev-W030IT7' ? 'var(--ochre)' : r.near ? 'var(--sea)' : 'var(--muted)', 'fill-opacity': r.near || r.id === 'ev-W030IT7' ? 1 : .55 }));
+      svg.append(s('text', { x: x(r.eur_m2) + 6, y: y + bh / 2 + 4, 'font-size': 12, fill: 'var(--muted)' }, '€' + nf.format(r.eur_m2)));
+    });
+    if (town) svg.append(s('text', { x: x(town.low) + 5, y: H - bot - 6, 'font-size': 12, fill: 'var(--ink)' }, `Nafplio average €${nf.format(town.low)}`));
+    box.replaceChildren(svg);
+  })();
+
+  // benchmarks + hotels
+  $('#bench tbody').replaceChildren(...D.market.map((m) => h('tr', {}, h('td', { text: m.measure }), h('td', { class: 'r', text: m.low === m.high ? `${nf.format(m.low)} ${m.unit}` : `${nf.format(m.low)}–${nf.format(m.high)} ${m.unit}` }), h('td', { text: m.as_of }), h('td', {}, ext(m.url, m.source + ' ↗', '')))));
+  $('#hotels tbody').replaceChildren(...D.hotels.map((o) => h('tr', {}, h('td', { text: o.name }), h('td', { class: 'r', text: m2(o.area_m2) }), h('td', { class: 'r', text: eur(o.price_eur) }), h('td', { class: 'r', text: ppm(o.price_eur / o.area_m2) }), h('td', { class: 'r', text: o.bedrooms ?? '—' }), h('td', {}, ext(o.url, 'Photos and listing ↗', '')))));
+
+  // news
+  let topic = '';
+  const drawN = () => $('#news-list').replaceChildren(...D.news.filter((n) => !topic || (topic === 'Nafplio' ? n.region !== 'Greece' : n.topic === topic)).map((n) => h('article', { class: 'ncard' },
+    h('div', { class: 'top' }, h('span', { text: dt(n.date) }), h('span', { class: 'chip' + (n.region === 'Greece' ? ' muted' : ' ochre'), text: `${n.topic} · ${n.region}` })),
+    h('h3', {}, ext(n.url, n.headline, '')), h('p', { text: n.summary }), h('p', { class: 'why', text: n.why }), h('span', { class: 'src', text: 'Source: ' + n.source }))));
+  document.querySelectorAll('#nfilters button').forEach((b) => b.addEventListener('click', () => { topic = b.dataset.t; document.querySelectorAll('#nfilters button').forEach((o) => o.setAttribute('aria-pressed', String(o === b))); drawN(); }));
+  drawN();
+
+  // costs
+  const pin = $('#price-in'); pin.value = PH ? PH.price_eur : 1000000;
+  const drawC = () => {
+    const p = Math.max(0, Number(pin.value) || 0); const C = D.costs;
+    const amt = (r, k) => p * r[k] / 100;
+    $('#costs tbody').replaceChildren(...C.map((r) => h('tr', {}, h('td', { text: r.item }), h('td', { class: 'r', text: r.low_pct === r.high_pct ? r.low_pct + '%' : `${r.low_pct}–${r.high_pct}%` }), h('td', { class: 'r', text: r.low_pct === r.high_pct ? eur(amt(r, 'low_pct')) : `${eur(amt(r, 'low_pct'))}–${eur(amt(r, 'high_pct'))}` }), h('td', { text: r.status }), h('td', { text: r.note }))));
+    const other = C.filter((r) => !r.id.startsWith('transfer')); const sum = (k) => other.reduce((t, r) => t + amt(r, k), 0);
+    const tax = (id) => { const r = C.find((x) => x.id === id); return r ? amt(r, 'low_pct') : 0; };
+    $('#totals').replaceChildren(
+      h('div', { class: 'total' }, h('span', { text: "All-in costs under today's rules" }), h('b', { text: `${eur(tax('transfer') + sum('low_pct'))}–${eur(tax('transfer') + sum('high_pct'))}` })),
+      h('div', { class: 'total bad' }, h('span', { text: 'If the 15% non-EU transfer tax applies' }), h('b', { text: `${eur(tax('transfer_noneu') + sum('low_pct'))}–${eur(tax('transfer_noneu') + sum('high_pct'))}` })),
+      h('div', { class: 'total' }, h('span', { text: 'Extra tax under the proposal' }), h('b', { text: eur(tax('transfer_noneu') - tax('transfer')) })));
+  };
+  pin.addEventListener('input', drawC); drawC();
+
+  // log
+  $('#log-list').replaceChildren(...D.changes.map((c) => h('div', {}, h('span', { class: 'num', text: dt(c.date) }), h('strong', { text: c.kind }), h('span', {}, c.url ? ext(c.url, c.listing + ' ↗', '') : c.listing, ' · ', c.detail))));
+
+  // nav highlight
+  const links = [...document.querySelectorAll('#navlinks a')];
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) links.forEach((a) => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-45% 0px -50% 0px' });
+  document.querySelectorAll('section.sec').forEach((s) => io.observe(s));
+  const hash = location.hash.slice(1); if (hash && document.getElementById(hash)) setTimeout(() => document.getElementById(hash).scrollIntoView(), 50);
+  // feedback: saved to the page's store when this viewer may write there, otherwise copied for an email
+  (() => {
+    const send = $('#fb-send'), status = $('#fb-status'), fb = $('#fb-fallback');
+    const text = () => {
+      const like = $('#fb-like').value.trim(), change = $('#fb-change').value.trim(), name = $('#fb-name').value.trim();
+      return { like, change, name, note: `Nafplio Old Town brief feedback${name ? ' from ' + name : ''}\n\nWhat works well:\n${like || '-'}\n\nWhat would make it better:\n${change || '-'}` };
+    };
+    const copy = async (s) => { try { await navigator.clipboard.writeText(s); return true; } catch { return false; } };
+    const fallback = async (t) => {
+      fb.hidden = false;
+      const ok = await copy(t.note);
+      $('#fb-mail').href = 'mailto:sschroeder@amsted.com?subject=' + encodeURIComponent('Nafplio brief feedback') + '&body=' + encodeURIComponent(t.note);
+      status.textContent = ok ? 'Copied to your clipboard.' : 'Select your note above and copy it, then email it to the address below.';
+    };
+    $('#fb-copy').addEventListener('click', async () => { const ok = await copy(text().note); status.textContent = ok ? 'Copied again.' : 'Copy did not work here; select the text in the boxes instead.'; });
+    $('#fb-copy-addr').addEventListener('click', async () => { const ok = await copy('sschroeder@amsted.com'); status.textContent = ok ? 'Address copied.' : 'Select the address and copy it.'; });
+    let dbP = null, userP = null;
+    try { dbP = window.claude?.use?.('db') ?? null; userP = window.claude?.use?.('user') ?? null; } catch { dbP = null; }
+    send.addEventListener('click', async () => {
+      const t = text();
+      if (!t.like && !t.change) { status.textContent = 'Type a note in either box first.'; return; }
+      send.disabled = true; status.textContent = 'Sending…';
+      try {
+        const db = dbP ? await dbP : null, user = userP ? await userP : null;
+        const uid = user ? await user.id() : null;
+        if (!db || !uid) throw new Error('no store');
+        const ref = db.doc('feedback/' + uid);
+        const cur = await ref.get();
+        const entries = (cur.exists && Array.isArray(cur.data().entries)) ? [...cur.data().entries] : [];
+        entries.push({ at: new Date().toISOString(), like: t.like, change: t.change, name: t.name });
+        await ref.set({ entries: entries.slice(-50) });
+        status.textContent = 'Thank you. Your feedback is saved and goes into the next update.';
+        $('#fb-like').value = ''; $('#fb-change').value = '';
+      } catch {
+        await fallback(t);
+      } finally { send.disabled = false; }
+    });
+  })();
+
+  // PDF brochure mode: load every image up front so the printout has them all
+  if (/[?&]print\b/.test(location.search)) document.querySelectorAll('img').forEach((i) => {
+    i.loading = 'eager';
+    const s = i.getAttribute('src') || '';
+    if (s.startsWith('photos/')) i.src = 'print/' + s.replace(/\.webp$/, '.jpg');
+  });
+})();
+</script>
+
+</body></html>
