@@ -31,7 +31,7 @@ a{color:inherit}
 .top{background:var(--navy);color:#FBF6EC;--mark-body:#FBF6EC;--mark-glass:#12304A}
 nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:18px;flex-wrap:wrap}
 .logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
-.logo svg{width:44px;height:44px}
+.logo svg{width:42px;height:auto}
 .logo b{font-family:var(--display);font-weight:800;font-size:21px;letter-spacing:-.02em;line-height:1;display:block}
 .logo small{display:block;font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--amber);font-weight:600;margin-top:3px}
 nav ul{list-style:none;margin:0;padding:0;display:flex;gap:22px;flex-wrap:wrap;font-size:15px;font-weight:500}
@@ -75,7 +75,7 @@ section h2{font-size:clamp(26px,3.4vw,38px);font-weight:800;letter-spacing:-.02e
 .who span{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 14px;font-size:14.5px}
 .about{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:start}
 .about .card{background:var(--navy);color:#FBF6EC;border-radius:14px;padding:28px;--mark-body:#FBF6EC;--mark-glass:#12304A}
-.about .card svg{width:64px;height:64px}
+.about .card svg{width:64px;height:auto}
 .about .card h3{font-size:22px;margin:14px 0 4px}
 .about .card p{margin:0;color:#C9D4DE;font-size:15px}
 .about .card .q{font-family:var(--display);font-weight:600;font-size:18px;line-height:1.35;color:#FBF6EC;margin-top:18px;border-left:3px solid var(--amber);padding-left:14px}
@@ -101,16 +101,37 @@ footer.site .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:
 <div class="top gutter">
   <div class="wrap">
     <nav>
-      <a class="logo" href="#top"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Lantern Tech Group mark">
-  <path d="M22 13 Q32 1 42 13" fill="none" stroke="var(--mark-body,#12304A)" stroke-width="3.2" stroke-linecap="round"/>
-  <rect x="19" y="12" width="26" height="5" rx="2" fill="var(--mark-body,#12304A)"/>
-  <path d="M18 17 H46 L48 44 Q48 51 41 51 H23 Q16 51 16 44 Z" fill="var(--mark-body,#12304A)"/>
-  <rect x="22" y="21" width="20" height="25" rx="3" fill="var(--mark-glass,#FBF6EC)"/>
-  <circle cx="32" cy="35" r="9.5" fill="#F5A623" opacity="0.28"/>
-  <circle cx="32" cy="35" r="5.5" fill="#F5A623"/>
-  <path d="M32 29.5 Q35 32.5 32 36 Q29 32.5 32 29.5Z" fill="var(--mark-glass,#FBF6EC)" opacity="0.9"/>
-  <rect x="19" y="51" width="26" height="4.5" rx="1.8" fill="var(--mark-body,#12304A)"/>
-  <rect x="22" y="57" width="20" height="3" rx="1.5" fill="#F5A623"/>
+      <a class="logo" href="#top"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 72" width="64" height="72" role="img" aria-label="Lantern Tech Group mark">
+  <defs>
+    <radialGradient id="ltgGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#F5A623" stop-opacity=".95"/>
+      <stop offset=".45" stop-color="#F5A623" stop-opacity=".35"/>
+      <stop offset="1" stop-color="#F5A623" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ltgFlame" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFD166"/>
+      <stop offset="1" stop-color="#F5A623"/>
+    </linearGradient>
+  </defs>
+  <!-- ambient glow behind the globe -->
+  <circle cx="32" cy="41" r="21" fill="url(#ltgGlow)"/>
+  <!-- bail handle -->
+  <path d="M19 15.5 C19 3 45 3 45 15.5" fill="none" stroke="var(--mark-body,#12304A)" stroke-width="3.2" stroke-linecap="round"/>
+  <!-- chimney and cap -->
+  <rect x="27.5" y="12" width="9" height="5" rx="1.5" fill="var(--mark-body,#12304A)"/>
+  <path d="M17 24 C20 14 44 14 47 24 Z" fill="var(--mark-body,#12304A)"/>
+  <rect x="14" y="23" width="36" height="4.5" rx="2.2" fill="var(--mark-body,#12304A)"/>
+  <!-- globe -->
+  <path d="M21 27.5 H43 C47.5 27.5 48.5 33 48 40 C47.5 47 46 53.5 41 53.5 H23 C18 53.5 16.5 47 16 40 C15.5 33 16.5 27.5 21 27.5 Z" fill="var(--mark-glass,#FBF6EC)"/>
+  <!-- guard wires -->
+  <path d="M24.5 28 C23 36 23 45 24.5 53 M39.5 28 C41 36 41 45 39.5 53" fill="none" stroke="var(--mark-body,#12304A)" stroke-width="1.6" stroke-linecap="round" opacity=".55"/>
+  <!-- flame -->
+  <path d="M32 31.5 C38 38 38.5 43.5 36 47 C34.5 49 29.5 49 28 47 C25.5 43.5 26 38 32 31.5 Z" fill="url(#ltgFlame)"/>
+  <path d="M32 38.5 C34.6 41.5 34.6 44.5 33.2 46 C32.4 46.8 31.6 46.8 30.8 46 C29.4 44.5 29.4 41.5 32 38.5 Z" fill="var(--mark-glass,#FBF6EC)" opacity=".9"/>
+  <!-- burner collar, fuel tank, foot -->
+  <rect x="19" y="53" width="26" height="4" rx="1.8" fill="var(--mark-body,#12304A)"/>
+  <path d="M17 57 H47 C48.5 57 49.5 58 49.5 59.5 V63 C49.5 64.5 48.5 65.5 47 65.5 H17 C15.5 65.5 14.5 64.5 14.5 63 V59.5 C14.5 58 15.5 57 17 57 Z" fill="var(--mark-body,#12304A)"/>
+  <rect x="19" y="67.5" width="26" height="3.5" rx="1.75" fill="#F5A623"/>
 </svg><span><b>Lantern</b><small>Tech Group</small></span></a>
       <ul><li><a href="#services">Services</a></li><li><a href="#process">How it works</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul>
     </nav>
@@ -121,16 +142,37 @@ footer.site .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:
         <p>AI, websites, search, and everyday IT for local businesses. One consultant who knows your whole setup, explains things in plain English, and answers the phone.</p>
         <div class="cta"><a class="btn primary" href="#contact">Book a free 30-minute call</a><a class="btn ghost" href="#services">See what we do</a></div>
       </div>
-      <div class="lamp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Lantern Tech Group mark">
-  <path d="M22 13 Q32 1 42 13" fill="none" stroke="var(--mark-body,#12304A)" stroke-width="3.2" stroke-linecap="round"/>
-  <rect x="19" y="12" width="26" height="5" rx="2" fill="var(--mark-body,#12304A)"/>
-  <path d="M18 17 H46 L48 44 Q48 51 41 51 H23 Q16 51 16 44 Z" fill="var(--mark-body,#12304A)"/>
-  <rect x="22" y="21" width="20" height="25" rx="3" fill="var(--mark-glass,#FBF6EC)"/>
-  <circle cx="32" cy="35" r="9.5" fill="#F5A623" opacity="0.28"/>
-  <circle cx="32" cy="35" r="5.5" fill="#F5A623"/>
-  <path d="M32 29.5 Q35 32.5 32 36 Q29 32.5 32 29.5Z" fill="var(--mark-glass,#FBF6EC)" opacity="0.9"/>
-  <rect x="19" y="51" width="26" height="4.5" rx="1.8" fill="var(--mark-body,#12304A)"/>
-  <rect x="22" y="57" width="20" height="3" rx="1.5" fill="#F5A623"/>
+      <div class="lamp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 72" width="64" height="72" role="img" aria-label="Lantern Tech Group mark">
+  <defs>
+    <radialGradient id="ltgGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#F5A623" stop-opacity=".95"/>
+      <stop offset=".45" stop-color="#F5A623" stop-opacity=".35"/>
+      <stop offset="1" stop-color="#F5A623" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ltgFlame" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFD166"/>
+      <stop offset="1" stop-color="#F5A623"/>
+    </linearGradient>
+  </defs>
+  <!-- ambient glow behind the globe -->
+  <circle cx="32" cy="41" r="21" fill="url(#ltgGlow)"/>
+  <!-- bail handle -->
+  <path d="M19 15.5 C19 3 45 3 45 15.5" fill="none" stroke="var(--mark-body,#12304A)" stroke-width="3.2" stroke-linecap="round"/>
+  <!-- chimney and cap -->
+  <rect x="27.5" y="12" width="9" height="5" rx="1.5" fill="var(--mark-body,#12304A)"/>
+  <path d="M17 24 C20 14 44 14 47 24 Z" fill="var(--mark-body,#12304A)"/>
+  <rect x="14" y="23" width="36" height="4.5" rx="2.2" fill="var(--mark-body,#12304A)"/>
+  <!-- globe -->
+  <path d="M21 27.5 H43 C47.5 27.5 48.5 33 48 40 C47.5 47 46 53.5 41 53.5 H23 C18 53.5 16.5 47 16 40 C15.5 33 16.5 27.5 21 27.5 Z" fill="var(--mark-glass,#FBF6EC)"/>
+  <!-- guard wires -->
+  <path d="M24.5 28 C23 36 23 45 24.5 53 M39.5 28 C41 36 41 45 39.5 53" fill="none" stroke="var(--mark-body,#12304A)" stroke-width="1.6" stroke-linecap="round" opacity=".55"/>
+  <!-- flame -->
+  <path d="M32 31.5 C38 38 38.5 43.5 36 47 C34.5 49 29.5 49 28 47 C25.5 43.5 26 38 32 31.5 Z" fill="url(#ltgFlame)"/>
+  <path d="M32 38.5 C34.6 41.5 34.6 44.5 33.2 46 C32.4 46.8 31.6 46.8 30.8 46 C29.4 44.5 29.4 41.5 32 38.5 Z" fill="var(--mark-glass,#FBF6EC)" opacity=".9"/>
+  <!-- burner collar, fuel tank, foot -->
+  <rect x="19" y="53" width="26" height="4" rx="1.8" fill="var(--mark-body,#12304A)"/>
+  <path d="M17 57 H47 C48.5 57 49.5 58 49.5 59.5 V63 C49.5 64.5 48.5 65.5 47 65.5 H17 C15.5 65.5 14.5 64.5 14.5 63 V59.5 C14.5 58 15.5 57 17 57 Z" fill="var(--mark-body,#12304A)"/>
+  <rect x="19" y="67.5" width="26" height="3.5" rx="1.75" fill="#F5A623"/>
 </svg></div>
     </div>
   </div>
@@ -182,16 +224,37 @@ footer.site .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:
 </div></section>
 
 <section class="block gutter" id="about"><div class="wrap about">
-  <div class="card"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Lantern Tech Group mark">
-  <path d="M22 13 Q32 1 42 13" fill="none" stroke="var(--mark-body,#12304A)" stroke-width="3.2" stroke-linecap="round"/>
-  <rect x="19" y="12" width="26" height="5" rx="2" fill="var(--mark-body,#12304A)"/>
-  <path d="M18 17 H46 L48 44 Q48 51 41 51 H23 Q16 51 16 44 Z" fill="var(--mark-body,#12304A)"/>
-  <rect x="22" y="21" width="20" height="25" rx="3" fill="var(--mark-glass,#FBF6EC)"/>
-  <circle cx="32" cy="35" r="9.5" fill="#F5A623" opacity="0.28"/>
-  <circle cx="32" cy="35" r="5.5" fill="#F5A623"/>
-  <path d="M32 29.5 Q35 32.5 32 36 Q29 32.5 32 29.5Z" fill="var(--mark-glass,#FBF6EC)" opacity="0.9"/>
-  <rect x="19" y="51" width="26" height="4.5" rx="1.8" fill="var(--mark-body,#12304A)"/>
-  <rect x="22" y="57" width="20" height="3" rx="1.5" fill="#F5A623"/>
+  <div class="card"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 72" width="64" height="72" role="img" aria-label="Lantern Tech Group mark">
+  <defs>
+    <radialGradient id="ltgGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#F5A623" stop-opacity=".95"/>
+      <stop offset=".45" stop-color="#F5A623" stop-opacity=".35"/>
+      <stop offset="1" stop-color="#F5A623" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ltgFlame" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFD166"/>
+      <stop offset="1" stop-color="#F5A623"/>
+    </linearGradient>
+  </defs>
+  <!-- ambient glow behind the globe -->
+  <circle cx="32" cy="41" r="21" fill="url(#ltgGlow)"/>
+  <!-- bail handle -->
+  <path d="M19 15.5 C19 3 45 3 45 15.5" fill="none" stroke="var(--mark-body,#12304A)" stroke-width="3.2" stroke-linecap="round"/>
+  <!-- chimney and cap -->
+  <rect x="27.5" y="12" width="9" height="5" rx="1.5" fill="var(--mark-body,#12304A)"/>
+  <path d="M17 24 C20 14 44 14 47 24 Z" fill="var(--mark-body,#12304A)"/>
+  <rect x="14" y="23" width="36" height="4.5" rx="2.2" fill="var(--mark-body,#12304A)"/>
+  <!-- globe -->
+  <path d="M21 27.5 H43 C47.5 27.5 48.5 33 48 40 C47.5 47 46 53.5 41 53.5 H23 C18 53.5 16.5 47 16 40 C15.5 33 16.5 27.5 21 27.5 Z" fill="var(--mark-glass,#FBF6EC)"/>
+  <!-- guard wires -->
+  <path d="M24.5 28 C23 36 23 45 24.5 53 M39.5 28 C41 36 41 45 39.5 53" fill="none" stroke="var(--mark-body,#12304A)" stroke-width="1.6" stroke-linecap="round" opacity=".55"/>
+  <!-- flame -->
+  <path d="M32 31.5 C38 38 38.5 43.5 36 47 C34.5 49 29.5 49 28 47 C25.5 43.5 26 38 32 31.5 Z" fill="url(#ltgFlame)"/>
+  <path d="M32 38.5 C34.6 41.5 34.6 44.5 33.2 46 C32.4 46.8 31.6 46.8 30.8 46 C29.4 44.5 29.4 41.5 32 38.5 Z" fill="var(--mark-glass,#FBF6EC)" opacity=".9"/>
+  <!-- burner collar, fuel tank, foot -->
+  <rect x="19" y="53" width="26" height="4" rx="1.8" fill="var(--mark-body,#12304A)"/>
+  <path d="M17 57 H47 C48.5 57 49.5 58 49.5 59.5 V63 C49.5 64.5 48.5 65.5 47 65.5 H17 C15.5 65.5 14.5 64.5 14.5 63 V59.5 C14.5 58 15.5 57 17 57 Z" fill="var(--mark-body,#12304A)"/>
+  <rect x="19" y="67.5" width="26" height="3.5" rx="1.75" fill="#F5A623"/>
 </svg><h3>Shawn Schroeder</h3><p>Principal Consultant, Lantern Tech Group</p>
     <div class="q">"My job is to make technology the easiest part of running your business."</div></div>
   <div class="text">
