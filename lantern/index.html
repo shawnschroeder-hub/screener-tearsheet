@@ -1,0 +1,241 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"></head><body style="margin:0"><title>Lantern Tech Group</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Lantern Tech Group: AI integration, website development, SEO, and IT consulting for local businesses in Manteno, Kankakee County, and Chicago's south suburbs.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single-page business site. Navy nav and hero with a glowing lantern, cream service grid, numbered process (a real sequence), plain-spoken about section, contact block. One accent: amber. */
+:root{
+  --bg:#FBF8F2; --surface:#FFFFFF; --fg:#16283A; --muted:#5E6B78; --line:#E3DDD1;
+  --navy:#12304A; --navy-2:#1C425F; --amber:#F5A623; --amber-ink:#8A5A0A; --cream:#FBF6EC;
+  --mark-body:#12304A; --mark-glass:#FBF6EC;
+  --display:'Sora',system-ui,sans-serif; --body:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0E1A26;--surface:#152433;--fg:#EEF1F4;--muted:#A6B2BE;--line:#2A3B4C;--amber-ink:#F5C56A;--mark-body:#FBF6EC;--mark-glass:#12304A;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0E1A26;--surface:#152433;--fg:#EEF1F4;--muted:#A6B2BE;--line:#2A3B4C;--amber-ink:#F5C56A;--mark-body:#FBF6EC;--mark-glass:#12304A;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);line-height:1.55;font-size:16px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+a{color:inherit}
+.gutter{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1080px;margin:0 auto}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-ink);margin-bottom:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:700;font-size:15px;padding:12px 20px;border-radius:8px;text-decoration:none;border:2px solid transparent;transition:transform .15s ease,background .15s ease}
+.btn.primary{background:var(--amber);color:#16283A;border-color:var(--amber)}
+.btn.primary:hover{transform:translateY(-1px);background:#FFB63A}
+.btn.ghost{color:#FBF6EC;border-color:#4A6B88}
+.btn.ghost:hover{border-color:#FBF6EC}
+.btn:focus-visible,a:focus-visible,button:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+/* nav + hero */
+.top{background:var(--navy);color:#FBF6EC;--mark-body:#FBF6EC;--mark-glass:#12304A}
+nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:18px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+.logo svg{width:44px;height:44px}
+.logo b{font-family:var(--display);font-weight:800;font-size:21px;letter-spacing:-.02em;line-height:1;display:block}
+.logo small{display:block;font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--amber);font-weight:600;margin-top:3px}
+nav ul{list-style:none;margin:0;padding:0;display:flex;gap:22px;flex-wrap:wrap;font-size:15px;font-weight:500}
+nav ul a{text-decoration:none;color:#D5DEE6}
+nav ul a:hover{color:#fff}
+.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:40px;align-items:center;padding-block:56px 72px}
+.hero h1{font-size:clamp(36px,5.4vw,60px);font-weight:800;letter-spacing:-.025em;line-height:1.02}
+.hero h1 em{font-style:normal;color:var(--amber)}
+.hero p{font-size:18px;color:#D5DEE6;max-width:52ch;margin:20px 0 28px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.lamp{display:flex;justify-content:center;align-items:center;position:relative;min-height:280px}
+.lamp svg{width:min(260px,70vw);height:auto;position:relative;z-index:1}
+.lamp::before{content:"";position:absolute;width:min(420px,90vw);aspect-ratio:1;max-width:100%;border-radius:50%;background:radial-gradient(circle,rgba(245,166,35,.42) 0%,rgba(245,166,35,.12) 40%,rgba(245,166,35,0) 70%)}
+@media (prefers-reduced-motion:no-preference){.lamp::before{animation:breathe 4s ease-in-out infinite}}
+@keyframes breathe{0%,100%{transform:scale(.94);opacity:.8}50%{transform:scale(1.04);opacity:1}}
+.strip{background:var(--navy-2);color:#FBF6EC}
+.strip .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding-block:22px}
+.strip div{display:flex;gap:12px;align-items:flex-start;font-size:15px;min-width:0}
+.strip b{font-family:var(--display);display:block;font-size:17px}
+.strip i{flex:none;width:10px;height:10px;border-radius:50%;background:var(--amber);margin-top:8px}
+/* sections */
+section.block{padding-block:72px}
+section.block.alt{background:var(--surface)}
+.lead{color:var(--muted);font-size:17px;max-width:62ch;margin:10px 0 0}
+section h2{font-size:clamp(26px,3.4vw,38px);font-weight:800;letter-spacing:-.02em}
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
+.svc{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:24px;min-width:0;display:flex;flex-direction:column;gap:10px}
+.svc.alt{background:var(--bg)}
+.svc .ic{width:44px;height:44px;border-radius:10px;background:var(--navy);display:grid;place-items:center;color:var(--amber)}
+.svc .ic svg{width:24px;height:24px}
+.svc h3{font-size:18px;font-weight:700}
+.svc p{margin:0;color:var(--muted);font-size:15px}
+.svc ul{margin:4px 0 0;padding-left:1.1em;font-size:14px;color:var(--fg)}
+.svc li::marker{color:var(--amber)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:36px;counter-reset:step}
+.step{min-width:0;border-top:3px solid var(--amber);padding-top:16px}
+.step::before{counter-increment:step;content:"Step " counter(step);font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber-ink)}
+.step h3{font-size:18px;margin:6px 0 6px}
+.step p{margin:0;color:var(--muted);font-size:15px}
+.who{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.who span{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 14px;font-size:14.5px}
+.about{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:start}
+.about .card{background:var(--navy);color:#FBF6EC;border-radius:14px;padding:28px;--mark-body:#FBF6EC;--mark-glass:#12304A}
+.about .card svg{width:64px;height:64px}
+.about .card h3{font-size:22px;margin:14px 0 4px}
+.about .card p{margin:0;color:#C9D4DE;font-size:15px}
+.about .card .q{font-family:var(--display);font-weight:600;font-size:18px;line-height:1.35;color:#FBF6EC;margin-top:18px;border-left:3px solid var(--amber);padding-left:14px}
+.about .text p{margin:0 0 14px;max-width:62ch}
+.contact{background:var(--navy);color:#FBF6EC}
+.contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding-block:72px}
+.contact p{color:#D5DEE6;max-width:48ch}
+.contact .line{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:18px;font-size:17px}
+.contact .line code{font-family:var(--mono);background:#1C425F;padding:6px 10px;border-radius:6px;font-size:15px;color:#FBF6EC;user-select:all}
+.contact button.copy{font:inherit;font-size:13px;font-weight:600;background:transparent;color:#FBF6EC;border:1px solid #4A6B88;border-radius:6px;padding:5px 10px;cursor:pointer}
+form{background:#1C425F;border-radius:14px;padding:24px;display:grid;gap:12px}
+form label{display:grid;gap:5px;font-size:13px;font-weight:500;color:#D5DEE6}
+form input,form textarea,form select{font:inherit;font-size:15px;padding:10px 12px;border-radius:7px;border:1px solid #4A6B88;background:#12304A;color:#FBF6EC;width:100%;min-width:0}
+form textarea{min-height:96px;resize:vertical}
+form .note{font-size:12.5px;color:#A6B2BE;margin:0}
+form .ok{display:none;background:#15382A;color:#7FD4A4;padding:10px 12px;border-radius:7px;font-size:14px}
+form.sent .ok{display:block}
+footer.site{background:#0B1E2E;color:#A6B2BE;font-size:13px}
+footer.site .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:22px}
+@media (max-width:860px){.hero{grid-template-columns:1fr}.services{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}.about{grid-template-columns:1fr}.contact .wrap{grid-template-columns:1fr}.strip .wrap{grid-template-columns:1fr;gap:10px}}
+@media (max-width:560px){.services{grid-template-columns:1fr}.steps{grid-template-columns:1fr}nav ul{gap:14px;font-size:14px}.hero{padding-block:40px 56px}}
+</style>
+<div class="top gutter">
+  <div class="wrap">
+    <nav>
+      <a class="logo" href="#top"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Lantern Tech Group mark">
+  <path d="M22 13 Q32 1 42 13" fill="none" stroke="var(--mark-body,#12304A)" stroke-width="3.2" stroke-linecap="round"/>
+  <rect x="19" y="12" width="26" height="5" rx="2" fill="var(--mark-body,#12304A)"/>
+  <path d="M18 17 H46 L48 44 Q48 51 41 51 H23 Q16 51 16 44 Z" fill="var(--mark-body,#12304A)"/>
+  <rect x="22" y="21" width="20" height="25" rx="3" fill="var(--mark-glass,#FBF6EC)"/>
+  <circle cx="32" cy="35" r="9.5" fill="#F5A623" opacity="0.28"/>
+  <circle cx="32" cy="35" r="5.5" fill="#F5A623"/>
+  <path d="M32 29.5 Q35 32.5 32 36 Q29 32.5 32 29.5Z" fill="var(--mark-glass,#FBF6EC)" opacity="0.9"/>
+  <rect x="19" y="51" width="26" height="4.5" rx="1.8" fill="var(--mark-body,#12304A)"/>
+  <rect x="22" y="57" width="20" height="3" rx="1.5" fill="#F5A623"/>
+</svg><span><b>Lantern</b><small>Tech Group</small></span></a>
+      <ul><li><a href="#services">Services</a></li><li><a href="#process">How it works</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul>
+    </nav>
+    <div class="hero" id="top">
+      <div>
+        <div class="eyebrow" style="color:#F5A623">Manteno, Illinois &middot; Serving Kankakee County and Chicago's south suburbs</div>
+        <h1>Technology help that <em>actually shows up.</em></h1>
+        <p>AI, websites, search, and everyday IT for local businesses. One consultant who knows your whole setup, explains things in plain English, and answers the phone.</p>
+        <div class="cta"><a class="btn primary" href="#contact">Book a free 30-minute call</a><a class="btn ghost" href="#services">See what we do</a></div>
+      </div>
+      <div class="lamp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Lantern Tech Group mark">
+  <path d="M22 13 Q32 1 42 13" fill="none" stroke="var(--mark-body,#12304A)" stroke-width="3.2" stroke-linecap="round"/>
+  <rect x="19" y="12" width="26" height="5" rx="2" fill="var(--mark-body,#12304A)"/>
+  <path d="M18 17 H46 L48 44 Q48 51 41 51 H23 Q16 51 16 44 Z" fill="var(--mark-body,#12304A)"/>
+  <rect x="22" y="21" width="20" height="25" rx="3" fill="var(--mark-glass,#FBF6EC)"/>
+  <circle cx="32" cy="35" r="9.5" fill="#F5A623" opacity="0.28"/>
+  <circle cx="32" cy="35" r="5.5" fill="#F5A623"/>
+  <path d="M32 29.5 Q35 32.5 32 36 Q29 32.5 32 29.5Z" fill="var(--mark-glass,#FBF6EC)" opacity="0.9"/>
+  <rect x="19" y="51" width="26" height="4.5" rx="1.8" fill="var(--mark-body,#12304A)"/>
+  <rect x="22" y="57" width="20" height="3" rx="1.5" fill="#F5A623"/>
+</svg></div>
+    </div>
+  </div>
+</div>
+<div class="strip gutter"><div class="wrap">
+  <div><i></i><span><b>3+ years retained</b>by our first client, with every renewal earned.</span></div>
+  <div><i></i><span><b>Four skills, one phone number</b>AI, web, SEO, and IT support without juggling vendors.</span></div>
+  <div><i></i><span><b>Local and in person</b>On-site when it matters, remote when it's faster.</span></div>
+</div></div>
+
+<section class="block gutter" id="services"><div class="wrap">
+  <div class="eyebrow">Services</div>
+  <h2>Everything a growing business needs from its technology</h2>
+  <p class="lead">Start with the one thing that's bugging you. Most clients end up handing us the whole list.</p>
+  <div class="services">
+    <div class="svc"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.6L18 9.4l-4.2 1.8L12 16l-1.8-4.8L6 9.4l4.2-1.8z"/><path d="M5 17l.8 2 2 .8-2 .8L5 22l-.8-1.6-2-.8 2-.8z"/></svg></div>
+      <h3>AI strategy and integration</h3><p>Put AI to work on the tasks that eat your week.</p>
+      <ul><li>Assistants trained on your documents and procedures</li><li>Automated intake, quoting, scheduling, and follow-ups</li><li>Safe-use policy and staff training</li></ul></div>
+    <div class="svc"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 21h8"/></svg></div>
+      <h3>Website design and development</h3><p>Fast, mobile-first sites built to turn visitors into calls.</p>
+      <ul><li>New builds and redesigns</li><li>Online booking, forms, and payments</li><li>Hosting, security, and monthly care</li></ul></div>
+    <div class="svc"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M8 11h6M11 8v6"/></svg></div>
+      <h3>SEO and local search</h3><p>Show up when neighbors search for what you do.</p>
+      <ul><li>Google Business Profile and maps ranking</li><li>On-page fixes and content that answers real questions</li><li>Review strategy and monthly reporting</li></ul></div>
+    <div class="svc alt"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v10H4zM2 20h20M12 16v4"/></svg></div>
+      <h3>IT consulting and support</h3><p>The help desk, hardware, and network you'd expect from a big company.</p>
+      <ul><li>Computers, printers, Wi-Fi, and phones that work</li><li>Microsoft 365 and Google Workspace administration</li><li>Onboarding and offboarding done right</li></ul></div>
+    <div class="svc alt"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <h3>Cybersecurity and backup</h3><p>Protection sized for a small business, not a bank.</p>
+      <ul><li>Multi-factor sign-in and email protection</li><li>Tested backups and a recovery plan</li><li>Cyber-insurance questionnaire help</li></ul></div>
+    <div class="svc alt"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17a4 4 0 010-8 6 6 0 0111.5 1.5A3.5 3.5 0 0118 17z"/></svg></div>
+      <h3>Cloud and technology roadmap</h3><p>A plan and a budget, so technology stops being a surprise.</p>
+      <ul><li>Migrations to Microsoft 365, Google, or cloud file storage</li><li>Vendor, license, and contract management</li><li>Annual roadmap and budget review</li></ul></div>
+  </div>
+</div></section>
+
+<section class="block alt gutter" id="process"><div class="wrap">
+  <div class="eyebrow">How it works</div>
+  <h2>Four steps, no jargon</h2>
+  <div class="steps">
+    <div class="step"><h3>Discover</h3><p>A free 30-minute call, then a walk-through of your systems. You talk, we take notes.</p></div>
+    <div class="step"><h3>Plan</h3><p>A one-page plan with priorities, costs, and what you can skip. No surprise invoices.</p></div>
+    <div class="step"><h3>Build</h3><p>We do the work in short phases so you see progress every week and can change course.</p></div>
+    <div class="step"><h3>Support</h3><p>A monthly plan that keeps everything running, with one number to call when something breaks.</p></div>
+  </div>
+  <div class="eyebrow" style="margin-top:48px">Who we help</div>
+  <h2 style="font-size:24px">Built for local businesses</h2>
+  <div class="who"><span>Medical and dental offices</span><span>Contractors and trades</span><span>Law and accounting firms</span><span>Restaurants and retail</span><span>Manufacturers and shops</span><span>Farms and ag businesses</span><span>Nonprofits and churches</span><span>Real estate and property managers</span></div>
+</div></section>
+
+<section class="block gutter" id="about"><div class="wrap about">
+  <div class="card"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Lantern Tech Group mark">
+  <path d="M22 13 Q32 1 42 13" fill="none" stroke="var(--mark-body,#12304A)" stroke-width="3.2" stroke-linecap="round"/>
+  <rect x="19" y="12" width="26" height="5" rx="2" fill="var(--mark-body,#12304A)"/>
+  <path d="M18 17 H46 L48 44 Q48 51 41 51 H23 Q16 51 16 44 Z" fill="var(--mark-body,#12304A)"/>
+  <rect x="22" y="21" width="20" height="25" rx="3" fill="var(--mark-glass,#FBF6EC)"/>
+  <circle cx="32" cy="35" r="9.5" fill="#F5A623" opacity="0.28"/>
+  <circle cx="32" cy="35" r="5.5" fill="#F5A623"/>
+  <path d="M32 29.5 Q35 32.5 32 36 Q29 32.5 32 29.5Z" fill="var(--mark-glass,#FBF6EC)" opacity="0.9"/>
+  <rect x="19" y="51" width="26" height="4.5" rx="1.8" fill="var(--mark-body,#12304A)"/>
+  <rect x="22" y="57" width="20" height="3" rx="1.5" fill="#F5A623"/>
+</svg><h3>Shawn Schroeder</h3><p>Principal Consultant, Lantern Tech Group</p>
+    <div class="q">"My job is to make technology the easiest part of running your business."</div></div>
+  <div class="text">
+    <div class="eyebrow">About</div>
+    <h2>Why a lantern?</h2>
+    <p class="lead" style="margin-bottom:18px">Because that's what you carry when the path isn't clear.</p>
+    <p>Most small businesses don't need a 20-person IT firm. They need one person who understands their whole setup, from the website to the Wi-Fi to the AI tools everyone keeps talking about, and who will explain the options without the sales pitch.</p>
+    <p>Lantern Tech Group grew out of a three-year consulting engagement with a single company that kept renewing because the work paid for itself. That's the standard for every client: clear advice, honest pricing, and technology that quietly does its job.</p>
+    <p>Based in Manteno, Illinois. On site across Kankakee County and the south suburbs, remote anywhere.</p>
+  </div>
+</div></section>
+
+<div class="contact gutter" id="contact"><div class="wrap">
+  <div>
+    <div class="eyebrow" style="color:#F5A623">Contact</div>
+    <h2>Start with a free 30-minute call</h2>
+    <p>Tell us what's slowing you down. You'll leave the call with at least one thing you can fix this week, whether or not you hire us.</p>
+    <div class="line"><span>Email</span><code id="emailText">shawnschroeder@gmail.com</code><button type="button" class="copy" id="copyEmail">Copy</button></div>
+    <div class="line"><span>Hours</span><span>Monday to Friday, 8 AM to 6 PM Central. Emergencies answered same day.</span></div>
+  </div>
+  <form id="contactForm" novalidate>
+    <label for="f-name">Your name<input id="f-name" name="name" autocomplete="name" required></label>
+    <label for="f-biz">Business<input id="f-biz" name="business" autocomplete="organization"></label>
+    <label for="f-email">Email<input id="f-email" name="email" type="email" autocomplete="email" required></label>
+    <label for="f-need">What do you need help with?<select id="f-need" name="need"><option>AI strategy and integration</option><option>Website design and development</option><option>SEO and local search</option><option>IT support and consulting</option><option>Cybersecurity and backup</option><option>Not sure yet</option></select></label>
+    <label for="f-msg">Anything else?<textarea id="f-msg" name="message"></textarea></label>
+    <button type="submit" class="btn primary" id="sendBtn">Send and open my email app</button>
+    <p class="note">Sending opens a pre-filled email in your mail app. Nothing is stored on this site.</p>
+    <div class="ok" id="okMsg">If your mail app didn't open, email the address on the left and we'll reply within one business day.</div>
+  </form>
+</div></div>
+<footer class="site gutter"><div class="wrap"><span>&copy; 2026 Lantern Tech Group &middot; Manteno, Illinois</span><span>AI integration &middot; Websites &middot; SEO &middot; IT consulting</span></div></footer>
+<script>
+(function(){
+  var copy=document.getElementById('copyEmail'),txt=document.getElementById('emailText');
+  copy.addEventListener('click',function(){var t=txt.textContent;function sel(){var r=document.createRange();r.selectNodeContents(txt);var s=getSelection();s.removeAllRanges();s.addRange(r);}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){copy.textContent='Copied';setTimeout(function(){copy.textContent='Copy'},1600)}).catch(sel)}else{sel()}});
+  var f=document.getElementById('contactForm');
+  f.addEventListener('submit',function(e){e.preventDefault();
+    var name=f.name.value.trim(),biz=f.business.value.trim(),em=f.email.value.trim(),need=f.need.value,msg=f.message.value.trim();
+    if(!name||!em){(name?f.email:f.name).focus();return}
+    var body='Name: '+name+'\nBusiness: '+biz+'\nEmail: '+em+'\nNeed: '+need+'\n\n'+msg;
+    var href='mailto:'+txt.textContent+'?subject='+encodeURIComponent('Website inquiry from '+name+(biz?' ('+biz+')':''))+'&body='+encodeURIComponent(body);
+    f.classList.add('sent');window.location.href=href;});
+})();
+</script>
+</body></html>
