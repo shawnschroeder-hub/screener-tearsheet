@@ -31557,7 +31557,7 @@ const tb=$('#themeBtn');
 tb.onclick=()=>{const r=document.documentElement;const cur=r.getAttribute('data-theme');
   const next=(cur==='light')?'dark':'light';   // slate is the default; the toggle opens the light report view
   r.setAttribute('data-theme',next); try{localStorage.setItem('st-theme',next);}catch(e){} };
-try{ const saved=localStorage.getItem('st-theme'); if(saved==='light') document.documentElement.setAttribute('data-theme','light'); }catch(e){}
+/* Shawn 2026-10-29: always open in the black theme (a remembered 'light' choice hid it on his shared link) */ try{ localStorage.removeItem('st-theme'); }catch(e){}
 
 /* ---- header heat strip (Shawn 2026-10-11): everything his two top screeners, filtered zacks rank4 and
    rank2, hold right now - one labelled row per screener, tiles coloured by this week's return (scorecard
