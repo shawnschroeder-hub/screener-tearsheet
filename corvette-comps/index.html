@@ -1,0 +1,1128 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow">
+<title>Fathom Green 427 Comps</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<style>
+/* Layout: one column, 1180px max, green header band, ballpark + strip plot first, then card grids by group. */
+:root{
+  --bg:#f4f5f0; --panel:#ffffff; --ink:#1b2420; --ink2:#52605a; --line:#d9ded6;
+  --green:#1f4d33; --green2:#2f6b48; --saddle:#b98a4a; --saddle2:#e8d7b8;
+  --ok:#2f7a4b; --warn:#b4541f; --dim:#6b756f; --sold:#8a2d2d;
+  --fd:"Barlow Condensed","Arial Narrow",Arial,sans-serif; --fb:"Barlow",system-ui,Segoe UI,Arial,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --bg:#121715; --panel:#1b2420; --ink:#eef1ec; --ink2:#aab4ad; --line:#2d3833; --green:#2f6b48; --green2:#3f8a5e; --saddle:#d4a765; --saddle2:#3a3124; --ok:#5cbf7f; --warn:#e58a4f; --dim:#93a098; --sold:#e07070; color-scheme:dark } }
+:root[data-theme="dark"]{ --bg:#121715; --panel:#1b2420; --ink:#eef1ec; --ink2:#aab4ad; --line:#2d3833; --green:#2f6b48; --green2:#3f8a5e; --saddle:#d4a765; --saddle2:#3a3124; --ok:#5cbf7f; --warn:#e58a4f; --dim:#93a098; --sold:#e07070; color-scheme:dark }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 var(--fb);}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+header.hero{background:var(--green);color:#f3f0e6}
+header.hero .wrap{padding-block:28px 26px;display:grid;grid-template-columns:1.4fr 1fr;gap:24px;align-items:end}
+header.hero h1{font:700 46px/1 var(--fd);margin:0 0 8px;letter-spacing:.3px;text-wrap:balance}
+header.hero .sub{color:#d8e3d6;max-width:62ch;margin:0}
+.carbox{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:14px 16px}
+.carbox h2{font:600 15px/1 var(--fd);text-transform:uppercase;letter-spacing:1.2px;margin:0 0 10px;color:var(--saddle2)}
+.carbox dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:0;font-size:15px}
+.carbox dt{color:#cfd9cd} .carbox dd{margin:0;font-weight:600}
+.ball{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:-22px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.tile .k{font:600 13px/1 var(--fd);letter-spacing:1.2px;text-transform:uppercase;color:var(--ink2)}
+.tile .v{font:700 38px/1.05 var(--fd);margin:8px 0 4px;font-variant-numeric:tabular-nums}
+.tile .v small{font-size:20px;color:var(--ink2);font-weight:600}
+.tile p{margin:0;color:var(--ink2);font-size:14px}
+.tile.hi{border-color:var(--saddle);background:linear-gradient(180deg,var(--saddle2),var(--panel) 70%)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin-top:18px}
+.panel h2,section.tier h2{font:700 26px/1.1 var(--fd);margin:0 0 10px}
+.panel p{max-width:78ch;margin:6px 0}
+.calc{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:10px}
+.calc label{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--ink2);font-weight:600;text-transform:uppercase;letter-spacing:.8px}
+.calc select{font:15px var(--fb);padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink)}
+.calcout{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-top:12px}
+.calcout .big{font:700 40px/1 var(--fd);color:var(--green2);font-variant-numeric:tabular-nums}
+.calcout .small{color:var(--ink2)}
+.strip{width:100%;height:auto;margin-top:8px}
+.strip .grid{stroke:var(--line);stroke-width:1} .strip .tick{fill:var(--ink2);font:12px var(--fb);text-anchor:middle}
+.strip .rowlbl{fill:var(--ink2);font:600 12px var(--fd);letter-spacing:.6px}
+.strip .band{fill:var(--saddle);opacity:.22} .strip .bandlbl{fill:var(--saddle);font:600 12px var(--fd);text-anchor:middle;letter-spacing:.6px}
+.strip .dot{fill:var(--green2);opacity:.85;stroke:var(--panel);stroke-width:1.5} .strip .dot.sold{fill:var(--sold)} .strip .dot.top{fill:var(--saddle)} .strip .dot.mod{fill:var(--dim)}
+nav.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 6px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding-block:10px;z-index:5}
+nav.tabs a{font:600 14px/1 var(--fd);letter-spacing:.8px;text-transform:uppercase;padding:9px 12px;border-radius:999px;border:1px solid var(--line);color:var(--ink);text-decoration:none;background:var(--panel)}
+nav.tabs a .n{color:var(--ink2);margin-left:4px}
+section.tier{margin-top:22px} section.tier h2 .cnt{color:var(--ink2);font-weight:500;font-size:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;height:100%}
+.card .ph{display:block;aspect-ratio:4/3;background:#222;max-width:100%} .card .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.card .ph.nop{display:flex;align-items:center;justify-content:center;color:#ccc;text-align:center;padding:16px;font-size:14px;text-decoration:none}
+.cb{padding:12px 14px 14px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.row1{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.price{font:700 28px/1 var(--fd);color:var(--green2);font-variant-numeric:tabular-nums} .price s{color:var(--ink2);font-weight:500;font-size:18px;margin-right:4px}
+.code{margin-left:auto;font:600 12px/1 var(--fd);letter-spacing:.8px;text-transform:uppercase;color:var(--saddle);border:1px solid var(--saddle);padding:4px 7px;border-radius:6px}
+.card h3{font:600 18px/1.25 var(--fd);margin:0;text-wrap:balance}
+.card dl{display:grid;grid-template-columns:1fr 1fr;gap:4px 10px;margin:0;font-size:14px} .card dt{color:var(--ink2);font-size:12px;text-transform:uppercase;letter-spacing:.6px} .card dd{margin:0;font-weight:600}
+.pills{display:flex;gap:6px;flex-wrap:wrap} .pill{font:600 12px/1 var(--fd);letter-spacing:.6px;text-transform:uppercase;padding:4px 8px;border-radius:999px;border:1px solid}
+.pill.ok{color:var(--ok);border-color:var(--ok)} .pill.warn{color:var(--warn);border-color:var(--warn)} .pill.dim{color:var(--dim);border-color:var(--line)} .pill.sold{color:#fff;background:var(--sold);border-color:var(--sold)}
+.note{margin:0;font-size:14px;color:var(--ink2)} .seller{margin:0;font-size:13px;color:var(--ink2)}
+.acts{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:auto;padding-top:4px}
+.btn{font:600 14px/1 var(--fd);letter-spacing:.6px;text-transform:uppercase;padding:9px 12px;border-radius:8px;background:var(--green);color:#fff;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--green2);border:1px solid var(--green2)} .phone{font-size:14px;color:var(--ink2)}
+.method ul{margin:6px 0 0 18px;padding:0} .method li{margin:4px 0}
+footer{color:var(--ink2);font-size:13px;margin-top:28px}
+@media (max-width:900px){ header.hero .wrap{grid-template-columns:1fr} .ball{grid-template-columns:1fr} .calc{grid-template-columns:1fr 1fr} header.hero h1{font-size:36px} }
+@media (prefers-reduced-motion: no-preference){ .card{transition:transform .15s} .card:hover{transform:translateY(-2px)} }
+</style></head><body>
+<header class="hero"><div class="wrap">
+  <div>
+    <h1>What is a Fathom Green 1969 Corvette 427 worth?</h1>
+    <p class="sub">55 comparable 1969 big-block Corvettes pulled October 30, 2026 from Facebook Marketplace, ClassicCars.com, Hemmings, Classics on Autotrader and dealer sites across the country, plus 5 real sales. Every photo and price links to the listing and to the dealer.</p>
+  </div>
+  <div class="carbox"><h2>The car being valued</h2>
+    <dl><dt>Year</dt><dd>1969 Chevrolet Corvette Stingray</dd><dt>Engine</dt><dd>427 big block</dd><dt>Color</dt><dd>Fathom Green (code 983, 1969-only color)</dd><dt>Miles</dt><dd>58,000</dd></dl>
+  </div>
+</div></header>
+<div class="wrap">
+  <div class="ball">
+    <div class="tile hi"><div class="k">Ballpark asking price</div><div class="v">$50,000 <small>to</small> $60,000</div><p>Numbers-matching L36 427/390 coupe, presentable driver, 58k miles. Expect to net 8% to 12% less in a private sale; a dealer will offer 20% to 30% under this to resell.</p></div>
+    <div class="tile"><div class="k">Fathom Green 427s that sold</div><div class="v">$49,990 <small>to</small> $59,900</div><p>Three Fathom Green 427 cars marked sold by dealers and a broker (two coupes, one convertible). The color is a plus: single-year, in demand, and the Fathom Green / Saddle combination is on collectors' short list.</p></div>
+    <div class="tile"><div class="k">Closest comps, asking</div><div class="v">$30,000 <small>to</small> $66,000</div><p>Median $49,972 across 18 factory-427 cars that are mostly original. L36 cars $39,900 to $118,960; L68 Tri-Power $46,500 to $100,000; L71 435 hp $30,000 to $124,000.</p></div>
+  </div>
+
+  <div class="panel">
+    <h2>Dial in the ballpark</h2>
+    <p>The base range is the L36 coupe above. Pick what is true about the car and the range moves. Engine code (L36 390 hp / L68 400 hp / L71 435 hp), body style, transmission and whether the numbers match are not confirmed. The ballpark below is for a numbers-matching L36 or L68 coupe in presentable driver condition; adjust with the sliders of the Ballpark section.</p>
+    <div class="calc">
+      <label>Engine code<select id="c_code"><option value="L36">L36 427/390 (4-barrel)</option><option value="L68">L68 427/400 (Tri-Power)</option><option value="L71">L71 427/435 (Tri-Power)</option><option value="unknown">Not sure</option></select></label>
+      <label>Body<select id="c_body"><option value="Coupe">Coupe (T-tops)</option><option value="Convertible">Convertible</option></select></label>
+      <label>Numbers<select id="c_match"><option value="yes">Original engine and trans</option><option value="unknown">Not verified</option><option value="no">Replacement engine</option></select></label>
+      <label>Condition<select id="c_cond"><option value="nice">Nice driver, good paint</option><option value="show">Show quality, documented</option><option value="driver">Honest driver, needs cosmetics</option><option value="project">Not running or needs paint</option></select></label>
+    </div>
+    <div class="calcout"><span class="big" id="c_out">$50,000 to $60,000</span><span class="small" id="c_note">asking price · likely private sale <b id="c_net"></b></span></div>
+  </div>
+
+  <div class="panel">
+    <h2>Where every comp sits</h2>
+    <p>Each dot is one car. Red is a real sale, green is a close comp, tan is top-of-market, grey is modified. The shaded band is the ballpark for Shawn's car as an L36 coupe. Click a dot to jump to the car.</p>
+    <svg viewBox="0 0 760 150" class="strip" role="img" aria-label="Asking and sold prices by group">
+<line x1="70" y1="18" x2="70" y2="136" class="grid"/><text x="70" y="148" class="tick">$20k</text>
+<line x1="192" y1="18" x2="192" y2="136" class="grid"/><text x="192" y="148" class="tick">$40k</text>
+<line x1="314" y1="18" x2="314" y2="136" class="grid"/><text x="314" y="148" class="tick">$60k</text>
+<line x1="436" y1="18" x2="436" y2="136" class="grid"/><text x="436" y="148" class="tick">$80k</text>
+<line x1="557" y1="18" x2="557" y2="136" class="grid"/><text x="557" y="148" class="tick">$100k</text>
+<line x1="679" y1="18" x2="679" y2="136" class="grid"/><text x="679" y="148" class="tick">$120k</text>
+<rect x="253" y="18" width="61" height="118" class="band"/>
+<text x="283" y="13" class="bandlbl">Shawn's car (L36 coupe)</text>
+<text x="2" y="36" class="rowlbl">Sold</text>
+<a href="#sold-streetside-7174"><circle cx="283.4" cy="32" r="6" class="dot sold"><title>$54,995 1969 Corvette 427 coupe, Fathom Green over green, numbers-matching L36 4-speed</title></circle></a>
+<a href="#sold-schmitt"><circle cx="313.3" cy="32" r="6" class="dot sold"><title>$59,900 1969 Corvette 427/400 coupe, Fathom Green over saddle</title></circle></a>
+<a href="#sold-vettenet"><circle cx="253.0" cy="32" r="6" class="dot sold"><title>$49,990 1969 Corvette 427/400 convertible, Fathom Green over saddle</title></circle></a>
+<a href="#sold-hagerty-l71"><circle cx="219.0" cy="32" r="6" class="dot sold"><title>$44,405 1969 Corvette L71 427/435 convertible, single-family owned, 4-speed</title></circle></a>
+<a href="#sold-hagerty-l68"><circle cx="309.3" cy="32" r="6" class="dot sold"><title>$59,250 1969 Corvette L68 427/400 convertible, 4-speed</title></circle></a>
+<text x="2" y="66" class="rowlbl">Closest</text>
+<a href="#cc-2103689"><circle cx="252.7" cy="62" r="6" class="dot core"><title>$49,950 1969 Corvette 427/390 T-top coupe, 4-speed, factory A/C</title></circle></a>
+<a href="#cc-2003545"><circle cx="289.6" cy="62" r="6" class="dot core"><title>$56,000 1969 Corvette L36 427/390 4-speed, numbers matching, 59,553 miles</title></circle></a>
+<a href="#cc-2121534"><circle cx="268.3" cy="62" r="6" class="dot core"><title>$52,500 1969 Corvette L68 427/400 Tri-Power convertible, 4-speed, matching numbers</title></circle></a>
+<a href="#cc-2012294"><circle cx="184.6" cy="62" r="6" class="dot core"><title>$38,750 1969 Corvette 427 (7.0L) 4-speed, 87,861 miles</title></circle></a>
+<a href="#cc-2032487"><circle cx="191.6" cy="62" r="6" class="dot core"><title>$39,900 1969 Corvette 427/390 convertible, 4-speed, two tops</title></circle></a>
+<a href="#cc-2083728"><circle cx="307.8" cy="62" r="6" class="dot core"><title>$59,000 1969 Corvette 427/390 coupe, one owner since 1970, tank sticker, 21,308 miles</title></circle></a>
+<a href="#cc-2115719"><circle cx="204.3" cy="62" r="6" class="dot core"><title>$42,000 1969 Corvette L36 427/390 convertible, automatic, one family since 1969</title></circle></a>
+<a href="#cc-2107345"><circle cx="344.3" cy="62" r="6" class="dot core"><title>$65,000 1969 Corvette L68 427/400 Tri-Power convertible, 4-speed, matching numbers</title></circle></a>
+<a href="#cc-2096296"><circle cx="282.9" cy="62" r="6" class="dot core"><title>$54,900 1969 Corvette 427 coupe, numbers matching, restored, 105,902 title-verified miles</title></circle></a>
+<a href="#cc-2079968"><circle cx="240.8" cy="62" r="6" class="dot core"><title>$47,995 1969 Corvette 427/390, Daytona Yellow with racing stripes, 4-speed</title></circle></a>
+<a href="#cc-2093098"><circle cx="231.7" cy="62" r="6" class="dot core"><title>$46,500 1969 Corvette L68 427/400 T-top coupe, 4-speed, factory Daytona Yellow over black</title></circle></a>
+<a href="#cc-1842197"><circle cx="350.4" cy="62" r="6" class="dot core"><title>$66,000 1969 Corvette L68 427/400 Tri-Power T-top coupe, 4-speed, numbers matching</title></circle></a>
+<a href="#hm-vineland"><circle cx="313.3" cy="62" r="6" class="dot core"><title>$59,900 1969 Corvette Convertible L68 427/400 Tri-Power, 4-speed</title></circle></a>
+<a href="#hm-seattle"><circle cx="252.4" cy="62" r="6" class="dot core"><title>$49,900 1969 Corvette L68 Coupe 427 Big Block 4-Speed T-Tops</title></circle></a>
+<a href="#hm-durham"><circle cx="283.5" cy="62" r="6" class="dot core"><title>$55,000 1969 Corvette 427/435 L71 Coupe, Muncie 4-speed, side pipes</title></circle></a>
+<a href="#hm-roanoke"><circle cx="253.0" cy="62" r="6" class="dot core"><title>$49,995 1969 Corvette Convertible 427/390 L36, numbers matching, side pipes</title></circle></a>
+<a href="#fb-1904013883666695"><circle cx="180.0" cy="62" r="6" class="dot core"><title>$38,000 1969 Corvette 427 Stingray, original engine and transmission</title></circle></a>
+<a href="#fb-1566624728710884"><circle cx="131.3" cy="62" r="6" class="dot core"><title>$30,000 1969 Corvette, original 427/435, 38,000 miles, needs paint</title></circle></a>
+<text x="2" y="96" class="rowlbl">Top</text>
+<a href="#cc-2121249"><circle cx="557.4" cy="92" r="6" class="dot top"><title>$100,000 1969 Corvette L68 427/400 convertible, 4-speed, 1,341 miles since restoration</title></circle></a>
+<a href="#cc-2086021"><circle cx="672.8" cy="92" r="6" class="dot top"><title>$118,960 1969 Corvette L36 427/390 coupe, Muncie M21, factory A/C, award-winning restoration</title></circle></a>
+<a href="#cc-1442442"><circle cx="648.7" cy="92" r="6" class="dot top"><title>$115,000 1969 Corvette L71 427/435 convertible, matching numbers, 2,996 miles</title></circle></a>
+<a href="#cc-2043478"><circle cx="703.5" cy="92" r="6" class="dot top"><title>$124,000 1969 Corvette L71 427/435 T-top, 6,931 original miles, Bloomington Gold 2025</title></circle></a>
+<a href="#cc-1998009"><circle cx="709.6" cy="92" r="6" class="dot top"><title>$125,000 1969 Corvette big block survivor, 24,000 miles, unrestored, 2024 NCRS Top Flight</title></circle></a>
+<a href="#hm-milfordct"><circle cx="490.4" cy="92" r="6" class="dot top"><title>$89,000 1969 Corvette Coupe L68 427/400 Tri-Power, matching numbers, factory Fathom Green car</title></circle></a>
+<a href="#at-102806424"><circle cx="466.1" cy="92" r="6" class="dot top"><title>$85,000 1969 Corvette Convertible L68 427/400 Tri-Power, Tremec 5-speed, tank sticker</title></circle></a>
+<a href="#at-102791051"><circle cx="460.0" cy="92" r="6" class="dot top"><title>$84,000 1969 Corvette Convertible 427 L68 Tri-Power 4-speed, frame-off restoration</title></circle></a>
+<a href="#fb-29112404781744113"><circle cx="527.0" cy="92" r="6" class="dot top"><title>$95,000 1969 Corvette 427/435 L71 Convertible, numbers matching, body-off restoration</title></circle></a>
+<a href="#fb-2067044114018269"><circle cx="466.1" cy="92" r="6" class="dot top"><title>$85,000 1969 Corvette Stingray 427/400 4-speed coupe, factory A/C, T-tops</title></circle></a>
+<text x="2" y="126" class="rowlbl">Modified</text>
+<a href="#cc-2113770"><circle cx="310.9" cy="122" r="6" class="dot mod"><title>$59,500 1969 Corvette coupe, replacement 427 and replacement Muncie 4-speed</title></circle></a>
+<a href="#cc-2109154"><circle cx="368.7" cy="122" r="6" class="dot mod"><title>$69,000 1969 Corvette roadster, 427 Tri-Power tribute (non-original block, ZL1-style heads), A/C</title></circle></a>
+<a href="#cc-2080149"><circle cx="253.0" cy="122" r="6" class="dot mod"><title>$49,999 1969 Corvette 427 big block coupe, 4-speed, red over black</title></circle></a>
+<a href="#cc-2075192"><circle cx="410.7" cy="122" r="6" class="dot mod"><title>$75,900 1969 Corvette convertible 427/435, non-original but period-correct, ZL1 aluminum heads</title></circle></a>
+<a href="#cc-1997657"><circle cx="435.7" cy="122" r="6" class="dot mod"><title>$80,000 1969 Corvette coupe with L71-spec 427/435, Tremec 5-speed, 2,079 miles since restoration</title></circle></a>
+<a href="#cc-1977513"><circle cx="435.0" cy="122" r="6" class="dot mod"><title>$79,900 1969 Corvette 427/390 numbers-matching resto-mod, factory side pipes, frame-off</title></circle></a>
+<a href="#hm-westby"><circle cx="198.3" cy="122" r="6" class="dot mod"><title>$41,000 1969 Corvette Convertible, replacement 427 w/ Tri-Power, Richmond 5-speed</title></circle></a>
+<a href="#hm-redmond"><circle cx="368.4" cy="122" r="6" class="dot mod"><title>$68,950 1969 Corvette Coupe, period-correct L68 427/400 Tri-Power swap, 6-year restoration</title></circle></a>
+<a href="#fb-1998409197516414"><circle cx="113.0" cy="122" r="6" class="dot mod"><title>$27,000 1969 Corvette convertible 427/390 4-speed, replacement 427, needs repaint</title></circle></a>
+<a href="#fb-1475529814470841"><circle cx="253.0" cy="122" r="6" class="dot mod"><title>$50,000 1969 Corvette roadster, born L68 427/400 4-speed, one family, modified for track</title></circle></a>
+<a href="#fb-1426507729602488"><circle cx="253.0" cy="122" r="6" class="dot mod"><title>$50,000 1969 Corvette convertible 427 restomod, L88 tribute, frame-off (not numbers matching)</title></circle></a>
+</svg>
+  </div>
+
+  <nav class="tabs"><a href="#tier-sold">Sold and auction results<span class="n">5</span></a><a href="#tier-core">Closest comps<span class="n">18</span></a><a href="#tier-top">Top of the market<span class="n">11</span></a><a href="#tier-mod">Modified 427s<span class="n">11</span></a><a href="#tier-ref">Context (not a 427 now, or small block)<span class="n">10</span></a><a href="#method">How this was built</a></nav>
+  <section class="tier" id="tier-sold"><h2>Sold and auction results <span class="cnt">5</span></h2><div class="grid"><div id="sold-hagerty-l71"><article class="card" data-tier="sold" data-code="L71" data-body="Convertible" data-price="44405">
+  <a class="ph nop" href="https://www.hagerty.com/marketplace/auction/1969-chevrolet-corvette/488d985d-8886-438a-9d78-669588146028" target="_blank" rel="noopener"><span>No photo pulled yet. Open the listing.</span></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$44,405</span><span class="pill sold">SOLD</span><span class="code">L71 427/435 Tri-Power</span></div>
+    <h3>1969 Corvette L71 427/435 convertible, single-family owned, 4-speed</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>not stated</dd></div>
+      <div><dt>Body</dt><dd>Convertible</dd></div>
+      <div><dt>Color</dt><dd>not stated</dd></div>
+      <div><dt>Trans</dt><dd>4-speed</dd></div>
+    </dl>
+    <div class="pills"><span class="pill dim">Numbers not stated</span><span class="pill dim">Auction</span></div>
+    <p class="note">Hammered at $44,405 on Feb 13, 2025 after 43 bids. A real sale, not an asking price, and it landed well under dealer asks for L71 cars.</p>
+    <p class="seller"><b>Hagerty Marketplace</b> · online auction · via Hagerty Marketplace auction</p>
+    <div class="acts"><a class="btn" href="https://www.hagerty.com/marketplace/auction/1969-chevrolet-corvette/488d985d-8886-438a-9d78-669588146028" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="https://www.hagerty.com/marketplace" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="sold-vettenet"><article class="card" data-tier="sold" data-code="L68" data-body="Convertible" data-price="49990">
+  <a class="ph nop" href="https://thevettenet.com/details/496-1969-fathom-green-aka-british-racing-green-convertible" target="_blank" rel="noopener"><span>No photo pulled yet. Open the listing.</span></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$49,990</span><span class="pill sold">SOLD</span><span class="code">L68 427/400 Tri-Power</span></div>
+    <h3>1969 Corvette 427/400 convertible, Fathom Green over saddle</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>not stated</dd></div>
+      <div><dt>Body</dt><dd>Convertible</dd></div>
+      <div><dt>Color</dt><dd>Fathom Green / Saddle</dd></div>
+      <div><dt>Trans</dt><dd>not stated</dd></div>
+    </dl>
+    <div class="pills"><span class="pill dim">Numbers not stated</span><span class="pill dim">Broker</span></div>
+    <p class="note">Marked SOLD at $49,990, described as a show car in excellent condition. Sale date not stated on the page, so treat as an older data point.</p>
+    <p class="seller"><b>TheVetteNet.com</b> · sold to a buyer in Wisconsin · via TheVetteNet.com (broker)</p>
+    <div class="acts"><a class="btn" href="https://thevettenet.com/details/496-1969-fathom-green-aka-british-racing-green-convertible" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="https://thevettenet.com" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="sold-streetside-7174"><article class="card" data-tier="sold" data-code="L36" data-body="Coupe" data-price="54995">
+  <a class="ph" href="https://www.streetsideclassics.com/vehicles/7174-cha/1969-chevrolet-corvette-427" target="_blank" rel="noopener"><img src="p/sold-streetside-7174.jpg" alt="1969 Corvette 427 coupe, Fathom Green over green, numbers-matching L36 4-speed" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$54,995</span><span class="pill sold">SOLD</span><span class="code">L36 427/390</span></div>
+    <h3>1969 Corvette 427 coupe, Fathom Green over green, numbers-matching L36 4-speed</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>46,312</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>Fathom Green / Green</dd></div>
+      <div><dt>Trans</dt><dd>4-speed, numbers matching</dd></div>
+    </dl>
+    <div class="pills"><span class="pill ok">Numbers match</span><span class="pill dim">Dealer</span></div>
+    <p class="note">The closest match to Shawn&#x27;s car on the market: same year, same color, same engine family, 46k miles. Marked SOLD at a $54,995 asking price. Engine rebuilt 2004, 30 years with one California owner, records and restoration photos.</p>
+    <p class="seller"><b>Streetside Classics - Charlotte</b> · Concord (Charlotte), NC · via Streetside Classics (Charlotte)</p>
+    <div class="acts"><a class="btn" href="https://www.streetsideclassics.com/vehicles/7174-cha/1969-chevrolet-corvette-427" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="https://www.streetsideclassics.com" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="sold-hagerty-l68"><article class="card" data-tier="sold" data-code="L68" data-body="Convertible" data-price="59250">
+  <a class="ph nop" href="https://www.hagerty.com/marketplace/auction/1969-Chevrolet-Corvette/876a4d35-7519-4e67-a8ce-4c7a2933cf13" target="_blank" rel="noopener"><span>No photo pulled yet. Open the listing.</span></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$59,250</span><span class="pill sold">SOLD</span><span class="code">L68 427/400 Tri-Power</span></div>
+    <h3>1969 Corvette L68 427/400 convertible, 4-speed</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>not stated</dd></div>
+      <div><dt>Body</dt><dd>Convertible</dd></div>
+      <div><dt>Color</dt><dd>not stated</dd></div>
+      <div><dt>Trans</dt><dd>4-speed</dd></div>
+    </dl>
+    <div class="pills"><span class="pill dim">Numbers not stated</span><span class="pill dim">Auction</span></div>
+    <p class="note">Sold at a $59,250 bid on Jul 15, 2026. The freshest real sale of a factory 427/400 car.</p>
+    <p class="seller"><b>Hagerty Marketplace</b> · online auction · via Hagerty Marketplace auction</p>
+    <div class="acts"><a class="btn" href="https://www.hagerty.com/marketplace/auction/1969-Chevrolet-Corvette/876a4d35-7519-4e67-a8ce-4c7a2933cf13" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="https://www.hagerty.com/marketplace" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="sold-schmitt"><article class="card" data-tier="sold" data-code="L68" data-body="Coupe" data-price="59900">
+  <a class="ph nop" href="https://www.schmitt.com/inventory/ds-1969-chevrolet-corvette-427400/" target="_blank" rel="noopener"><span>No photo pulled yet. Open the listing.</span></a>
+  <div class="cb">
+    <div class="row1"><span class="price"><s>$64,900</s> $59,900</span><span class="pill sold">SOLD</span><span class="code">L68 427/400 Tri-Power</span></div>
+    <h3>1969 Corvette 427/400 coupe, Fathom Green over saddle</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>not stated</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>Fathom Green / Saddle</dd></div>
+      <div><dt>Trans</dt><dd>not stated</dd></div>
+    </dl>
+    <div class="pills"><span class="pill dim">Numbers not stated</span><span class="pill dim">Dealer</span></div>
+    <p class="note">Dealer page shows SOLD at $59,900 after a $5,000 cut from $64,900. Fathom Green with saddle, the factory combination collectors ask for.</p>
+    <p class="seller"><b>Schmitt</b> · St. Louis, MO area · via Schmitt (St. Louis area)</p>
+    <div class="acts"><a class="btn" href="https://www.schmitt.com/inventory/ds-1969-chevrolet-corvette-427400/" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="https://www.schmitt.com" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div></div></section><section class="tier" id="tier-core"><h2>Closest comps <span class="cnt">18</span></h2><div class="grid"><div id="fb-1566624728710884"><article class="card" data-tier="core" data-code="L71" data-body="not stated" data-price="30000">
+  <a class="ph" href="https://www.facebook.com/marketplace/item/1566624728710884/" target="_blank" rel="noopener"><img src="p/fb-1566624728710884.jpg" alt="1969 Corvette, original 427/435, 38,000 miles, needs paint" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price"><s>$45,000</s> $30,000</span><span class="code">L71 427/435 Tri-Power</span></div>
+    <h3>1969 Corvette, original 427/435, 38,000 miles, needs paint</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>38,000</dd></div>
+      <div><dt>Body</dt><dd>not stated</dd></div>
+      <div><dt>Color</dt><dd>not stated (needs paint)</dd></div>
+      <div><dt>Trans</dt><dd>not stated</dd></div>
+    </dl>
+    <div class="pills"><span class="pill dim">Numbers not stated</span><span class="pill dim">Private</span></div>
+    <p class="note">Cut from $45,000. Off the road 1979 to 2023, Hooker headers and side pipes added, garage kept, needs paint. Owner since 2000.</p>
+    <p class="seller"><b>Private seller (Zig Rac Der)</b> · Schenectady, NY · via Facebook Marketplace</p>
+    <div class="acts"><a class="btn" href="https://www.facebook.com/marketplace/item/1566624728710884/" target="_blank" rel="noopener">Open listing</a></div>
+  </div>
+</article></div>
+<div id="fb-1904013883666695"><article class="card" data-tier="core" data-code="427" data-body="Coupe" data-price="38000">
+  <a class="ph" href="https://www.facebook.com/marketplace/item/1904013883666695/" target="_blank" rel="noopener"><img src="p/fb-1904013883666695.jpg" alt="1969 Corvette 427 Stingray, original engine and transmission" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price"><s>$45,000</s> $38,000</span><span class="code">427 (code not stated)</span></div>
+    <h3>1969 Corvette 427 Stingray, original engine and transmission</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>17,000 (as listed)</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>Blue / Blue</dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill ok">Numbers match</span><span class="pill dim">Private</span></div>
+    <p class="note">Cut from $45,000. Listed a year ago, OBO, carburetor just replaced. Engine code not stated.</p>
+    <p class="seller"><b>Private seller (Vicki Ann)</b> · Staten Island, NY · via Facebook Marketplace</p>
+    <div class="acts"><a class="btn" href="https://www.facebook.com/marketplace/item/1904013883666695/" target="_blank" rel="noopener">Open listing</a></div>
+  </div>
+</article></div>
+<div id="cc-2012294"><article class="card" data-tier="core" data-code="427" data-body="Coupe" data-price="38750">
+  <a class="ph" href="https://classiccars.com/listings/view/2012294/1969-chevrolet-corvette-for-sale-in-ashland-ohio-44805" target="_blank" rel="noopener"><img src="p/cc-2012294.jpg" alt="1969 Corvette 427 (7.0L) 4-speed, 87,861 miles" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$38,750</span><span class="code">427 (code not stated)</span></div>
+    <h3>1969 Corvette 427 (7.0L) 4-speed, 87,861 miles</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>87,861</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>Off White</dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill dim">Numbers not stated</span><span class="pill dim">Dealer</span></div>
+    <p class="note">Whitmore Motors, Ashland OH. Autotrader lists the engine as 7.0L V8. Short listing, so call before trusting it; $38,750 would be the cheapest 427 coupe at a dealer.</p>
+    <p class="seller"><b>Whitmore Motors</b> · Ashland, Ohio · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/2012294/1969-chevrolet-corvette-for-sale-in-ashland-ohio-44805" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="http://www.whitmoremotorcars.com" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="cc-2032487"><article class="card" data-tier="core" data-code="L36" data-body="Convertible" data-price="39900">
+  <a class="ph" href="https://classiccars.com/listings/view/2032487/1969-chevrolet-corvette-for-sale-in-collierville-tennessee-38017" target="_blank" rel="noopener"><img src="p/cc-2032487.jpg" alt="1969 Corvette 427/390 convertible, 4-speed, two tops" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$39,900</span><span class="code">L36 427/390</span></div>
+    <h3>1969 Corvette 427/390 convertible, 4-speed, two tops</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>43,459</dd></div>
+      <div><dt>Body</dt><dd>Convertible</dd></div>
+      <div><dt>Color</dt><dd>Corvette Bronze</dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill dim">Numbers not stated</span><span class="pill dim">Dealer</span></div>
+    <p class="note">Born Riverside Gold, now Corvette Bronze (color change). 43,459 miles. The cheapest dealer-listed factory 427 in the country at $39,900.</p>
+    <p class="seller"><b>Art &amp; Speed</b> · Collierville, Tennessee · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/2032487/1969-chevrolet-corvette-for-sale-in-collierville-tennessee-38017" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="http://www.artandspeed.com" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="cc-2115719"><article class="card" data-tier="core" data-code="L36" data-body="Convertible" data-price="42000">
+  <a class="ph" href="https://classiccars.com/listings/view/2115719/1969-chevrolet-corvette-for-sale-in-dearborn-michigan-48120" target="_blank" rel="noopener"><img src="p/cc-2115719.jpg" alt="1969 Corvette L36 427/390 convertible, automatic, one family since 1969" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$42,000</span><span class="code">L36 427/390</span></div>
+    <h3>1969 Corvette L36 427/390 convertible, automatic, one family since 1969</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>34,601</dd></div>
+      <div><dt>Body</dt><dd>Convertible</dd></div>
+      <div><dt>Color</dt><dd>BLUE</dd></div>
+      <div><dt>Trans</dt><dd>Automatic</dd></div>
+    </dl>
+    <div class="pills"><span class="pill ok">Numbers match</span><span class="pill dim">Dealer</span></div>
+    <p class="note">Block number matches the VIN, hardtop and soft top, 34,601 miles. Gateway Classic Cars of Detroit. Automatic holds the price down to $42,000.</p>
+    <p class="seller"><b>Gateway Classic Cars of Detroit</b> · Dearborn, Michigan · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/2115719/1969-chevrolet-corvette-for-sale-in-dearborn-michigan-48120" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="http://gatewayclassiccars.com/vehicles" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="cc-2093098"><article class="card" data-tier="core" data-code="L68" data-body="Coupe" data-price="46500">
+  <a class="ph" href="https://classiccars.com/listings/view/2093098/1969-chevrolet-corvette-for-sale-in-beverly-hills-california-90210" target="_blank" rel="noopener"><img src="p/cc-2093098.jpg" alt="1969 Corvette L68 427/400 T-top coupe, 4-speed, factory Daytona Yellow over black" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$46,500</span><span class="code">L68 427/400 Tri-Power</span></div>
+    <h3>1969 Corvette L68 427/400 T-top coupe, 4-speed, factory Daytona Yellow over black</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>not stated</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>Daytona Yellow</dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill dim">Numbers not stated</span><span class="pill dim">Dealer</span></div>
+    <p class="note">Beverly Hills Car Club, California blue-plate car. Listed at $46,500, which is the low end for an L68 coupe; the dealer sells mostly as-is projects, so inspect before using it as a floor.</p>
+    <p class="seller"><b>Beverly Hills Car Club</b> · Beverly Hills, California · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/2093098/1969-chevrolet-corvette-for-sale-in-beverly-hills-california-90210" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="http://www.beverlyhillscarclub.com/" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="cc-2079968"><article class="card" data-tier="core" data-code="L36" data-body="Coupe" data-price="47995">
+  <a class="ph" href="https://classiccars.com/listings/view/2079968/1969-chevrolet-corvette-for-sale-in-mesa-arizona-85204" target="_blank" rel="noopener"><img src="p/cc-2079968.jpg" alt="1969 Corvette 427/390, Daytona Yellow with racing stripes, 4-speed" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$47,995</span><span class="code">L36 427/390</span></div>
+    <h3>1969 Corvette 427/390, Daytona Yellow with racing stripes, 4-speed</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>980</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>Daytona Yellow</dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill dim">Numbers not stated</span><span class="pill dim">Dealer</span></div>
+    <p class="note">Streetside Classics Phoenix. Odometer 980 (TMU). Saddle interior. Stripes and side pipes make it a driver, not a show car: $47,995.</p>
+    <p class="seller"><b>Streetside Classics - Phoenix</b> · Mesa, Arizona · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/2079968/1969-chevrolet-corvette-for-sale-in-mesa-arizona-85204" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="http://www.streetsideclassics.com" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="hm-seattle"><article class="card" data-tier="core" data-code="L68" data-body="Coupe" data-price="49900">
+  <a class="ph" href="https://www.hemmings.com/listing/1969-chevrolet-corvette-seattle-wa-932704" target="_blank" rel="noopener"><img src="p/hm-seattle.jpg" alt="1969 Corvette L68 Coupe 427 Big Block 4-Speed T-Tops" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$49,900</span><span class="code">L68 427/400 Tri-Power</span></div>
+    <h3>1969 Corvette L68 Coupe 427 Big Block 4-Speed T-Tops</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>60,400</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>Polar White (orig. Cortez Silver)</dd></div>
+      <div><dt>Trans</dt><dd>4-speed</dd></div>
+    </dl>
+    <div class="pills"><span class="pill warn">Non-matching</span><span class="pill dim">Private</span></div>
+    <p class="note">Family-owned since 1974. Non-matching engine, color change, interior changed saddle to black. Appraised Oct 2024 at $66,569.</p>
+    <p class="seller"><b>Private seller (Hemmings Make Offer)</b> · Bonney Lake (Seattle), WA · via Hemmings</p>
+    <div class="acts"><a class="btn" href="https://www.hemmings.com/listing/1969-chevrolet-corvette-seattle-wa-932704" target="_blank" rel="noopener">Open listing</a></div>
+  </div>
+</article></div>
+<div id="cc-2103689"><article class="card" data-tier="core" data-code="L36" data-body="Coupe" data-price="49950">
+  <a class="ph" href="https://classiccars.com/listings/view/2103689/1969-chevrolet-corvette-for-sale-in-divide-colorado-80814-7600" target="_blank" rel="noopener"><img src="p/cc-2103689.jpg" alt="1969 Corvette 427/390 T-top coupe, 4-speed, factory A/C" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$49,950</span><span class="code">L36 427/390</span></div>
+    <h3>1969 Corvette 427/390 T-top coupe, 4-speed, factory A/C</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>60,000</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>LeMans Blue</dd></div>
+      <div><dt>Trans</dt><dd>not stated</dd></div>
+    </dl>
+    <div class="pills"><span class="pill dim">Numbers not stated</span><span class="pill dim">Private</span></div>
+    <p class="note">Private seller. Odometer stopped at 60,000 so true miles unknown. Side pipes added, recent paint, cold A/C. Priced $49,950 (also on Autotrader at $49,750).</p>
+    <p class="seller"><b>Private Seller</b> · Divide, Colorado · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/2103689/1969-chevrolet-corvette-for-sale-in-divide-colorado-80814-7600" target="_blank" rel="noopener">Open listing</a></div>
+  </div>
+</article></div>
+<div id="hm-roanoke"><article class="card" data-tier="core" data-code="L36" data-body="Convertible" data-price="49995">
+  <a class="ph" href="https://www.hemmings.com/classifieds/listing/1969-chevrolet-corvette-roanoke-il-2975412" target="_blank" rel="noopener"><img src="p/hm-roanoke.jpg" alt="1969 Corvette Convertible 427/390 L36, numbers matching, side pipes" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$49,995</span><span class="code">L36 427/390</span></div>
+    <h3>1969 Corvette Convertible 427/390 L36, numbers matching, side pipes</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>76,675</dd></div>
+      <div><dt>Body</dt><dd>Convertible</dd></div>
+      <div><dt>Color</dt><dd>Riverside Gold / Saddle leather</dd></div>
+      <div><dt>Trans</dt><dd>Automatic</dd></div>
+    </dl>
+    <div class="pills"><span class="pill ok">Numbers match</span><span class="pill dim">Dealer</span></div>
+    <p class="note">One family owned most of its life, factory side pipes, correct code 980 Riverside Gold. Dealer about 2 hours from Manteno.</p>
+    <p class="seller"><b>Midwest Classic Cars</b> · Roanoke, IL · via Hemmings</p>
+    <div class="acts"><a class="btn" href="https://www.hemmings.com/classifieds/listing/1969-chevrolet-corvette-roanoke-il-2975412" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="https://www.midwestclassiccars.com" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="cc-2121534"><article class="card" data-tier="core" data-code="L68" data-body="Convertible" data-price="52500">
+  <a class="ph" href="https://classiccars.com/listings/view/2121534/1969-chevrolet-corvette-for-sale-in-el-cajon-california-92021" target="_blank" rel="noopener"><img src="p/cc-2121534.jpg" alt="1969 Corvette L68 427/400 Tri-Power convertible, 4-speed, matching numbers" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$52,500</span><span class="code">L68 427/400 Tri-Power</span></div>
+    <h3>1969 Corvette L68 427/400 Tri-Power convertible, 4-speed, matching numbers</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>61,815</dd></div>
+      <div><dt>Body</dt><dd>Convertible</dd></div>
+      <div><dt>Color</dt><dd>Gold</dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill ok">Numbers match</span><span class="pill dim">Dealer</span></div>
+    <p class="note">Riverside Gold over black, trim tag correct, 61,815 miles. Also posted on Facebook Marketplace and Hemmings at the same $52,500.</p>
+    <p class="seller"><b>Affordable Classics San Diego</b> · El Cajon, California · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/2121534/1969-chevrolet-corvette-for-sale-in-el-cajon-california-92021" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="http://www.affordableclassicssandiego.com/" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="cc-2096296"><article class="card" data-tier="core" data-code="L36" data-body="Coupe" data-price="54900">
+  <a class="ph" href="https://classiccars.com/listings/view/2096296/1969-chevrolet-corvette-for-sale-in-morgantown-pennsylvania-19543" target="_blank" rel="noopener"><img src="p/cc-2096296.jpg" alt="1969 Corvette 427 coupe, numbers matching, restored, 105,902 title-verified miles" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$54,900</span><span class="code">L36 427/390</span></div>
+    <h3>1969 Corvette 427 coupe, numbers matching, restored, 105,902 title-verified miles</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>105,902</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>Butternut Yellow</dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill ok">Numbers match</span><span class="pill dim">Dealer</span></div>
+    <p class="note">Butternut Yellow. Classic Auto Mall consignment at $54,900 despite 105k miles, which shows how little mileage moves these cars once they are restored.</p>
+    <p class="seller"><b>Classic Auto Mall</b> · Morgantown, Pennsylvania · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/2096296/1969-chevrolet-corvette-for-sale-in-morgantown-pennsylvania-19543" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="http://www.classicautomall.com" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="hm-durham"><article class="card" data-tier="core" data-code="L71" data-body="Coupe" data-price="55000">
+  <a class="ph" href="https://www.hemmings.com/classifieds/listing/1969-chevrolet-corvette-durham-ct-2966569" target="_blank" rel="noopener"><img src="p/hm-durham.jpg" alt="1969 Corvette 427/435 L71 Coupe, Muncie 4-speed, side pipes" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$55,000</span><span class="code">L71 427/435 Tri-Power</span></div>
+    <h3>1969 Corvette 427/435 L71 Coupe, Muncie 4-speed, side pipes</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>44,807</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>Cortez Silver</dd></div>
+      <div><dt>Trans</dt><dd>Muncie 4-speed</dd></div>
+    </dl>
+    <div class="pills"><span class="pill dim">Numbers not stated</span><span class="pill dim">Private</span></div>
+    <p class="note">Rally wheels, redline tires. Short listing, documentation not stated.</p>
+    <p class="seller"><b>Private seller (Hemmings classified)</b> · Durham, CT · via Hemmings</p>
+    <div class="acts"><a class="btn" href="https://www.hemmings.com/classifieds/listing/1969-chevrolet-corvette-durham-ct-2966569" target="_blank" rel="noopener">Open listing</a></div>
+  </div>
+</article></div>
+<div id="cc-2003545"><article class="card" data-tier="core" data-code="L36" data-body="Coupe" data-price="56000">
+  <a class="ph" href="https://classiccars.com/listings/view/2003545/1969-chevrolet-corvette-for-sale-in-conroe-texas-77304" target="_blank" rel="noopener"><img src="p/cc-2003545.jpg" alt="1969 Corvette L36 427/390 4-speed, numbers matching, 59,553 miles" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$56,000</span><span class="code">L36 427/390</span></div>
+    <h3>1969 Corvette L36 427/390 4-speed, numbers matching, 59,553 miles</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>59,553</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>Tuxedo Black</dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill ok">Numbers match</span><span class="pill dim">Private</span></div>
+    <p class="note">Private seller, second owner since 1972, factory side exhaust (N14), Vintage Air added 2013, records. Price firm at $56,000. Nearly the same mileage as Shawn&#x27;s car.</p>
+    <p class="seller"><b>Private Seller</b> · CONROE, Texas · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/2003545/1969-chevrolet-corvette-for-sale-in-conroe-texas-77304" target="_blank" rel="noopener">Open listing</a></div>
+  </div>
+</article></div>
+<div id="cc-2083728"><article class="card" data-tier="core" data-code="L36" data-body="Coupe" data-price="59000">
+  <a class="ph" href="https://classiccars.com/listings/view/2083728/1969-chevrolet-corvette-for-sale-in-colombus-ohio-43201" target="_blank" rel="noopener"><img src="p/cc-2083728.jpg" alt="1969 Corvette 427/390 coupe, one owner since 1970, tank sticker, 21,308 miles" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$59,000</span><span class="code">L36 427/390</span></div>
+    <h3>1969 Corvette 427/390 coupe, one owner since 1970, tank sticker, 21,308 miles</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>21,308</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>Yellow</dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill ok">Numbers match</span><span class="pill dim">Dealer</span></div>
+    <p class="note">Older repaint in the original Daytona Yellow, original interior, original engine inspected. Same car appears to be listed by Haggle Me in Hobart, IN at $62,900.</p>
+    <p class="seller"><b>Arena Motor Sales</b> · Colombus, Ohio · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/2083728/1969-chevrolet-corvette-for-sale-in-colombus-ohio-43201" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="http://www.arenamotor.com" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="hm-vineland"><article class="card" data-tier="core" data-code="L68" data-body="Convertible" data-price="59900">
+  <a class="ph" href="https://www.hemmings.com/listing/1969-chevrolet-corvette-vineland-nj-584780" target="_blank" rel="noopener"><img src="p/hm-vineland.jpg" alt="1969 Corvette Convertible L68 427/400 Tri-Power, 4-speed" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$59,900</span><span class="code">L68 427/400 Tri-Power</span></div>
+    <h3>1969 Corvette Convertible L68 427/400 Tri-Power, 4-speed</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>115,000 (shows 15,000)</dd></div>
+      <div><dt>Body</dt><dd>Convertible</dd></div>
+      <div><dt>Color</dt><dd>LeMans Blue (orig. Fathom Green 983 / green interior)</dd></div>
+      <div><dt>Trans</dt><dd>M21 4-speed</dd></div>
+    </dl>
+    <div class="pills"><span class="pill ok">Numbers match</span><span class="pill dim">Private</span></div>
+    <p class="note">Factory Fathom Green car repainted LeMans Blue. Original block and trans, side exhaust, hardtop. 15-foot paint with cracks, needs carpet. Driver quality.</p>
+    <p class="seller"><b>Private seller (Hemmings Make Offer)</b> · Vineland, NJ · via Hemmings</p>
+    <div class="acts"><a class="btn" href="https://www.hemmings.com/listing/1969-chevrolet-corvette-vineland-nj-584780" target="_blank" rel="noopener">Open listing</a></div>
+  </div>
+</article></div>
+<div id="cc-2107345"><article class="card" data-tier="core" data-code="L68" data-body="Convertible" data-price="65000">
+  <a class="ph" href="https://classiccars.com/listings/view/2107345/1969-chevrolet-corvette-for-sale-in-east-china-michigan-48054" target="_blank" rel="noopener"><img src="p/cc-2107345.jpg" alt="1969 Corvette L68 427/400 Tri-Power convertible, 4-speed, matching numbers" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$65,000</span><span class="code">L68 427/400 Tri-Power</span></div>
+    <h3>1969 Corvette L68 427/400 Tri-Power convertible, 4-speed, matching numbers</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>17,195</dd></div>
+      <div><dt>Body</dt><dd>Convertible</dd></div>
+      <div><dt>Color</dt><dd>Burgundy</dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill ok">Numbers match</span><span class="pill dim">Private</span></div>
+    <p class="note">Private seller in Michigan. Restored around 2015, new leather 2021, new glass and bumpers. 17,195 miles showing. Asking $65,000.</p>
+    <p class="seller"><b>Private Seller</b> · East China, Michigan · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/2107345/1969-chevrolet-corvette-for-sale-in-east-china-michigan-48054" target="_blank" rel="noopener">Open listing</a></div>
+  </div>
+</article></div>
+<div id="cc-1842197"><article class="card" data-tier="core" data-code="L68" data-body="Coupe" data-price="66000">
+  <a class="ph" href="https://classiccars.com/listings/view/1842197/1969-chevrolet-corvette-stingray-for-sale-in-red-deer-county-alberta-t0m0k0" target="_blank" rel="noopener"><img src="p/cc-1842197.jpg" alt="1969 Corvette L68 427/400 Tri-Power T-top coupe, 4-speed, numbers matching" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$66,000</span><span class="code">L68 427/400 Tri-Power</span></div>
+    <h3>1969 Corvette L68 427/400 Tri-Power T-top coupe, 4-speed, numbers matching</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>48,083</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>Cortez Silver</dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill ok">Numbers match</span><span class="pill dim">Private</span></div>
+    <p class="note">Private seller in Alberta, Canada, Cortez Silver over black, 48,083 miles. Listed at $66,000 (likely CAD) so treat it as a direction, not a dollar comp.</p>
+    <p class="seller"><b>Private Seller</b> · Red Deer County, Alberta · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/1842197/1969-chevrolet-corvette-stingray-for-sale-in-red-deer-county-alberta-t0m0k0" target="_blank" rel="noopener">Open listing</a></div>
+  </div>
+</article></div></div></section><section class="tier" id="tier-top"><h2>Top of the market <span class="cnt">11</span></h2><div class="grid"><div id="at-102791051"><article class="card" data-tier="top" data-code="L68" data-body="Convertible" data-price="84000">
+  <a class="ph" href="https://classics.autotrader.com/classic-cars/1969/chevrolet/corvette/102791051" target="_blank" rel="noopener"><img src="p/at-102791051.jpg" alt="1969 Corvette Convertible 427 L68 Tri-Power 4-speed, frame-off restoration" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$84,000</span><span class="code">L68 427/400 Tri-Power</span></div>
+    <h3>1969 Corvette Convertible 427 L68 Tri-Power 4-speed, frame-off restoration</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>90,944</dd></div>
+      <div><dt>Body</dt><dd>Convertible</dd></div>
+      <div><dt>Color</dt><dd>Monza Red / Black</dd></div>
+      <div><dt>Trans</dt><dd>4-speed</dd></div>
+    </dl>
+    <div class="pills"><span class="pill dim">Numbers not stated</span><span class="pill dim">Dealer</span></div>
+    <p class="note">Frame-off, factory-correct restoration, hard top included. $1,299 dealer fee on top.</p>
+    <p class="seller"><b>Exotic Car Trader</b> · Fort Lauderdale, FL · via Classics on Autotrader</p>
+    <div class="acts"><a class="btn" href="https://classics.autotrader.com/classic-cars/1969/chevrolet/corvette/102791051" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="https://www.exoticcartrader.com" target="_blank" rel="noopener">Dealer website</a><span class="phone">(888) 546-9784</span></div>
+  </div>
+</article></div>
+<div id="at-102806424"><article class="card" data-tier="top" data-code="L68" data-body="Convertible" data-price="85000">
+  <a class="ph" href="https://classics.autotrader.com/classic-cars/1969/chevrolet/corvette/102806424" target="_blank" rel="noopener"><img src="p/at-102806424.jpg" alt="1969 Corvette Convertible L68 427/400 Tri-Power, Tremec 5-speed, tank sticker" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$85,000</span><span class="code">L68 427/400 Tri-Power</span></div>
+    <h3>1969 Corvette Convertible L68 427/400 Tri-Power, Tremec 5-speed, tank sticker</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>90,330</dd></div>
+      <div><dt>Body</dt><dd>Convertible</dd></div>
+      <div><dt>Color</dt><dd>Daytona Yellow / Black</dd></div>
+      <div><dt>Trans</dt><dd>Tremec TKX 5-speed (new)</dd></div>
+    </dl>
+    <div class="pills"><span class="pill dim">Numbers not stated</span><span class="pill dim">Dealer</span></div>
+    <p class="note">Show quality, 5-speed swap, two tops, added power steering. Also listed on FB Marketplace at $85,000.</p>
+    <p class="seller"><b>Napoli Classics</b> · Milford, CT · via Classics on Autotrader</p>
+    <div class="acts"><a class="btn" href="https://classics.autotrader.com/classic-cars/1969/chevrolet/corvette/102806424" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="https://www.napoliclassics.com" target="_blank" rel="noopener">Dealer website</a><span class="phone">(877) 792-9901</span></div>
+  </div>
+</article></div>
+<div id="fb-2067044114018269"><article class="card" data-tier="top" data-code="L68" data-body="Coupe" data-price="85000">
+  <a class="ph" href="https://www.facebook.com/marketplace/item/2067044114018269/" target="_blank" rel="noopener"><img src="p/fb-2067044114018269.jpg" alt="1969 Corvette Stingray 427/400 4-speed coupe, factory A/C, T-tops" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$85,000</span><span class="code">L68 427/400 Tri-Power</span></div>
+    <h3>1969 Corvette Stingray 427/400 4-speed coupe, factory A/C, T-tops</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>not stated</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>not stated</dd></div>
+      <div><dt>Trans</dt><dd>4-speed</dd></div>
+    </dl>
+    <div class="pills"><span class="pill dim">Numbers not stated</span><span class="pill dim">Private</span></div>
+    <p class="note">Seller says perfect condition, clear-coated a few years back, open to trades, price negotiable. Listed 11 weeks ago.</p>
+    <p class="seller"><b>Private seller (David A Brown)</b> · Homestead, FL · via Facebook Marketplace</p>
+    <div class="acts"><a class="btn" href="https://www.facebook.com/marketplace/item/2067044114018269/" target="_blank" rel="noopener">Open listing</a></div>
+  </div>
+</article></div>
+<div id="hm-milfordct"><article class="card" data-tier="top" data-code="L68" data-body="Coupe" data-price="89000">
+  <a class="ph" href="https://www.hemmings.com/classifieds/listing/1969-chevrolet-corvette-milford-ct-2964933" target="_blank" rel="noopener"><img src="p/hm-milfordct.jpg" alt="1969 Corvette Coupe L68 427/400 Tri-Power, matching numbers, factory Fathom Green car" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$89,000</span><span class="code">L68 427/400 Tri-Power</span></div>
+    <h3>1969 Corvette Coupe L68 427/400 Tri-Power, matching numbers, factory Fathom Green car</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>56,590 (actual)</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>Black (body tag PNT 983 Fathom Green)</dd></div>
+      <div><dt>Trans</dt><dd>4-speed</dd></div>
+    </dl>
+    <div class="pills"><span class="pill ok">Numbers match</span><span class="pill dim">Dealer</span></div>
+    <p class="note">Born Fathom Green per trim tag, now black. $150k restoration, window sticker, side pipes, T-tops, Barrett-Jackson purchase 18 years ago. Show-quality top of range.</p>
+    <p class="seller"><b>Napoli Classics</b> · Milford, CT · via Hemmings</p>
+    <div class="acts"><a class="btn" href="https://www.hemmings.com/classifieds/listing/1969-chevrolet-corvette-milford-ct-2964933" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="https://www.napoliclassics.com" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="fb-29112404781744113"><article class="card" data-tier="top" data-code="L71" data-body="Convertible" data-price="95000">
+  <a class="ph" href="https://www.facebook.com/marketplace/item/29112404781744113/" target="_blank" rel="noopener"><img src="p/fb-29112404781744113.jpg" alt="1969 Corvette 427/435 L71 Convertible, numbers matching, body-off restoration" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$95,000</span><span class="code">L71 427/435 Tri-Power</span></div>
+    <h3>1969 Corvette 427/435 L71 Convertible, numbers matching, body-off restoration</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>66,135</dd></div>
+      <div><dt>Body</dt><dd>Convertible</dd></div>
+      <div><dt>Color</dt><dd>Cortez Silver / Black</dd></div>
+      <div><dt>Trans</dt><dd>M21 4-speed, numbers matching</dd></div>
+    </dl>
+    <div class="pills"><span class="pill ok">Numbers match</span><span class="pill dim">Private</span></div>
+    <p class="note">Comprehensive body-off restoration, two tops, 3.70 Posi, OBO. Listed 3 days ago.</p>
+    <p class="seller"><b>Private seller (Joshua Newman)</b> · New Smyrna Beach, FL · via Facebook Marketplace</p>
+    <div class="acts"><a class="btn" href="https://www.facebook.com/marketplace/item/29112404781744113/" target="_blank" rel="noopener">Open listing</a></div>
+  </div>
+</article></div>
+<div id="cc-2121249"><article class="card" data-tier="top" data-code="L68" data-body="Convertible" data-price="100000">
+  <a class="ph" href="https://classiccars.com/listings/view/2121249/1969-chevrolet-corvette-for-sale-in-morgantown-pennsylvania-19543" target="_blank" rel="noopener"><img src="p/cc-2121249.jpg" alt="1969 Corvette L68 427/400 convertible, 4-speed, 1,341 miles since restoration" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$100,000</span><span class="code">L68 427/400 Tri-Power</span></div>
+    <h3>1969 Corvette L68 427/400 convertible, 4-speed, 1,341 miles since restoration</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>1,341</dd></div>
+      <div><dt>Body</dt><dd>Convertible</dd></div>
+      <div><dt>Color</dt><dd>Can-Am White</dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill dim">Numbers not stated</span><span class="pill dim">Dealer</span></div>
+    <p class="note">Classic Auto Mall, Can-Am White. $100,000 ask for a fully restored Tri-Power convertible.</p>
+    <p class="seller"><b>Classic Auto Mall</b> · Morgantown, Pennsylvania · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/2121249/1969-chevrolet-corvette-for-sale-in-morgantown-pennsylvania-19543" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="http://www.classicautomall.com" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="cc-1442442"><article class="card" data-tier="top" data-code="L71" data-body="Convertible" data-price="115000">
+  <a class="ph" href="https://classiccars.com/listings/view/1442442/1969-chevrolet-corvette-stingray-for-sale-in-sarasota-florida-34238" target="_blank" rel="noopener"><img src="p/cc-1442442.jpg" alt="1969 Corvette L71 427/435 convertible, matching numbers, 2,996 miles" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$115,000</span><span class="code">L71 427/435 Tri-Power</span></div>
+    <h3>1969 Corvette L71 427/435 convertible, matching numbers, 2,996 miles</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>2,700</dd></div>
+      <div><dt>Body</dt><dd>Convertible</dd></div>
+      <div><dt>Color</dt><dd>Daytona Yellow</dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill ok">Numbers match</span><span class="pill dim">Private</span></div>
+    <p class="note">Private seller in Sarasota, Daytona Yellow. $115,000. Listed for a long time, which says the ask is high.</p>
+    <p class="seller"><b>Private Seller</b> · Sarasota, Florida · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/1442442/1969-chevrolet-corvette-stingray-for-sale-in-sarasota-florida-34238" target="_blank" rel="noopener">Open listing</a></div>
+  </div>
+</article></div>
+<div id="cc-2086021"><article class="card" data-tier="top" data-code="L36" data-body="Coupe" data-price="118960">
+  <a class="ph" href="https://classiccars.com/listings/view/2086021/1969-chevrolet-corvette-for-sale-in-aiken-south-carolina-29801" target="_blank" rel="noopener"><img src="p/cc-2086021.jpg" alt="1969 Corvette L36 427/390 coupe, Muncie M21, factory A/C, award-winning restoration" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$118,960</span><span class="code">L36 427/390</span></div>
+    <h3>1969 Corvette L36 427/390 coupe, Muncie M21, factory A/C, award-winning restoration</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>1,975</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>Monza Red</dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill ok">Numbers match</span><span class="pill dim">Dealer</span></div>
+    <p class="note">Car Cave USA. 27 years of one ownership, professional restoration, 1,975 miles since. $118,960 is show-car money for an L36 and shows the ceiling for a perfect car.</p>
+    <p class="seller"><b>Car Cave USA</b> · Aiken, South Carolina · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/2086021/1969-chevrolet-corvette-for-sale-in-aiken-south-carolina-29801" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="http://www.carcaveusa.com" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="cc-2043478"><article class="card" data-tier="top" data-code="L71" data-body="Coupe" data-price="124000">
+  <a class="ph" href="https://classiccars.com/listings/view/2043478/1969-chevrolet-corvette-for-sale-in-caledonia-wisconsin-53126" target="_blank" rel="noopener"><img src="p/cc-2043478.jpg" alt="1969 Corvette L71 427/435 T-top, 6,931 original miles, Bloomington Gold 2025" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$124,000</span><span class="code">L71 427/435 Tri-Power</span></div>
+    <h3>1969 Corvette L71 427/435 T-top, 6,931 original miles, Bloomington Gold 2025</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>6,931</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>Le Mans Blue</dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill ok">Numbers match</span><span class="pill dim">Dealer</span></div>
+    <p class="note">Gateway Classic Cars of Milwaukee, LeMans Blue, unrestored with original exhaust. $124,000.</p>
+    <p class="seller"><b>Gateway Classic Cars of Milwaukee</b> · Caledonia, Wisconsin · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/2043478/1969-chevrolet-corvette-for-sale-in-caledonia-wisconsin-53126" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="http://gatewayclassiccars.com/vehicles" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="cc-1998009"><article class="card" data-tier="top" data-code="427" data-body="Coupe" data-price="125000">
+  <a class="ph" href="https://classiccars.com/listings/view/1998009/1969-chevrolet-corvette-stingray-for-sale-in-old-forge-pennsylvania-18518" target="_blank" rel="noopener"><img src="p/cc-1998009.jpg" alt="1969 Corvette big block survivor, 24,000 miles, unrestored, 2024 NCRS Top Flight" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$125,000</span><span class="code">427 (code not stated)</span></div>
+    <h3>1969 Corvette big block survivor, 24,000 miles, unrestored, 2024 NCRS Top Flight</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>24,000</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>Can-Am White</dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill ok">Numbers match</span><span class="pill dim">Dealer</span></div>
+    <p class="note">Coffee&#x27;s Sports and Classics, Can-Am White. $125,000 for an unrestored, fully documented original.</p>
+    <p class="seller"><b>Coffee&#x27;s Sports and Classics</b> · Old Forge, Pennsylvania · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/1998009/1969-chevrolet-corvette-stingray-for-sale-in-old-forge-pennsylvania-18518" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="http://www.coffeescorvettes.com" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="cc-1948022"><article class="card" data-tier="top" data-code="L89" data-body="Coupe" data-price="145000">
+  <a class="ph" href="https://classiccars.com/listings/view/1948022/1969-chevrolet-corvette-l82-for-sale-in-libur-georgia-30047" target="_blank" rel="noopener"><img src="p/cc-1948022.jpg" alt="1969 Corvette L89 427/435 aluminum-head coupe, 1 of 390, Tuxedo Black" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$145,000</span><span class="code">L89 427/435 alum. heads</span></div>
+    <h3>1969 Corvette L89 427/435 aluminum-head coupe, 1 of 390, Tuxedo Black</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>not stated</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>not stated</dd></div>
+      <div><dt>Trans</dt><dd>not stated</dd></div>
+    </dl>
+    <div class="pills"><span class="pill dim">Numbers not stated</span><span class="pill dim">Dealer</span></div>
+    <p class="note">American Street Machines, Georgia. $145,000. L89 is a different market from L36/L68.</p>
+    <p class="seller"><b>American Street Machines</b> · Libur, Georgia · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/1948022/1969-chevrolet-corvette-l82-for-sale-in-libur-georgia-30047" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="http://www.americanstreetmachinesinc.com" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div></div></section><section class="tier" id="tier-mod"><h2>Modified 427s <span class="cnt">11</span></h2><div class="grid"><div id="fb-1998409197516414"><article class="card" data-tier="mod" data-code="L36" data-body="Convertible" data-price="27000">
+  <a class="ph" href="https://www.facebook.com/marketplace/item/1998409197516414/" target="_blank" rel="noopener"><img src="p/fb-1998409197516414.jpg" alt="1969 Corvette convertible 427/390 4-speed, replacement 427, needs repaint" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$27,000</span><span class="code">L36 427/390</span></div>
+    <h3>1969 Corvette convertible 427/390 4-speed, replacement 427, needs repaint</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>82,000</dd></div>
+      <div><dt>Body</dt><dd>Convertible</dd></div>
+      <div><dt>Color</dt><dd>Blue / Blue</dd></div>
+      <div><dt>Trans</dt><dd>4-speed</dd></div>
+    </dl>
+    <div class="pills"><span class="pill warn">Non-matching</span><span class="pill dim">Private</span></div>
+    <p class="note">Both tops, power steering, new carb and alternator, worn original interior, needs repaint. Listed a week ago.</p>
+    <p class="seller"><b>Private seller (Gary via Erin Strayhorn)</b> · Tulsa, OK · via Facebook Marketplace</p>
+    <div class="acts"><a class="btn" href="https://www.facebook.com/marketplace/item/1998409197516414/" target="_blank" rel="noopener">Open listing</a></div>
+  </div>
+</article></div>
+<div id="hm-westby"><article class="card" data-tier="mod" data-code="427" data-body="Convertible" data-price="41000">
+  <a class="ph" href="https://www.hemmings.com/auction/1969-chevrolet-corvette-westby-wi-320048" target="_blank" rel="noopener"><img src="p/hm-westby.jpg" alt="1969 Corvette Convertible, replacement 427 w/ Tri-Power, Richmond 5-speed" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$41,000</span><span class="code">427 (code not stated)</span></div>
+    <h3>1969 Corvette Convertible, replacement 427 w/ Tri-Power, Richmond 5-speed</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>83,877 (TMU)</dd></div>
+      <div><dt>Body</dt><dd>Convertible</dd></div>
+      <div><dt>Color</dt><dd>Monza Red (orig. Cortez Silver)</dd></div>
+      <div><dt>Trans</dt><dd>5-speed manual (Richmond, swapped)</dd></div>
+    </dl>
+    <div class="pills"><span class="pill warn">Non-matching</span><span class="pill dim">Private</span></div>
+    <p class="note">Color change, engine replaced, 5-speed swap. Highest offer $33,333 so far. Modified car, not an originality comp.</p>
+    <p class="seller"><b>Private seller (Hemmings Make Offer)</b> · Westby, WI · via Hemmings</p>
+    <div class="acts"><a class="btn" href="https://www.hemmings.com/auction/1969-chevrolet-corvette-westby-wi-320048" target="_blank" rel="noopener">Open listing</a></div>
+  </div>
+</article></div>
+<div id="cc-2080149"><article class="card" data-tier="mod" data-code="427" data-body="Coupe" data-price="49999">
+  <a class="ph" href="https://classiccars.com/listings/view/2080149/1969-chevrolet-corvette-for-sale-in-sherman-texas-75092" target="_blank" rel="noopener"><img src="p/cc-2080149.jpg" alt="1969 Corvette 427 big block coupe, 4-speed, red over black" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$49,999</span><span class="code">427 (code not stated)</span></div>
+    <h3>1969 Corvette 427 big block coupe, 4-speed, red over black</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>14</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>Red</dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill warn">Non-matching</span><span class="pill dim">Dealer</span></div>
+    <p class="note">Gearhead Classics. Aluminum intake, headers, four-wheel discs. Listing does not claim original numbers; 14 miles showing (TMU). $49,999.</p>
+    <p class="seller"><b>Gearhead Classics</b> · Sherman, Texas · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/2080149/1969-chevrolet-corvette-for-sale-in-sherman-texas-75092" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="http://gearheadclassics.com/" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="fb-1475529814470841"><article class="card" data-tier="mod" data-code="L68" data-body="Convertible" data-price="50000">
+  <a class="ph" href="https://www.facebook.com/marketplace/item/1475529814470841/" target="_blank" rel="noopener"><img src="p/fb-1475529814470841.jpg" alt="1969 Corvette roadster, born L68 427/400 4-speed, one family, modified for track" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$50,000</span><span class="code">L68 427/400 Tri-Power</span></div>
+    <h3>1969 Corvette roadster, born L68 427/400 4-speed, one family, modified for track</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>16,000 (as listed)</dd></div>
+      <div><dt>Body</dt><dd>Convertible</dd></div>
+      <div><dt>Color</dt><dd>Black / Black (triple black)</dd></div>
+      <div><dt>Trans</dt><dd>Original M21 4-speed, rebuilt</dd></div>
+    </dl>
+    <div class="pills"><span class="pill ok">Numbers match</span><span class="pill dim">Private</span></div>
+    <p class="note">One family, two tops, raced at Lime Rock, rack and pinion, coil-overs, headers and side pipes. Binder of receipts. Listed 6 days ago.</p>
+    <p class="seller"><b>Private seller (Matthew Henault)</b> · Assonet, MA · via Facebook Marketplace</p>
+    <div class="acts"><a class="btn" href="https://www.facebook.com/marketplace/item/1475529814470841/" target="_blank" rel="noopener">Open listing</a></div>
+  </div>
+</article></div>
+<div id="fb-1426507729602488"><article class="card" data-tier="mod" data-code="427" data-body="Convertible" data-price="50000">
+  <a class="ph" href="https://www.facebook.com/marketplace/item/1426507729602488/" target="_blank" rel="noopener"><img src="p/fb-1426507729602488.jpg" alt="1969 Corvette convertible 427 restomod, L88 tribute, frame-off (not numbers matching)" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$50,000</span><span class="code">427 (code not stated)</span></div>
+    <h3>1969 Corvette convertible 427 restomod, L88 tribute, frame-off (not numbers matching)</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>34,000 (TMU)</dd></div>
+      <div><dt>Body</dt><dd>Convertible</dd></div>
+      <div><dt>Color</dt><dd>Monza Red / Black</dd></div>
+      <div><dt>Trans</dt><dd>4-speed</dd></div>
+    </dl>
+    <div class="pills"><span class="pill warn">Non-matching</span><span class="pill dim">Private</span></div>
+    <p class="note">Florida car, frame-off, C50 rear defrost. Restomod, reasonable offers. Listed 19 hours ago.</p>
+    <p class="seller"><b>Private seller (Mark Antczak)</b> · Scandia, MN · via Facebook Marketplace</p>
+    <div class="acts"><a class="btn" href="https://www.facebook.com/marketplace/item/1426507729602488/" target="_blank" rel="noopener">Open listing</a></div>
+  </div>
+</article></div>
+<div id="cc-2113770"><article class="card" data-tier="mod" data-code="427" data-body="Coupe" data-price="59500">
+  <a class="ph" href="https://classiccars.com/listings/view/2113770/1969-chevrolet-corvette-for-sale-in-auburn-indiana-46706" target="_blank" rel="noopener"><img src="p/cc-2113770.jpg" alt="1969 Corvette coupe, replacement 427 and replacement Muncie 4-speed" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$59,500</span><span class="code">427 (code not stated)</span></div>
+    <h3>1969 Corvette coupe, replacement 427 and replacement Muncie 4-speed</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>63,681</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>Blue</dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill warn">Non-matching</span><span class="pill dim">Dealer</span></div>
+    <p class="note">Older LeMans Blue repaint, side pipes. Non-matching drivetrain, which is why a dealer asks $59,500 for a car that would be $70k+ with its numbers.</p>
+    <p class="seller"><b>Auburn Classic Cars</b> · Auburn, Indiana · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/2113770/1969-chevrolet-corvette-for-sale-in-auburn-indiana-46706" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="http://auburnclassiccars.com" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="hm-redmond"><article class="card" data-tier="mod" data-code="L68" data-body="Coupe (T-top)" data-price="68950">
+  <a class="ph" href="https://www.hemmings.com/classifieds/listing/1969-chevrolet-corvette-redmond-wa-2958191" target="_blank" rel="noopener"><img src="p/hm-redmond.jpg" alt="1969 Corvette Coupe, period-correct L68 427/400 Tri-Power swap, 6-year restoration" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$68,950</span><span class="code">L68 427/400 Tri-Power</span></div>
+    <h3>1969 Corvette Coupe, period-correct L68 427/400 Tri-Power swap, 6-year restoration</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>570 since restoration</dd></div>
+      <div><dt>Body</dt><dd>Coupe (T-top)</dd></div>
+      <div><dt>Color</dt><dd>LeMans Blue (orig. Can-Am White)</dd></div>
+      <div><dt>Trans</dt><dd>Automatic</dd></div>
+    </dl>
+    <div class="pills"><span class="pill warn">Non-matching</span><span class="pill dim">Dealer</span></div>
+    <p class="note">Born a 350 automatic A/C car; big block installed, Vintage Air, coil-overs, MSD. Restomod-leaning, not an originality comp.</p>
+    <p class="seller"><b>Authentic Motorcars</b> · Redmond, WA · via Hemmings</p>
+    <div class="acts"><a class="btn" href="https://www.hemmings.com/classifieds/listing/1969-chevrolet-corvette-redmond-wa-2958191" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="https://www.authenticmotorcars.com" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="cc-2109154"><article class="card" data-tier="mod" data-code="L71" data-body="Convertible" data-price="69000">
+  <a class="ph" href="https://classiccars.com/listings/view/2109154/1969-chevrolet-corvette-for-sale-in-colombus-ohio-43201" target="_blank" rel="noopener"><img src="p/cc-2109154.jpg" alt="1969 Corvette roadster, 427 Tri-Power tribute (non-original block, ZL1-style heads), A/C" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$69,000</span><span class="code">L71 427/435 Tri-Power</span></div>
+    <h3>1969 Corvette roadster, 427 Tri-Power tribute (non-original block, ZL1-style heads), A/C</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>511</dd></div>
+      <div><dt>Body</dt><dd>Convertible</dd></div>
+      <div><dt>Color</dt><dd>Yellow</dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill warn">Non-matching</span><span class="pill dim">Dealer</span></div>
+    <p class="note">Arena Motor Sales, Columbus OH. Frame-off about 10 years ago, 511 miles since. $69,000 for a well-built tribute.</p>
+    <p class="seller"><b>Arena Motor Sales</b> · Colombus, Ohio · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/2109154/1969-chevrolet-corvette-for-sale-in-colombus-ohio-43201" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="http://www.arenamotor.com" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="cc-2075192"><article class="card" data-tier="mod" data-code="L71" data-body="Convertible" data-price="75900">
+  <a class="ph" href="https://classiccars.com/listings/view/2075192/1969-chevrolet-corvette-for-sale-in-hobart-indiana-46342" target="_blank" rel="noopener"><img src="p/cc-2075192.jpg" alt="1969 Corvette convertible 427/435, non-original but period-correct, ZL1 aluminum heads" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$75,900</span><span class="code">L71 427/435 Tri-Power</span></div>
+    <h3>1969 Corvette convertible 427/435, non-original but period-correct, ZL1 aluminum heads</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>not stated</dd></div>
+      <div><dt>Body</dt><dd>Convertible</dd></div>
+      <div><dt>Color</dt><dd>not stated</dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill warn">Non-matching</span><span class="pill dim">Dealer</span></div>
+    <p class="note">Haggle Me, Hobart IN (about an hour from Manteno). Fresh restoration, Daytona Yellow. $75,900 with a non-matching engine shows the premium the 435 badge still carries.</p>
+    <p class="seller"><b>Haggle Me</b> · Hobart, Indiana · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/2075192/1969-chevrolet-corvette-for-sale-in-hobart-indiana-46342" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="http://haggleme.com/" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="cc-1977513"><article class="card" data-tier="mod" data-code="L36" data-body="Coupe" data-price="79900">
+  <a class="ph" href="https://classiccars.com/listings/view/1977513/1969-chevrolet-corvette-for-sale-in-montgomery-texas-77316" target="_blank" rel="noopener"><img src="p/cc-1977513.jpg" alt="1969 Corvette 427/390 numbers-matching resto-mod, factory side pipes, frame-off" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$79,900</span><span class="code">L36 427/390</span></div>
+    <h3>1969 Corvette 427/390 numbers-matching resto-mod, factory side pipes, frame-off</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>53,245</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>Cortez Silver</dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill ok">Numbers match</span><span class="pill dim">Private</span></div>
+    <p class="note">Private seller in Texas. Documented nut-and-bolt restoration with upgrades to about 420 hp. Was $95,000 OBO, now $79,900 OBO.</p>
+    <p class="seller"><b>Private Seller</b> · Montgomery, Texas · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/1977513/1969-chevrolet-corvette-for-sale-in-montgomery-texas-77316" target="_blank" rel="noopener">Open listing</a></div>
+  </div>
+</article></div>
+<div id="cc-1997657"><article class="card" data-tier="mod" data-code="L71" data-body="Coupe" data-price="80000">
+  <a class="ph" href="https://classiccars.com/listings/view/1997657/1969-chevrolet-corvette-stingray-for-sale-in-toronto-ontario-m9b3j1" target="_blank" rel="noopener"><img src="p/cc-1997657.jpg" alt="1969 Corvette coupe with L71-spec 427/435, Tremec 5-speed, 2,079 miles since restoration" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$80,000</span><span class="code">L71 427/435 Tri-Power</span></div>
+    <h3>1969 Corvette coupe with L71-spec 427/435, Tremec 5-speed, 2,079 miles since restoration</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>2,079</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>River Side Gold </dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill warn">Non-matching</span><span class="pill dim">Private</span></div>
+    <p class="note">Private seller in Toronto. Restored, modern 5-speed. $80,000, likely CAD.</p>
+    <p class="seller"><b>Private Seller</b> · Toronto, Ontario · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/1997657/1969-chevrolet-corvette-stingray-for-sale-in-toronto-ontario-m9b3j1" target="_blank" rel="noopener">Open listing</a></div>
+  </div>
+</article></div></div></section><section class="tier" id="tier-ref"><h2>Context (not a 427 now, or small block) <span class="cnt">10</span></h2><div class="grid"><div id="fb-1444487204503291"><article class="card" data-tier="ref" data-code="L36" data-body="Convertible" data-price="18500">
+  <a class="ph" href="https://www.facebook.com/marketplace/item/1444487204503291/" target="_blank" rel="noopener"><img src="p/fb-1444487204503291.jpg" alt="1969 Corvette convertible 427/390 L36, numbers matching, damaged (trailer accident)" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$18,500</span><span class="code">L36 427/390</span></div>
+    <h3>1969 Corvette convertible 427/390 L36, numbers matching, damaged (trailer accident)</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>59,000</dd></div>
+      <div><dt>Body</dt><dd>Convertible</dd></div>
+      <div><dt>Color</dt><dd>Burgundy / Tan</dd></div>
+      <div><dt>Trans</dt><dd>Muncie M21 4-speed</dd></div>
+    </dl>
+    <div class="pills"><span class="pill ok">Numbers match</span><span class="pill dim">Private</span></div>
+    <p class="note">Body damage from a trailer coming loose; birdcage said to be perfect; runs and drives. Cash only, no offers. Shows what a damaged numbers-matching 427/390 brings. Listed 23 hours ago.</p>
+    <p class="seller"><b>Private seller (Jay Vogel)</b> · Bordentown, NJ · via Facebook Marketplace</p>
+    <div class="acts"><a class="btn" href="https://www.facebook.com/marketplace/item/1444487204503291/" target="_blank" rel="noopener">Open listing</a></div>
+  </div>
+</article></div>
+<div id="cc-2009771"><article class="card" data-tier="ref" data-code="350" data-body="Coupe" data-price="19500">
+  <a class="ph" href="https://classiccars.com/listings/view/2009771/1969-chevrolet-corvette-for-sale-in-milford-ohio-45150" target="_blank" rel="noopener"><img src="p/cc-2009771.jpg" alt="1969 Corvette coupe, Fathom Green, matching-numbers 350/350 4-speed, barn find, not running" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$19,500</span><span class="code">350 small block</span></div>
+    <h3>1969 Corvette coupe, Fathom Green, matching-numbers 350/350 4-speed, barn find, not running</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>48,431</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>Fathom Green </dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill ok">Numbers match</span><span class="pill dim">Dealer</span></div>
+    <p class="note">Ultra Automotive, Milford OH. 48,431 miles, factory A/C, T-tops. $19,500 shows the floor for a Fathom Green car that needs everything.</p>
+    <p class="seller"><b>Ultra Automotive</b> · Milford, Ohio · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/2009771/1969-chevrolet-corvette-for-sale-in-milford-ohio-45150" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="http://www.ultraautomotive.com" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="cc-2086075"><article class="card" data-tier="ref" data-code="454" data-body="Convertible" data-price="33000">
+  <a class="ph" href="https://classiccars.com/listings/view/2086075/1969-chevrolet-corvette-for-sale-in-martinsburg-pennsylvania-16662" target="_blank" rel="noopener"><img src="p/cc-2086075.jpg" alt="1969 Corvette convertible, 454 big block, 4-speed, custom" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$33,000</span><span class="code">454 installed</span></div>
+    <h3>1969 Corvette convertible, 454 big block, 4-speed, custom</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>65,602</dd></div>
+      <div><dt>Body</dt><dd>Convertible</dd></div>
+      <div><dt>Color</dt><dd>Yellow</dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill warn">Non-matching</span><span class="pill dim">Dealer</span></div>
+    <p class="note">Hobby Car Corvettes, PA. 65,602 miles. Cash price $33,000.</p>
+    <p class="seller"><b>Hobby Car Corvettes</b> · MARTINSBURG, Pennsylvania · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/2086075/1969-chevrolet-corvette-for-sale-in-martinsburg-pennsylvania-16662" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="http://www.hobbycarcorvettes.net" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="at-102700251"><article class="card" data-tier="ref" data-code="350" data-body="Coupe" data-price="35988">
+  <a class="ph" href="https://classics.autotrader.com/classic-cars/1969/chevrolet/corvette/102700251" target="_blank" rel="noopener"><img src="p/at-102700251.jpg" alt="1969 Corvette Coupe 350 4-speed, matching numbers, original paint (SMALL BLOCK reference)" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$35,988</span><span class="code">350 small block</span></div>
+    <h3>1969 Corvette Coupe 350 4-speed, matching numbers, original paint (SMALL BLOCK reference)</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>91,452</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>Monaco Orange / Black</dd></div>
+      <div><dt>Trans</dt><dd>4-speed</dd></div>
+    </dl>
+    <div class="pills"><span class="pill dim">Numbers not stated</span><span class="pill dim">Dealer</span></div>
+    <p class="note">Small block. Included only as a local reference for what a 350 car brings.</p>
+    <p class="seller"><b>Bill Kay Corvettes and Classics</b> · Downers Grove, IL · via Classics on Autotrader</p>
+    <div class="acts"><a class="btn" href="https://classics.autotrader.com/classic-cars/1969/chevrolet/corvette/102700251" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="https://www.billkaycorvettes.com" target="_blank" rel="noopener">Dealer website</a><span class="phone">(855) 396-0554</span></div>
+  </div>
+</article></div>
+<div id="cc-2085211"><article class="card" data-tier="ref" data-code="454" data-body="Convertible" data-price="38600">
+  <a class="ph" href="https://classiccars.com/listings/view/2085211/1969-chevrolet-corvette-for-sale-in-fort-myers-florida-33912" target="_blank" rel="noopener"><img src="p/cc-2085211.jpg" alt="1969 Corvette convertible, born a 427 big block, 454 installed, two tops" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$38,600</span><span class="code">454 installed</span></div>
+    <h3>1969 Corvette convertible, born a 427 big block, 454 installed, two tops</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>12,900</dd></div>
+      <div><dt>Body</dt><dd>Convertible</dd></div>
+      <div><dt>Color</dt><dd>Red</dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill warn">Non-matching</span><span class="pill dim">Dealer</span></div>
+    <p class="note">Muscle Cars For Sale Inc, Fort Myers. One owner, 4-speed, side pipes. $38,600 shows what a factory 427 car brings once the original engine is gone.</p>
+    <p class="seller"><b>Muscle Cars For Sale Inc.</b> · Fort Myers, Florida · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/2085211/1969-chevrolet-corvette-for-sale-in-fort-myers-florida-33912" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="http://www.musclecarsforsaleinc.com/" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="fb-1559814502553171"><article class="card" data-tier="ref" data-code="496" data-body="Convertible" data-price="44500">
+  <a class="ph" href="https://www.facebook.com/marketplace/item/1559814502553171/" target="_blank" rel="noopener"><img src="p/fb-1559814502553171.jpg" alt="1969 Corvette convertible listed as 427, actually a 496 BluePrint crate (623 hp)" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$44,500</span><span class="code">496 crate</span></div>
+    <h3>1969 Corvette convertible listed as 427, actually a 496 BluePrint crate (623 hp)</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>10,092 (as listed)</dd></div>
+      <div><dt>Body</dt><dd>Convertible</dd></div>
+      <div><dt>Color</dt><dd>Silver</dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill dim">Numbers not stated</span><span class="pill dim">Private</span></div>
+    <p class="note">Restomod. Listed 9 weeks ago.</p>
+    <p class="seller"><b>Private seller (Gary Pearson)</b> · Ventura, CA · via Facebook Marketplace</p>
+    <div class="acts"><a class="btn" href="https://www.facebook.com/marketplace/item/1559814502553171/" target="_blank" rel="noopener">Open listing</a></div>
+  </div>
+</article></div>
+<div id="cc-2015233"><article class="card" data-tier="ref" data-code="350" data-body="Coupe" data-price="44995">
+  <a class="ph" href="https://classiccars.com/listings/view/2015233/1969-chevrolet-corvette-for-sale-in-cadillac-michigan-49601" target="_blank" rel="noopener"><img src="p/cc-2015233.jpg" alt="1969 Corvette L46 350/350 4-speed, matching numbers, 62,000 miles, Daytona Yellow" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$44,995</span><span class="code">350 small block</span></div>
+    <h3>1969 Corvette L46 350/350 4-speed, matching numbers, 62,000 miles, Daytona Yellow</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>62,000</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>Daytona Yellow</dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill ok">Numbers match</span><span class="pill dim">Dealer</span></div>
+    <p class="note">Classic Car Deals, Cadillac MI. $44,995. A good small-block yardstick: the same car with an L36 would list $10k to $15k higher.</p>
+    <p class="seller"><b>Classic Car Deals</b> · Cadillac, Michigan · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/2015233/1969-chevrolet-corvette-for-sale-in-cadillac-michigan-49601" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="http://www.classiccardeals.com" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="cc-1870383"><article class="card" data-tier="ref" data-code="350" data-body="Convertible" data-price="54000">
+  <a class="ph" href="https://classiccars.com/listings/view/1870383/1969-chevrolet-corvette-stingray-for-sale-in-oceanside-ca%60-95620" target="_blank" rel="noopener"><img src="p/cc-1870383.jpg" alt="1969 Corvette L46 350/350 convertible, matching numbers, born Fathom Green, custom candy paint" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$54,000</span><span class="code">350 small block</span></div>
+    <h3>1969 Corvette L46 350/350 convertible, matching numbers, born Fathom Green, custom candy paint</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>not stated</dd></div>
+      <div><dt>Body</dt><dd>Convertible</dd></div>
+      <div><dt>Color</dt><dd>Candy Wineberry</dd></div>
+      <div><dt>Trans</dt><dd>Manual</dd></div>
+    </dl>
+    <div class="pills"><span class="pill ok">Numbers match</span><span class="pill dim">Private</span></div>
+    <p class="note">Private seller, Oceanside CA, 40-year owner, $20k custom paint. $54,000 OBO. Small block reference.</p>
+    <p class="seller"><b>Private Seller</b> · Oceanside, CA` · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/1870383/1969-chevrolet-corvette-stingray-for-sale-in-oceanside-ca%60-95620" target="_blank" rel="noopener">Open listing</a></div>
+  </div>
+</article></div>
+<div id="cc-2086247"><article class="card" data-tier="ref" data-code="502" data-body="Coupe" data-price="59995">
+  <a class="ph" href="https://classiccars.com/listings/view/2086247/1969-chevrolet-corvette-for-sale-in-addison-illinois-60101" target="_blank" rel="noopener"><img src="p/cc-2086247.jpg" alt="1969 Corvette pro-touring, fuel-injected 502 big block, automatic" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price">$59,995</span><span class="code">502 installed</span></div>
+    <h3>1969 Corvette pro-touring, fuel-injected 502 big block, automatic</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>not stated</dd></div>
+      <div><dt>Body</dt><dd>Coupe</dd></div>
+      <div><dt>Color</dt><dd>Green</dd></div>
+      <div><dt>Trans</dt><dd>Automatic</dd></div>
+    </dl>
+    <div class="pills"><span class="pill warn">Non-matching</span><span class="pill dim">Dealer</span></div>
+    <p class="note">MGM Classic Cars, Addison IL. Custom build at $59,995. Not a comparable, shown because it is local.</p>
+    <p class="seller"><b>MGM Classic Cars</b> · Addison, Illinois · via ClassicCars.com</p>
+    <div class="acts"><a class="btn" href="https://classiccars.com/listings/view/2086247/1969-chevrolet-corvette-for-sale-in-addison-illinois-60101" target="_blank" rel="noopener">Open listing</a><a class="btn ghost" href="http://www.mgmclassiccars.com" target="_blank" rel="noopener">Dealer website</a></div>
+  </div>
+</article></div>
+<div id="fb-867114589731899"><article class="card" data-tier="ref" data-code="454" data-body="Convertible" data-price="70000">
+  <a class="ph" href="https://www.facebook.com/marketplace/item/867114589731899/" target="_blank" rel="noopener"><img src="p/fb-867114589731899.jpg" alt="1969 Corvette 427 convertible, frame-off, 454 installed (original engine included)" loading="lazy"></a>
+  <div class="cb">
+    <div class="row1"><span class="price"><s>$85,000</s> $70,000</span><span class="code">454 installed</span></div>
+    <h3>1969 Corvette 427 convertible, frame-off, 454 installed (original engine included)</h3>
+    <dl>
+      <div><dt>Miles</dt><dd>29,475 (under 100 on rebuild)</dd></div>
+      <div><dt>Body</dt><dd>Convertible</dd></div>
+      <div><dt>Color</dt><dd>Yellow / Black</dd></div>
+      <div><dt>Trans</dt><dd>4-speed</dd></div>
+    </dl>
+    <div class="pills"><span class="pill warn">Non-matching</span><span class="pill dim">Private</span></div>
+    <p class="note">Cut from $85,000. Fully optioned, A/C, power windows. Listed 26 weeks ago.</p>
+    <p class="seller"><b>Private seller (Lucas Renz)</b> · Detroit, MI (car stored near Chicago, IL) · via Facebook Marketplace</p>
+    <div class="acts"><a class="btn" href="https://www.facebook.com/marketplace/item/867114589731899/" target="_blank" rel="noopener">Open listing</a></div>
+  </div>
+</article></div></div></section>
+
+  <div class="panel method" id="method">
+    <h2>How this was built</h2>
+    <ul>
+      <li><b>Sources.</b> Facebook Marketplace searched city by city (Chicago, Dallas, LA, New York, Atlanta, Miami, Detroit, Philadelphia, Houston, Seattle, Nashville, Boston, Minneapolis, St. Louis, Kansas City, Las Vegas, San Francisco, Tampa), every 1969 Corvette on ClassicCars.com (61 listings), Hemmings (52), Classics on Autotrader (57), plus Streetside Classics, Gateway, Schmitt, TheVetteNet, Hagerty auction results.</li>
+      <li><b>What counts as a comp.</b> A factory 427 car (L36, L68 or L71) that still has a 427 in it and is sold as mostly original. Cars with 454/496/502 swaps, LS swaps, pro-touring builds, L88/L89/ZL1 cars and $150k+ restomods are shown separately or left out, because they do not price like Shawn's car.</li>
+      <li><b>Asking is not selling.</b> Dealer asks on this page run roughly 10% to 20% over what cars actually trade for; the five sales (two Hagerty auctions, three dealer sold-tags) are the anchors. The Hagerty L71 convertible that hammered at $44,405 in Feb 2025 is the clearest warning that 435-hp badges do not guarantee $80k.</li>
+      <li><b>Fathom Green.</b> Code 983, offered only in 1969. Three of the five sold anchors are Fathom Green 427 cars at $49,990 to $59,900. Two more Fathom Green big blocks on the market today were repainted (Vineland NJ, now LeMans Blue; Milford CT, now black at $89,000), which is why an unmolested factory-color car has a story to sell.</li>
+      <li><b>Mileage.</b> 58,000 miles is right in the pack: the closest comps run 17k to 106k and price barely moves with miles once a car is restored. Documentation (tank sticker, Protect-O-Plate, NCRS judging) moves it more.</li>
+      <li><b>Dealers you can call.</b> Affordable Classics San Diego, American Street Machines, Arena Motor Sales, Art &amp; Speed, Auburn Classic Cars, Authentic Motorcars, Beverly Hills Car Club, Bill Kay Corvettes and Classics, Car Cave USA, Classic Auto Mall, Classic Car Deals, Coffee&#x27;s Sports and Classics, Exotic Car Trader, Gateway Classic Cars of Detroit, Gateway Classic Cars of Milwaukee, Gearhead Classics, Haggle Me, Hobby Car Corvettes, MGM Classic Cars, Midwest Classic Cars, Muscle Cars For Sale Inc., Napoli Classics, Schmitt, Streetside Classics - Charlotte, Streetside Classics - Phoenix, Ultra Automotive, Whitmore Motors.</li>
+    </ul>
+  </div>
+  <footer>Built October 30, 2026 for Shawn Schroeder. Prices are what sellers asked on that date; listings change daily. 51 of 55 cars have photos pulled from the listing. Not an appraisal.</footer>
+</div>
+<script>
+(function(){
+  var ADJ={"code": {"L36": 0, "L68": 6000, "L71": 22000, "unknown": -3000}, "body": {"Coupe": 0, "Convertible": 5000}, "matching": {"yes": 0, "no": -10000, "unknown": -4000}, "condition": {"show": 20000, "nice": 0, "driver": -8000, "project": -25000}}, LO=50000, HI=60000;
+  var ids=["c_code","c_body","c_match","c_cond"], keys=["code","body","matching","condition"];
+  function fmt(v){return "$"+Math.round(v/500)*500 .toLocaleString("en-US");}
+  function upd(){
+    var lo=LO,hi=HI;
+    ids.forEach(function(id,i){var v=document.getElementById(id).value;var a=ADJ[keys[i]][v]||0;lo+=a;hi+=a;});
+    if(lo<12000)lo=12000; if(hi<lo+6000)hi=lo+6000;
+    document.getElementById("c_out").textContent=fmt(lo)+" to "+fmt(hi);
+    document.getElementById("c_net").textContent=fmt(lo*0.9)+" to "+fmt(hi*0.92);
+  }
+  ids.forEach(function(id){document.getElementById(id).addEventListener("change",upd);});
+  try{ids.forEach(function(id){var s=localStorage.getItem("vette_"+id);if(s)document.getElementById(id).value=s;});}catch(e){}
+  ids.forEach(function(id){document.getElementById(id).addEventListener("change",function(){try{localStorage.setItem("vette_"+id,this.value);}catch(e){}});});
+  upd();
+})();
+</script>
+</body></html>
