@@ -736,7 +736,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 </div>
 
 <script id="analysis-data" type="application/json">{
-    "GeneratedAt":  "2026-10-31 01:38",
+    "GeneratedAt":  "2026-10-31 10:31",
     "PicksAsOf":  "07/24/26",
     "LivePicks":  [
                       {
@@ -34761,7 +34761,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 }
 }</script>
 <script id="tracker-data" type="application/json">{
-"built": "2026-10-31 01:38",
+"built": "2026-10-31 10:31",
 "priced": "2026-10-30",
 "rule": "Buy at the first market open after the stock appeared on that screener; sell at the first open after it dropped off. Still on the list = latest price.",
 "screens": {
@@ -40550,7 +40550,14 @@ function heatCol(v,cap){ cap=cap||8; if(v==null) return {bg:'#2a2e39',fg:'#d1d4d
   return {bg:a<0.5?mix('#e6c445',lo,a/0.5):mix(lo,hi,(a-0.5)/0.5), fg:a<0.22?'#131722':'#fff'}; }
 const fmtPct=v=>v==null?'–':(v>0?'+':'')+(+v).toFixed(1)+'%';
 /* Shawn 2026-10-30: show the gain SINCE A STOCK WAS PICKED, never the run-up before it joined the list. */
+/* Shawn 2026-10-31 ("why is BOOM 10.3 in the 5 stocks most screeners agree on and 9.7 in filtered rank 4"): the
+   stock-wide number uses the same rule as the screener cards - bought at the first market open after the stock came
+   out - from the earliest screener now holding it, not that day's close. The close-based figure is only a fallback. */
 function sincePick(tk){ const h=HEATQ[tk]||{}; const md=d=>d?(+d.slice(5,7))+'/'+(+d.slice(8,10)):'';
+  if(sincePick.T===undefined) sincePick.T=(()=>{ try{ return JSON.parse(document.getElementById('tracker-data').textContent); }catch(e){ return null; } })();
+  const T=sincePick.T; let best=null; if(T&&T.screens) for(const sc of Object.values(T.screens)) for(const x of (sc.trades||[]))
+    if(x.t===tk&&x.open&&x.ret!=null&&x.buyD&&(!best||x.buyD<best.buyD)) best=x;
+  if(best) return {v:best.ret,since:true,lab:'since '+md(best.buyD)+' open'};
   return h.FirstRet!=null&&h.First?{v:h.FirstRet,since:true,lab:'since picked '+md(h.First)}:{v:h.Week==null?null:h.Week,since:false,lab:'last 5 days'}; }
 /* Shawn 2026-10-30: on a screener's card, count from the day THAT screener called the stock (start of its current
    unbroken run in the scans; a stock it dropped and re-picked restarts at the new pick). */
@@ -41840,7 +41847,7 @@ function renderHeroHeat(){ // TOP5-STRIP
       +(sp.since&&t&&t.Week!=null?`<div class="hh-first">last 5 days ${fmt(t.Week)}</div>`:'')
       +`<div class="hh-meta">${r.n} of ${total} screeners · power ${r.power.toFixed(0)}${t&&t.Price!=null?' · $'+(+t.Price).toFixed(2):''}</div></div>`; };
   box.innerHTML=`<div class="hh-head"><span class="hh-title">The 5 stocks the most screeners agree on</span>`+`<span class="hh-sub" style="display:block;color:var(--gold)">Ranked by how many of your screeners hold each stock (better screeners count more), NOT by how the stock is doing. A stock can rank #1 and still be down.</span>`
-    +`<span class="hh-sub">ranked across all ${total} screeners by how many hold each stock, weighted by each screener's track record · picks captured ${asof} · big number and colour = gain since each stock was picked (a brand-new pick starts at 0%) · last 5 trading days in small print${H&&H.WeekFrom?' ('+H.WeekFrom+' to '+H.WeekTo+')':''}, S&amp;P 500 ${H&&H.SpyWeek!=null?fmt(H.SpyWeek):'–'} · hover a stock for its chart, click for the full sheet</span></div>`
+    +`<span class="hh-sub">ranked across all ${total} screeners by how many hold each stock, weighted by each screener's track record · picks captured ${asof} · big number and colour = gain since bought at the first market open after the stock came out, same as the screener cards · last 5 trading days in small print${H&&H.WeekFrom?' ('+H.WeekFrom+' to '+H.WeekTo+')':''}, S&amp;P 500 ${H&&H.SpyWeek!=null?fmt(H.SpyWeek):'–'} · hover a stock for its chart, click for the full sheet</span></div>`
     +`<div class="hh-row">${top.map(tile).join('')}</div>`;
 }
 renderHeroHeat(); renderBottomLine(); renderTracker(); renderTable(); renderPowerCompare(); renderWVM(); renderCombos(); renderPicks();
