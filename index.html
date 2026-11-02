@@ -263,7 +263,7 @@ table.tk th,table.tk td{padding:6px 10px;border-bottom:1px solid var(--hair);tex
 table.tk th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:600}
 table.tk tr.tk-start td{opacity:.55}
 .tk-note{font-size:11px;color:var(--muted)}
-.tk-new{color:var(--new)}
+.tk-new{background:#FFE600;color:#111;border-radius:4px;padding:1px 6px}
 .badge-day{display:inline-block;margin-left:6px;padding:1px 5px;border-radius:4px;font-size:9.5px;font-weight:700;letter-spacing:.04em;background:#1f9d55;color:#fff;vertical-align:middle}
 .yr-real{font-size:12px;line-height:1.55;margin:6px 0 2px;color:var(--muted)}
 .yr-real b{color:inherit;font-weight:700}
@@ -274,6 +274,13 @@ table.tk tr.tk-start td{opacity:.55}
 .cchip .cret{font-family:var(--mono);font-size:11.5px;font-weight:700;opacity:.95;white-space:nowrap}
 .cchip.new{box-shadow:0 0 0 2px var(--new-line)}
 .cchip.new::after{content:"";position:absolute;top:-4px;right:-4px;width:9px;height:9px;border-radius:50%;background:var(--new);border:2px solid var(--surface)}
+.cchip.buyday{border-color:#111;box-shadow:0 0 0 2px #FFE600,0 0 16px 2px rgba(255,230,0,.8)}
+.cchip.buyday .cret{opacity:1;font-weight:800}
+.cchip.buyday::after{display:none}
+.cp-tile.buyday{background:#FFE600;border:2px solid #FFE600;color:#111;box-shadow:0 0 14px 1px rgba(255,230,0,.6)}
+.cp-tile.buyday .cp-co,.cp-tile.buyday .cp-grades,.cp-tile.buyday .cp-nums,.cp-tile.buyday .cp-nums b,.cp-tile.buyday .cp-tk{color:#111}
+.cp-tile.buyday .newtag{background:#111;color:#FFE600;border-color:#111}
+.buykey{display:inline-block;background:#FFE600;color:#111;font-weight:800;border-radius:4px;padding:0 5px;white-space:nowrap}
 .cstocks-legend{display:flex;align-items:center;gap:6px;margin-top:8px;font-size:10.5px;color:var(--muted)}
 .cstocks-legend i{display:inline-block;width:60px;height:7px;border-radius:4px;background:linear-gradient(90deg,#6a0f16,#e5484d,#e6c445,#1f9d55,#0a4a2a)}
 .pod{overflow:hidden}
@@ -403,19 +410,19 @@ tbody tr:hover td:first-child{background:var(--surface-2)}
 .pick{padding:14px 16px;border:1px solid var(--hair);border-radius:8px;background:var(--surface)}
 .pick .pn{font-weight:600;font-size:13.5px} .pick .pf{font-size:11px;color:var(--muted);margin-bottom:9px}
 /* yellow = changed since the previous scan */
-.tick.new{background:var(--new-soft);color:var(--new);border:1px solid var(--new-line);font-weight:800}
+.tick.new{background:#FFE600;color:#111;border:1px solid #FFE600;font-weight:800}
 .optchip{display:inline-block;font-family:var(--sans);font-style:normal;font-size:9px;font-weight:800;letter-spacing:.03em;
   background:var(--surface);color:var(--accent);border:1px solid var(--accent);border-radius:4px;
   padding:0 4px;margin-left:5px;vertical-align:1px}
 .optchip.w{background:var(--accent);color:var(--surface);border-color:var(--accent)}
 /* small grey count on a live-pick chip = scans in a row that screener has held the name */
 .tick .held{font-style:normal;font-family:var(--mono);font-size:9.5px;font-weight:600;color:var(--muted);margin-left:5px;vertical-align:1px;letter-spacing:0}
-.tick.new .held{color:var(--new);opacity:.85}
+.tick.new .held{color:#111;opacity:.85}
 .tick .zrsell{font-style:normal;font-family:var(--sans);font-size:9px;font-weight:800;color:var(--neg);background:var(--neg-soft);border:1px solid var(--neg);border-radius:3px;padding:0 3px;margin-left:5px;vertical-align:1px}
 /* red badge on a live-pick chip = Zacks Rank #4 Sell / #5 Strong Sell: the one case where the Zacks view contradicts the pick */
 .heldkey{font-family:var(--mono);font-size:10px;color:var(--muted);border:1px solid var(--hair);border-radius:4px;padding:0 4px}
 .stand.newname{box-shadow:0 0 0 2px var(--new-line),var(--shadow)}
-.newtag{display:inline-block;background:var(--new-soft);color:var(--new);border:1px solid var(--new-line);font-family:var(--sans);
+.newtag{display:inline-block;background:#FFE600;color:#111;border:1px solid #FFE600;font-family:var(--sans);
   font-size:10px;font-weight:800;letter-spacing:.06em;padding:1px 7px;border-radius:5px;vertical-align:middle;text-shadow:none}
 .srank .newtag{margin-right:7px}
 .zrline{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);margin:0 0 10px}
@@ -515,7 +522,7 @@ svg.zv-spark{overflow:visible;flex-shrink:0}.zv-spark path{fill:none;stroke-widt
   font-size:11.5px;color:var(--muted);text-align:left}
 .pod .pfoot b{color:var(--pos);font-weight:700}
 .newkey{display:inline-flex;align-items:center;gap:6px}
-.newkey i{width:11px;height:11px;border-radius:3px;background:var(--new-soft);border:1px solid var(--new-line);display:inline-block}
+.newkey i{width:11px;height:11px;border-radius:3px;background:#FFE600;border:1px solid #FFE600;display:inline-block}
 .tick{display:inline-block;font-family:var(--mono);font-size:12px;font-weight:500;background:var(--surface-2);
   color:var(--ink);border:1px solid var(--hair);padding:2px 7px;border-radius:4px;margin:2px 4px 2px 0}
 
@@ -736,7 +743,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 </div>
 
 <script id="analysis-data" type="application/json">{
-    "GeneratedAt":  "2026-11-02 01:37",
+    "GeneratedAt":  "2026-11-02 06:42",
     "PicksAsOf":  "07/24/26",
     "LivePicks":  [
                       {
@@ -37365,7 +37372,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 }
 }</script>
 <script id="tracker-data" type="application/json">{
-"built": "2026-11-02 01:37",
+"built": "2026-11-02 06:42",
 "priced": "2026-10-30",
 "rule": "Buy at the first market open after the stock appeared on that screener; sell at the first open after it dropped off. Still on the list = latest price.",
 "screens": {
@@ -43641,8 +43648,10 @@ function renderBottomLine(){
     c.dataset.screen=s.Screen; c.tabIndex=0; c.setAttribute('role','button'); c.setAttribute('aria-expanded','false');
     c.setAttribute('aria-controls','cardPanel'); const cpi=cardPicksFor(s), nPicks=cpi.list.length;
     const chipSince=cpi.list.every(tk=>screenPick(s.Screen,tk).since);
-    const chips=cpi.list.map(tk=>{ const sp=screenPick(s.Screen,tk), w=sp.v, hc=heatCol(w);
-      return `<span class="cchip${cpi.news.has(tk)?' new':''}" data-chart="${tk}" tabindex="0" style="background:${hc.bg};color:${hc.fg}" title="${tk}: ${fmtPct(w)} ${sp.lab}" aria-label="${tk}, ${fmtPct(w)} ${sp.lab}: show chart"><span class="cticker">${tk}</span><span class="cret">${sp.wait?'BUY DAY':fmtPct(w)}</span></span>`; }).join('');
+    const anyBuy=cpi.list.some(tk=>screenPick(s.Screen,tk).wait);
+    /* Shawn 2026-11-02: BUY DAY stocks are bright yellow so they stand out (CHMG was a dark grey chip) */
+    const chips=cpi.list.map(tk=>{ const sp=screenPick(s.Screen,tk), w=sp.v, hc=sp.wait?{bg:'#FFE600',fg:'#111'}:heatCol(w);
+      return `<span class="cchip${cpi.news.has(tk)?' new':''}${sp.wait?' buyday':''}" data-chart="${tk}" tabindex="0" style="background:${hc.bg};color:${hc.fg}" title="${tk}: ${fmtPct(w)} ${sp.lab}" aria-label="${tk}, ${fmtPct(w)} ${sp.lab}: show chart"><span class="cticker">${tk}</span><span class="cret">${sp.wait?'BUY DAY':fmtPct(w)}</span></span>`; }).join('');
     c.innerHTML=`<h2>${s.Screen}</h2>
       <div class="tag">${i===0?'Best 1-year return':'#'+(i+1)+' by 1-year return'} · weekly hold · ${s.Folder}</div>
       <div class="big pos">${pct(t.Ret1y)}</div>
@@ -43655,7 +43664,7 @@ function renderBottomLine(){
       </div>
       <div class="cstocks"><div class="cstocks-lab">Current stocks${cpi.src==='live'?'':' (backtest)'}:<span class="cstocks-hint">hover for chart · click for details</span></div>
         <div class="cstocks-list">${nPicks?chips:'<span class="cstocks-none">none passing today</span>'}</div>
-        ${nPicks?'<div class="cstocks-legend">'+(chipSince?'gain since bought the morning it came out on this screener':'last 5 days')+' <i></i></div>':''}
+        ${nPicks?'<div class="cstocks-legend">'+(chipSince?'gain since bought the morning it came out on this screener':'last 5 days')+' <i></i></div>'+(anyBuy?'<div class="cstocks-legend"><span class="buykey">BUY DAY</span> new on this screener: buy at the next market open</div>':''):''}
         <div class="peek"><span>Details for each stock</span><i>▾</i></div></div>`;
     c.onclick=()=>toggleCardPanel(s.Screen);
     c.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggleCardPanel(s.Screen); } };
@@ -43725,13 +43734,14 @@ function toggleCardPanel(name){
   const md=d=>d?(+String(d).slice(5,7))+'/'+(+String(d).slice(8,10)):'';
   const tiles=info.list.map(tk=>{ const z=zv[tk], h=heat[tk]; const isNew=info.news.has(tk);
     const price=(h&&h.Price!=null)?h.Price:(z&&z.Price!=null?z.Price:null);
-    return `<div class="cp-tile${isNew?' isnew':''}" data-chart="${tk}" tabindex="0">
+    const isBuy=screenPick(openCard,tk).wait;
+    return `<div class="cp-tile${isNew?' isnew':''}${isBuy?' buyday':''}" data-chart="${tk}" tabindex="0">
       <div class="cp-top"><span class="cp-tk">${tk}</span>${isNew?'<span class="newtag">NEW</span>':''}${z?zvRank(z.Rank):''}</div>
       <div class="cp-co">${z?z.Company:'&nbsp;'}</div>
       ${z?`<div class="cp-grades">Value ${zvBadge(z.Value)} Growth ${zvBadge(z.Growth)} Momentum ${zvBadge(z.Momentum)}</div>`:''}
       <div class="cp-nums"><div><b>${price==null?'–':'$'+(+price).toFixed(2)}</b>price</div>
         <div><b class="${cls(h&&h.Week)}">${f(h&&h.Week)}</b>last 5 days</div>
-        ${(()=>{ const sp=screenPick(openCard,tk); return sp.since?`<div style="grid-column:1/-1"><b class="${cls(sp.v)}">${f(sp.v)}</b>${sp.lab}</div>`:''; })()}</div>
+        ${(()=>{ const sp=screenPick(openCard,tk); return sp.since?`<div style="grid-column:1/-1"><b class="${cls(sp.v)}">${sp.wait?'BUY DAY':f(sp.v)}</b>${sp.lab}</div>`:''; })()}</div>
     </div>`; }).join('');
   const src = info.src==='live'
     ? `Live from Research Wizard · captured <b>${info.asof||''}</b>${info.carried?' · <b>query failed, last good basket shown</b>':''}`
