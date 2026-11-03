@@ -271,6 +271,7 @@ window.dash = (function () {
   .tt-hmbtn:focus-visible { outline: 3px solid var(--color-fg); outline-offset: 2px; }
   .tt-hmbtn[aria-expanded="true"] { background: var(--color-fg); color: var(--color-panel); }
   .tt-boardacts { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; }
+  @media (min-width: 721px) { .tt-boardacts { flex-wrap: nowrap; } .tt-boardacts .tt-search { min-width: 19rem; } }
   .tt-hm { display: grid; gap: .75rem; padding-top: 1rem; border-top: 2px solid var(--color-border-line); min-width: 0; }
   .tt-hmtop { display: flex; flex-wrap: wrap; gap: .6rem 1.25rem; align-items: center; justify-content: space-between; }
   .tt-hm h3 { margin: 0; font-size: 1.2rem; font-weight: 800; }
