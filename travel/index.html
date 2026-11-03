@@ -187,25 +187,107 @@ window.dash = (function () {
   .tt-combo .tot { font-family: var(--font-anthropic-serif); font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; line-height: 1.1; }
   .tt-combo .sub { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
   .tt-combo .deal { font-size: var(--cds-font-size-caption); color: var(--color-ok); font-weight: 600; }
+
+  /* Departure-board look: one color per part of the world, carried from the destination tabs into each place's page. */
+  .tt { --tt-night: #0b3a47; --tt-sea: #0b7285; --tt-sun: #d9480f; --tt-leaf: #2b8a3e; --tt-hibiscus: #c2255c; --tt-orchid: #862e9c; --tt-glacier: #1864ab; --tt-mainland: #364fc7; --tt-gold: #ffd23f; --tt-on: #fff; gap: 1.5rem; }
+  .tt-head { position: relative; background: var(--tt-night); color: var(--tt-on); border-radius: 14px; padding: 1.75rem 1.75rem 2.1rem; gap: .4rem; overflow: hidden; }
+  .tt-head .tt-eyebrow { color: #a9d3dc; font-weight: 700; letter-spacing: .12em; }
+  .tt-head .tt-title { font-size: clamp(1.9rem, 4.5vw, 3.1rem); line-height: 1.05; color: var(--tt-on); }
+  .tt-head .tt-tag { color: #d6e8ec; }
+  .tt-head .tt-take { color: var(--tt-on); margin-top: .6rem; }
+  .tt-head .tt-take b { color: var(--tt-gold); font-weight: 700; }
+  .tt-stripe { position: absolute; inset: auto 0 0 0; height: 8px; display: flex; }
+  .tt-stripe i { flex: 1; }
+  .tt-tabs { border: 0; gap: .5rem; }
+  .tt-tab { padding: .7rem 1.15rem; border-radius: 10px; font-weight: 800; font-size: 1rem; color: var(--tt-on); background: var(--tc, var(--tt-sea)); border: 0; margin: 0; }
+  .tt-tab:hover { filter: brightness(1.1); }
+  .tt-tab[aria-selected="true"] { color: var(--tt-on); outline: 3px solid var(--color-fg); outline-offset: 2px; }
+  .tt-board { display: grid; gap: .9rem; background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: 14px; padding: 1.1rem 1.25rem 1.25rem; min-width: 0; }
+  .tt-board h2 { margin: 0; font-size: 1.3rem; font-weight: 800; }
+  .tt-boardtop { display: flex; flex-wrap: wrap; gap: .75rem 1.25rem; align-items: center; justify-content: space-between; }
+  .tt-board .tt-search { font-size: 1rem; padding: .55rem .8rem; min-width: min(100%, 19rem); border-width: 2px; border-radius: 10px; }
+  .tt-region { display: grid; grid-template-columns: 10rem minmax(0, 1fr); gap: .5rem 1rem; align-items: start; padding-top: .75rem; border-top: 1px solid var(--color-border-line); }
+  .tt-region > .nm { font-weight: 800; color: var(--color-fg); padding-top: .55rem; line-height: 1.2; }
+  .tt-gos { display: flex; flex-wrap: wrap; gap: .5rem; }
+  @media (max-width: 720px) { .tt-region { grid-template-columns: minmax(0, 1fr); } .tt-region > .nm { padding-top: 0; } }
+  .tt-go { all: unset; box-sizing: border-box; display: grid; gap: 1px; cursor: pointer; padding: .5rem .8rem; border-radius: 10px; background: var(--c); color: var(--tt-on); min-width: 7.5rem; }
+  .tt-go b { font-weight: 800; font-size: 1.02rem; line-height: 1.2; }
+  .tt-go span { font-size: .74rem; font-variant-numeric: tabular-nums; }
+  .tt-go span em { font-style: normal; font-weight: 800; color: var(--tt-gold); }
+  .tt-go:hover { filter: brightness(1.12); }
+  .tt-go:focus-visible, .tt-go[aria-current="true"] { outline: 3px solid var(--color-fg); outline-offset: 2px; }
+  .tt-tile { background: var(--c, var(--tt-sea)); border: 0; color: var(--tt-on); }
+  .tt-tile .lab, .tt-tile .sub { color: var(--tt-on); }
+  .tt-tile .big { font-weight: 700; }
+  .tt-tile:nth-child(1) { --c: var(--tt-leaf); } .tt-tile:nth-child(2) { --c: var(--tt-sea); } .tt-tile:nth-child(3) { --c: var(--tt-sun); } .tt-tile:nth-child(4) { --c: var(--tt-hibiscus); } .tt-tile:nth-child(5) { --c: var(--tt-orchid); }
+  .tt-card { border-radius: 14px; box-shadow: 0 1px 3px color-mix(in srgb, var(--color-fg) 14%, transparent); }
+  .tt-card > h2 { margin: calc(-1 * var(--cds-pad-lg)) calc(-1 * var(--cds-pad-lg)) 0; padding: .85rem var(--cds-pad-lg); background: var(--sec, var(--tt-sea)); color: var(--sec-fg, var(--tt-on)); border-radius: 13px 13px 0 0; font-size: 1.2rem; font-weight: 800; }
+  #power { --sec: var(--tt-gold); --sec-fg: #1d1a05; } #ladder { --sec: var(--tt-orchid); } #closeup { --sec: var(--tt-sea); } #deals { --sec: var(--tt-sun); } #resorts { --sec: var(--tt-leaf); } #trend { --sec: var(--tt-glacier); } #checks { --sec: var(--tt-mainland); } #playbook { --sec: var(--tt-hibiscus); } #sheet { --sec: var(--tt-sea); }
+  .tt-chip { font-weight: 700; padding: .4rem .85rem; }
+  .tt-chip[aria-pressed="true"] { background: var(--tt-sea); border-color: var(--tt-sea); color: var(--tt-on); }
+  .tt-lab { font-weight: 800; font-size: var(--cds-font-size-caption); }
+  .tt-table th { background: color-mix(in srgb, var(--sec, var(--tt-sea)) 14%, var(--color-panel)); color: var(--color-fg); font-weight: 800; }
+  .tt-table tbody tr:where(:nth-child(even)) td { background: color-mix(in srgb, var(--color-fg) 3%, var(--color-panel)); }
+  .tt-table td { padding-block: var(--cds-pad-sm); }
+  .tt-table .res b { font-size: var(--cds-font-size-body); font-weight: 700; }
+  .tt-thumb { width: 84px; height: 56px; border-radius: 8px; }
+  .tt-save { font-size: 1.02em; font-weight: 800; }
+  .tt-pill { font-weight: 700; border: 0; padding: 2px 10px; }
+  .tt-pill.nb { background: var(--tt-leaf); color: var(--tt-on); }
+  .tt-pill.gd { background: var(--tt-gold); color: #1d1a05; }
+  .tt-pill.gv { background: color-mix(in srgb, var(--color-fg) 12%, var(--color-panel)); color: var(--color-fg); }
+  .tt-pill.live { background: transparent; border: 1px dashed currentColor; color: var(--color-ok); }
+  .tt-btn { font-weight: 700; border-radius: 8px; padding: .42rem .8rem; }
+  .tt-btn.primary { background: var(--tt-sun); border-color: var(--tt-sun); color: var(--tt-on); }
+  .tt-book, .tt-sheet .tt-book { display: inline-block; text-decoration: none; background: var(--tt-sun); color: var(--tt-on); border-radius: 6px; padding: 2px 8px; font-weight: 700; justify-self: start; }
+  .tt-book:hover { filter: brightness(1.1); }
+  .tt-pcard, .tt-combo { border-radius: 12px; }
+  .tt-pcard .pr, .tt-combo .tot, .tt-tile .big { font-weight: 700; }
+  .tt-pcard .nm { font-weight: 800; }
+  .tt-pcard .why { font-weight: 600; }
+  .tt-combo .nm { font-weight: 800; font-size: 1.02rem; }
+  .tt-rankno { justify-self: start; display: inline-block; background: var(--c, var(--tt-sea)); color: var(--tt-on); font-weight: 800; border-radius: 999px; padding: 1px 10px; font-size: var(--cds-font-size-caption); }
+  .tt-combo.top .tt-rankno { background: var(--tt-gold); color: #1d1a05; }
+  .tt-off { color: var(--color-ok); font-weight: 800; }
+  .tt-phero { margin: calc(-1 * var(--cds-pad-lg)) calc(-1 * var(--cds-pad-lg)) 0; padding: 1.4rem var(--cds-pad-lg); background: var(--c, var(--tt-sea)); color: var(--tt-on); border-radius: 13px 13px 0 0; display: grid; gap: .6rem; }
+  .tt-phero .rg { font-size: .78rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+  .tt-phero h2 { margin: 0; font-family: var(--font-anthropic-serif); font-weight: 400; font-size: clamp(1.8rem, 4vw, 2.7rem); line-height: 1.05; }
+  .tt-phero .ln { max-width: 75ch; }
+  .tt-phero .st { display: flex; flex-wrap: wrap; gap: .5rem 2rem; }
+  .tt-phero .st div { display: grid; font-size: .78rem; }
+  .tt-phero .st b { font-size: 1.5rem; font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1.15; }
+  .tt-ladbtn { all: unset; cursor: pointer; display: inline-block; background: var(--c); color: var(--tt-on); font-weight: 800; border-radius: 8px; padding: .28rem .7rem; font-size: var(--cds-font-size-body); white-space: nowrap; }
+  .tt-ladbtn:hover { filter: brightness(1.12); }
+  .tt-ladbtn:focus-visible { outline: 3px solid var(--color-fg); outline-offset: 2px; }
+  @media (prefers-reduced-motion: no-preference) { .tt-go, .tt-tab, .tt-ladbtn { transition: filter .12s; } }
   [data-dash-source-state=empty] { color: transparent; }
   [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
 </style>
 
 <div class="tt">
   <header class="tt-head" id="top">
-    <div class="tt-eyebrow">Daily update · all-inclusive for two from Chicago</div>
+    <div class="tt-eyebrow">Vacation deals for two from Chicago · checked daily</div>
     <h1 class="tt-title">Shawn &amp; Melissa Travel Tracker</h1>
     <p class="tt-tag">The AI travel robot trying to get Melissa and Shawn on a trip through a great deal.</p>
     <p class="tt-take dash-skeleton" id="takeaway" data-source="summary">—</p>
+    <div class="tt-stripe" aria-hidden="true"><i style="background:var(--tt-sun)"></i><i style="background:var(--tt-gold)"></i><i style="background:var(--tt-sea)"></i><i style="background:var(--tt-leaf)"></i><i style="background:var(--tt-hibiscus)"></i><i style="background:var(--tt-orchid)"></i><i style="background:var(--tt-glacier)"></i></div>
   </header>
 
   <nav class="tt-tabs" role="tablist" aria-label="Views">
-    <button type="button" role="tab" class="tt-tab" id="tabbtn-deals" data-tab="deals" aria-selected="true">Today's deals</button>
-    <button type="button" role="tab" class="tt-tab" id="tabbtn-sheet" data-tab="sheet" aria-selected="false">Resort sheet</button>
-    <button type="button" role="tab" class="tt-tab" id="tabbtn-calendar" data-tab="calendar" aria-selected="false">Price calendar</button>
-    <button type="button" role="tab" class="tt-tab" id="tabbtn-iceland" data-tab="iceland" aria-selected="false">Iceland</button>
-    <button type="button" role="tab" class="tt-tab" id="tabbtn-places" data-tab="places" aria-selected="false">More places</button>
+    <button type="button" role="tab" class="tt-tab" style="--tc:var(--tt-sun)" id="tabbtn-deals" data-tab="deals" aria-selected="true">Best deals</button>
+    <button type="button" role="tab" class="tt-tab" style="--tc:var(--tt-sea)" id="tabbtn-sheet" data-tab="sheet" aria-selected="false">Resort sheet</button>
+    <button type="button" role="tab" class="tt-tab" style="--tc:var(--tt-orchid)" id="tabbtn-calendar" data-tab="calendar" aria-selected="false">Price calendar</button>
   </nav>
+
+  <section class="tt-board" id="board" aria-label="Destinations" data-source="markets">
+    <div class="tt-boardtop">
+      <h2>Pick a destination</h2>
+      <input class="tt-search" id="placeq" type="search" placeholder="Search a place, region or resort" aria-label="Search destinations">
+    </div>
+    <div class="tt-controls" id="regchips"><span class="tt-lab">Region</span></div>
+    <div id="board-rows" style="display:grid;gap:.75rem"></div>
+    <p class="tt-note" id="board-note">Each tab shows the cheapest trip for two from Chicago and the biggest discount found. Click one to see every deal there.</p>
+  </section>
 
   <div class="tt-page" id="tab-deals" role="tabpanel">
   <section class="tt-tiles" id="tiles" aria-label="Today at a glance">
@@ -217,9 +299,19 @@ window.dash = (function () {
   </section>
 
   <section class="tt-card" id="power">
-    <h2>Power rankings: today's 3 best values</h2>
-    <p class="tt-note">Scored on how far under its usual price the trip is, the resort's guest rating, and the cost per night for two, with a bonus when the price was confirmed live. One pick per resort.</p>
+    <h2>Power rankings: today's top 3</h2>
+    <div class="tt-controls"><span class="tt-lab">Rank by</span><button class="tt-chip" type="button" data-pw="value" aria-pressed="true">Best value</button><button class="tt-chip" type="button" data-pw="under" aria-pressed="false">Most % off</button></div>
+    <p class="tt-note" id="power-note">Scored on how far under its usual price the trip is, the resort's guest rating, and the cost per night for two, with a bonus when the price was confirmed live. One pick per resort.</p>
     <div class="tt-power" id="power-cards" data-source="deals" data-row-key="deal_id"></div>
+  </section>
+
+  <section class="tt-card" id="ladder">
+    <h2>Every destination, ranked</h2>
+    <div class="tt-controls"><span class="tt-lab">Rank by</span><button class="tt-chip" type="button" data-lad="pct" aria-pressed="true">Most % off</button><button class="tt-chip" type="button" data-lad="from" aria-pressed="false">Lowest price</button></div>
+    <p class="tt-note">All-inclusive places compare against that resort's usual price for nearby dates. Flight + hotel places compare against a typical trip there. The Region buttons above narrow this list too.</p>
+    <div class="tt-scroll" style="max-height: 30rem">
+      <table class="tt-table" id="ladder-table"><thead><tr><th class="num">#</th><th>Destination</th><th class="tt-hide-narrow">Region</th><th class="num">Biggest discount</th><th class="num">Cheapest trip for two</th><th class="tt-hide-narrow">Trip type</th></tr></thead><tbody></tbody></table>
+    </div>
   </section>
 
   <section class="tt-card" id="closeup">
@@ -394,35 +486,30 @@ window.dash = (function () {
     </section>
   </template>
 
-  <div class="tt-page" id="tab-iceland" role="tabpanel" hidden></div>
-  <template id="tpl-iceland">
-    <section class="tt-card tt-market" id="iceland-view" data-market-view="iceland">
-      <h2>Iceland: flights + hotel watch</h2>
-      <p class="tt-note">Reykjavik from Chicago, priced the way you'd book it: flights plus a top-rated hotel, not a package. Northern lights season runs September to March; June and July have near-24-hour daylight.</p>
-      
-      <div class="tt-mhead" data-mk="head" data-source="markets"></div>
-      <h3 class="tt-h3">Best flight + hotel combos for two</h3>
-      <p class="tt-note">Five nights (ten for Thailand and Bali), two people: round-trip flights from Chicago (cheapest on Google Flights for that day) plus a top-rated hotel. Hotels come from Booking.com, Priceline (including Express Deals) and Hotwire (Hot Rates). On Express Deals and Hot Rates the hotel's name is only shown after you book, in exchange for a lower price.</p>
-      <div class="tt-combos" data-mk="combos" data-source="market_options" data-row-key="option_id"></div>
-      <h3 class="tt-h3">Flight prices for every departure day</h3>
-      <p class="tt-note">Round trip for two, 5-day trips. Greener is cheaper than usual, redder is pricier; the star is the cheapest day. Click a day for flight and hotel search links for those dates.</p>
-      <div class="tt-calday" data-mk="day" hidden></div>
-      <div class="tt-months" data-mk="months" data-source="market_flights"></div>
+  <div class="tt-page" id="tab-place" role="tabpanel" hidden></div>
+  <template id="tpl-place">
+    <section class="tt-card" id="place-view">
+      <div class="tt-phero" id="pl-hero"></div>
+      <div class="tt-controls"><span class="tt-lab">Rank by</span><button class="tt-chip" type="button" data-prank="value" aria-pressed="true">Best value</button><button class="tt-chip" type="button" data-prank="under" aria-pressed="false">Most % off</button><button class="tt-chip" type="button" data-prank="price" aria-pressed="false">Lowest price</button></div>
+      <p class="tt-note" id="pl-note"></p>
+      <div class="tt-combos" id="pl-cards"></div>
+      <h3 class="tt-h3" id="pl-other-h">Other top-rated resorts here</h3>
+      <p class="tt-note" id="pl-other-n">Highly rated, but not priced below usual right now. These are their cheapest trips.</p>
+      <div class="tt-scroll" id="pl-other-w" style="max-height: 26rem"><table class="tt-table"><thead><tr><th>Resort</th><th class="num">Rating</th><th class="num">Cheapest trip for two</th><th>Dates</th><th>Links</th></tr></thead><tbody id="pl-other"></tbody></table></div>
     </section>
   </template>
 
   <div class="tt-page" id="tab-places" role="tabpanel" hidden></div>
   <template id="tpl-places">
     <section class="tt-card tt-market" id="places-view" data-market-view="places">
-      <h2>More places: Arizona, Colorado, Florida, Hawaii</h2>
-      <p class="tt-note">Flight + hotel trips for two to the other places on your list. Cabo and Costa Rica are all-inclusive markets, so they live on the Today's deals, Resort sheet and Price calendar tabs.</p>
-      <div class="tt-controls"><select class="tt-select" data-mk="pick" aria-label="Place"></select></div>
+      <div class="tt-phero" data-mk="hero"></div>
       <div class="tt-mhead" data-mk="head" data-source="markets"></div>
       <h3 class="tt-h3">Best flight + hotel combos for two</h3>
-      <p class="tt-note">Five nights (ten for Thailand and Bali), two people: round-trip flights from Chicago (cheapest on Google Flights for that day) plus a top-rated hotel. Hotels come from Booking.com, Priceline (including Express Deals) and Hotwire (Hot Rates). On Express Deals and Hot Rates the hotel's name is only shown after you book, in exchange for a lower price.</p>
+      <div class="tt-controls"><span class="tt-lab">Rank by</span><button class="tt-chip" type="button" data-mrank="value" aria-pressed="true">Best value</button><button class="tt-chip" type="button" data-mrank="under" aria-pressed="false">Most % off</button><button class="tt-chip" type="button" data-mrank="price" aria-pressed="false">Lowest price</button></div>
+      <p class="tt-note" data-mk="cnote"></p>
       <div class="tt-combos" data-mk="combos" data-source="market_options" data-row-key="option_id"></div>
       <h3 class="tt-h3">Flight prices for every departure day</h3>
-      <p class="tt-note">Round trip for two, 5-day trips. Greener is cheaper than usual, redder is pricier; the star is the cheapest day. Click a day for flight and hotel search links for those dates.</p>
+      <p class="tt-note" data-mk="fnote"></p>
       <div class="tt-calday" data-mk="day" hidden></div>
       <div class="tt-months" data-mk="months" data-source="market_flights"></div>
     </section>
@@ -484,8 +571,11 @@ window.dash = (function () {
     }
     drawSheet();
     drawCal();
-    drawMarket('iceland');
+    drawBoard();
+    drawLadder();
+    drawPlace();
     drawMarket('places');
+    if (window.tt.startPlace && places().some((p) => p.id === window.tt.startPlace)) { const id = window.tt.startPlace; window.tt.startPlace = null; window.ttPlace(id); }
     drawPower();
     drawCloseup();
     drawDeals();
@@ -495,20 +585,181 @@ window.dash = (function () {
     drawPlay();
   });
 
+  // ---- Destinations: every city or country is its own tab, in a region with its own color.
+  const REGIONS = [['mexico', 'Mexico', '#d9480f'], ['caribbean', 'Caribbean', '#0b7285'], ['central', 'Central America', '#2b8a3e'], ['hawaii', 'Hawaii', '#c2255c'],
+    ['asia', 'Thailand & Bali', '#862e9c'], ['iceland', 'Iceland', '#1864ab'], ['usa', 'Arizona, Colorado & Florida', '#364fc7']];
+  const regionOf = (name) => /Cancun|Cozumel|Cabo|Vallarta/.test(name) ? 'mexico' : /Costa Rica|Belize|Cartagena/.test(name) ? 'central' : /^Hawaii/.test(name) ? 'hawaii'
+    : /^Thailand|^Bali/.test(name) ? 'asia' : /^Iceland/.test(name) ? 'iceland' : /^(Arizona|Colorado|Florida)/.test(name) ? 'usa' : 'caribbean';
+  const colorOf = (k) => REGIONS.find((r) => r[0] === k)[2];
+  const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  function places() {
+    const R = dash.data('resorts'), D = dash.data('deals'), M = dash.data('markets'), out = [];
+    if (R.status === 'ok') {
+      const deals = D.status === 'ok' ? D.data : [];
+      [...new Set(R.data.map((r) => r.destination))].forEach((dest) => {
+        const rs = R.data.filter((r) => r.destination === dest), ds = deals.filter((d) => d.destination === dest);
+        const label = dest.replace(/ \(.*\)$/, ''), region = regionOf(dest);
+        out.push({ id: slug(label), label, full: dest, region, color: colorOf(region), kind: 'ai', from: d3.min(rs, (r) => r.cheapest_total_for_two), pct: d3.max(ds, (d) => d.pct_below_usual) || 0,
+          type: 'All-inclusive + flights', resorts: rs.length, deals: new Set(ds.map((d) => d.hotel_code)).size, hay: rs.map((r) => r.resort).join(' ') });
+      });
+    }
+    if (M.status === 'ok') {
+      M.data.forEach((m) => {
+        const region = regionOf(m.name), label = m.market === 'iceland' ? 'Iceland' : m.name.replace(/^.*?: /, '').replace(/ \(.*\)$/, '');
+        out.push({ id: m.market, market: m.market, label, full: m.name, region, color: colorOf(region), kind: 'market', from: m.cheapest_trip_total, pct: Math.max(0, m.best_pct_below || 0),
+          type: `Flights + hotel, ${m.nights || 5} nights`, hay: m.best_hotel || '' });
+      });
+    }
+    return out;
+  }
+  window.ttPlace = (id) => {
+    const p = places().find((x) => x.id === id);
+    if (!p) return;
+    window.tt.place = id;
+    if (p.kind === 'market') { window.tt.mk.places = p.market; window.tt.mday.places = null; window.ttTab('places', true); }
+    else window.ttTab('place', true);
+    window.tt.place = id;
+    dash.setLink(id);
+    drawBoard();
+  };
+  const placeShown = (p) => {
+    const t = window.tt, q = (t.pq || '').toLowerCase();
+    return (!t.region || p.region === t.region) && (!q || (p.label + ' ' + p.full + ' ' + REGIONS.find((r) => r[0] === p.region)[1] + ' ' + p.hay).toLowerCase().includes(q));
+  };
+  function drawBoard() {
+    const rows = document.getElementById('board-rows');
+    const all = places(), t = window.tt;
+    if (!all.length) return;
+    const chipsBox = document.getElementById('regchips');
+    if (chipsBox.children.length === 1) {
+      [['', 'All regions'], ...REGIONS].forEach(([k, name]) => {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'tt-chip'; b.dataset.reg = k; b.textContent = name;
+        b.addEventListener('click', () => { t.region = k; drawBoard(); drawLadder(); });
+        chipsBox.append(b);
+      });
+    }
+    chipsBox.querySelectorAll('[data-reg]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.reg === (t.region || ''))));
+    const shown = all.filter(placeShown);
+    rows.replaceChildren(...REGIONS.map(([k, name]) => {
+      const list = shown.filter((p) => p.region === k).sort((a, b) => a.label.localeCompare(b.label));
+      if (!list.length) return null;
+      const row = document.createElement('div'); row.className = 'tt-region';
+      const nm = document.createElement('div'); nm.className = 'nm'; nm.textContent = name;
+      const gos = document.createElement('div'); gos.className = 'tt-gos';
+      gos.append(...list.map((p) => {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'tt-go'; b.style.setProperty('--c', p.color);
+        if (t.place === p.id) b.setAttribute('aria-current', 'true');
+        const nb = document.createElement('b'); nb.textContent = p.label;
+        const sp = document.createElement('span'); sp.textContent = `from ${money(p.from)}`;
+        if (p.pct >= 0.05) { const em = document.createElement('em'); em.textContent = ` · ${pct(p.pct)} off`; sp.append(em); }
+        b.append(nb, sp);
+        b.addEventListener('click', () => window.ttPlace(p.id));
+        return b;
+      }));
+      row.append(nm, gos);
+      return row;
+    }).filter(Boolean));
+    if (!shown.length) { const e = document.createElement('p'); e.className = 'tt-empty'; e.textContent = 'No destination matches that search.'; rows.replaceChildren(e); }
+  }
+  function drawLadder() {
+    const tb = document.querySelector('#ladder-table tbody');
+    const by = window.tt.lad || 'pct';
+    const list = places().filter(placeShown).sort(by === 'from' ? (a, b) => a.from - b.from : (a, b) => b.pct - a.pct || a.from - b.from);
+    tb.replaceChildren(...list.map((p, i) => {
+      const tr = document.createElement('tr');
+      const td = (cls, txt) => { const c = document.createElement('td'); if (cls) c.className = cls; if (txt != null) c.textContent = txt; tr.append(c); return c; };
+      td('num', String(i + 1));
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'tt-ladbtn'; b.style.setProperty('--c', p.color); b.textContent = p.label;
+      b.addEventListener('click', () => window.ttPlace(p.id));
+      td('').append(b);
+      td('tt-hide-narrow', REGIONS.find((r) => r[0] === p.region)[1]);
+      td('num tt-save', p.pct ? pct(p.pct) : '—');
+      td('num', money(p.from));
+      td('tt-hide-narrow', p.type);
+      return tr;
+    }));
+  }
+  function placeHero(el, p, line, stats) {
+    el.style.setProperty('--c', p.color);
+    const rg = document.createElement('div'); rg.className = 'rg'; rg.textContent = REGIONS.find((r) => r[0] === p.region)[1];
+    const h = document.createElement('h2'); h.textContent = p.full.replace(/^Iceland: /, 'Iceland: ').replace(/^(Hawaii|Thailand|Arizona|Colorado|Florida): /, '$1: ');
+    const ln = document.createElement('div'); ln.className = 'ln'; ln.textContent = line;
+    const st = document.createElement('div'); st.className = 'st';
+    st.append(...stats.map(([k, v]) => { const d = document.createElement('div'); const b = document.createElement('b'); b.textContent = v; d.append(b, k); return d; }));
+    el.replaceChildren(rg, h, ln, st);
+  }
+  function drawPlace() {
+    if (!document.getElementById('place-view') || window.tt.tab !== 'place') return;
+    const p = places().find((x) => x.id === window.tt.place);
+    const D = dash.data('deals'), R = dash.data('resorts');
+    if (!p || p.kind !== 'ai' || D.status !== 'ok' || R.status !== 'ok') return;
+    const mode = window.tt.prank || 'value', gal = dash.data('gallery'), pm = photoMap(), inSheet = dash.data('sheet');
+    const better = { value: (a, b) => b.value_score - a.value_score, under: (a, b) => b.pct_below_usual - a.pct_below_usual, price: (a, b) => a.total_for_two - b.total_for_two }[mode];
+    const seen = new Set();
+    const list = D.data.filter((d) => d.destination === p.full).sort(better).filter((d) => !seen.has(d.hotel_code) && seen.add(d.hotel_code));
+    placeHero(document.getElementById('pl-hero'), p, 'All-inclusive resort plus round-trip flights for two from Chicago, sold together as one price.', [
+      ['Cheapest trip for two', money(p.from)], ['Biggest discount', p.pct ? pct(p.pct) : '—'], ['Resorts priced below usual', String(p.deals)], ['Top-rated resorts', String(p.resorts)]]);
+    document.getElementById('pl-note').textContent = list.length ? 'One card per resort, showing its best trip for the ranking you picked.' : `Nothing in ${p.label} is priced below usual today. The cheapest trips at its top-rated resorts are below.`;
+    const mk = (cls, t) => { const e = document.createElement('div'); e.className = cls; e.textContent = t; return e; };
+    document.getElementById('pl-cards').replaceChildren(...list.map((r, i) => {
+      const c = document.createElement('div'); c.className = 'tt-combo' + (i === 0 ? ' top' : ''); c.style.setProperty('--c', p.color);
+      const pic = gal.status === 'ok' ? gal.data.find((g) => g.hotel_code === r.hotel_code && okImg(g.src)) : null, rec = pm.get(r.hotel_code);
+      const src = pic ? pic.src : rec && okImg(rec.thumb) ? rec.thumb : '';
+      if (src) { const im = document.createElement('img'); im.src = src; im.alt = r.resort; im.loading = 'lazy'; c.append(im); }
+      const links = document.createElement('div'); links.className = 'tt-links';
+      links.append(...[linkEl(r.book_link, 'Book ↗', 'tt-btn primary'), linkEl(r.resort_page, 'Resort page ↗'), linkEl(r.google_link, 'Reviews ↗')].filter(Boolean));
+      if (inSheet.status !== 'ok' || inSheet.data.some((x) => x.hotel_code === r.hotel_code)) {
+        const calb = document.createElement('button'); calb.type = 'button'; calb.className = 'tt-btn'; calb.textContent = 'Price calendar';
+        calb.addEventListener('click', () => window.ttCal(r.hotel_code, r.from_airport, r.nights)); links.append(calb);
+      }
+      c.append(mk('tt-rankno', `#${i + 1} ${{ value: 'best value', under: 'most % off', price: 'lowest price' }[mode]}`), mk('nm', r.resort),
+        mk('sub', `${r.rating}★${r.adults_only === 'Yes' ? ' · adults only' : ''} · ${r.level}`), mk('tot', money(r.total_for_two)),
+        mk('sub', `for two · ${money(r.per_night_for_two)} a night · usually ${money(r.usual_for_two)}`), mk('tt-off', `${pct(r.pct_below_usual)} under usual`),
+        mk('sub', `${fmtDay(day(r.depart))} – ${fmtDay(day(r.return))} · ${r.nights} nights from ${r.from_airport === 'MDW' ? 'Midway' : "O'Hare"} · ${r.price_check === 'Live price confirmed' ? 'live price' : 'not re-checked yet'}`), links);
+      return c;
+    }));
+    const others = R.data.filter((r) => r.destination === p.full && !seen.has(r.hotel_code)).sort((a, b) => a.cheapest_total_for_two - b.cheapest_total_for_two);
+    ['pl-other-h', 'pl-other-n', 'pl-other-w'].forEach((id) => { document.getElementById(id).hidden = !others.length; });
+    document.getElementById('pl-other').replaceChildren(...others.map((r) => {
+      const tr = document.createElement('tr');
+      const td = (cls, txt) => { const c = document.createElement('td'); if (cls) c.className = cls; if (txt != null) c.textContent = txt; tr.append(c); return c; };
+      td('res').append(Object.assign(document.createElement('b'), { textContent: r.resort }));
+      td('num', `${r.rating}★`); td('num', money(r.cheapest_total_for_two));
+      td('', `${fmtDay(day(r.cheapest_depart))} · ${r.cheapest_nights} nights · ${r.cheapest_from}`);
+      const lk = td(''); const a = linkEl(r.book_link, 'Book ↗', 'tt-book'); if (a) lk.append(a);
+      return tr;
+    }));
+  }
+  // Rank-by buttons: attr names the group, key is where the choice lives on window.tt.
+  function rankChips(attr, key, draw) {
+    const all = document.querySelectorAll(`[${attr}]`);
+    all.forEach((b) => b.addEventListener('click', () => {
+      window.tt[key] = b.getAttribute(attr);
+      all.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      draw();
+    }));
+  }
+
   function drawPower() {
     const box = document.getElementById('power-cards');
     const d = dash.data('deals');
     if (d.status !== 'ok') { box.replaceChildren(); return; }
     const pm = photoMap();
     const g = dash.data('gallery');
-    const top = d.data.filter((r) => r.power_rank).sort((a, b) => a.power_rank - b.power_rank);
-    box.replaceChildren(...top.map((r) => {
-      const c = document.createElement('div'); c.className = 'tt-pcard'; c.dataset.key = r.deal_id; c.id = `power-${r.power_rank}`;
+    const under = window.tt.pw === 'under';
+    const seenPw = new Set();
+    const top = under ? [...d.data].sort((a, b) => b.pct_below_usual - a.pct_below_usual).filter((r) => !seenPw.has(r.hotel_code) && seenPw.add(r.hotel_code)).slice(0, 3)
+      : d.data.filter((r) => r.power_rank).sort((a, b) => a.power_rank - b.power_rank);
+    document.getElementById('power-note').textContent = under
+      ? "The three biggest discounts today, one pick per resort, ranked only on how far under the usual price they are. Check that the price has been re-checked before trusting a very large number."
+      : "Scored on how far under its usual price the trip is, the resort's guest rating, and the cost per night for two, with a bonus when the price was confirmed live. One pick per resort.";
+    box.replaceChildren(...top.map((r, i) => {
+      const c = document.createElement('div'); c.className = 'tt-pcard'; c.dataset.key = r.deal_id; c.id = `power-${i + 1}`;
       const pic = g.status === 'ok' ? g.data.find((p) => p.hotel_code === r.hotel_code && okImg(p.src)) : null;
       const img = document.createElement('img'); img.alt = r.resort;
       const rec = pm.get(r.hotel_code);
       if (pic) img.src = pic.src; else if (rec && okImg(rec.thumb)) img.src = rec.thumb;
-      const badge = document.createElement('span'); badge.className = 'tt-rank'; badge.textContent = `#${r.power_rank} best value`;
+      const badge = document.createElement('span'); badge.className = 'tt-rank'; badge.textContent = `#${i + 1} ${under ? 'most % off' : 'best value'}`;
       const mk = (cls, t) => { const e = document.createElement('div'); e.className = cls; e.textContent = t; return e; };
       const links = document.createElement('div'); links.className = 'tt-links';
       const look = document.createElement('button'); look.type = 'button'; look.className = 'tt-btn'; look.textContent = 'Photos & details';
@@ -521,7 +772,7 @@ window.dash = (function () {
         mk('sub', `${r.destination} · ${r.rating}★${r.adults_only === 'Yes' ? ' · adults only' : ''}`),
         mk('pr', money(r.total_for_two)),
         mk('sub', `for two · ${money(r.per_night_for_two)} a night · usually ${money(r.usual_for_two)}`),
-        mk('why', `${fmtDay(day(r.depart))} – ${fmtDay(day(r.return))} · ${r.nights} nights from ${r.from_airport === 'MDW' ? 'Midway' : "O'Hare"} · ${pct(r.pct_below_usual)} under usual${r.price_check === 'Live price confirmed' ? ' · live price' : ''}`),
+        mk('why', `${fmtDay(day(r.depart))} – ${fmtDay(day(r.return))} · ${r.nights} nights from ${r.from_airport === 'MDW' ? 'Midway' : "O'Hare"} · ${pct(r.pct_below_usual)} under usual${r.price_check === 'Live price confirmed' ? ' · live price' : ' · not re-checked yet'}`),
         mk('sub', `Value score ${r.value_score}`),
         links);
       return c;
@@ -739,7 +990,7 @@ window.dash = (function () {
   }
 
   // ---- Tabs: the sheet and calendar are cloned in (and their data loaded) only when first opened.
-  const TABS = ['deals', 'sheet', 'calendar', 'iceland', 'places'];
+  const TABS = ['deals', 'sheet', 'calendar', 'place', 'places'];
   window.tt.tab = 'deals';
   window.tt.cal = { hc: null, air: null, nights: null, day: null };
   window.ttTab = (name, scroll) => {
@@ -749,14 +1000,17 @@ window.dash = (function () {
     if (tpl && !page.childElementCount) { page.append(tpl.content.cloneNode(true)); wire(name); }
     TABS.forEach((t) => {
       document.getElementById('tab-' + t).hidden = t !== name;
-      document.getElementById('tabbtn-' + t).setAttribute('aria-selected', String(t === name));
+      document.getElementById('tabbtn-' + t)?.setAttribute('aria-selected', String(t === name));
     });
+    if (name !== 'place' && name !== 'places') window.tt.place = null;
+    drawBoard();
     window.tt.tab = name;
     dash.setLink(name);
     if (name === 'sheet') drawSheet();
     if (name === 'calendar') drawCal();
-    if (name === 'iceland' || name === 'places') drawMarket(name);
-    if (scroll) document.getElementById('tabbtn-' + name).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (name === 'place') drawPlace();
+    if (name === 'places') drawMarket(name);
+    if (scroll) document.getElementById(page.id).scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
   window.ttCal = (hc, air, nights) => {
     Object.assign(window.tt.cal, { hc, air: air || null, nights: nights || null, day: null });
@@ -765,9 +1019,8 @@ window.dash = (function () {
   document.querySelectorAll('.tt-tab').forEach((b) => b.addEventListener('click', () => window.ttTab(b.dataset.tab)));
 
   function wire(name) {
-    if (name === 'places') {
-      document.querySelector('#places-view [data-mk="pick"]').addEventListener('change', (e) => { window.tt.mk.places = e.target.value; window.tt.mday.places = null; drawMarket('places'); });
-    }
+    if (name === 'places') rankChips('data-mrank', 'mrank', () => drawMarket('places'));
+    if (name === 'place') rankChips('data-prank', 'prank', drawPlace);
     if (name === 'sheet') {
       document.getElementById('ssearch').addEventListener('input', (e) => { window.tt.sq = e.target.value; drawSheet(); });
       document.querySelectorAll('[data-smode]').forEach((btn) => btn.addEventListener('click', () => {
@@ -796,7 +1049,7 @@ window.dash = (function () {
   }
 
 
-  // ---- Iceland and More places: flight + hotel markets.
+  // ---- Flight + hotel places (Iceland, Hawaii, Thailand, Bali and more).
   window.tt.mk = { iceland: 'iceland', places: null };
   window.tt.mday = { iceland: null, places: null };
   const searchLinks = (m, ci, co) => {
@@ -824,13 +1077,6 @@ window.dash = (function () {
       head.textContent = [M, O, F].some((x) => x.status === 'error') ? 'These prices didn’t load.' : 'Loading flights and hotels…';
       return;
     }
-    if (tab === 'places') {
-      const pick = q('pick');
-      const others = M.data.filter((m) => m.market !== 'iceland');
-      if (pick.options.length !== others.length) pick.replaceChildren(...others.map((m) => new Option(`${m.name}${m.level ? ' · ' + m.level : ''}`, m.market)));
-      if (!window.tt.mk.places || !others.some((m) => m.market === window.tt.mk.places)) window.tt.mk.places = (others.find((m) => m.level === 'Great deal') || others[0] || {}).market;
-      pick.value = window.tt.mk.places;
-    }
     const m = M.data.find((x) => x.market === window.tt.mk[tab]);
     if (!m) { head.textContent = 'No prices for this place yet. They refresh on the next Monday, Wednesday or Friday check.'; combos.replaceChildren(); months.replaceChildren(); return; }
 
@@ -843,17 +1089,23 @@ window.dash = (function () {
     fact(`cheapest round trip per person, ${fmtDay(day(m.cheapest_flight_day))}`, money(m.cheapest_flight_pp));
     fact('typical round trip per person', money(m.typical_flight_pp));
     if (m.hot_rate_avg && m.standard_avg) fact(`Hotwire Hot Rate vs standard, per night`, `${money(m.hot_rate_avg)} vs ${money(m.standard_avg)}`);
+    const nights = m.nights || 5, placeRow = places().find((p) => p.market === m.market);
+    if (placeRow) placeHero(q('hero'), placeRow, `Flights + a top-rated hotel for two, ${nights} nights from Chicago.`, [
+      ['Cheapest trip for two', money(m.cheapest_trip_total)], ['Best-value trip', money(m.best_trip_total)], ['Biggest discount', placeRow.pct ? pct(placeRow.pct) : '—']]);
+    q('cnote').textContent = `${nights} nights, two people: round-trip flights from Chicago (cheapest on Google Flights for that day) plus a top-rated hotel. Hotels come from Booking.com, Priceline (including Express Deals) and Hotwire (Hot Rates). On Express Deals and Hot Rates the hotel's name is only shown after you book, in exchange for a lower price.`;
+    q('fnote').textContent = `Round trip for two, ${nights}-night trips. Greener is cheaper than usual, redder is pricier; the star is the cheapest day. Click a day for flight and hotel search links for those dates.`;
     if (m.level) { const pill = document.createElement('span'); pill.className = 'tt-pill ' + (m.level === 'Great deal' ? 'nb' : 'gd'); pill.textContent = m.level; head.append(pill); }
     head.append(facts, sub);
 
     // Combos
-    const opts = O.data.filter((o) => o.market === m.market).sort((a, b) => a.rank - b.rank);
+    const mrank = window.tt.mrank || 'value';
+    const opts = O.data.filter((o) => o.market === m.market).sort(mrank === 'under' ? (a, b) => b.pct_below_typical - a.pct_below_typical : mrank === 'price' ? (a, b) => a.trip_total - b.trip_total : (a, b) => a.rank - b.rank);
     combos.replaceChildren(...opts.map((o, i) => {
       const c = document.createElement('div'); c.className = 'tt-combo' + (i === 0 ? ' top' : ''); c.dataset.key = o.option_id;
       if (okImg(o.image)) { const im = document.createElement('img'); im.src = o.image; im.alt = o.hotel; c.append(im); }
       else { const ph = document.createElement('div'); ph.className = 'ph'; ph.textContent = /after booking/.test(o.rating_text + o.deal_note) ? 'Hotel name revealed after booking' : 'Photos on the hotel page'; c.append(ph); }
       const mk = (cls, t) => { const e = document.createElement('div'); e.className = cls; e.textContent = t; return e; };
-      if (i === 0) { const g = document.createElement('div'); g.className = 'tt-goldpill'; g.textContent = 'Best value here'; c.append(g); }
+      const no = document.createElement('div'); no.className = 'tt-rankno'; no.textContent = `#${i + 1} ${{ value: 'best value', under: 'most % off', price: 'lowest price' }[mrank]}`; c.append(no);
       c.append(mk('src', o.source), mk('nm', o.hotel), mk('sub', `${o.rating_text}${o.area ? ' · ' + o.area : ''}`),
         mk('tot', money(o.trip_total)),
         mk('sub', `for two: hotel ${money(o.hotel_total)} + flights ${money(o.flights_for_two)} · ${fmtDay(day(o.checkin))} – ${fmtDay(day(o.checkout))}`),
@@ -1147,8 +1399,12 @@ window.dash = (function () {
     btn.setAttribute('aria-sort', t.rdir > 0 ? 'ascending' : 'descending');
     drawResorts();
   }));
+  rankChips('data-pw', 'pw', drawPower);
+  rankChips('data-lad', 'lad', drawLadder);
+  document.getElementById('placeq').addEventListener('input', (e) => { window.tt.pq = e.target.value; drawBoard(); drawLadder(); });
   const startTab = location.hash.slice(1);
-  if (TABS.includes(startTab) && startTab !== 'deals') window.ttTab(startTab);
+  if (startTab === 'sheet' || startTab === 'calendar') window.ttTab(startTab);
+  else if (startTab && startTab !== 'deals') window.tt.startPlace = startTab;
 </script>
 
 </div></body></html>
