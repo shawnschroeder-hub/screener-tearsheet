@@ -260,6 +260,25 @@ window.dash = (function () {
   .tt-ladbtn:hover { filter: brightness(1.12); }
   .tt-ladbtn:focus-visible { outline: 3px solid var(--color-fg); outline-offset: 2px; }
   @media (prefers-reduced-motion: no-preference) { .tt-go, .tt-tab, .tt-ladbtn { transition: filter .12s; } }
+  .tt-hmbtn { all: unset; box-sizing: border-box; display: inline-flex; align-items: center; gap: .55rem; cursor: pointer; font-weight: 800; padding: .55rem .9rem; border-radius: 10px; border: 2px solid var(--color-fg); color: var(--color-fg); }
+  .tt-hmbtn i { display: block; width: 3.2rem; height: .7rem; border-radius: 3px; background: linear-gradient(90deg, #0a7a35, #7cc36a, #fff2a8, #f08a4b, #c21f1f); }
+  .tt-hmbtn:hover { background: color-mix(in srgb, var(--color-fg) 8%, var(--color-panel)); }
+  .tt-hmbtn:focus-visible { outline: 3px solid var(--color-fg); outline-offset: 2px; }
+  .tt-hmbtn[aria-expanded="true"] { background: var(--color-fg); color: var(--color-panel); }
+  .tt-boardacts { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; }
+  .tt-hm { display: grid; gap: .75rem; padding-top: 1rem; border-top: 2px solid var(--color-border-line); min-width: 0; }
+  .tt-hmtop { display: flex; flex-wrap: wrap; gap: .6rem 1.25rem; align-items: center; justify-content: space-between; }
+  .tt-hm h3 { margin: 0; font-size: 1.2rem; font-weight: 800; }
+  .tt-hmkey { display: flex; align-items: center; gap: .5rem; font-size: var(--cds-font-size-caption); font-weight: 700; font-variant-numeric: tabular-nums; }
+  .tt-hmkey i { display: block; width: min(11rem, 30vw); height: .75rem; border-radius: 3px; background: linear-gradient(90deg, #0a7a35, #7cc36a, #fff2a8, #f08a4b, #c21f1f); }
+  .tt-hmgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 8.8rem), 1fr)); gap: 4px; }
+  .tt-ht { all: unset; box-sizing: border-box; cursor: pointer; display: grid; gap: 1px; align-content: start; padding: .55rem .65rem .6rem; border-radius: 6px; min-height: 6rem; background: var(--h); color: var(--ht); }
+  .tt-ht .no { font-size: .7rem; font-weight: 700; }
+  .tt-ht .nm { font-weight: 800; line-height: 1.15; }
+  .tt-ht .val { font-size: 1.32rem; font-weight: 800; line-height: 1.2; font-variant-numeric: tabular-nums; }
+  .tt-ht .ty { font-size: .7rem; line-height: 1.2; }
+  .tt-ht:hover { outline: 3px solid var(--color-fg); outline-offset: -1px; }
+  .tt-ht:focus-visible { outline: 3px solid var(--color-fg); outline-offset: 2px; }
   [data-dash-source-state=empty] { color: transparent; }
   [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
 </style>
@@ -282,11 +301,23 @@ window.dash = (function () {
   <section class="tt-board" id="board" aria-label="Destinations" data-source="markets">
     <div class="tt-boardtop">
       <h2>Pick a destination</h2>
-      <input class="tt-search" id="placeq" type="search" placeholder="Search a place, region or resort" aria-label="Search destinations">
+      <div class="tt-boardacts">
+        <button class="tt-hmbtn" type="button" id="hm-btn" aria-expanded="false" aria-controls="hm"><i aria-hidden="true"></i>Heat map</button>
+        <input class="tt-search" id="placeq" type="search" placeholder="Search a place, region or resort" aria-label="Search destinations">
+      </div>
     </div>
     <div class="tt-controls" id="regchips"><span class="tt-lab">Region</span></div>
     <div id="board-rows" style="display:grid;gap:.75rem"></div>
     <p class="tt-note" id="board-note">Each tab shows the cheapest trip for two from Chicago and the biggest discount found. Click one to see every deal there.</p>
+    <div class="tt-hm" id="hm" hidden>
+      <div class="tt-hmtop">
+        <h3>Price heat map</h3>
+        <div class="tt-controls"><span class="tt-lab">Show</span><button class="tt-chip" type="button" data-hm="total" aria-pressed="true">Trip price</button><button class="tt-chip" type="button" data-hm="night" aria-pressed="false">Price per night</button><button class="tt-chip" type="button" data-hm="pct" aria-pressed="false">% off</button></div>
+        <div class="tt-hmkey"><span id="hm-lo"></span><i aria-hidden="true"></i><span id="hm-hi"></span></div>
+      </div>
+      <div class="tt-hmgrid" id="hm-grid"></div>
+      <p class="tt-note" id="hm-note"></p>
+    </div>
   </section>
 
   <div class="tt-page" id="tab-deals" role="tabpanel">
@@ -558,14 +589,14 @@ window.dash = (function () {
       [...new Set(R.data.map((r) => r.destination))].forEach((dest) => {
         const rs = R.data.filter((r) => r.destination === dest), ds = deals.filter((d) => d.destination === dest);
         const label = dest.replace(/ \(.*\)$/, ''), region = regionOf(dest);
-        out.push({ id: slug(label), label, full: dest, region, color: colorOf(region), kind: 'ai', from: d3.min(rs, (r) => r.cheapest_total_for_two), pct: d3.max(ds, (d) => d.pct_below_usual) || 0,
+        out.push({ id: slug(label), label, full: dest, region, color: colorOf(region), kind: 'ai', from: d3.min(rs, (r) => r.cheapest_total_for_two), perNight: d3.min(rs, (r) => r.cheapest_per_night_for_two), pct: d3.max(ds, (d) => d.pct_below_usual) || 0,
           type: 'All-inclusive + flights', resorts: rs.length, deals: new Set(ds.map((d) => d.hotel_code)).size, hay: rs.map((r) => r.resort).join(' ') });
       });
     }
     if (M.status === 'ok') {
       M.data.forEach((m) => {
         const region = regionOf(m.name), label = m.market === 'iceland' ? 'Iceland' : m.name.replace(/^.*?: /, '').replace(/ \(.*\)$/, '');
-        out.push({ id: m.market, market: m.market, label, full: m.name, region, color: colorOf(region), kind: 'market', from: m.cheapest_trip_total, pct: Math.max(0, m.best_pct_below || 0),
+        out.push({ id: m.market, market: m.market, label, full: m.name, region, color: colorOf(region), kind: 'market', from: m.cheapest_trip_total, perNight: Math.round(m.cheapest_trip_total / (m.nights || 5)), pct: Math.max(0, m.best_pct_below || 0),
           type: `Flights + hotel, ${m.nights || 5} nights`, hay: m.best_hotel || '' });
       });
     }
@@ -619,6 +650,35 @@ window.dash = (function () {
       return row;
     }).filter(Boolean));
     if (!shown.length) { const e = document.createElement('p'); e.className = 'tt-empty'; e.textContent = 'No destination matches that search.'; rows.replaceChildren(e); }
+    drawHeat();
+  }
+  // Colors run by rank, cheapest to priciest, so the map keeps its full spread even though a few islands cost far more than the rest. Every tile prints its real number.
+  const heatColor = d3.scaleLinear([0, 0.25, 0.5, 0.75, 1], ['#0a7a35', '#7cc36a', '#fff2a8', '#f08a4b', '#c21f1f']).interpolate(d3.interpolateLab);
+  const luminance = (c) => { const r = d3.rgb(c); const f = (v) => { const x = v / 255; return x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4; }; return 0.2126 * f(r.r) + 0.7152 * f(r.g) + 0.0722 * f(r.b); };
+  const inkOn = (c) => { const l = luminance(c); return (1.05) / (l + 0.05) >= (l + 0.05) / (luminance('#14210f') + 0.05) ? '#fff' : '#14210f'; };
+  function drawHeat() {
+    const box = document.getElementById('hm');
+    if (!box || box.hidden) return;
+    const m = window.tt.hm || 'total';
+    const val = { total: (p) => p.from, night: (p) => p.perNight, pct: (p) => p.pct }[m];
+    const list = places().filter(placeShown).sort(m === 'pct' ? (a, b) => b.pct - a.pct || a.from - b.from : (a, b) => val(a) - val(b));
+    const show = (p) => (m === 'pct' ? (p.pct ? pct(p.pct) : 'None') : money(val(p)));
+    document.getElementById('hm-grid').replaceChildren(...list.map((p, i) => {
+      const t = list.length > 1 ? i / (list.length - 1) : 0, c = heatColor(t);
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'tt-ht';
+      b.style.setProperty('--h', c); b.style.setProperty('--ht', inkOn(c));
+      b.title = `${p.full}: cheapest trip ${money(p.from)}, ${money(p.perNight)} a night, ${p.pct ? pct(p.pct) + ' off' : 'no discount found'}. ${p.type}.`;
+      const mk = (cls, txt) => { const e = document.createElement('span'); e.className = cls; e.textContent = txt; return e; };
+      b.append(mk('no', `#${i + 1}`), mk('nm', p.label), mk('val', show(p)), mk('ty', p.kind === 'ai' ? 'All-inclusive' : p.type.replace('Flights + hotel, ', 'Flights + hotel, ')));
+      b.addEventListener('click', () => window.ttPlace(p.id));
+      return b;
+    }));
+    document.getElementById('hm-lo').textContent = list.length ? (m === 'pct' ? `Most off ${show(list[0])}` : `Cheapest ${show(list[0])}`) : '';
+    document.getElementById('hm-hi').textContent = list.length ? (m === 'pct' ? `Least off ${show(list[list.length - 1])}` : `Priciest ${show(list[list.length - 1])}`) : '';
+    document.getElementById('hm-note').textContent = {
+      total: 'The cheapest trip for two at each destination, from greenest to reddest. All-inclusive trips include food and drinks and flight + hotel trips do not, and trip lengths differ, so Price per night is the fairer comparison.',
+      night: 'The cheapest trip divided by its nights, for two, flights included. All-inclusive prices also cover food and drinks.',
+      pct: 'The biggest discount found at each destination, greenest for the most off. All-inclusive places compare against the resort\'s usual price; flight + hotel places compare against a typical trip there.' }[m];
   }
   function drawLadder() {
     const tb = document.querySelector('#ladder-table tbody');
@@ -1401,6 +1461,14 @@ window.dash = (function () {
   }));
   rankChips('data-pw', 'pw', drawPower);
   rankChips('data-lad', 'lad', drawLadder);
+  rankChips('data-hm', 'hm', drawHeat);
+  document.getElementById('hm-btn').addEventListener('click', (e) => {
+    const box = document.getElementById('hm');
+    box.hidden = !box.hidden;
+    e.currentTarget.setAttribute('aria-expanded', String(!box.hidden));
+    drawHeat();
+    if (!box.hidden) box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
   document.getElementById('placeq').addEventListener('input', (e) => { window.tt.pq = e.target.value; drawBoard(); drawLadder(); });
   const startTab = location.hash.slice(1);
   if (startTab === 'sheet' || startTab === 'calendar') window.ttTab(startTab);
