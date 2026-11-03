@@ -544,47 +544,6 @@ window.dash = (function () {
   const setText = (el, s) => { el.textContent = s; el.classList.remove('dash-skeleton'); };
   const levelClass = { 'No-brainer': 'nb', 'Great deal': 'gd', 'Good value': 'gv' };
 
-  dash.onData(() => {
-    const s = dash.data('summary');
-    const take = document.getElementById('takeaway');
-    if (s.status === 'ok' && s.data.length) {
-      const r = s.data[0];
-      document.querySelectorAll('[data-source="summary"][data-field]').forEach((el) => {
-        const v = r[el.dataset.field];
-        const f = el.dataset.field;
-        setText(el, v == null ? '—' : (f.includes('total') || f.includes('per_night')) ? money(v) : comma(v));
-      });
-      take.replaceChildren();
-      if (r.top_resort) {
-        const lead = document.createElement('b');
-        lead.textContent = `#1 best value: ${r.top_resort}, ${r.top_destination}`;
-        take.append(lead, ` — ${r.top_nights} nights from ${fmtDay(day(r.top_depart))}, ${money(r.top_total_for_two)} for both of you, ${pct(r.top_pct_below)} under its usual price.`);
-      } else {
-        take.textContent = 'Nothing is priced far enough below normal today. The tracker checks again tomorrow at 11 AM.';
-      }
-      take.classList.remove('dash-skeleton');
-      setText(document.getElementById('top-sub'), r.top_resort ? `${r.top_resort}, ${pct(r.top_pct_below)} under usual` : 'none today');
-      setText(document.getElementById('run-sub'), `checked ${fmtDay(day(r.run_date))} across ${comma(r.rated_resorts)} top-rated resorts`);
-    } else if (s.status !== 'loading') {
-      take.textContent = 'Today’s summary didn’t load.';
-      take.classList.remove('dash-skeleton');
-    }
-    drawSheet();
-    drawCal();
-    drawBoard();
-    drawLadder();
-    drawPlace();
-    drawMarket('places');
-    if (window.tt.startPlace && places().some((p) => p.id === window.tt.startPlace)) { const id = window.tt.startPlace; window.tt.startPlace = null; window.ttPlace(id); }
-    drawPower();
-    drawCloseup();
-    drawDeals();
-    drawResorts();
-    drawTrend();
-    drawChecks();
-    drawPlay();
-  });
-
   // ---- Destinations: every city or country is its own tab, in a region with its own color.
   const REGIONS = [['mexico', 'Mexico', '#d9480f'], ['caribbean', 'Caribbean', '#0b7285'], ['central', 'Central America', '#2b8a3e'], ['hawaii', 'Hawaii', '#c2255c'],
     ['asia', 'Thailand & Bali', '#862e9c'], ['iceland', 'Iceland', '#1864ab'], ['usa', 'Arizona, Colorado & Florida', '#364fc7']];
@@ -739,6 +698,47 @@ window.dash = (function () {
       draw();
     }));
   }
+
+  dash.onData(() => {
+    const s = dash.data('summary');
+    const take = document.getElementById('takeaway');
+    if (s.status === 'ok' && s.data.length) {
+      const r = s.data[0];
+      document.querySelectorAll('[data-source="summary"][data-field]').forEach((el) => {
+        const v = r[el.dataset.field];
+        const f = el.dataset.field;
+        setText(el, v == null ? '—' : (f.includes('total') || f.includes('per_night')) ? money(v) : comma(v));
+      });
+      take.replaceChildren();
+      if (r.top_resort) {
+        const lead = document.createElement('b');
+        lead.textContent = `#1 best value: ${r.top_resort}, ${r.top_destination}`;
+        take.append(lead, ` — ${r.top_nights} nights from ${fmtDay(day(r.top_depart))}, ${money(r.top_total_for_two)} for both of you, ${pct(r.top_pct_below)} under its usual price.`);
+      } else {
+        take.textContent = 'Nothing is priced far enough below normal today. The tracker checks again tomorrow at 11 AM.';
+      }
+      take.classList.remove('dash-skeleton');
+      setText(document.getElementById('top-sub'), r.top_resort ? `${r.top_resort}, ${pct(r.top_pct_below)} under usual` : 'none today');
+      setText(document.getElementById('run-sub'), `checked ${fmtDay(day(r.run_date))} across ${comma(r.rated_resorts)} top-rated resorts`);
+    } else if (s.status !== 'loading') {
+      take.textContent = 'Today’s summary didn’t load.';
+      take.classList.remove('dash-skeleton');
+    }
+    drawSheet();
+    drawCal();
+    drawBoard();
+    drawLadder();
+    drawPlace();
+    drawMarket('places');
+    if (window.tt.startPlace && places().some((p) => p.id === window.tt.startPlace)) { const id = window.tt.startPlace; window.tt.startPlace = null; window.ttPlace(id); }
+    drawPower();
+    drawCloseup();
+    drawDeals();
+    drawResorts();
+    drawTrend();
+    drawChecks();
+    drawPlay();
+  });
 
   function drawPower() {
     const box = document.getElementById('power-cards');
