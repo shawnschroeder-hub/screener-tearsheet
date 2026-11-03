@@ -321,6 +321,13 @@ window.dash = (function () {
   .tt-ht .ty { font-size: .7rem; line-height: 1.2; }
   .tt-ht:hover { outline: 2px solid #fff; outline-offset: -1px; }
   .tt-ht:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
+  .tt-bench { display: grid; gap: .55rem; padding: .9rem 1rem; border-radius: 12px; border: 2px solid #e5b800; background: color-mix(in srgb, #ffd23f 16%, var(--color-panel)); }
+  .tt-bench .k { font-size: .72rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+  .tt-bench .nm { font-size: 1.25rem; font-weight: 800; line-height: 1.2; }
+  .tt-bench .st { display: flex; flex-wrap: wrap; gap: .5rem 2rem; }
+  .tt-bench .st div { display: grid; font-size: .78rem; }
+  .tt-bench .st b { font-size: 1.45rem; font-weight: 800; line-height: 1.15; font-variant-numeric: tabular-nums; }
+  .tt-bench .why { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); max-width: 80ch; }
   [data-dash-source-state=empty] { color: transparent; }
   [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
 </style>
@@ -575,6 +582,10 @@ window.dash = (function () {
     <section class="tt-card" id="place-view">
       <div class="tt-phero" id="pl-hero"></div>
       <div class="tt-controls"><span class="tt-lab">Rank by</span><button class="tt-chip" type="button" data-prank="value" aria-pressed="true">Best value</button><button class="tt-chip" type="button" data-prank="under" aria-pressed="false">Most % off</button><button class="tt-chip" type="button" data-prank="price" aria-pressed="false">Lowest price</button></div>
+      <div class="tt-bench" id="pl-bench" hidden></div>
+      <h3 class="tt-h3" id="pl-rank-h" hidden>Where it ranks: every resort here, cheapest first</h3>
+      <div class="tt-scroll" id="pl-rank-w" style="max-height: 26rem" hidden><table class="tt-table"><thead><tr><th class="num">#</th><th>Resort</th><th class="num">Rating</th><th class="num">Cheapest per night</th><th class="num">That trip for two</th><th>Dates</th><th>Links</th></tr></thead><tbody id="pl-rank"></tbody></table></div>
+      <h3 class="tt-h3" id="pl-cards-h" hidden>Deals here right now</h3>
       <p class="tt-note" id="pl-note"></p>
       <div class="tt-combos" id="pl-cards"></div>
       <h3 class="tt-h3" id="pl-other-h">Other top-rated resorts here</h3>
@@ -979,6 +990,32 @@ window.dash = (function () {
     const list = D.data.filter((d) => d.destination === p.full).sort(better).filter((d) => !seen.has(d.hotel_code) && seen.add(d.hotel_code));
     placeHero(document.getElementById('pl-hero'), p, 'All-inclusive resort plus round-trip flights for two from Chicago, sold together as one price.', [
       ['Cheapest trip for two', money(p.from)], ['Biggest discount', p.pct ? pct(p.pct) : '—'], ['Resorts priced below usual', String(p.deals)], ['Top-rated resorts', String(p.resorts)]]);
+    const sumRow = dash.data('summary').status === 'ok' ? dash.data('summary').data[0] : null;
+    const bench = ((sumRow && sumRow.benchmarks) || []).find((b) => b.destination === p.full) || null;
+    const benchBox = document.getElementById('pl-bench');
+    ['pl-bench', 'pl-rank-h', 'pl-rank-w', 'pl-cards-h'].forEach((id) => { document.getElementById(id).hidden = !bench; });
+    if (bench) {
+      const mkb = (cls, t) => { const e = document.createElement('div'); e.className = cls; e.textContent = t; return e; };
+      const st = document.createElement('div'); st.className = 'st';
+      st.append(...[[`#${bench.rank} of ${bench.of}`, `by price per night in ${p.label}`], [money(bench.cheapest_total_for_two), `cheapest-per-night trip for two, ${bench.cheapest_nights} nights`], [money(bench.cheapest_per_night_for_two), 'a night for two'], ...(bench.cheapest_5n_total ? [[money(bench.cheapest_5n_total), `cheapest 5-night trip, ${fmtDay(day(bench.cheapest_5n_depart))}`]] : []), [money(bench.typical_per_night), 'typical night for two']].map(([v, k]) => { const d = document.createElement('div'); const b = document.createElement('b'); b.textContent = v; d.append(b, k); return d; }));
+      const blinks = document.createElement('div'); blinks.className = 'tt-links';
+      blinks.append(...[linkEl(bench.book_link, 'See this trip ↗', 'tt-btn primary'), linkEl(bench.resort_page, 'Resort page ↗'), linkEl(bench.google_link, 'Reviews ↗')].filter(Boolean));
+      benchBox.replaceChildren(mkb('k', bench.note || 'For comparison'), mkb('nm', bench.resort), st,
+        mkb('why', `${fmtDay(day(bench.cheapest_depart))} – ${fmtDay(day(bench.cheapest_return))} from ${bench.cheapest_from === 'MDW' ? 'Midway' : "O'Hare"}. ${bench.rating}★ from ${comma(bench.reviews || 0)} Google reviews, under the 4.5★ cutoff, so it's priced for comparison and stays out of the deal rankings. Price feed, not re-checked live.`), blinks);
+      const rows = [...R.data.filter((r) => r.destination === p.full), { ...bench, isBench: true }].sort((a, b) => a.cheapest_per_night_for_two - b.cheapest_per_night_for_two);
+      document.getElementById('pl-rank').replaceChildren(...rows.map((r, i) => {
+        const tr = document.createElement('tr'); if (r.isBench) tr.className = 'tt-gold';
+        const td = (cls, txt) => { const c = document.createElement('td'); if (cls) c.className = cls; if (txt != null) c.textContent = txt; tr.append(c); return c; };
+        td('num', String(i + 1));
+        const res = td('res');
+        if (r.isBench) { const g = document.createElement('div'); g.className = 'tt-goldpill'; g.textContent = r.note || 'For comparison'; res.append(g); }
+        res.append(Object.assign(document.createElement('b'), { textContent: r.resort }));
+        td('num', `${r.rating}★`); td('num tt-save', money(r.cheapest_per_night_for_two)); td('num', money(r.cheapest_total_for_two));
+        td('', `${fmtDay(day(r.cheapest_depart))} · ${r.cheapest_nights} nights · ${r.cheapest_from}`);
+        const lk = td(''); const a = linkEl(r.book_link, 'Book ↗', 'tt-book'); if (a) lk.append(a);
+        return tr;
+      }));
+    }
     document.getElementById('pl-note').textContent = list.length ? 'One card per resort, showing its best trip for the ranking you picked.' : `Nothing in ${p.label} is priced below usual today. The cheapest trips at its top-rated resorts are below.`;
     const mk = (cls, t) => { const e = document.createElement('div'); e.className = cls; e.textContent = t; return e; };
     document.getElementById('pl-cards').replaceChildren(...list.map((r, i) => {
@@ -995,6 +1032,7 @@ window.dash = (function () {
       c.append(mk('tt-rankno', `#${i + 1} ${{ value: 'best value', under: 'most % off', price: 'lowest price' }[mode]}`), mk('nm', r.resort),
         mk('sub', `${r.rating}★${r.adults_only === 'Yes' ? ' · adults only' : ''} · ${r.level}`), mk('tot', money(r.total_for_two)),
         mk('sub', `for two · ${money(r.per_night_for_two)} a night · usually ${money(r.usual_for_two)}`), mk('tt-off', `${pct(r.pct_below_usual)} under usual`),
+        ...(bench && r.bench_total ? [mk('sub', r.total_for_two === r.bench_total ? `Same price as ${bench.resort} on these dates` : `${money(Math.abs(r.total_for_two - r.bench_total))} ${r.total_for_two > r.bench_total ? 'more' : 'less'} than ${bench.resort} on these dates`)] : []),
         mk('sub', `${fmtDay(day(r.depart))} – ${fmtDay(day(r.return))} · ${r.nights} nights from ${r.from_airport === 'MDW' ? 'Midway' : "O'Hare"} · ${r.price_check === 'Live price confirmed' ? 'live price' : 'not re-checked yet'}`), links);
       return c;
     }));
