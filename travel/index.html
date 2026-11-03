@@ -144,6 +144,7 @@ window.dash = (function () {
   .tt-sheet .tt-cl:focus-visible { outline: 2px solid var(--color-fg); }
   .tt-sheet .res .tt-cl b { text-decoration: underline; text-underline-offset: 2px; }
   .tt-sheet .tt-book { text-decoration: underline; }
+  .tt-sheet tbody tr td.tt-nowmonth, .tt-sheet tbody tr:hover td.tt-nowmonth { background: #ffe600; color: #1d1a05; font-weight: 700; }
   .tt-calhead { display: flex; flex-wrap: wrap; gap: var(--cds-gap-lg); align-items: center; }
   .tt-calhead img { width: 120px; height: 80px; object-fit: cover; border-radius: var(--cds-radius); }
   .tt-calhead .nm { font-family: var(--font-anthropic-serif); font-size: var(--cds-font-size-title); line-height: 1.15; }
@@ -330,7 +331,7 @@ window.dash = (function () {
   <template id="tpl-sheet">
     <section class="tt-card" id="sheet">
       <h2>Resort sheet</h2>
-      <p class="tt-note">Every resort I'm recommending today, best value first (the top 3 are today's power rankings). Totals are for both of you with round-trip flights from Chicago. "Deal days" counts departure dates priced as a great deal or better across all trip lengths and both airports. Click a column heading to sort. Everything in a row is clickable: the photo and name open the resort page, the dates and prices open that exact trip, the rating opens Google reviews, and the usual price, discount, deal days and cheapest month open the price calendar.</p>
+      <p class="tt-note">Every resort I'm recommending today, best value first (the top 3 are today's power rankings). Totals are for both of you with round-trip flights from Chicago. "Deal days" counts departure dates priced as a great deal or better across all trip lengths and both airports. Click a column heading to sort. Everything in a row is clickable: the photo and name open the resort page, the dates and prices open that exact trip, the rating opens Google reviews, and the usual price, discount, deal days and cheapest month open the price calendar. A cheapest month in bright yellow means this month is that resort's cheapest.</p>
       <div class="tt-controls">
         <button class="tt-chip" type="button" data-smode="value" aria-pressed="true">Rank by best value</button>
         <button class="tt-chip" type="button" data-smode="under" aria-pressed="false">Rank by under usual</button>
@@ -933,6 +934,7 @@ window.dash = (function () {
       return (typeof x === 'number' ? x - y : String(x).localeCompare(String(y))) * t.sdir;
     });
     const under = t.smode === 'under';
+    const now = new Date(), thisMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
     tb.replaceChildren(...list.map((r) => {
       const tr = document.createElement('tr'); tr.dataset.key = r.hotel_code;
       const medal = under ? (r.under_rank <= 3 ? `#${r.under_rank} under usual` : '') : (r.power_rank ? `#${r.power_rank} best value` : '');
@@ -965,7 +967,7 @@ window.dash = (function () {
       toCal('num tt-hide-narrow', money(r.usual_for_two));
       toCal('num tt-save', pct(r.pct_below_usual));
       toCal('num tt-hide-narrow', comma(r.deal_days));
-      toCal('tt-hide-narrow', r.cheapest_month ? fmtMon(day(r.cheapest_month + '-01')) : '');
+      toCal(r.cheapest_month === thisMonth ? 'tt-hide-narrow tt-nowmonth' : 'tt-hide-narrow', r.cheapest_month ? fmtMon(day(r.cheapest_month + '-01')) : '');
       toTrip('tt-hide-narrow', r.price_check === 'Live price confirmed' ? 'Live price' : 'Price feed');
       const lk = td(); lk.style.display = 'grid'; lk.style.gap = '2px';
       const cal = document.createElement('button'); cal.type = 'button'; cal.className = 'tt-look'; cal.textContent = 'Calendar';
