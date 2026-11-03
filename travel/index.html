@@ -969,7 +969,7 @@ window.dash = (function () {
       toCal('num tt-hide-narrow', comma(r.deal_days));
       toCal(r.cheapest_month === thisMonth ? 'tt-hide-narrow tt-nowmonth' : 'tt-hide-narrow', r.cheapest_month ? fmtMon(day(r.cheapest_month + '-01')) : '');
       toTrip('tt-hide-narrow', r.price_check === 'Live price confirmed' ? 'Live price' : 'Price feed');
-      const lk = td(); lk.style.display = 'grid'; lk.style.gap = '2px';
+      const lk = document.createElement('div'); td().append(lk); lk.style.display = 'grid'; lk.style.gap = '2px';
       const cal = document.createElement('button'); cal.type = 'button'; cal.className = 'tt-look'; cal.textContent = 'Calendar';
       cal.addEventListener('click', () => window.ttCal(r.hotel_code, r.best_from, r.best_nights));
       lk.append(...[linkEl(r.book_link, 'Book ↗', 'tt-book'), cal, linkEl(r.resort_page, 'Resort page ↗', 'tt-book')].filter(Boolean));
