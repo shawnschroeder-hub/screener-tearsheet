@@ -261,8 +261,13 @@ window.dash = (function () {
   .tt-ladbtn:focus-visible { outline: 3px solid var(--color-fg); outline-offset: 2px; }
   @media (prefers-reduced-motion: no-preference) { .tt-go, .tt-tab, .tt-ladbtn { transition: filter .12s; } }
   .tt-hmbtn { all: unset; box-sizing: border-box; display: inline-flex; align-items: center; gap: .55rem; cursor: pointer; font-weight: 800; padding: .55rem .9rem; border-radius: 10px; border: 2px solid var(--color-fg); color: var(--color-fg); }
-  .tt-hmbtn i { display: block; width: 3.2rem; height: .7rem; border-radius: 3px; background: linear-gradient(90deg, #0a7a35, #7cc36a, #fff2a8, #f08a4b, #c21f1f); }
+  .tt-coins { display: inline-flex; }
+  .tt-coins i { font-style: normal; display: grid; place-items: center; width: 1.45rem; height: 1.45rem; border-radius: 50%; font-weight: 900; font-size: .85rem; line-height: 1; color: #fff; border: 2px solid #fff; margin-left: -.42rem; }
+  .tt-coins i:first-child { margin-left: 0; background: #0a7a35; }
+  .tt-coins i:nth-child(2) { background: #f2b705; color: #1d1a05; }
+  .tt-coins i:nth-child(3) { background: #c21f1f; }
   .tt-hmbtn:hover { background: color-mix(in srgb, var(--color-fg) 8%, var(--color-panel)); }
+  .tt-hmbtn { font-size: 1rem; }
   .tt-hmbtn:focus-visible { outline: 3px solid var(--color-fg); outline-offset: 2px; }
   .tt-hmbtn[aria-expanded="true"] { background: var(--color-fg); color: var(--color-panel); }
   .tt-boardacts { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; }
@@ -302,7 +307,7 @@ window.dash = (function () {
     <div class="tt-boardtop">
       <h2>Pick a destination</h2>
       <div class="tt-boardacts">
-        <button class="tt-hmbtn" type="button" id="hm-btn" aria-expanded="false" aria-controls="hm"><i aria-hidden="true"></i>Heat map</button>
+        <button class="tt-hmbtn" type="button" id="hm-btn" aria-expanded="false" aria-controls="hm"><span class="tt-coins" aria-hidden="true"><i>$</i><i>$</i><i>$</i></span>Price map</button>
         <input class="tt-search" id="placeq" type="search" placeholder="Search a place, region or resort" aria-label="Search destinations">
       </div>
     </div>
@@ -311,7 +316,7 @@ window.dash = (function () {
     <p class="tt-note" id="board-note">Each tab shows the cheapest trip for two from Chicago and the biggest discount found. Click one to see every deal there.</p>
     <div class="tt-hm" id="hm" hidden>
       <div class="tt-hmtop">
-        <h3>Price heat map</h3>
+        <h3>Price map</h3>
         <div class="tt-controls"><span class="tt-lab">Show</span><button class="tt-chip" type="button" data-hm="total" aria-pressed="true">Trip price</button><button class="tt-chip" type="button" data-hm="night" aria-pressed="false">Price per night</button><button class="tt-chip" type="button" data-hm="pct" aria-pressed="false">% off</button></div>
         <div class="tt-hmkey"><span id="hm-lo"></span><i aria-hidden="true"></i><span id="hm-hi"></span></div>
       </div>
