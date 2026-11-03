@@ -136,6 +136,14 @@ window.dash = (function () {
   .tt-page { display: grid; gap: var(--cds-gap-xl); }
   .tt-seg { display: inline-flex; flex-wrap: wrap; gap: var(--cds-gap-xs); }
   .tt-sheet tr.tt-gold td { background: color-mix(in srgb, #ffd23f 24%, var(--color-panel)); }
+  .tt-sheet tbody tr:hover td { background: var(--color-bg); }
+  .tt-sheet tbody tr.tt-gold:hover td { background: color-mix(in srgb, #ffd23f 38%, var(--color-panel)); }
+  .tt-sheet .tt-cl { all: unset; cursor: pointer; display: block; width: 100%; }
+  .tt-sheet .tt-cl:hover { text-decoration: underline; }
+  .tt-sheet .tt-cl:hover .tt-thumb { opacity: .8; }
+  .tt-sheet .tt-cl:focus-visible { outline: 2px solid var(--color-fg); }
+  .tt-sheet .res .tt-cl b { text-decoration: underline; text-underline-offset: 2px; }
+  .tt-sheet .tt-book { text-decoration: underline; }
   .tt-calhead { display: flex; flex-wrap: wrap; gap: var(--cds-gap-lg); align-items: center; }
   .tt-calhead img { width: 120px; height: 80px; object-fit: cover; border-radius: var(--cds-radius); }
   .tt-calhead .nm { font-family: var(--font-anthropic-serif); font-size: var(--cds-font-size-title); line-height: 1.15; }
@@ -322,12 +330,17 @@ window.dash = (function () {
   <template id="tpl-sheet">
     <section class="tt-card" id="sheet">
       <h2>Resort sheet</h2>
-      <p class="tt-note">Every resort I'm recommending today, best value first (the top 3 are today's power rankings). Totals are for both of you with round-trip flights from Chicago. "Deal days" counts departure dates priced as a great deal or better across all trip lengths and both airports. Click a column to sort; use Calendar to see that resort's prices day by day.</p>
-      <div class="tt-controls"><input class="tt-search" id="ssearch" type="search" placeholder="Search resort or place" aria-label="Search the resort sheet"></div>
+      <p class="tt-note">Every resort I'm recommending today, best value first (the top 3 are today's power rankings). Totals are for both of you with round-trip flights from Chicago. "Deal days" counts departure dates priced as a great deal or better across all trip lengths and both airports. Click a column heading to sort. Everything in a row is clickable: the photo and name open the resort page, the dates and prices open that exact trip, the rating opens Google reviews, and the usual price, discount, deal days and cheapest month open the price calendar.</p>
+      <div class="tt-controls">
+        <button class="tt-chip" type="button" data-smode="value" aria-pressed="true">Rank by best value</button>
+        <button class="tt-chip" type="button" data-smode="under" aria-pressed="false">Rank by under usual</button>
+        <input class="tt-search" id="ssearch" type="search" placeholder="Search resort or place" aria-label="Search the resort sheet">
+      </div>
+      <p class="tt-note" id="sheet-mode-note" hidden>Ranked only on how far each resort's best trip is below its usual price, biggest discount first. Rating and price per night don't count here. "Price feed" means the price hasn't been re-checked on the booking site yet, so confirm it before trusting a big number.</p>
       <div class="tt-scroll" style="max-height: 46rem">
         <table class="tt-table tt-sheet" id="sheet-table" data-source="sheet" data-row-key="hotel_code">
           <thead><tr>
-            <th class="num" data-field="value_rank"><button type="button" data-ssort="value_rank" aria-sort="ascending">Rank</button></th>
+            <th class="num" data-field="value_rank"><button type="button" id="sheet-rank-btn" data-ssort="value_rank" aria-sort="ascending">Rank</button></th>
             <th class="tt-hide-narrow">Photo</th>
             <th data-field="resort"><button type="button" data-ssort="resort">Resort</button></th>
             <th class="num" data-field="rating"><button type="button" data-ssort="rating">Rating</button></th>
@@ -756,6 +769,16 @@ window.dash = (function () {
     }
     if (name === 'sheet') {
       document.getElementById('ssearch').addEventListener('input', (e) => { window.tt.sq = e.target.value; drawSheet(); });
+      document.querySelectorAll('[data-smode]').forEach((btn) => btn.addEventListener('click', () => {
+        const t = window.tt, rankBtn = document.getElementById('sheet-rank-btn');
+        t.smode = btn.dataset.smode; t.sdir = 1;
+        t.ssort = rankBtn.dataset.ssort = t.smode === 'under' ? 'under_rank' : 'value_rank';
+        document.querySelectorAll('[data-smode]').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        document.querySelectorAll('[data-ssort]').forEach((b) => b.removeAttribute('aria-sort'));
+        rankBtn.setAttribute('aria-sort', 'ascending');
+        document.getElementById('sheet-mode-note').hidden = t.smode !== 'under';
+        drawSheet();
+      }));
       document.querySelectorAll('[data-ssort]').forEach((btn) => btn.addEventListener('click', () => {
         const k = btn.dataset.ssort, t = window.tt;
         t.sdir = t.ssort === k ? -t.sdir : (['pct_below_usual', 'rating', 'deal_days'].includes(k) ? -1 : 1); t.ssort = k;
@@ -896,7 +919,7 @@ window.dash = (function () {
     }));
   }
 
-  window.tt.ssort = 'value_rank'; window.tt.sdir = 1; window.tt.sq = '';
+  window.tt.ssort = 'value_rank'; window.tt.sdir = 1; window.tt.sq = ''; window.tt.smode = 'value';
   function drawSheet() {
     const tbl = document.getElementById('sheet-table');
     if (!tbl || window.tt.tab !== 'sheet') return;
@@ -904,30 +927,46 @@ window.dash = (function () {
     const tb = tbl.querySelector('tbody');
     if (d.status !== 'ok') { tb.replaceChildren(); return; }
     const t = window.tt, q = (t.sq || '').toLowerCase(), pm = photoMap();
-    const list = d.data.filter((r) => !q || (r.resort + ' ' + r.destination).toLowerCase().includes(q)).sort((a, b) => {
+    const underRank = new Map([...d.data].sort((x, y) => y.pct_below_usual - x.pct_below_usual || x.best_total_for_two - y.best_total_for_two).map((r, i) => [r.hotel_code, i + 1]));
+    const list = d.data.map((r) => ({ ...r, under_rank: underRank.get(r.hotel_code) })).filter((r) => !q || (r.resort + ' ' + r.destination).toLowerCase().includes(q)).sort((a, b) => {
       const x = a[t.ssort], y = b[t.ssort];
       return (typeof x === 'number' ? x - y : String(x).localeCompare(String(y))) * t.sdir;
     });
+    const under = t.smode === 'under';
     tb.replaceChildren(...list.map((r) => {
       const tr = document.createElement('tr'); tr.dataset.key = r.hotel_code;
-      if (r.power_rank) tr.className = 'tt-gold';
+      const medal = under ? (r.under_rank <= 3 ? `#${r.under_rank} under usual` : '') : (r.power_rank ? `#${r.power_rank} best value` : '');
+      if (medal) tr.className = 'tt-gold';
       const td = (cls) => { const c = document.createElement('td'); if (cls) c.className = cls; tr.append(c); return c; };
-      td('num').textContent = r.value_rank;
-      td('tt-hide-narrow').append(thumbEl(pm, r.hotel_code, r.resort));
-      const res = td('res');
-      if (r.power_rank) { const g = document.createElement('div'); g.className = 'tt-goldpill'; g.textContent = `#${r.power_rank} best value`; res.append(g); }
+      // Every cell is a way in: a link to the resort, the trip or its reviews, or a jump to its price calendar.
+      const toLink = (cls, href, title, ...kids) => {
+        const c = td(cls), a = linkEl(href, '', 'tt-cl');
+        if (!a) { c.append(...kids); return; }
+        a.title = title; a.append(...kids); c.append(a);
+      };
+      const toCal = (cls, ...kids) => {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'tt-cl'; b.title = 'See prices day by day';
+        b.append(...kids); b.addEventListener('click', () => window.ttCal(r.hotel_code, r.best_from, r.best_nights));
+        td(cls).append(b);
+      };
+      const toResort = (cls, ...kids) => toLink(cls, r.resort_page, 'Open the resort page', ...kids);
+      const toTrip = (cls, text) => toLink(cls, r.book_link, 'Open this trip on the booking site', text);
+      toResort('num', String(under ? r.under_rank : r.value_rank));
+      toResort('tt-hide-narrow', thumbEl(pm, r.hotel_code, r.resort));
+      const names = [];
+      if (medal) { const g = document.createElement('div'); g.className = 'tt-goldpill'; g.textContent = medal; names.push(g); }
       const b = document.createElement('b'); b.textContent = r.resort;
       const sp = document.createElement('span'); sp.textContent = `${r.destination}${r.adults_only === 'Yes' ? ' · adults only' : ''}`;
-      res.append(b, sp);
-      td('num').textContent = `${r.rating}★`;
-      td().textContent = `${fmtDay(day(r.best_depart))} – ${fmtDay(day(r.best_return))} · ${r.best_nights}n · ${r.best_from}`;
-      td('num').textContent = money(r.best_total_for_two);
-      td('num').textContent = money(r.best_per_night);
-      td('num tt-hide-narrow').textContent = money(r.usual_for_two);
-      const sv = td('num tt-save'); sv.textContent = pct(r.pct_below_usual);
-      td('num tt-hide-narrow').textContent = comma(r.deal_days);
-      td('tt-hide-narrow').textContent = r.cheapest_month ? fmtMon(day(r.cheapest_month + '-01')) : '';
-      td('tt-hide-narrow').textContent = r.price_check === 'Live price confirmed' ? 'Live price' : 'Price feed';
+      toResort('res', ...names, b, sp);
+      toLink('num', r.google_link, 'Open the Google reviews', `${r.rating}★`);
+      toTrip('', `${fmtDay(day(r.best_depart))} – ${fmtDay(day(r.best_return))} · ${r.best_nights}n · ${r.best_from}`);
+      toTrip('num', money(r.best_total_for_two));
+      toTrip('num', money(r.best_per_night));
+      toCal('num tt-hide-narrow', money(r.usual_for_two));
+      toCal('num tt-save', pct(r.pct_below_usual));
+      toCal('num tt-hide-narrow', comma(r.deal_days));
+      toCal('tt-hide-narrow', r.cheapest_month ? fmtMon(day(r.cheapest_month + '-01')) : '');
+      toTrip('tt-hide-narrow', r.price_check === 'Live price confirmed' ? 'Live price' : 'Price feed');
       const lk = td(); lk.style.display = 'grid'; lk.style.gap = '2px';
       const cal = document.createElement('button'); cal.type = 'button'; cal.className = 'tt-look'; cal.textContent = 'Calendar';
       cal.addEventListener('click', () => window.ttCal(r.hotel_code, r.best_from, r.best_nights));
