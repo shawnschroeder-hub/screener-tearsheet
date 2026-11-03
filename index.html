@@ -751,7 +751,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 </div>
 
 <script id="analysis-data" type="application/json">{
-    "GeneratedAt":  "2026-11-03 01:59",
+    "GeneratedAt":  "2026-11-03 02:01",
     "PicksAsOf":  "07/24/26",
     "LivePicks":  [
                       {
@@ -39749,7 +39749,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 }
 }</script>
 <script id="tracker-data" type="application/json">{
-"built": "2026-11-03 01:59",
+"built": "2026-11-03 02:01",
 "priced": "2026-11-02",
 "rule": "Buy at the first market open after the stock appeared on that screener; sell at the first open after it dropped off. Still on the list = latest price.",
 "screens": {
@@ -48331,9 +48331,9 @@ function renderHeroHeat(){ // TOP5-STRIP
     return `<div class="hh-tile${buyDay?' buyday':''}" data-chart="${tk}" tabindex="0" style="background:${buyDay?'#FFE600':col(v)};color:${buyDay?'#111':txt(v)}">`
       +`<div class="hh-rank"><span>#${i+1} most agreed</span>${isNew?'<span class="newtag">NEW</span>':''}</div>`
       +`<div class="hh-tick">${tk}</div>`
-      +(buyDay?`<div class="hh-ret">BUY DAY <span class="hh-ret-l">buy at the next market open</span></div>`
+      +(buyDay?`<div class="hh-ret">BUY DAY <span class="hh-ret-l">at the next open</span></div>`
               :`<div class="hh-ret">${v==null?'–':fmt(v)} <span class="hh-ret-l">${sp.lab}</span></div>`)
-      +(buyDay&&t&&t.Week!=null?`<div class="hh-first" style="background:rgba(0,0,0,.12);color:#111">before it came out: last 5 days ${fmt(t.Week)}</div>`:'')
+      +(buyDay&&t&&t.Week!=null?`<div class="hh-first" style="background:rgba(0,0,0,.12);color:#111">pre-pick 5 days ${fmt(t.Week)}</div>`:'')
       +(sp.since&&t&&t.Week!=null?`<div class="hh-first">last 5 days ${fmt(t.Week)}</div>`:'')
       +`<div class="hh-meta">${r.n} of ${total} screeners · power ${r.power.toFixed(0)}${t&&t.Price!=null?' · $'+(+t.Price).toFixed(2):''}</div></div>`; };
   box.innerHTML=`<div class="hh-head"><span class="hh-title">The 5 stocks the most screeners agree on</span>`+`<span class="hh-sub" style="display:block;color:var(--gold)">Ranked by how many of your screeners hold each stock (better screeners count more), NOT by how the stock is doing. A stock can rank #1 and still be down.</span>`
