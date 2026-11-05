@@ -306,14 +306,12 @@ table.dl-tbl td.g,table.dl-tbl th.g{border-left:2px solid var(--hair-strong)}
 
 .tk-hold{margin:0 0 14px}
 .tk-hold h3{font-size:15px;margin:0 0 4px}
-.wk-mini{margin:2px 0 8px;padding:7px 9px;border:1px solid var(--hair-strong);border-radius:6px;background:var(--surface-2);font-size:12px;color:var(--muted)}
-.wk-mini .wk-now{display:flex;align-items:baseline;flex-wrap:wrap;gap:0 7px}
-.wk-mini .wk-now b{font-family:var(--mono);font-size:16px;font-weight:700;color:var(--ink)}
-.wk-mini .wk-now b.pos{color:var(--pos)} .wk-mini .wk-now b.neg{color:var(--neg)}
-.wk-mini .wk-rows{display:grid;grid-template-columns:repeat(auto-fill,minmax(68px,1fr));gap:4px;margin-top:6px}
-.wk-mini .wk-rows span{display:block;font-size:10.5px;line-height:1.3}
-.wk-mini .wk-rows i{display:block;font-style:normal;font-family:var(--mono);font-size:12px;font-weight:700}
-.wk-mini .wk-rows i.pos{color:var(--pos)} .wk-mini .wk-rows i.neg{color:var(--neg)}
+.bottomline .hero{display:flex;flex-direction:column}
+.bottomline .hero .cstocks{margin-bottom:12px}
+.wk-line{margin-top:auto;padding-top:10px;border-top:1px solid var(--hair);text-align:center;font-size:12px;line-height:1.4;color:var(--muted)}
+.wk-line b{display:block;font-family:var(--mono);font-size:20px;font-weight:600;line-height:1.2;color:var(--ink);margin-bottom:1px}
+.wk-line b.pos{color:var(--pos)} .wk-line b.neg{color:var(--neg)}
+.wk-line span{display:block}
 .cstocks-legend{display:flex;align-items:center;gap:6px;margin-top:8px;font-size:10.5px;color:var(--muted)}
 .cstocks-legend i{display:inline-block;width:60px;height:7px;border-radius:4px;background:linear-gradient(90deg,#6a0f16,#e5484d,#e6c445,#1f9d55,#0a4a2a)}
 .pod{overflow:hidden}
@@ -52725,11 +52723,12 @@ function renderDelayTest(){ const box=$('#delayTest'); if(!box) return; if(!DELA
           +H.map((k,i)=>`<td class="${i?'':'g '}${y[k]<y.spy?'neg':'pos'}">${dlPct(y[k])}</td>`).join('')+`<td>${dlPct(y.spy)}</td></tr>`; }).join('');
       return rw?`<h3>How long to hold, bought Tuesday open</h3><p>Each week's list held for that many weeks, with the money split evenly across the overlapping batches. Green beat the S&P 500 over the same days and red did not. These are four tries on past data, so treat the highest number as a lead to keep testing.</p>`
         +`<div class="dl-wrap"><table class="dl-tbl"><thead><tr><th>Screener</th><th>5 yr: 1 week</th><th>2 weeks</th><th>4 weeks</th><th>8 weeks</th><th>S&P 500</th><th class="g">1 yr: 1 week</th><th>2 weeks</th><th>4 weeks</th><th>8 weeks</th><th>S&P 500</th></tr></thead><tbody>${rw}</tbody></table></div>`:''; })(); }
-/* Shawn 2026-11-04 TEST, may not ship: a small live weekly number under the big backtest number, rank 4 only, shown only at #weekly-preview. */
-function weekMini(screen){ if(location.hash!=='#weekly-preview'||screen!=='filtered zacks rank4') return '';
-  const w=TRACK&&TRACK.screens[screen]&&TRACK.screens[screen].weekly; if(!w) return ''; const c=v=>v>0?'pos':v<0?'neg':'';
-  return `<div class="wk-mini"><div class="wk-now"><b class="${c(w.last5)}">${fmtPct(w.last5)}</b><span>live list, last 5 trading days · S&P ${fmtPct(w.last5Spy)}</span></div>`
-    +`<div class="wk-rows">${w.weeks.slice(-6).map((x,i,all)=>`<span>Week of ${tmd(x.wk)}${i===all.length-1&&x.wk===w.weeks[w.weeks.length-1].wk&&x.days<5?', so far':''}<i class="${c(x.ret)}">${fmtPct(x.ret)}</i>S&P ${fmtPct(x.spy)}</span>`).join('')}</div></div>`; }
+/* Shawn 2026-11-04: a smaller weekly number on each card, a little below "Details for each stock" and centered, under the big yearly number. Live list, not the backtest. */
+function weekLine(screen){ const w=TRACK&&TRACK.screens[screen]&&TRACK.screens[screen].weekly;
+  if(!w||w.last5==null) return `<div class="wk-line"><span>No live weekly number yet</span></div>`;
+  const c=v=>v>0?'pos':v<0?'neg':'', wk=w.weeks||[], n=wk.reduce((a,x)=>a+(x.days||0),0), days=Math.min(5,n||5);
+  const tip=wk.slice(-6).map(x=>`Week of ${tmd(x.wk)}${x.days<5?' ('+x.days+' days)':''}: ${fmtPct(x.ret)}, S&P ${fmtPct(x.spy)}`).join('\n');
+  return `<div class="wk-line" title="Live list: each stock bought at the first open after it came out, not the backtest.\n${tip}"><b class="${c(w.last5)}">${fmtPct(w.last5)}</b><span>last ${days} trading day${days===1?'':'s'}, live</span><span>S&amp;P 500 ${fmtPct(w.last5Spy)} · ${tmd(w.from)} to ${tmd(w.to)}</span></div>`; }
 function renderBottomLine(){
   renderDelayTest();
   const bl=$('#bottomline'); bl.innerHTML='';
@@ -52765,7 +52764,7 @@ function renderBottomLine(){
     c.innerHTML=`<h2>${s.Screen}</h2>
       <div class="tag">${i===0?'Best 1-year backtest':'#'+(i+1)+' by 1-year backtest'} · weekly hold · ${s.Folder}</div>
       <div class="big pos">${pct(t.Ret1y)}</div>
-      ${weekMini(s.Screen)}<div class="caption">${DELAY&&DELAY[s.Screen]?dlDate(DELAY[s.Screen].from)+' to '+dlDate(DELAY[s.Screen].to)+' backtest':'1-year backtest'} &nbsp;·&nbsp; S&P 500 ${pct(t.Bench1y)}</div>${delayLine(s.Screen)}<div class="yr-real" style="margin-top:2px">${t.DayOut?'<b>Backtest figures assume each list was bought at its Friday open</b> and sold at the next Friday open':'Still measured at Friday\'s close - being re-measured by the day each list came out'}</div>${yearLine(s.Screen)}
+      <div class="caption">${DELAY&&DELAY[s.Screen]?dlDate(DELAY[s.Screen].from)+' to '+dlDate(DELAY[s.Screen].to)+' backtest':'1-year backtest'} &nbsp;·&nbsp; S&P 500 ${pct(t.Bench1y)}</div>${delayLine(s.Screen)}<div class="yr-real" style="margin-top:2px">${t.DayOut?'<b>Backtest figures assume each list was bought at its Friday open</b> and sold at the next Friday open':'Still measured at Friday\'s close - being re-measured by the day each list came out'}</div>${yearLine(s.Screen)}
       <div class="statline">
         <div><b>${t.Win1y==null?'–':(+t.Win1y).toFixed(0)+'%'}</b>weeks profitable</div>
         <div><b class="neg">${pct(t.MaxDD1y)}</b>worst drop (1 yr)</div>
@@ -52775,7 +52774,7 @@ function renderBottomLine(){
       <div class="cstocks"><div class="cstocks-lab">Current stocks${cpi.src==='live'?'':' (backtest)'}:<span class="cstocks-hint">hover for chart · click for details</span></div>
         <div class="cstocks-list">${nPicks?chips:'<span class="cstocks-none">none passing today</span>'}</div>
         ${nPicks?'<div class="cstocks-legend">'+(chipSince?'gain since bought the morning it came out on this screener':'last 5 days')+' <i></i></div>'+(anyBuy?'<div class="cstocks-legend"><span class="buykey">BUY DAY</span> new on this screener: buy at the next market open</div>':''):''}
-        <div class="peek"><span>Details for each stock</span><i>▾</i></div></div>`;
+        <div class="peek"><span>Details for each stock</span><i>▾</i></div></div>${weekLine(s.Screen)}`;
     c.onclick=()=>toggleCardPanel(s.Screen);
     c.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggleCardPanel(s.Screen); } };
     bl.appendChild(c);
