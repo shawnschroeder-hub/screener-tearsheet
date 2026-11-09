@@ -3,6 +3,8 @@
 
 
 
+
+
 <style id="phev-css">
 .subtabs{display:flex;gap:8px;margin:10px 0 14px;flex-wrap:wrap}
 .pt{font:inherit;font-weight:700;font-size:.95rem;background:var(--surface);color:var(--ink);border:1px solid var(--line);padding:9px 16px;border-radius:999px;cursor:pointer}
@@ -11,6 +13,7 @@
 .pill.kind{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 .muted{color:var(--muted)}
 </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 </head><body>
 
 <title>Shawn's Car Board</title>
@@ -107,37 +110,9 @@ footer{color:var(--muted);font-size:.85rem;max-width:80ch}
 .card .photo{width:100%;height:auto;aspect-ratio:4/3;max-width:100%;margin-bottom:8px}
 @media (max-width:640px){.row.noimg{grid-template-columns:34px minmax(0,1fr)}}
 
-.row.noimg{grid-template-columns:40px minmax(0,1fr)}
-.card .photo{width:100%;height:auto;aspect-ratio:4/3;max-width:100%;margin-bottom:8px}
-@media (max-width:640px){.row.noimg{grid-template-columns:34px minmax(0,1fr)}}
-
-.row.noimg{grid-template-columns:40px minmax(0,1fr)}
-.card .photo{width:100%;height:auto;aspect-ratio:4/3;max-width:100%;margin-bottom:8px}
-@media (max-width:640px){.row.noimg{grid-template-columns:34px minmax(0,1fr)}}
-
-.row.noimg{grid-template-columns:40px minmax(0,1fr)}
-.card .photo{width:100%;height:auto;aspect-ratio:4/3;max-width:100%;margin-bottom:8px}
-@media (max-width:640px){.row.noimg{grid-template-columns:34px minmax(0,1fr)}}
-
-.row.noimg{grid-template-columns:40px minmax(0,1fr)}
-.card .photo{width:100%;height:auto;aspect-ratio:4/3;max-width:100%;margin-bottom:8px}
-@media (max-width:640px){.row.noimg{grid-template-columns:34px minmax(0,1fr)}}
-
-.row.noimg{grid-template-columns:40px minmax(0,1fr)}
-.card .photo{width:100%;height:auto;aspect-ratio:4/3;max-width:100%;margin-bottom:8px}
-@media (max-width:640px){.row.noimg{grid-template-columns:34px minmax(0,1fr)}}
-
-.row.noimg{grid-template-columns:40px minmax(0,1fr)}
-.card .photo{width:100%;height:auto;aspect-ratio:4/3;max-width:100%;margin-bottom:8px}
-@media (max-width:640px){.row.noimg{grid-template-columns:34px minmax(0,1fr)}}
-
 .row.tpick{background:#fff3b0;border-color:#e6c84a}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .row.tpick{background:#4a3f0c;border-color:#8a7a2a}}
 :root[data-theme="dark"] .row.tpick{background:#4a3f0c;border-color:#8a7a2a}
-
-.row.noimg{grid-template-columns:40px minmax(0,1fr)}
-.card .photo{width:100%;height:auto;aspect-ratio:4/3;max-width:100%;margin-bottom:8px}
-@media (max-width:640px){.row.noimg{grid-template-columns:34px minmax(0,1fr)}}
 
 .picker{display:flex;flex-wrap:wrap;gap:8px}
 .mp{font:inherit;font-weight:700;font-size:.88rem;background:var(--surface);color:var(--ink);border:1px solid var(--line);padding:8px 12px;border-radius:8px;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;gap:2px}
@@ -160,19 +135,126 @@ footer{color:var(--muted);font-size:.85rem;max-width:80ch}
 @media (prefers-reduced-motion:no-preference){a{transition:filter .15s}}
 </style>
 
+<style id="board-design">
+/* ---- palette: cool neutral + one blue accent ---- */
+:root{
+  --bg:#F3F5F8; --surface:#FFFFFF; --ink:#0F172A; --muted:#566275; --line:#DCE2EA;
+  --accent:#1D4ED8; --accent-ink:#FFFFFF; --accent-soft:#E7EEFE;
+  --good:#16803C; --good-soft:#E1F3E7; --lease:#0E7490; --lease-soft:#DCF1F5; --even:#7C5A0B; --even-soft:#F8EFD6;
+  --warn:#B45309; --warn-soft:#FCEAD4;
+  --display:"Inter","Source Sans 3",system-ui,"Segoe UI",sans-serif; --body:"Inter","Source Sans 3",system-ui,"Segoe UI",sans-serif;
+  --radius:12px; --shadow:0 1px 2px rgba(15,23,42,.05),0 2px 6px rgba(15,23,42,.06);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E141C; --surface:#161E29; --ink:#E7ECF3; --muted:#9AA6B8; --line:#263243;
+  --accent:#6AA2FF; --accent-ink:#08111F; --accent-soft:#1A2A45;
+  --good:#6FD08C; --good-soft:#14291D; --lease:#5CC8E0; --lease-soft:#11303A; --even:#E3B341; --even-soft:#33290F;
+  --warn:#F5A94E; --warn-soft:#3A2A10; --shadow:0 1px 2px rgba(0,0,0,.4),0 2px 8px rgba(0,0,0,.25); color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0E141C; --surface:#161E29; --ink:#E7ECF3; --muted:#9AA6B8; --line:#263243;
+  --accent:#6AA2FF; --accent-ink:#08111F; --accent-soft:#1A2A45;
+  --good:#6FD08C; --good-soft:#14291D; --lease:#5CC8E0; --lease-soft:#11303A; --even:#E3B341; --even-soft:#33290F;
+  --warn:#F5A94E; --warn-soft:#3A2A10; --shadow:0 1px 2px rgba(0,0,0,.4),0 2px 8px rgba(0,0,0,.25); color-scheme:dark;
+}
+
+/* ---- type ---- */
+body{font-size:15.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:2.15rem;font-weight:800}
+h2{font-size:1.45rem;font-weight:750}
+h3{font-size:1.08rem;font-weight:700}
+.eyebrow{font-size:.72rem;letter-spacing:.09em;font-weight:700}
+.name{font-size:1.1rem;font-weight:700;line-height:1.25;letter-spacing:-.01em}
+.price{font-size:1.4rem;font-weight:750;letter-spacing:-.02em}
+.trim{font-weight:600}
+
+/* ---- top navigation: one uniform row of buttons ---- */
+nav#tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+nav#tabs a{display:inline-flex;align-items:center;justify-content:center;height:38px;padding:0 16px;border-radius:10px;
+  border:1px solid var(--line);background:var(--surface);color:var(--ink);font-weight:600;font-size:.9rem;white-space:nowrap;text-decoration:none;box-shadow:var(--shadow)}
+nav#tabs a:hover,nav#tabs a:focus-visible{border-color:var(--accent);color:var(--accent);background:var(--surface);outline:none}
+nav#tabs a.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);box-shadow:none}
+
+/* ---- the five top tiles ---- */
+.verdicts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;display:flex;flex-direction:column;gap:6px;min-width:0;box-shadow:var(--shadow)}
+.tile .eyebrow{color:var(--muted)}
+.tile .big{font-size:1.08rem;font-weight:750;line-height:1.28;letter-spacing:-.01em;text-transform:none;overflow-wrap:anywhere}
+.tile .sub{font-size:.88rem;color:var(--muted);line-height:1.45}
+.tile.hero{grid-column:1 / -1;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:10px 32px;align-items:start;
+  background:var(--accent-soft);border-color:transparent;box-shadow:none}
+.tile.hero .eyebrow{color:var(--accent)}
+.tile.hero .big{font-size:1.45rem;font-weight:800;line-height:1.2;margin-top:4px}
+.tile.hero ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px;font-size:.92rem;color:var(--ink);line-height:1.45}
+.tile.hero li{padding-left:18px;position:relative}
+.tile.hero li::before{content:"";position:absolute;left:0;top:.55em;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+
+/* ---- cards, rows, tables ---- */
+.card,.tbl,.row{border-radius:var(--radius)}
+.card,.row{box-shadow:var(--shadow)}
+.card{padding:18px 20px}
+.card li b{color:var(--ink)}
+.row{padding:14px 16px;transition:border-color .15s}
+.row:hover{border-color:var(--accent)}
+.photo{border-radius:8px}
+th{font-weight:700;background:var(--bg)}
+.pill{font-size:.72rem;font-weight:650;padding:3px 10px;background:var(--accent-soft);color:var(--accent)}
+.pill.kind{background:var(--accent);color:var(--accent-ink)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.badge{font-weight:700;letter-spacing:.04em}
+.row.tpick{background:var(--accent-soft);border-color:var(--accent)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .row.tpick{background:var(--accent-soft);border-color:var(--accent)}}
+:root[data-theme="dark"] .row.tpick{background:var(--accent-soft);border-color:var(--accent)}
+
+/* ---- buttons: the same size and shape everywhere ---- */
+.btn{display:inline-flex;align-items:center;justify-content:center;height:38px;min-width:96px;padding:0 18px;border-radius:10px;
+  background:var(--accent);color:var(--accent-ink);font-weight:650;font-size:.9rem;text-decoration:none;white-space:nowrap;margin-top:6px}
+.btn:hover,.btn:focus-visible{filter:brightness(1.08);outline:none}
+.btn:focus-visible,.pt:focus-visible,.mp:focus-visible,nav#tabs a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (min-width:641px){.right{align-items:stretch}.right .btn{width:100%}}
+
+/* ---- New / Used switch inside the Plug-in / Hybrid tab ---- */
+.subtabs{display:inline-flex;gap:4px;padding:4px;background:var(--bg);border:1px solid var(--line);border-radius:12px;align-self:flex-start;margin:6px 0 10px}
+.pt{height:36px;padding:0 20px;border:0;border-radius:9px;background:transparent;color:var(--muted);font:inherit;font-weight:650;font-size:.92rem;cursor:pointer;white-space:nowrap}
+.pt:hover{color:var(--ink)}
+.pt.on{background:var(--surface);color:var(--accent);box-shadow:var(--shadow)}
+
+/* ---- model picker on the Used tab: equal tiles in a grid ---- */
+.picker{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.mp{min-width:0;min-height:54px;padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);
+  display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:1px;text-align:left;font:inherit;font-weight:650;font-size:.88rem;line-height:1.25;cursor:pointer}
+.mp span{font-weight:500;font-size:.74rem;color:var(--muted)}
+.mp:hover{border-color:var(--accent)}
+.mp.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.mp.on span{color:var(--accent-ink);opacity:.9}
+
+@media (max-width:900px){.verdicts{grid-template-columns:repeat(2,minmax(0,1fr))}.tile.hero{grid-template-columns:1fr}}
+@media (max-width:640px){
+  h1{font-size:1.75rem}
+  .verdicts{grid-template-columns:1fr}
+  .tile.hero .big{font-size:1.3rem}
+  nav#tabs{flex-wrap:nowrap;overflow-x:auto;margin-inline:-16px;padding:2px 16px 8px;scrollbar-width:none;
+    -webkit-mask-image:linear-gradient(to right,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(to right,#000 calc(100% - 28px),transparent)}
+  nav#tabs::-webkit-scrollbar{display:none}
+  .right .btn{min-width:110px}
+  .picker{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+</style>
+
 <div class="wrap">
 <header>
   <div class="eyebrow">Bourbonnais, IL · refreshed 2026-11-04 · offers run through 2026-11-02 unless noted</div>
   <h1>Shawn's Car Board</h1>
   <p>The best cars for the money on sale right now, ranked three ways: what to buy, what to lease, and a head-to-head on whether buying or leasing the same car costs less. Prices are sticker before tax, title and doc fees; offers are national programs for well-qualified buyers, so treat them as the number to hand a Chicago-area dealer.</p>
-  <nav id="tabs"><a href="#all" class="on">All</a><a href="#buy">Best buys</a><a href="#lease">Best leases</a><a href="#compare">Buy vs. lease</a><a href="#stock">XLE in stock</a><a href="#used">Used sweet spot</a><a href="#power">Power Rankings</a><a href="#cheap">Cheapest cars</a><a href="#own">Cheapest to own</a><a href="#jeep">Jeep</a><a href="#jeep">Jeep</a><a href="#jeep">Jeep</a><a href="#jeep">Jeep</a><a href="#phev">Plug-in / Hybrid</a><a href="#coming">Coming soon</a><a href="#jeep">Jeep</a><a href="#jeep">Jeep</a><a href="#jeep">Jeep</a><a href="#jeep">Jeep</a><a href="#jeep">Jeep</a><a href="#rules">How to decide</a></nav>
+  <nav id="tabs"><a href="#all" class="on">All</a><a href="#buy">Best buys</a><a href="#lease">Best leases</a><a href="#compare">Buy vs. lease</a><a href="#stock">XLE in stock</a><a href="#used">Used sweet spot</a><a href="#power">Power Rankings</a><a href="#cheap">Cheapest cars</a><a href="#own">Cheapest to own</a><a href="#phev">Plug-in / Hybrid</a><a href="#jeep">Jeep</a><a href="#coming">Coming soon</a><a href="#rules">How to decide</a></nav>
 </header>
 
-<div class="verdicts"><div class="verdict" style="border-left-color:#B8860B"><div class="eyebrow">Best fit for smooth + quiet (your ask)</div><div class="big">Camry XLE new, or the 2024 Model 3 from Tesla pre-owned</div><div class="sub">XLE: $34,234 at Evans Toyota, Fort Wayne (2.5 hrs) or $35,627 at Oakbrook Toyota, Westmont (44 mi); a $32,535 AWD in Rochester, NY needs a phone call to confirm · 2024 Model 3 RWD $30,500 Ann Arbor (Tesla board, Oct 25), 47k mi, warranty to 2032, about $28,500 after the IL rebate · about $33,500 to own over 5 years against about $36,500 for an XLE at current prices · Cybercab: not orderable yet, see the watch card on the Power Rankings tab</div></div>
-  <div class="verdict"><div class="eyebrow">Best buy overall</div><div class="big">Toyota Camry Hybrid LE</div><div class="sub">$29,600 · 51 mpg · 3.49% APR · two value awards</div></div>
-  <div class="verdict"><div class="eyebrow">Best SUV deal</div><div class="big">Kia Sportage Hybrid LX</div><div class="sub">$30,290 · 43 mpg · 0% APR for 48 months</div></div>
-  <div class="verdict"><div class="eyebrow">Best lease</div><div class="big">Toyota Corolla Hybrid LE</div><div class="sub">$331/mo, nothing down · RAV4 Hybrid LE $382 is the SUV pick</div></div>
-  <div class="verdict"><div class="eyebrow">Buy or lease?</div><div class="big">Keep it 5+ years? Buy. Swap every 3? Lease.</div><div class="sub">Leasing wins every 3-year matchup; buying wins every 6-year one</div></div>
+<div class="verdicts"><div class="tile hero"><div><div class="eyebrow">Best fit for smooth + quiet (your ask)</div><div class="big">Camry XLE new, or a 2024 Model 3 from Tesla pre-owned</div></div><ul><li><b>This week's pick:</b> 2024 Tesla Model 3 RWD (new body), Tesla pre-owned, Bridgeville PA (near Pittsburgh), $33,600 plus about $400 shipping</li><li><b>Runner-up:</b> 2027 Toyota Camry XLE: Lombard Toyota $35,317 (48 miles, cut $378 today) or Evans Toyota Fort Wayne $34,234 (read the fine print)</li><li><b>Cybercab:</b> not orderable yet; the watch card on the Power Rankings tab is kept current</li></ul></div>
+  <div class="tile"><div class="eyebrow">Best buy overall</div><div class="big">Toyota Camry Hybrid LE</div><div class="sub">$29,600 · 51 mpg · 3.49% APR · two value awards</div></div>
+  <div class="tile"><div class="eyebrow">Best SUV deal</div><div class="big">Kia Sportage Hybrid LX</div><div class="sub">$30,290 · 43 mpg · 0% APR for 48 months</div></div>
+  <div class="tile"><div class="eyebrow">Best lease</div><div class="big">Toyota Corolla Hybrid LE</div><div class="sub">$331/mo, nothing down · RAV4 Hybrid LE $382 is the SUV pick</div></div>
+  <div class="tile"><div class="eyebrow">Buy or lease?</div><div class="big">Keep it 5+ years? Buy. Swap every 3? Lease.</div><div class="sub">Leasing wins every 3-year matchup; buying wins every 6-year one</div></div>
 </div>
 
 
@@ -183,7 +265,8 @@ footer{color:var(--muted);font-size:.85rem;max-width:80ch}
 
 
 
-<section id="verdict"><div class="card" style="border-left:5px solid #B8860B"><div class="eyebrow">This week's call · 2026-11-04 · most cost-effective move this month</div><h2 style="margin-top:4px">Buy: 2024 Tesla Model 3 RWD (new body), Tesla pre-owned, Bridgeville PA (near Pittsburgh), $33,600 plus about $400 shipping</h2><p class="note">Runner-up: 2027 Toyota Camry XLE: Lombard Toyota $35,317 (48 miles, cut $378 today) or Evans Toyota Fort Wayne $34,234 (read the fine print)</p><ul><li>Last week&#x27;s West Bloomfield Model 3 sold, so the pick moves to the best 2024-body Model 3 on your Tesla board: Bridgeville, PA, $33,600 with a $3,200 Tesla markdown, only 14,800 miles, ex-demo, factory warranty active, battery warranty to 2032 and a real range reading of 96% of new. It is the same quiet, soft-riding 2024 body that fits your smooth-and-quiet brief, for $600 more than last week&#x27;s car with 7,000 fewer miles. About 410 miles away: a one-day drive or roughly $400 on a truck.</li><li>Every money-saver is still on the purchase side: the Illinois $2,000 EV rebate (purchases only, from an Illinois-licensed dealer, so confirm with Tesla that an Illinois delivery of a Pennsylvania car qualifies before you pay the order fee), the trade-in sales-tax credit on the Jeep (about $1,200), and the 2027 Camry discounts. A lease gets none of them.</li><li>Gas fell to $4.64 in Illinois this week, which narrows the Tesla&#x27;s fuel edge a little: about $375 a year charging overnight at the ComEd rate against roughly $1,200 for a Camry XLE. Over five years the Tesla still comes out close to even or slightly ahead once the rebate is counted; the Camry wins on resale and cheaper insurance, the Tesla on fuel. This is a fit decision more than a money one.</li><li>Take the Camry instead if you keep cars eight-plus years, want the dealer three miles away to service it, or cannot confirm the rebate. Lombard is now the one to see: $35,317 all-in with the doc fee, 48 miles away, a real photo of the actual blue car, cut $378 this morning. Evans in Fort Wayne is $1,083 cheaper on paper, but its price is good for two days, assumes a Fort Wayne-area buyer and comes with a pre-installed protection package. The Texas car at $34,330 only beats them if the dealer removes its $997 of add-ons and you pay about $780 to ship.</li><li>Is a plug-in hybrid worth it this month? Not new. The RAV4 Plug-in is $8,000-11,000 over a Camry XLE with no Illinois rebate and saves about $500 a year at $4.64 gas; the Prius Plug-in at about $35,000 is the only plug-in at Camry money, and it is a smaller, lower car that is not as hushed as the XLE. If you want the gas-plus-electric combo, the cheap way in is a used one: see the Used list on the Plug-in / Hybrid tab, where 2-3-year-old plug-ins sell for 40-60% under their original price.</li><li>Value wildcard: the Silver Spring, MD 2023 Model 3 RWD at $26,100 (35,800 miles, warranty active, battery reads 96% of new) is $7,500 less than the Bridgeville car. It is the pre-2024 body, so a little more road noise. If quiet is worth less than $7,500 to you, that is the money pick.</li><li>Caveats: Tesla reprices daily and sold two of last week&#x27;s four picks, so check the car is still listed before you plan a trip; the Illinois rebate program can run short of funds late in the year, so ask before counting on it.</li></ul><p><b>Next step:</b> Open the Bridgeville listing from the Tesla block on the Power Rankings tab; if it is still there, ask Tesla whether the Illinois EV rebate applies to an Illinois delivery of this car before paying the $250 refundable order fee. Same day, email Lombard Toyota for an out-the-door price on stock 222289 so you have the Camry number in hand.</p></div></section>
+
+<section id="verdict"><div class="card" style="border-left:5px solid var(--accent)"><div class="eyebrow">This week's call · 2026-11-04 · most cost-effective move this month</div><h2 style="margin-top:4px">Buy: 2024 Tesla Model 3 RWD (new body), Tesla pre-owned, Bridgeville PA (near Pittsburgh), $33,600 plus about $400 shipping</h2><p class="note">Runner-up: 2027 Toyota Camry XLE: Lombard Toyota $35,317 (48 miles, cut $378 today) or Evans Toyota Fort Wayne $34,234 (read the fine print)</p><ul><li>Last week&#x27;s West Bloomfield Model 3 sold, so the pick moves to the best 2024-body Model 3 on your Tesla board: Bridgeville, PA, $33,600 with a $3,200 Tesla markdown, only 14,800 miles, ex-demo, factory warranty active, battery warranty to 2032 and a real range reading of 96% of new. It is the same quiet, soft-riding 2024 body that fits your smooth-and-quiet brief, for $600 more than last week&#x27;s car with 7,000 fewer miles. About 410 miles away: a one-day drive or roughly $400 on a truck.</li><li>Every money-saver is still on the purchase side: the Illinois $2,000 EV rebate (purchases only, from an Illinois-licensed dealer, so confirm with Tesla that an Illinois delivery of a Pennsylvania car qualifies before you pay the order fee), the trade-in sales-tax credit on the Jeep (about $1,200), and the 2027 Camry discounts. A lease gets none of them.</li><li>Gas fell to $4.64 in Illinois this week, which narrows the Tesla&#x27;s fuel edge a little: about $375 a year charging overnight at the ComEd rate against roughly $1,200 for a Camry XLE. Over five years the Tesla still comes out close to even or slightly ahead once the rebate is counted; the Camry wins on resale and cheaper insurance, the Tesla on fuel. This is a fit decision more than a money one.</li><li>Take the Camry instead if you keep cars eight-plus years, want the dealer three miles away to service it, or cannot confirm the rebate. Lombard is now the one to see: $35,317 all-in with the doc fee, 48 miles away, a real photo of the actual blue car, cut $378 this morning. Evans in Fort Wayne is $1,083 cheaper on paper, but its price is good for two days, assumes a Fort Wayne-area buyer and comes with a pre-installed protection package. The Texas car at $34,330 only beats them if the dealer removes its $997 of add-ons and you pay about $780 to ship.</li><li>Is a plug-in hybrid worth it this month? Not new. The RAV4 Plug-in is $8,000-11,000 over a Camry XLE with no Illinois rebate and saves about $500 a year at $4.64 gas; the Prius Plug-in at about $35,000 is the only plug-in at Camry money, and it is a smaller, lower car that is not as hushed as the XLE. If you want the gas-plus-electric combo, the cheap way in is a used one: see the Used list on the Plug-in / Hybrid tab, where 2-3-year-old plug-ins sell for 40-60% under their original price.</li><li>Value wildcard: the Silver Spring, MD 2023 Model 3 RWD at $26,100 (35,800 miles, warranty active, battery reads 96% of new) is $7,500 less than the Bridgeville car. It is the pre-2024 body, so a little more road noise. If quiet is worth less than $7,500 to you, that is the money pick.</li><li>Caveats: Tesla reprices daily and sold two of last week&#x27;s four picks, so check the car is still listed before you plan a trip; the Illinois rebate program can run short of funds late in the year, so ask before counting on it.</li></ul><p><b>Next step:</b> Open the Bridgeville listing from the Tesla block on the Power Rankings tab; if it is still there, ask Tesla whether the Illinois EV rebate applies to an Illinois delivery of this car before paying the $250 refundable order fee. Same day, email Lombard Toyota for an out-the-door price on stock 222289 so you have the Camry number in hand.</p></div></section>
 <section id="buy">
   <h2>Best buys, ranked on value for the dollar</h2>
   <p class="note">Ranking weighs sticker price, fuel economy, reliability and resale record, this year's value awards from Kelley Blue Book and U.S. News, and what the brand is offering in October. Fuel cost assumes 12,000 miles a year at Illinois gas of $4.67 (AAA, 10/13) or ComEd power at about 17 cents a kWh.</p>
@@ -2210,6 +2293,7 @@ footer{color:var(--muted);font-size:.85rem;max-width:80ch}
 
 
 
+
 </section>
 
 
@@ -3080,6 +3164,14 @@ footer{color:var(--muted);font-size:.85rem;max-width:80ch}
     </div>
   </div>
 </section>
+
+
+
+
+
+
+
+
 
 
 
@@ -4276,6 +4368,8 @@ footer{color:var(--muted);font-size:.85rem;max-width:80ch}
   });
 })();
 </script>
+
+
 
 
 
