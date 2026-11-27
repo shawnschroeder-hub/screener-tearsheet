@@ -328,6 +328,15 @@ window.dash = (function () {
   .tt-bench .st div { display: grid; font-size: .78rem; }
   .tt-bench .st b { font-size: 1.45rem; font-weight: 800; line-height: 1.15; font-variant-numeric: tabular-nums; }
   .tt-bench .why { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); max-width: 80ch; }
+  #drops { --sec: #0d0d0d; --sec-fg: #ffd23f; }
+  .tt-drop .was { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); text-decoration: line-through; font-variant-numeric: tabular-nums; }
+  .tt-drop .cut { font-size: 1.15rem; font-weight: 800; color: var(--color-ok); font-variant-numeric: tabular-nums; }
+  .tt-dropstat { font-size: var(--cds-font-size-body); max-width: 85ch; margin: 0; }
+  .tt-dropstat b { font-weight: 800; }
+  .tt-bfsales { display: grid; gap: .5rem; padding: .9rem 1rem; border-radius: 12px; border: 2px solid #0d0d0d; background: color-mix(in srgb, #ffd23f 12%, var(--color-panel)); }
+  .tt-bfsales h3 { margin: 0; font-size: 1.05rem; font-weight: 800; }
+  .tt-bfsales ul { margin: 0; padding-left: 1.1rem; display: grid; gap: .3rem; }
+  .tt-bfsales a { color: inherit; font-weight: 800; }
   [data-dash-source-state=empty] { color: transparent; }
   [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
 </style>
@@ -387,6 +396,24 @@ window.dash = (function () {
     <div class="tt-tile"><span class="lab">Best deal, total for two</span><span class="big dash-skeleton" data-source="summary" data-field="top_total_for_two">—</span><span class="sub dash-skeleton" id="top-sub" data-source="summary">—</span></div>
     <div class="tt-tile"><span class="lab">Cheapest 4.6★+ resort, per night for two</span><span class="big dash-skeleton" data-source="summary" data-field="cheapest_top_rated_per_night">—</span><span class="sub">flights + all-inclusive hotel</span></div>
     <div class="tt-tile"><span class="lab">Prices checked today</span><span class="big dash-skeleton" data-source="summary" data-field="price_points_scanned">—</span><span class="sub dash-skeleton" id="run-sub" data-source="summary">—</span></div>
+  </section>
+
+  <section class="tt-card" id="drops">
+    <h2 id="drops-title">Biggest price drops this week</h2>
+    <p class="tt-dropstat" id="drops-stat" data-source="summary"></p>
+    <div class="tt-combos" id="drops-cards" data-source="deals" data-row-key="deal_id"></div>
+    <div class="tt-bfsales" id="bf-sales" hidden>
+      <h3>Black Friday sales on other sites (not priced on this tracker)</h3>
+      <ul>
+        <li><a href="https://www.sandals.com/sale/" target="_blank" rel="noopener">Sandals</a>: up to 65% off all-inclusive Caribbean resorts, plus up to $2,250 in resort credit.</li>
+        <li><a href="https://www.barcelo.com/en-us/offers/black-friday/" target="_blank" rel="noopener">Barceló</a>: up to 55% off its hotels, including all-inclusives in Mexico and the Caribbean. This is hotel only, so add flights.</li>
+        <li>Getaways by Southwest: up to $500 off qualifying international flight + hotel packages for two, and up to $250 off domestic ones, for Cyber Week.</li>
+        <li><a href="https://www.costcotravel.com/" target="_blank" rel="noopener">Costco Travel</a>: $300 instant savings on a Hilton Los Cabos package with daily breakfast.</li>
+        <li><a href="https://www.vacationexpress.com/black-friday/" target="_blank" rel="noopener">Vacation Express</a>: up to 55% off select all-inclusive packages.</li>
+        <li>Airfares: several travel guides expect the best 2027 fare drops on Travel Tuesday, Dec 1, rather than on Black Friday itself.</li>
+      </ul>
+      <p class="tt-note">Taken from each site's sale page or travel deal roundups on Nov 27. Check the terms, travel dates and blackout dates on the site before booking.</p>
+    </div>
   </section>
 
   <section class="tt-card" id="power">
@@ -1090,6 +1117,7 @@ window.dash = (function () {
     drawPlace();
     drawMarket('places');
     if (window.tt.startPlace && places().some((p) => p.id === window.tt.startPlace)) { const id = window.tt.startPlace; window.tt.startPlace = null; window.ttPlace(id); }
+    drawDrops();
     drawPower();
     drawCloseup();
     drawDeals();
@@ -1098,6 +1126,48 @@ window.dash = (function () {
     drawChecks();
     drawPlay();
   });
+
+  // Trips that cost less today than the same trip a week ago; labeled Black Friday through Travel Tuesday.
+  function drawDrops() {
+    const box = document.getElementById('drops-cards');
+    const D = dash.data('deals'), S = dash.data('summary'), H = dash.data('history');
+    if (D.status !== 'ok' || S.status !== 'ok') return;
+    const now = new Date(), sale = now >= new Date('2026-11-26T00:00:00') && now < new Date('2026-12-02T00:00:00');
+    document.getElementById('drops-title').textContent = sale ? 'Black Friday price drops' : 'Biggest price drops this week';
+    document.getElementById('bf-sales').hidden = !sale;
+    const wc = S.data[0].week_compare;
+    const stat = document.getElementById('drops-stat');
+    stat.replaceChildren();
+    if (wc) {
+      const b = (t) => Object.assign(document.createElement('b'), { textContent: t });
+      const then = H.status === 'ok' ? H.data.find((h) => h.run_date === wc.since) : null;
+      stat.append('Since ', b(fmtDay(day(wc.since))), ', ', b(pct(wc.cheaper / wc.compared)), ' of trips at top-rated resorts got cheaper and ', pct(wc.pricier / wc.compared),
+        ' got pricier. The typical trip moved ', b(`${wc.median_change < 0 ? '' : '+'}${(wc.median_change * 100).toFixed(1)}%`), '. Today has ', b(`${S.data[0].no_brainers} no-brainers`),
+        then ? `, compared with ${then.no_brainers} that day.` : '.', ' These are the biggest drops on trips worth booking, one per resort.');
+    }
+    const seen = new Set();
+    const list = D.data.filter((r) => r.week_ago_total && r.week_ago_total > r.total_for_two).sort((a, b) => (a.total_for_two - a.week_ago_total) - (b.total_for_two - b.week_ago_total))
+      .filter((r) => !seen.has(r.hotel_code) && seen.add(r.hotel_code)).slice(0, 8);
+    const gal = dash.data('gallery'), pm = photoMap();
+    const mk = (cls, t) => { const e = document.createElement('div'); e.className = cls; e.textContent = t; return e; };
+    box.replaceChildren(...list.map((r, i) => {
+      const c = document.createElement('div'); c.className = 'tt-combo tt-drop' + (i === 0 ? ' top' : ''); c.dataset.key = r.deal_id;
+      const pic = gal.status === 'ok' ? gal.data.find((g) => g.hotel_code === r.hotel_code && okImg(g.src)) : null, rec = pm.get(r.hotel_code);
+      const src = pic ? pic.src : rec && okImg(rec.thumb) ? rec.thumb : '';
+      if (src) { const im = document.createElement('img'); im.src = src; im.alt = r.resort; im.loading = 'lazy'; c.append(im); }
+      const links = document.createElement('div'); links.className = 'tt-links';
+      links.append(...[linkEl(r.book_link, 'Book ↗', 'tt-btn primary'), linkEl(r.resort_page, 'Resort page ↗')].filter(Boolean));
+      const look = document.createElement('button'); look.type = 'button'; look.className = 'tt-btn'; look.textContent = 'Photos & details';
+      look.addEventListener('click', () => window.ttPick(r.deal_id)); links.append(look);
+      c.append(mk('tt-rankno', `#${i + 1} price drop`), mk('nm', r.resort), mk('sub', `${r.destination} · ${r.rating}★${r.adults_only === 'Yes' ? ' · adults only' : ''} · ${r.level}`),
+        mk('cut', `${money(r.week_ago_total - r.total_for_two)} less than a week ago`), mk('tot', money(r.total_for_two)),
+        mk('was', `was ${money(r.week_ago_total)} on ${fmtDay(day(wc ? wc.since : r.depart))}`),
+        mk('tt-off', `${pct(r.pct_below_usual)} under its usual price`),
+        mk('sub', `${fmtDay(day(r.depart))} – ${fmtDay(day(r.return))} · ${r.nights} nights from ${r.from_airport === 'MDW' ? 'Midway' : "O'Hare"} · ${r.price_check === 'Live price confirmed' ? 'live price' : 'not re-checked yet'}`), links);
+      return c;
+    }));
+    if (!list.length) box.replaceChildren(mk('tt-empty', 'No trips worth booking are cheaper than a week ago today.'));
+  }
 
   function drawPower() {
     const box = document.getElementById('power-cards');
