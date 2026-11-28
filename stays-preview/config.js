@@ -1,8 +1,8 @@
-// Shawn Schroeder Stays: the only file you need to edit.
+// LakeView Estate Properties: the only file you need to edit.
 // Leave a value as "" and the site hides that button instead of showing a broken one.
 window.SITE = {
-  brand: "Shawn Schroeder Stays",
-  contactEmail: "",   // booking requests go here
+  brand: "LakeView Estate Properties",
+  contactEmail: "",   // booking inbox: use an address without a personal name
   contactPhone: "",   // optional, shown as text
   // Booking links once a checkout page exists for each home
   bookNow: { lakeview: "", rivard: "", munroe: "", highpoint: "" },
