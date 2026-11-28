@@ -2,7 +2,7 @@
 // Leave a value as "" and the site hides that button instead of showing a broken one.
 window.SITE = {
   brand: "LakeView Estate Properties",
-  contactEmail: "",   // booking inbox: use an address without a personal name
+  contactEmail: "shawnschroeder@gmail.com",   // temporary until a business inbox exists
   contactPhone: "",   // optional, shown as text
   // Booking links once a checkout page exists for each home
   bookNow: { lakeview: "", rivard: "", munroe: "", highpoint: "" },
