@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Lakeview Estate Flyer</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Encode+Sans+Semi+Expanded:wght@400;500&display=swap">
+<style>
+@page{size:letter;margin:0}
+*{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:#cfc6ba;font-family:"Encode Sans Semi Expanded",system-ui,sans-serif;color:#6f655f}
+.page{width:8.5in;height:11in;margin:0 auto;background:#f5f1ea;display:flex;flex-direction:column;overflow:hidden}
+.top{height:4.35in;position:relative;background:url(img/hero-suite.jpg) center/cover}
+.top h1{position:absolute;left:0;right:0;bottom:.3in;margin:0;text-align:center;color:#fff;font:600 .42in Cinzel,serif;text-shadow:0 2px 12px rgba(0,0,0,.6)}
+.lead{text-align:center;padding:.22in .8in;font-size:13pt;line-height:1.6;margin:0}
+.mid{display:block;width:7.2in;height:2.65in;object-fit:cover;margin:0 auto}
+.bottom{flex:1;display:flex;align-items:center;justify-content:center;gap:.7in;text-align:left}
+.bottom h2{margin:0 0 8px;color:#3b322e;font:600 17pt Cinzel,serif}
+.bottom p{margin:0;max-width:2.8in;font-size:11pt}
+.qr{text-align:center;font:500 8pt Cinzel,serif;letter-spacing:.2em}
+.qr img{display:block;width:1.35in;background:#fff;padding:5px;border:1px solid #ccc2b5}
+.foot{background:#9f9185;color:#fff;text-align:center;padding:.14in}
+.foot b{display:block;font:600 13pt Cinzel,serif}
+.foot span{font-size:10pt}
+@media(max-width:820px){body{zoom:.45}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="top"><h1>Welcome to Lakeview Estate</h1></div>
+  <p class="lead">A lakeside legacy of comfort and care. Come sit by the water, linger over coffee, and let the day unfold slowly.</p>
+  <img class="mid" src="img/living.jpg" alt="Living room and kitchen">
+  <div class="bottom">
+    <div><h2>Book Direct &amp; Save</h2><p>Skip the booking-site fees and reserve straight through us, our gift to you.</p></div>
+    <div class="qr"><img src="img/qr-flyer.png" alt="QR code to the Lakeview Estate page on laurentaylorhomes.com">SCAN TO BOOK</div>
+  </div>
+  <div class="foot"><b>Shawn Schroeder Stays</b><span>Preview copy</span></div>
+</div>
+</body>
+</html>

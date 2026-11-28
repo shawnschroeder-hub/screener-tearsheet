@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Shawn Schroeder Stays</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Encode+Sans+Semi+Expanded:wght@400;500;700&display=swap">
+<style>
+:root{--cream:#f5f1ea;--sand:#e8e0d5;--taupe:#9f9185;--taupe-d:#6b5f57;--ink:#3b322e;--muted:#6f655f;--card:#fffdfa;--line:#ddd3c6}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.65 "Encode Sans Semi Expanded",system-ui,sans-serif}
+h1,h2,h3{font-family:Cinzel,Georgia,serif;font-weight:600;line-height:1.15;margin:0;text-wrap:balance}
+a{color:var(--taupe-d)}
+.wrap{max-width:1100px;margin:0 auto;padding-inline:20px}
+nav{position:sticky;top:0;z-index:5;background:var(--taupe-d);color:#fff}
+nav .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 18px;padding-block:12px}
+nav a{color:#fff;text-decoration:none;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+nav .brand{font:600 22px Cinzel,serif;letter-spacing:.06em;text-transform:none}
+nav .brand small{display:block;font:500 10px "Encode Sans Semi Expanded",sans-serif;letter-spacing:.42em;text-transform:uppercase;opacity:.85}
+nav .links{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+.btn{display:inline-block;border:0;border-radius:999px;padding:12px 24px;background:var(--ink);color:#fff;font:700 13px "Encode Sans Semi Expanded",sans-serif;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;cursor:pointer}
+nav .btn{background:var(--sand);color:var(--ink);padding:9px 18px}
+.hero{position:relative;min-height:min(72vh,620px);display:flex;align-items:flex-end;justify-content:center;text-align:center;background:#6b5f57 url(img/hero-suite.jpg) center/cover;color:#fff}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(40,30,25,0) 35%,rgba(40,30,25,.72))}
+.hero h1{position:relative;z-index:1;font-size:clamp(32px,6vw,66px);padding:0 18px 34px}
+.intro{background:var(--sand);text-align:center;padding:44px 0}
+.intro p{max-width:62ch;margin:12px auto 22px;color:var(--muted);font-size:18px}
+section{padding:54px 0}
+.center{text-align:center}
+.eyebrow{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--taupe-d);margin-bottom:8px}
+.grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));margin-top:28px}
+.card{background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column}
+.shot{aspect-ratio:4/3;width:100%;object-fit:cover;display:block}
+.shot.none{display:flex;align-items:center;justify-content:center;background:var(--sand);color:var(--muted);font-size:13px;letter-spacing:.2em;text-transform:uppercase}
+.card .body{padding:20px;display:grid;gap:10px;flex:1;align-content:start}
+.card h3{font-size:21px}
+.meta{color:var(--muted);font-size:13px}
+.card .go{padding:0 20px 22px}
+.why{border-top:3px solid var(--taupe);padding-top:14px}
+.why h3{font-size:18px;margin-bottom:6px}
+.home{border-top:1px solid var(--line)}
+.split{display:grid;gap:34px;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);margin-top:26px;align-items:start}
+@media(max-width:860px){.split{grid-template-columns:minmax(0,1fr)}}
+.gal{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.gal button{border:0;padding:0;background:var(--sand);cursor:zoom-in;aspect-ratio:4/3;overflow:hidden}
+.gal button.big{grid-column:span 4;aspect-ratio:16/9}
+.gal img{width:100%;height:100%;object-fit:cover;display:block}
+ul.feat{padding-left:20px;columns:2;column-gap:28px}
+@media(max-width:560px){ul.feat{columns:1}}
+.book{background:var(--card);border:1px solid var(--line);padding:22px;display:grid;gap:11px}
+label{display:grid;gap:4px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+input,select{font:inherit;width:100%;min-width:0;padding:10px;border:1px solid var(--line);background:#fff;color:var(--ink)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.note{font-size:13px;color:var(--muted);margin:0}
+.out{white-space:pre-wrap;background:var(--sand);padding:12px;font-size:13px}
+.dark{background:var(--ink);color:#fff}
+.dark .eyebrow{color:var(--sand)}
+.dark .card{color:var(--ink)}
+.flyer{display:grid;gap:28px;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));align-items:center;margin-top:26px}
+.flyer img.photo{width:100%;display:block}
+.qr{text-align:center}
+.qr img{width:200px;max-width:100%;background:#fff;border:1px solid var(--line);padding:8px}
+dialog{border:0;padding:0;max-width:min(96vw,1000px)}
+dialog img{display:block;max-width:100%;max-height:88vh}
+dialog::backdrop{background:rgba(0,0,0,.82)}
+footer{background:var(--taupe);color:#fff;text-align:center;padding:34px 18px}
+footer b{display:block;font:600 22px Cinzel,serif;margin-bottom:6px}
+footer a{color:#fff}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="#top">Shawn Schroeder<small>Stays</small></a>
+  <div class="links"><a href="#homes">Properties</a><a href="#longer">Longer stays</a><a href="#flyer">Flyer</a><a href="#about">About</a><a class="btn" href="#lakeview">Book direct</a></div>
+</div></nav>
+
+<header class="hero" id="top"><h1>Welcome to Lakeview Estate</h1></header>
+<div class="intro"><div class="wrap">
+  <h2>A lakeside legacy of comfort and care</h2>
+  <p>Come sit by the water, linger over coffee, and let the day unfold slowly. Book direct with the owner.</p>
+  <a class="btn" href="#lakeview">View and request dates</a>
+</div></div>
+
+<main>
+<section id="homes"><div class="wrap center">
+  <div class="eyebrow">Furnished homes in Manteno and Bourbonnais</div><h2>Our properties</h2>
+  <div class="grid" id="cards"></div>
+</div></section>
+
+<section class="home"><div class="wrap">
+  <h2 class="center">Why book direct</h2>
+  <div class="grid">
+    <div class="why"><h3>No platform fee</h3><p>You deal with the owner, so no marketplace service fee is added on top.</p></div>
+    <div class="why"><h3>A real person</h3><p>Your questions go to the people who look after the home.</p></div>
+    <div class="why"><h3>Longer stays welcome</h3><p>Monthly agreements for insurance, relocation, medical and crew stays.</p></div>
+    <div class="why"><h3>Flexible plans</h3><p>Special requests and extended stays are handled one on one.</p></div>
+  </div>
+</div></section>
+
+<div id="details"></div>
+
+<section class="dark" id="longer"><div class="wrap center">
+  <div class="eyebrow">30 nights and longer</div>
+  <h2>Insurance, travel work and relocation housing</h2>
+  <div class="grid" style="text-align:left">
+    <div class="card"><div class="body"><h3>Insurance stays</h3><p>Displaced by a fire or storm? Furnished home, kitchen, laundry and parking on a monthly agreement, billed to your adjuster or housing company.</p></div></div>
+    <div class="card"><div class="body"><h3>Traveling clinicians</h3><p>Manteno and Bourbonnais are close to the Kankakee area hospitals. Monthly rate with utilities and internet.</p></div></div>
+    <div class="card"><div class="body"><h3>Work crews</h3><p>Cook at home, park in the driveway and keep the crew under one roof.</p></div></div>
+    <div class="card"><div class="body"><h3>Relocation</h3><p>Time to sell, buy or build, without living out of a hotel.</p></div></div>
+  </div>
+</div></section>
+
+<section id="flyer"><div class="wrap">
+  <h2 class="center">Book direct and save</h2>
+  <div class="flyer">
+    <img class="photo" src="img/living.jpg" alt="Lakeview Estate living room and kitchen">
+    <div class="qr">
+      <img src="img/qr-flyer.png" alt="QR code for the Lakeview Estate page on laurentaylorhomes.com">
+      <p class="note">Scan for the Lakeview Estate page at laurentaylorhomes.com</p>
+      <a class="btn" href="flyer.html">Open the printable flyer</a>
+    </div>
+  </div>
+</div></section>
+
+<section class="home" id="about"><div class="wrap center">
+  <h2>About</h2>
+  <p style="max-width:64ch;margin:14px auto">I'm Shawn Schroeder. I own furnished homes in Manteno and Bourbonnais, about an hour south of Chicago. Lakeview Estate was furnished in honor of my mother.</p>
+  <p class="note">Every guest is welcome. We follow federal, Illinois and local fair housing law.</p>
+</div></section>
+</main>
+
+<footer><b>Shawn Schroeder Stays</b><span id="contact"></span></footer>
+<dialog id="zoom"><img alt=""></dialog>
+
+<script src="config.js"></script>
+<script>
+const lake = Array.from({length:22},(_,i)=>`img/lake/p${String(i+1).padStart(2,"0")}.jpg`);
+const order = [1,7,3,4,10,5,6,2,11,12,13,9,14,15,20,21,22,19,16,8].map(n=>lake[n-1]);
+const HOMES = [
+ {id:"lakeview",name:"Lakeview Estate",town:"Manteno, IL · Little Lake",meta:"Up to 10 guests · 3 bedrooms + loft · 2.5 baths",min:"2+ nights",photos:order,
+  blurb:"A charming lakefront home with views and direct water access, a loft for games or movies, a fire pit and a kayak launch. A short walk to downtown Manteno.",
+  proof:"Rated 4.91 from 43 Airbnb reviews · Guest Favorite",
+  story:[
+   ["The space","An open living, dining and kitchen area greets you. The dining table seats six, the kitchen has island barstools and a coffee bar, and the living room has a 55-inch Smart TV and a big window facing the lake."],
+   ["The loft","Up the spiral staircase is a tucked-away loft with its own 55-inch Smart TV and a pull-out couch."],
+   ["Bedrooms","Primary suite: king bed, lake views, walk-out patio, large shower, walk-in tub and a roomy closet. A full-over-full bunk room with memory foam mattresses. A full-size bedroom with a Smart TV. Half bath, full bath and washer and dryer."],
+   ["Outside","A back patio for meals and morning coffee, a paved lakeside patio with a fire pit, your own kayak launch and fishing dock."],
+   ["Nearby","Downtown Manteno cafés and restaurants, a commuter bus to Chicago, Lucille Thies Park with pickleball and walking paths, and Square on Second with a zip line, water play and seasonal events."]],
+  feat:["Lake access and fishing dock","Kayak launch","Fire pit patio","King primary suite","Walk-in tub","Full kitchen and coffee bar","Washer and free dryer","Central air","Wi-Fi","Free parking","Self check-in"],
+  rules:["Check-in 3 to 11 PM, check-out by 11 AM, smart lock self check-in","Rate includes 2 guests; $50 fee per additional guest","Early check-in or late check-out $30 an hour, if available","Exterior security camera records the entrance door","Keep the thermostat between 68 and 75°F","Please remove shoes and avoid eating on the furniture"]},
+ {id:"rivard",name:"Rivard House",town:"Bourbonnais, IL",meta:"Up to 6 guests · 2 bedrooms · 1 bath",min:"7+ nights",photos:[],
+  blurb:"A comfortable two-bedroom set up for week-long and monthly stays.",
+  feat:["King and queen bedrooms","Fenced backyard","Grill and outdoor seating","Full kitchen","Utilities included on monthly stays","Free parking"]},
+ {id:"munroe",name:"Munroe House",town:"Bourbonnais, IL",meta:"4 bedrooms · 1 bath · 1,380 sq ft",min:"7+ nights",photos:[],
+  blurb:"Four bedrooms in one house for families between homes, work crews and travel teams.",
+  feat:["Four bedrooms","Full kitchen","Yard and driveway parking","Utilities included on monthly stays","Monthly agreements","Direct billing to companies or insurers"]},
+ {id:"highpoint",name:"Private Room",town:"Bourbonnais, IL · owner-occupied home",meta:"1 guest · bathroom next door",min:"Ask for dates",photos:[],
+  blurb:"A quiet, well-kept room in a very nice home, with a bathroom right next to it. The owner lives here.",
+  feat:["Furnished private bedroom","Bathroom beside the room","Utilities and internet included","Parking","Suits a travel nurse, visiting faculty or intern","Quiet household"]}
+];
+const S = window.SITE || {bookNow:{},airbnb:{}};
+document.getElementById("cards").innerHTML = HOMES.map(h=>`<article class="card" style="text-align:left">${h.photos.length?`<img class="shot" src="${h.photos[0]}" alt="${h.name}">`:`<div class="shot none">Photos soon</div>`}
+ <div class="body"><h3>${h.name}</h3><div class="meta">${h.town}<br>${h.meta} · ${h.min}</div><div>${h.blurb}</div></div>
+ <div class="go"><a class="btn" href="#${h.id}">View more</a></div></article>`).join("");
+document.getElementById("details").innerHTML = HOMES.map(h=>`<section class="home" id="${h.id}"><div class="wrap">
+ <div class="eyebrow">${h.town}</div><h2>${h.name}</h2><p style="max-width:70ch">${h.blurb}</p>${h.proof?`<p class="meta">${h.proof}</p>`:""}
+ <div class="split"><div>
+  ${h.photos.length?`<div class="gal">${h.photos.map((u,i)=>`<button type="button" class="${i?"":"big"}" data-full="${u}" aria-label="Open photo ${i+1} of ${h.name}"><img loading="lazy" src="${u}" alt="${h.name} photo ${i+1}"></button>`).join("")}</div>`:`<div class="shot none">Photos soon</div>`}
+  ${(h.story||[]).map(([t,x])=>`<h3 style="margin-top:24px;font-size:19px">${t}</h3><p>${x}</p>`).join("")}
+  <ul class="feat">${h.feat.map(f=>`<li>${f}</li>`).join("")}</ul>
+  ${h.rules?`<h3 style="font-size:19px">Good to know</h3><ul>${h.rules.map(r=>`<li>${r}</li>`).join("")}</ul>`:""}</div>
+  <form class="book" data-home="${h.id}" data-name="${h.name}">
+   <h3>Request your dates</h3>
+   <div class="two"><label>Arrive<input type="date" name="in" required></label><label>Leave<input type="date" name="out" required></label></div>
+   <div class="two"><label>Guests<input type="number" name="g" min="1" max="10" value="1" required></label><label>Reason<select name="why"><option>Vacation or family visit</option><option>Work or travel contract</option><option>Insurance or relocation</option><option>University visit</option></select></label></div>
+   <label>Your name<input name="n" required></label><label>Email or phone<input name="c" required></label>
+   <button class="btn" type="submit">Send request</button>
+   <div class="out" hidden></div>
+   <p class="note">${h.min==="7+ nights"?"Stays of 7 nights or longer. ":""}Nothing is booked or charged until we confirm.</p>
+   ${S.bookNow[h.id]?`<a class="btn" href="${S.bookNow[h.id]}">Book and pay online</a>`:""}
+   ${S.airbnb[h.id]?`<a href="${S.airbnb[h.id]}" target="_blank" rel="noopener">See it on Airbnb</a>`:""}
+  </form></div></div></section>`).join("");
+document.querySelectorAll("form.book").forEach(f=>f.addEventListener("submit",e=>{
+  e.preventDefault(); const d=new FormData(f), out=f.querySelector(".out"); out.hidden=false;
+  if(d.get("out")<=d.get("in")){out.textContent="The leave date must be after the arrive date.";return}
+  const nights=Math.round((new Date(d.get("out"))-new Date(d.get("in")))/864e5);
+  const min={lakeview:2,rivard:7,munroe:7}[f.dataset.home]||1;
+  if(nights<min){out.textContent=`This home books for ${min} nights or longer. Please adjust your dates.`;return}
+  const body=`Booking request: ${f.dataset.name}\nArrive: ${d.get("in")}\nLeave: ${d.get("out")} (${nights} nights)\nGuests: ${d.get("g")}\nReason: ${d.get("why")}\nName: ${d.get("n")}\nReach me at: ${d.get("c")}`;
+  if(S.contactEmail){ out.textContent="Your email app is opening. If it does not, send this to "+S.contactEmail+":\n\n"+body; location.href=`mailto:${S.contactEmail}?subject=${encodeURIComponent("Stay request: "+f.dataset.name)}&body=${encodeURIComponent(body)}`; }
+  else out.textContent="Preview mode: no booking email is set yet, so nothing was sent.\n\n"+body;
+}));
+const z=document.getElementById("zoom");
+document.addEventListener("click",e=>{const b=e.target.closest("[data-full]"); if(b){z.querySelector("img").src=b.dataset.full; z.showModal()} else if(z.open && (e.target===z||e.target.closest("#zoom"))) z.close()});
+document.getElementById("contact").textContent = [S.contactEmail,S.contactPhone].filter(Boolean).join(" · ") || "Contact details to be added";
+</script>
+</body>
+</html>
